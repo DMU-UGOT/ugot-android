@@ -17,11 +17,6 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-    // Data, View Binding
-    buildFeatures{
-        dataBinding true
-        viewBinding true
-    }
     buildTypes {
         release {
             minifyEnabled false
@@ -29,14 +24,18 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = '17'
+        jvmTarget = '1.8'
     }
     packagingOptions {
         resources.excludes.add("META-INF/*")
+    }
+    // Data Binding
+    buildFeatures{
+        dataBinding true
     }
 }
 
@@ -65,9 +64,6 @@ dependencies {
     // dagger hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
-
-    // Data Binding
-    implementation 'com.android.databinding:compiler:3.1.4'
 
     // Network
     implementation "com.google.code.gson:gson:$retrofit_version"
