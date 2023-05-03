@@ -2,23 +2,29 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/profileFragment"
+        android:id="@+id/item_profile"
         android:enabled="true"
-        android:title="@string/nav_item_profile" />
+        android:title=""
+        android:icon="@drawable/ic_bottom_nav_profile"/>
     <item
-        android:id="@+id/studyFragment"
+        android:id="@+id/item_study"
         android:enabled="true"
-        android:title="@string/nav_item_study" />
+        android:title=""
+        android:icon="@drawable/ic_bottom_nav_study"/>
     <item
-        android:id="@+id/teamFragment"
+        android:id="@+id/item_team"
         android:enabled="true"
-        android:title="@string/nav_item_team" />
+        android:title=""
+        android:icon="@drawable/ic_bottom_nav_home"
+        />
     <item
-        android:id="@+id/groupFragment"
+        android:id="@+id/item_group"
         android:enabled="true"
-        android:title="@string/nav_item_group" />
+        android:title=""
+        android:icon="@drawable/ic_bottom_nav_group"/>
     <item
-        android:id="@+id/communityFragment"
+        android:id="@+id/item_community"
         android:enabled="true"
-        android:title="@string/nav_item_community" />
+        android:title=""
+        android:icon="@drawable/ic_bottom_nav_community"/>
 </menu>

@@ -3,25 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/teamFragment">
+    app:startDestination="@id/item_team">
     <fragment
-        android:id="@+id/communityFragment"
+        android:id="@+id/item_community"
         android:name="com.example.ugotprototype.fragment.CommunityFragment"
         android:label="CommunityFragment" />
     <fragment
-        android:id="@+id/groupFragment"
+        android:id="@+id/item_group"
         android:name="com.example.ugotprototype.fragment.GroupFragment"
         android:label="GroupFragment" />
     <fragment
-        android:id="@+id/profileFragment"
+        android:id="@+id/item_profile"
         android:name="com.example.ugotprototype.fragment.ProfileFragment"
         android:label="ProfileFragment" />
     <fragment
-        android:id="@+id/studyFragment"
+        android:id="@+id/item_study"
         android:name="com.example.ugotprototype.fragment.StudyFragment"
         android:label="StudyFragment" />
     <fragment
-        android:id="@+id/teamFragment"
+        android:id="@+id/item_team"
         android:name="com.example.ugotprototype.fragment.TeamFragment"
         android:label="TeamFragment" />
 </navigation>
