@@ -7,11 +7,12 @@
     <!-- Home Activity -->
     <string name = "home_go_main_activity">초기 페이지 이동</string>
 
-    <!-- Bottom Navigation -->
+    <!-- Bottom Navigation
     <string name = "nav_item_team"> 팀빌딩 </string>
     <string name = "nav_item_study"> 스터디 </string>
     <string name = "nav_item_community"> 커뮤니티 </string>
     <string name = "nav_item_profile"> 마이페이지 </string>
     <string name = "nav_item_group"> 그룹페이지 </string>
+    -->
 
 </resources>
