@@ -26,8 +26,9 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:labelVisibilityMode="unlabeled"
-                    app:itemIconSize="27dp"
+                    app:itemIconSize="33dp"
                     app:itemBackground="@drawable/bottom_nav_indicator"
+                    android:background="@color/white"
                     app:itemActiveIndicatorStyle="@color/white"
 
                     app:menu="@menu/nav_menu" />
