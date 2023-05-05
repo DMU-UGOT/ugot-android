@@ -33,6 +33,7 @@ android {
     packagingOptions {
         resources.excludes.add("META-INF/*")
     }
+
     // Data Binding
     buildFeatures{
         dataBinding true

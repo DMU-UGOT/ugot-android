@@ -6,22 +6,22 @@
     app:startDestination="@id/item_team">
     <fragment
         android:id="@+id/item_community"
-        android:name="com.example.ugotprototype.fragment.CommunityFragment"
+        android:name="com.example.ugotprototype.ui.community.CommunityFragment"
         android:label="CommunityFragment" />
     <fragment
         android:id="@+id/item_group"
-        android:name="com.example.ugotprototype.fragment.GroupFragment"
+        android:name="com.example.ugotprototype.ui.group.GroupFragment"
         android:label="GroupFragment" />
     <fragment
         android:id="@+id/item_profile"
-        android:name="com.example.ugotprototype.fragment.ProfileFragment"
+        android:name="com.example.ugotprototype.ui.profile.ProfileFragment"
         android:label="ProfileFragment" />
     <fragment
         android:id="@+id/item_study"
-        android:name="com.example.ugotprototype.fragment.StudyFragment"
+        android:name="com.example.ugotprototype.ui.study.StudyFragment"
         android:label="StudyFragment" />
     <fragment
         android:id="@+id/item_team"
-        android:name="com.example.ugotprototype.fragment.TeamFragment"
+        android:name="com.example.ugotprototype.ui.team.TeamFragment"
         android:label="TeamFragment" />
 </navigation>
