@@ -2,15 +2,20 @@
     <string name="app_name">ugotprototype</string>
 
     <!-- Main Activity -->
-    <string name = "main_go_home_activity">홈 이동</string>
+    <string name="main_go_home_activity">홈 이동</string>
 
     <!-- Home Activity -->
-    <string name = "home_go_main_activity">초기 페이지 이동</string>
+    <string name="home_go_main_activity">초기 페이지 이동</string>
 
     <!-- Bottom Navigation -->
-    <string name = "nav_item_team"> 팀빌딩 </string>
-    <string name = "nav_item_study"> 스터디 </string>
-    <string name = "nav_item_community"> 커뮤니티 </string>
-    <string name = "nav_item_profile"> 마이페이지 </string>
-    <string name = "nav_item_group"> 그룹페이지 </string>
+    <string name="nav_item_team"> 팀빌딩 </string>
+    <string name="nav_item_study"> 스터디 </string>
+    <string name="nav_item_community"> 커뮤니티 </string>
+    <string name="nav_item_profile"> 마이페이지 </string>
+    <string name="nav_item_group"> 그룹페이지 </string>
+
+    <!-- Splash Activity -->
+    <string name="splash_activity_title">타이틀 페이지</string>
+
+
 </resources>

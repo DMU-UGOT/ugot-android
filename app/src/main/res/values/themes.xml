@@ -7,4 +7,11 @@
     </style>
 
     <style name="Theme.Ugotprototype" parent="Base.Theme.Ugotprototype" />
+
+    <style name ="SplashTheme" parent ="Theme.AppCompat.Light.DarkActionBar">
+        <!-- 타이틀바 없애기 -->
+        <item name="windowNoTitle">true</item>
+        <!-- 액션바 없애기 -->
+        <item name ="windowActionBar">false</item>
+    </style>
 </resources>
