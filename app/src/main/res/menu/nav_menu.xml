@@ -1,30 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
     <item
         android:id="@+id/item_team"
-        android:enabled="true"
-        android:title=""
-        android:icon="@drawable/selector_bottom_nav_team"/>
+        android:icon="@drawable/selector_bottom_nav_team"
+        android:title="@string/nav_item_team" />
+
     <item
         android:id="@+id/item_study"
-        android:enabled="true"
-        android:title=""
-        android:icon="@drawable/selector_bottom_nav_study"/>
+        android:icon="@drawable/selector_bottom_nav_study"
+        android:title="@string/nav_item_study" />
+
     <item
         android:id="@+id/item_group"
-        android:enabled="true"
-        android:title=""
         android:icon="@drawable/selector_bottom_nav_group"
-        />
+        android:title="@string/nav_item_group" />
+
     <item
         android:id="@+id/item_community"
-        android:enabled="true"
-        android:title=""
-        android:icon="@drawable/selector_bottom_nav_community"/>
+        android:icon="@drawable/selector_bottom_nav_community"
+        android:title="@string/nav_item_community" />
+
     <item
         android:id="@+id/item_profile"
-        android:enabled="true"
-        android:title=""
-        android:icon="@drawable/selector_bottom_nav_profile"/>
+        android:icon="@drawable/selector_bottom_nav_profile"
+        android:title="@string/nav_item_profile" />
 </menu>

@@ -7,21 +7,26 @@
     <fragment
         android:id="@+id/item_community"
         android:name="com.example.ugotprototype.ui.community.CommunityFragment"
-        android:label="CommunityFragment" />
+        android:label="CommunityFragment"
+        tools:layout="@layout/fragment_community"/>
     <fragment
         android:id="@+id/item_group"
         android:name="com.example.ugotprototype.ui.group.GroupFragment"
-        android:label="GroupFragment" />
+        android:label="GroupFragment"
+        tools:layout="@layout/fragment_group"/>
     <fragment
         android:id="@+id/item_profile"
         android:name="com.example.ugotprototype.ui.profile.ProfileFragment"
-        android:label="ProfileFragment" />
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile"/>
     <fragment
         android:id="@+id/item_study"
         android:name="com.example.ugotprototype.ui.study.StudyFragment"
-        android:label="StudyFragment" />
+        android:label="StudyFragment"
+        tools:layout="@layout/fragment_study"/>
     <fragment
         android:id="@+id/item_team"
         android:name="com.example.ugotprototype.ui.team.TeamFragment"
-        android:label="TeamFragment" />
+        android:label="TeamFragment"
+        tools:layout="@layout/fragment_team"/>
 </navigation>
