@@ -1,4 +1,4 @@
-package com.example.ugotprototype.ui.viewmodel
+package com.example.ugotprototype.ui.team.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

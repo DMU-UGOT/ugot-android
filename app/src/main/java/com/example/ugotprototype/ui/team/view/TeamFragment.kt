@@ -1,4 +1,4 @@
-package com.example.ugotprototype.ui.team
+package com.example.ugotprototype.ui.team.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.FragmentTeamBinding
-import com.example.ugotprototype.ui.viewmodel.TeamViewModel
+import com.example.ugotprototype.ui.team.viewmodel.TeamViewModel
 
 class TeamFragment : Fragment() {
     private lateinit var binding: FragmentTeamBinding

@@ -1,4 +1,4 @@
-package com.example.ugotprototype.ui.adapter
+package com.example.ugotprototype.ui.team.adapter
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView

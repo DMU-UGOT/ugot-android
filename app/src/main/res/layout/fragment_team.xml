@@ -7,7 +7,7 @@
 
         <variable
             name="teamViewModel"
-            type="com.example.ugotprototype.ui.viewmodel.TeamViewModel" />
+            type="com.example.ugotprototype.ui.team.viewmodel.TeamViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

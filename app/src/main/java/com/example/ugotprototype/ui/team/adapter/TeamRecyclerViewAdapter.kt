@@ -1,4 +1,4 @@
-package com.example.ugotprototype.ui.adapter
+package com.example.ugotprototype.ui.team.adapter
 
 
 import android.view.LayoutInflater
