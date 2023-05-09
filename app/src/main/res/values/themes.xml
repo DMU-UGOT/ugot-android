@@ -2,16 +2,14 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Ugotprototype" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
+        <item name="android:statusBarColor">@color/black</item>
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="android:statusBarColor">@color/white</item>
     </style>
 
     <style name="Theme.Ugotprototype" parent="Base.Theme.Ugotprototype" />
 
-    <style name ="SplashTheme" parent ="Theme.AppCompat.Light.DarkActionBar">
-        <!-- 타이틀바 없애기 -->
-        <item name="windowNoTitle">true</item>
-        <!-- 액션바 없애기 -->
-        <item name ="windowActionBar">false</item>
+
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/black</item>
     </style>
 </resources>

@@ -39,4 +39,9 @@ class TeamRecyclerViewAdapter : RecyclerView.Adapter<TeamRecyclerViewAdapter.MyV
     override fun getItemId(position: Int): Long {
         return position.toLong()
     }
+
+    fun setData(data: ArrayList<TeamData>) {
+        teamItemList = data
+        notifyDataSetChanged()
+    }
 }
