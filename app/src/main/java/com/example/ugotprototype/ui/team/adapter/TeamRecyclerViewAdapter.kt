@@ -5,14 +5,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ugotprototype.data.TeamData
-import com.example.ugotprototype.databinding.FragmentTeamItemBinding
+import com.example.ugotprototype.databinding.ItemTeamListBinding
 
 class TeamRecyclerViewAdapter : RecyclerView.Adapter<TeamRecyclerViewAdapter.MyViewHolder>() {
 
     var teamItemList = arrayListOf<TeamData>()
 
     // 생성된 뷰 홀더에 값 지정
-    class MyViewHolder(val binding: FragmentTeamItemBinding) :
+    class MyViewHolder(val binding: ItemTeamListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(currentTeamData: TeamData) {
             binding.teamItem = currentTeamData
@@ -22,7 +22,7 @@ class TeamRecyclerViewAdapter : RecyclerView.Adapter<TeamRecyclerViewAdapter.MyV
     // 어떤 xml 으로 뷰 홀더를 생성할지 지정
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding =
-            FragmentTeamItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemTeamListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding)
     }
 
