@@ -23,6 +23,6 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/fragment_team_item" />
+            tools:listitem="@layout/item_team_list" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
