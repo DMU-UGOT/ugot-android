@@ -1,17 +1,21 @@
 package com.example.ugotprototype.ui.team.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.ugotprototype.R
 import com.example.ugotprototype.data.TeamData
 import com.example.ugotprototype.databinding.FragmentTeamBinding
 import com.example.ugotprototype.ui.team.adapter.TeamRecyclerViewAdapter
 import com.example.ugotprototype.ui.team.viewmodel.TeamViewModel
+
 
 class TeamFragment : Fragment() {
     private lateinit var binding: FragmentTeamBinding
@@ -20,7 +24,11 @@ class TeamFragment : Fragment() {
     private lateinit var teamRecyclerViewAdapter: TeamRecyclerViewAdapter
     private var teamItems = ArrayList<TeamData>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_team, container, false)
         binding.teamViewModel = teamViewModel
@@ -39,6 +47,7 @@ class TeamFragment : Fragment() {
         teamViewModel.teamItemList.observe(viewLifecycleOwner) {
             teamRecyclerViewAdapter.setData(it)
         }
+        findEndScroll()
     }
 
     private fun testData() {
@@ -79,5 +88,19 @@ class TeamFragment : Fragment() {
                 "댓글 : 4"
             )
         )
+    }
+
+    private fun findEndScroll() {
+        binding.rvTeam.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val lastVisibleItemPosition =
+                    (recyclerView.layoutManager as LinearLayoutManager?)!!.findLastCompletelyVisibleItemPosition()
+                val itemTotalCount = recyclerView.adapter!!.itemCount - 1
+                if (lastVisibleItemPosition == itemTotalCount) {
+                    binding.teamBottomDiv.visibility = View.VISIBLE
+                }
+            }
+        })
     }
 }

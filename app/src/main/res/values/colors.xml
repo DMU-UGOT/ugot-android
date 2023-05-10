@@ -5,4 +5,8 @@
 
     <color name="gray">#808080</color>
     <color name="gray400">#BBC0C5</color>
+
+    <color name="color_F0F1F3">#F0F1F3</color>
+    <color name="color_9DA1A6">#9DA1A6</color>
+    <color name="color_FFFFFF">#FFFFFF</color>
 </resources>
