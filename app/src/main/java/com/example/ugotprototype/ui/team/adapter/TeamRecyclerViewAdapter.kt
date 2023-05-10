@@ -21,8 +21,7 @@ class TeamRecyclerViewAdapter : RecyclerView.Adapter<TeamRecyclerViewAdapter.MyV
 
     // 어떤 xml 으로 뷰 홀더를 생성할지 지정
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val binding =
-            ItemTeamListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemTeamListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding)
     }
 
@@ -32,9 +31,7 @@ class TeamRecyclerViewAdapter : RecyclerView.Adapter<TeamRecyclerViewAdapter.MyV
     }
 
     // 뷰 홀더의 개수 리턴
-    override fun getItemCount(): Int {
-        return teamItemList.size
-    }
+    override fun getItemCount() = teamItemList.size
 
     override fun getItemId(position: Int): Long {
         return position.toLong()
