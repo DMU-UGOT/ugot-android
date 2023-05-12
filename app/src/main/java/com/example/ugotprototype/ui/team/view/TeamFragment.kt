@@ -1,15 +1,18 @@
 package com.example.ugotprototype.ui.team.view
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.example.ugotprototype.MainActivity
 import com.example.ugotprototype.R
 import com.example.ugotprototype.data.TeamData
 import com.example.ugotprototype.databinding.FragmentTeamBinding
@@ -24,6 +27,8 @@ class TeamFragment : Fragment() {
     private lateinit var teamRecyclerViewAdapter: TeamRecyclerViewAdapter
     private var teamItems = ArrayList<TeamData>()
 
+    private lateinit var resultLauncher: ActivityResultLauncher<Intent>
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,6 +37,7 @@ class TeamFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_team, container, false)
         binding.teamViewModel = teamViewModel
+
         return binding.root
     }
 
@@ -47,7 +53,19 @@ class TeamFragment : Fragment() {
         teamViewModel.teamItemList.observe(viewLifecycleOwner) {
             teamRecyclerViewAdapter.setData(it)
         }
-        findEndScroll()
+
+        resultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    val data: Intent? = result.data
+                    val resultText = data?.getStringExtra("resultText")
+                    if (resultText != null) {
+                        Log.d("main", resultText)
+                    }
+                }
+            }
+        
+        goToTeamSearchDetail()
     }
 
     private fun testData() {
@@ -90,17 +108,9 @@ class TeamFragment : Fragment() {
         )
     }
 
-    private fun findEndScroll() {
-        binding.rvTeam.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                val lastVisibleItemPosition =
-                    (recyclerView.layoutManager as LinearLayoutManager?)!!.findLastCompletelyVisibleItemPosition()
-                val itemTotalCount = recyclerView.adapter!!.itemCount - 1
-                if (lastVisibleItemPosition == itemTotalCount) {
-                    binding.teamBottomDiv.visibility = View.VISIBLE
-                }
-            }
-        })
+    private fun goToTeamSearchDetail() {
+        binding.btGoDetailSearch.setOnClickListener {
+            resultLauncher.launch(Intent(requireContext(), TeamSearchDetailActivity::class.java))
+        }
     }
 }
