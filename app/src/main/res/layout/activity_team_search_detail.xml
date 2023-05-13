@@ -14,12 +14,12 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="44dp"
             android:background="@drawable/team_search_drawable"
-            app:layout_constraintEnd_toStartOf="@+id/tv_Cancle"
+            app:layout_constraintEnd_toStartOf="@+id/tv_Cancel"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_Cancle"
+            android:id="@+id/tv_Cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="25dp"
@@ -67,7 +67,6 @@
             android:id="@+id/chip_group"
             android:layout_width="wrap_content"
             android:layout_height="100dp"
-            android:layout_marginHorizontal="30dp"
             android:layout_marginTop="16dp"
             app:chipSpacing="8dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -81,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxWidth="100dp"
-                android:text="Android Programming"
+                android:text="Android Programmin"
                 app:chipBackgroundColor="@color/color_F0F1F3"
                 tools:text="Android Programming" />
 

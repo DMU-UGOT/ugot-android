@@ -18,7 +18,7 @@
         <android.widget.Button
             android:id="@+id/bt_go_detail_search"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:background="@drawable/team_search_drawable"
             android:drawableLeft="@drawable/ic_team_search"
