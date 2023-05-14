@@ -1,378 +1,381 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <View
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="#d3d3d3" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="#d3d3d3" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/my_page_area1"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="15dp"
-                    tools:ignore="MissingConstraints">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/profile_main_name_text"
-                        android:layout_width="match_parent"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/my_page_area1"
+                        android:layout_width="300dp"
                         android:layout_height="wrap_content"
-                        android:maxLines="1"
-                        android:paddingLeft="10dp"
                         android:paddingBottom="15dp"
-                        android:textColor="@color/black"
-                        android:textSize="40dp"
-                        android:textStyle="bold"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text="John Park" />
+                        tools:ignore="MissingConstraints">
 
-                    <TextView
-                        android:id="@+id/profile_main_email_text"
-                        android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/profile_main_name_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:paddingLeft="10dp"
+                            android:paddingBottom="15dp"
+                            android:textColor="@color/black"
+                            android:textSize="40dp"
+                            android:textStyle="bold"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="John Park" />
+
+                        <TextView
+                            android:id="@+id/profile_main_email_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="10dp"
+                            android:textSize="10sp"
+                            app:layout_constraintTop_toBottomOf="@id/profile_main_name_text"
+                            tools:text="bagopa@naver.com" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="10dp"
-                        android:textSize="10dp"
-                        app:layout_constraintTop_toBottomOf="@id/profile_main_name_text"
-                        tools:text="bagopa@naver.com" />
+                        android:paddingTop="10dp"
+                        app:layout_constraintLeft_toRightOf="@id/my_page_area1"
+                        tools:ignore="MissingConstraints">
 
+                        <TextView
+                            android:id="@+id/profile_main_stack"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="주 기술"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/profile_main_stack_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Database"
+                            android:textSize="18sp"
+                            app:layout_constraintTop_toBottomOf="@id/profile_main_stack" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="100dp"
+
+                <!--       계정관련 정보 수정      -->
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
-                    app:layout_constraintLeft_toRightOf="@id/my_page_area1"
-                    tools:ignore="MissingConstraints">
+                    android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/profile_main_stack"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:background="#d2d2d2"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="20dp"
+                        android:text="계정"
+                        android:textSize="25dp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="주 기술"
-                        android:textColor="@color/black"
-                        android:textSize="18dp" />
+                        android:orientation="vertical">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/profile_school_btn"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:gravity="left"
+                            android:paddingLeft="20dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="5dp"
+                            android:text="학교 정보 확인"
+                            android:textColor="@color/black"
+                            android:textSize="18dp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/materialButton" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:background="#d3d3d3" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/profile_nickname_btn"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:gravity="left"
+                            android:paddingLeft="20dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="5dp"
+                            android:text="닉네임 변경"
+                            android:textColor="@color/black"
+                            android:textSize="18dp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/materialButton" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:background="#d3d3d3" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/profile_modify_btn"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:gravity="left"
+                            android:paddingLeft="20dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="5dp"
+                            android:text="개인정보 변경"
+                            android:textColor="@color/black"
+                            android:textSize="18dp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/materialButton" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:background="#d3d3d3" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/profile_stack_btn"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:gravity="left"
+                            android:paddingLeft="20dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="5dp"
+                            android:text="사용 기술"
+                            android:textColor="@color/black"
+                            android:textSize="18dp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/materialButton" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:background="#d3d3d3" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/profile_delete_btn"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:gravity="left"
+                            android:paddingLeft="20dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="5dp"
+                            android:text="회원 탈퇴"
+                            android:textColor="@color/black"
+                            android:textSize="18dp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/materialButton" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:background="#d3d3d3" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/profile_logout_btn"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:gravity="left"
+                            android:paddingLeft="20dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="5dp"
+                            android:text="로그아웃"
+                            android:textColor="@color/black"
+                            android:textSize="18dp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/materialButton" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <!--     앱설정      -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/profile_main_stack_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:background="#d2d2d2"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="20dp"
+                        android:text="앱 설정"
+                        android:textSize="25dp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Database"
-                        android:textSize="15dp"
-                        app:layout_constraintTop_toBottomOf="@id/profile_main_stack" />
+                        android:orientation="vertical">
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/profile_alarm_option_btn"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:gravity="left"
+                            android:paddingLeft="20dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="5dp"
+                            android:text="알림 설정"
+                            android:textColor="@color/black"
+                            android:textSize="18dp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/materialButton" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:background="#d3d3d3" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/profile_chat_option_btn"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:gravity="left"
+                            android:paddingLeft="20dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="5dp"
+                            android:text="채팅 설정"
+                            android:textColor="@color/black"
+                            android:textSize="18dp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/materialButton" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:background="#d3d3d3" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
 
-            <!--       계정관련 정보 수정      -->
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:background="#d2d2d2"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="20dp"
-                    android:text="계정"
-                    android:textSize="25dp"
-                    android:textStyle="bold" />
-
+                <!--    앱정보            -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/profile_school"
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="?attr/materialButtonOutlinedStyle"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/materialButton"
-                        android:background="@color/white"
-                        android:gravity="left"
+                        android:layout_height="60dp"
+                        android:background="#d2d2d2"
+                        android:gravity="center_vertical"
                         android:paddingLeft="20dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="5dp"
-                        android:text="학교 정보 확인"
-                        android:textColor="@color/black"
-                        android:textSize="18dp"
+                        android:text="앱 정보"
+                        android:textSize="25dp"
                         android:textStyle="bold" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:background="#d3d3d3" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/profile_nickname"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        style="?attr/materialButtonOutlinedStyle"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/materialButton"
-                        android:background="@color/white"
-                        android:gravity="left"
-                        android:paddingLeft="20dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="5dp"
-                        android:text="닉네임 변경"
-                        android:textColor="@color/black"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
+                        android:orientation="vertical">
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:background="#d3d3d3" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/profile_modify"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="?attr/materialButtonOutlinedStyle"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/materialButton"
-                        android:background="@color/white"
-                        android:gravity="left"
-                        android:paddingLeft="20dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="5dp"
-                        android:text="개인정보 변경"
-                        android:textColor="@color/black"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:background="#d3d3d3" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/profile_stack"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="?attr/materialButtonOutlinedStyle"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/materialButton"
-                        android:background="@color/white"
-                        android:gravity="left"
-                        android:paddingLeft="20dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="5dp"
-                        android:text="사용 기술"
-                        android:textColor="@color/black"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:background="#d3d3d3" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/profile_delete"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="?attr/materialButtonOutlinedStyle"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/materialButton"
-                        android:background="@color/white"
-                        android:gravity="left"
-                        android:paddingLeft="20dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="5dp"
-                        android:text="회원 탈퇴"
-                        android:textColor="@color/black"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:background="#d3d3d3" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/profile_logout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="?attr/materialButtonOutlinedStyle"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/materialButton"
-                        android:background="@color/white"
-                        android:gravity="left"
-                        android:paddingLeft="20dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="5dp"
-                        android:text="로그아웃"
-                        android:textColor="@color/black"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-
-            <!--     앱설정      -->
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:background="#d2d2d2"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="20dp"
-                    android:text="앱 설정"
-                    android:textSize="25dp"
-                    android:textStyle="bold" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/profile_alarm_option"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="?attr/materialButtonOutlinedStyle"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/materialButton"
-                        android:background="@color/white"
-                        android:gravity="left"
-                        android:paddingLeft="20dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="5dp"
-                        android:text="알림 설정"
-                        android:textColor="@color/black"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:background="#d3d3d3" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/profile_chat_option"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="?attr/materialButtonOutlinedStyle"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/materialButton"
-                        android:background="@color/white"
-                        android:gravity="left"
-                        android:paddingLeft="20dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="5dp"
-                        android:text="채팅 설정"
-                        android:textColor="@color/black"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:background="#d3d3d3" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-
-            <!--    앱정보            -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:background="#d2d2d2"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="20dp"
-                    android:text="앱 정보"
-                    android:textSize="25dp"
-                    android:textStyle="bold" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/profile_app_version"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="?attr/materialButtonOutlinedStyle"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/materialButton"
-                        android:background="@color/white"
-                        android:gravity="left"
-                        android:paddingLeft="20dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="5dp"
-                        android:text="앱 버전"
-                        android:textColor="@color/black"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/profile_app_version_btn"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:gravity="left"
+                            android:paddingLeft="20dp"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="5dp"
+                            android:text="앱 버전"
+                            android:textColor="@color/black"
+                            android:textSize="18dp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/materialButton" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
 
-    </ScrollView>
+        </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
