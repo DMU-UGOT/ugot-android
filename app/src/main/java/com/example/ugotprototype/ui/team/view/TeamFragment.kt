@@ -7,12 +7,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.ugotprototype.MainActivity
 import com.example.ugotprototype.R
 import com.example.ugotprototype.data.TeamData
 import com.example.ugotprototype.databinding.FragmentTeamBinding
@@ -27,7 +25,6 @@ class TeamFragment : Fragment() {
     private lateinit var teamRecyclerViewAdapter: TeamRecyclerViewAdapter
     private var teamItems = ArrayList<TeamData>()
 
-    private lateinit var resultLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,18 +51,8 @@ class TeamFragment : Fragment() {
             teamRecyclerViewAdapter.setData(it)
         }
 
-        resultLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                if (result.resultCode == Activity.RESULT_OK) {
-                    val data: Intent? = result.data
-                    val resultText = data?.getStringExtra("resultText")
-                    if (resultText != null) {
-                        Log.d("main", resultText)
-                    }
-                }
-            }
-        
         goToTeamSearchDetail()
+        goToTeamPostWriteDetail()
     }
 
     private fun testData() {
@@ -109,8 +96,39 @@ class TeamFragment : Fragment() {
     }
 
     private fun goToTeamSearchDetail() {
+
+        var goToSearchResultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    val data: Intent? = result.data
+                    val resultText = data?.getStringExtra("resultText")
+                    if (resultText != null) {
+                        Log.d("main", resultText)
+                    }
+                }
+            }
+
         binding.btGoDetailSearch.setOnClickListener {
-            resultLauncher.launch(Intent(requireContext(), TeamSearchDetailActivity::class.java))
+            goToSearchResultLauncher.launch(Intent(requireContext(), TeamSearchDetailActivity::class.java))
         }
+    }
+
+    private fun goToTeamPostWriteDetail(){
+
+        var goToPostWriteResultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    val data: Intent? = result.data
+                    val resultText = data?.getStringExtra("resultText")
+                    if (resultText != null) {
+                        Log.d("main", resultText)
+                    }
+                }
+            }
+
+        binding.fabTeam.setOnClickListener {
+            goToPostWriteResultLauncher.launch(Intent(requireContext(), TeamPostWriteDetailActivity::class.java))
+        }
+
     }
 }
