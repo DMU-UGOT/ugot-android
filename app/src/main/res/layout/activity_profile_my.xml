@@ -104,14 +104,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 tools:ignore="MissingConstraints">
 
                 <TextView
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
                     android:text="성별"
                     android:textColor="@color/black"
                     android:textSize="18dp"
@@ -164,8 +165,8 @@
 
                 <EditText
                     android:id="@+id/profile_my_email_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="280dp"
+                    android:layout_height="50dp"
                     android:hint="abcdefg@naver.com"
                     android:paddingLeft="10dp"
                     android:textSize="18dp" />
@@ -195,8 +196,8 @@
 
                 <EditText
                     android:id="@+id/profile_my_git_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="280dp"
+                    android:layout_height="50dp"
                     android:hint="samsung@gmail.com"
                     android:paddingLeft="10dp"
                     android:textSize="18dp" />

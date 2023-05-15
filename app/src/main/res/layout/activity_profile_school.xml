@@ -77,7 +77,7 @@
                 <EditText
                     android:id="@+id/profile_school_major_name"
                     android:layout_width="300dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:hint="컴퓨터 소프트웨어 공학과"
                     android:paddingLeft="10dp"
                     android:textSize="18dp"
@@ -107,12 +107,14 @@
                     android:textSize="18dp" />
 
                 <RadioGroup
+                    android:id="@+id/profile_school_radio_group"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:paddingTop="10dp">
 
                     <RadioButton
+                        android:id="@+id/profile_school_radio_btn1"
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -120,6 +122,7 @@
                         android:text="1" />
 
                     <RadioButton
+                        android:id="@+id/profile_school_radio_btn2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -127,6 +130,7 @@
                         android:text="2" />
 
                     <RadioButton
+                        android:id="@+id/profile_school_radio_btn3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -167,8 +171,9 @@
                 <EditText
                     android:id="@+id/profile_school_class_name"
                     android:layout_width="50dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:hint="YB"
+                    android:maxWidth="4dp"
                     android:paddingLeft="10dp"
                     android:textSize="18dp"
                     tools:ignore="DuplicateIds" />

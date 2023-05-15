@@ -127,7 +127,7 @@
                 tools:ignore="MissingConstraints">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/profile_nickname_saveBtn"
+                    android:id="@+id/profile_stack_saveBtn"
                     style="?attr/materialButtonOutlinedStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
