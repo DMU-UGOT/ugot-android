@@ -18,9 +18,10 @@ class TeamSearchDetailActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_team_search_detail)
 
         checkTextInput()
+        backToMain()
     }
 
-    fun checkTextInput() {
+    private fun checkTextInput() {
         binding.svTextInput.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 val resultIntent = Intent()
@@ -34,5 +35,14 @@ class TeamSearchDetailActivity : AppCompatActivity() {
                 return true
             }
         })
+    }
+
+    private fun backToMain() {
+        binding.btBackToMain.setOnClickListener {
+            val resultIntent = Intent()
+            resultIntent.putExtra("resultText", "text")
+            setResult(Activity.RESULT_OK, resultIntent)
+            finish()
+        }
     }
 }
