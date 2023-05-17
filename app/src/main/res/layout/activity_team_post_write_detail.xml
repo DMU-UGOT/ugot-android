@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.example.ugotprototype.ui.team.viewmodel.TeamViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -15,12 +22,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <Button
-                android:id="@+id/bt_team_post_cancel"
+            <ImageButton
+                android:id="@+id/bt_back_to_main"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:drawableLeft="@drawable/ic_team_post_close"
+                android:padding="5dp"
+                android:src="@drawable/ic_team_post_close"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,20 +36,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="글쓰기"
-                android:textSize="21dp"
+                android:textSize="18dp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/bt_team_post_cancel"
+                app:layout_constraintBottom_toBottomOf="@+id/bt_back_to_main"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/bt_team_post_cancel"
+                app:layout_constraintTop_toTopOf="@+id/bt_back_to_main"
                 tools:text="글쓰기" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/bt_team_post_register"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:drawableRight="@drawable/ic_team_post_register"
+                android:padding="5dp"
+                android:src="@drawable/ic_team_post_register"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -50,7 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="#E0E0E0"
-                app:layout_constraintTop_toBottomOf="@+id/bt_team_post_cancel" />
+                app:layout_constraintTop_toBottomOf="@+id/bt_back_to_main" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ScrollView
@@ -63,7 +72,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
 
                 <EditText
@@ -74,7 +83,7 @@
                     android:background="@android:color/transparent"
                     android:hint="제목"
                     android:textColorHint="@color/color_80636363"
-                    android:textSize="20dp"
+                    android:textSize="15dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -95,7 +104,7 @@
                     android:gravity="top|start"
                     android:hint="내용을 입력하세요"
                     android:textColorHint="@color/color_80636363"
-                    android:textSize="20dp"
+                    android:textSize="15dp"
                     app:layout_constraintTop_toBottomOf="@+id/title_line" />
 
                 <View
@@ -112,29 +121,16 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:text="프로젝트 분야"
-                    android:textSize="17dp"
+                    android:textSize="15dp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/title_detail_line"
                     tools:text="프로젝트 분야" />
 
-                <TextView
-                    android:id="@+id/tv_project_field_check"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="필수항목입니다"
-                    android:textColor="#ff0000"
-                    android:textSize="10dp"
-                    android:visibility="invisible"
-                    app:layout_constraintStart_toStartOf="@+id/tv_field_title"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_field_title"
-                    tools:text="필수항목입니다" />
-
                 <Spinner
                     android:id="@+id/field_spinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="-4dp"
                     android:layout_marginTop="20dp"
                     android:textSize="17dp"
                     app:layout_constraintStart_toStartOf="@+id/tv_field_title"
@@ -155,29 +151,16 @@
                     android:layout_margin="10dp"
                     android:layout_marginEnd="10dp"
                     android:text="학년 반"
-                    android:textSize="17dp"
+                    android:textSize="15dp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/field_title_line"
                     tools:text="학년 반" />
 
-                <TextView
-                    android:id="@+id/tv_class_check"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="필수항목입니다"
-                    android:textColor="#ff0000"
-                    android:textSize="10dp"
-                    android:visibility="invisible"
-                    app:layout_constraintStart_toStartOf="@+id/tv_class_title"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_class_title"
-                    tools:text="필수항목입니다" />
-
                 <Spinner
                     android:id="@+id/class_spinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="-4dp"
                     android:layout_marginTop="20dp"
                     app:layout_constraintStart_toStartOf="@+id/tv_class_title"
                     app:layout_constraintTop_toBottomOf="@+id/tv_class_title" />
@@ -197,7 +180,7 @@
                     android:layout_margin="10dp"
                     android:layout_marginEnd="10dp"
                     android:text="모집 인원"
-                    android:textSize="17dp"
+                    android:textSize="15dp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/number_line"
@@ -230,12 +213,12 @@
                     android:id="@+id/tv_max_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="10명"
+                    android:text="0명"
                     app:layout_constraintBottom_toBottomOf="@+id/seekBar"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/seekBar"
                     app:layout_constraintTop_toTopOf="@+id/seekBar"
-                    tools:text="10명" />
+                    tools:text="1명" />
 
                 <View
                     android:id="@+id/leader_github_link_line"
