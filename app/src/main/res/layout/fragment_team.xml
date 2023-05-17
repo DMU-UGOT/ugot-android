@@ -6,7 +6,7 @@
     <data>
 
         <variable
-            name="teamViewModel"
+            name="vm"
             type="com.example.ugotprototype.ui.team.viewmodel.TeamViewModel" />
     </data>
 
@@ -15,31 +15,40 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.widget.Button
-            android:id="@+id/bt_go_detail_search"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:background="@drawable/team_search_drawable"
-            android:drawableLeft="@drawable/ic_team_search"
-            android:drawablePadding="15dp"
-            android:gravity="left|center_vertical"
-            android:padding="10dp"
-            android:text="어떤 팀이 궁금하시나요?"
-            android:textColor="@color/color_80636363"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/top_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/nsv_main"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/bt_go_detail_search"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="20dp"
+                android:backgroundTint="@color/color_F0F1F3"
+                android:gravity="start|center_vertical"
+                android:text="어떤 팀이 궁금하시나요?"
+                android:textColor="@color/color_80636363"
+                app:cornerRadius="20dp"
+                app:icon="@drawable/ic_team_search"
+                app:iconTint="#636363"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nsv_main"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="42dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bt_go_detail_search">
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

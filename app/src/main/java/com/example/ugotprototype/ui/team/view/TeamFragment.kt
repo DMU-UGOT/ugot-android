@@ -33,7 +33,7 @@ class TeamFragment : Fragment() {
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_team, container, false)
-        binding.teamViewModel = teamViewModel
+        binding.vm = teamViewModel
 
         return binding.root
     }
@@ -97,7 +97,7 @@ class TeamFragment : Fragment() {
 
     private fun goToTeamSearchDetail() {
 
-        var goToSearchResultLauncher =
+        val goToSearchResultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
                     val data: Intent? = result.data
@@ -109,13 +109,18 @@ class TeamFragment : Fragment() {
             }
 
         binding.btGoDetailSearch.setOnClickListener {
-            goToSearchResultLauncher.launch(Intent(requireContext(), TeamSearchDetailActivity::class.java))
+            goToSearchResultLauncher.launch(
+                Intent(
+                    requireContext(),
+                    TeamSearchDetailActivity::class.java
+                )
+            )
         }
     }
 
-    private fun goToTeamPostWriteDetail(){
+    private fun goToTeamPostWriteDetail() {
 
-        var goToPostWriteResultLauncher =
+        val goToPostWriteResultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
                     val data: Intent? = result.data
@@ -127,7 +132,12 @@ class TeamFragment : Fragment() {
             }
 
         binding.fabTeam.setOnClickListener {
-            goToPostWriteResultLauncher.launch(Intent(requireContext(), TeamPostWriteDetailActivity::class.java))
+            goToPostWriteResultLauncher.launch(
+                Intent(
+                    requireContext(),
+                    TeamPostWriteDetailActivity::class.java
+                )
+            )
         }
 
     }

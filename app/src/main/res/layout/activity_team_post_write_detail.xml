@@ -6,7 +6,7 @@
     <data>
 
         <variable
-            name="teamViewModel"
+            name="vm"
             type="com.example.ugotprototype.ui.team.viewmodel.TeamViewModel" />
     </data>
 
@@ -72,7 +72,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
 
                 <EditText
@@ -131,7 +131,6 @@
                     android:id="@+id/field_spinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="-4dp"
                     android:layout_marginTop="20dp"
                     android:textSize="17dp"
                     app:layout_constraintStart_toStartOf="@+id/tv_field_title"
@@ -162,7 +161,6 @@
                     android:id="@+id/class_spinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="-4dp"
                     android:layout_marginTop="20dp"
                     app:layout_constraintStart_toStartOf="@+id/tv_class_title"
                     app:layout_constraintTop_toBottomOf="@+id/tv_class_title" />
@@ -192,12 +190,12 @@
                     android:id="@+id/tv_min_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0명"
+                    android:text="1명"
                     app:layout_constraintBottom_toBottomOf="@+id/seekBar"
                     app:layout_constraintEnd_toStartOf="@+id/seekBar"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/seekBar"
-                    tools:text="0명" />
+                    tools:text="1명" />
 
                 <SeekBar
                     android:id="@+id/seekBar"
