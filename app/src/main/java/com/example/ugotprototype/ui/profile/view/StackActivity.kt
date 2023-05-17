@@ -1,4 +1,4 @@
-package com.example.ugotprototype.ui.profile
+package com.example.ugotprototype.ui.profile.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
