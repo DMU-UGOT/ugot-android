@@ -12,7 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.ugotprototype.R
-import com.example.ugotprototype.data.TeamData
+import com.example.ugotprototype.data.team.TeamData
 import com.example.ugotprototype.databinding.FragmentTeamBinding
 import com.example.ugotprototype.ui.team.adapter.TeamRecyclerViewAdapter
 import com.example.ugotprototype.ui.team.viewmodel.TeamViewModel

@@ -16,13 +16,11 @@ import com.example.ugotprototype.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
-
     // 초기화
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
-        var btnPressed = MutableLiveData<Boolean>(false)
 
         return binding.root
     }

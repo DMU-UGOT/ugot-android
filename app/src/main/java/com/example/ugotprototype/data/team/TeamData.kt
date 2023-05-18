@@ -1,4 +1,4 @@
-package com.example.ugotprototype.data
+package com.example.ugotprototype.data.team
 
 class TeamData(
     val title: String,

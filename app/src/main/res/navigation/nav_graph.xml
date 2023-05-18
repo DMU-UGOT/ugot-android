@@ -16,7 +16,7 @@
         tools:layout="@layout/fragment_group" />
     <fragment
         android:id="@+id/item_profile"
-        android:name="com.example.ugotprototype.ui.profile.ProfileFragment"
+        android:name="com.example.ugotprototype.ui.profile.view.ProfileFragment"
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile" />
     <fragment

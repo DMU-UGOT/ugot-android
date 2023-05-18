@@ -4,7 +4,7 @@ package com.example.ugotprototype.ui.team.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ugotprototype.data.TeamData
+import com.example.ugotprototype.data.team.TeamData
 import com.example.ugotprototype.databinding.ItemTeamListBinding
 
 class TeamRecyclerViewAdapter : RecyclerView.Adapter<TeamRecyclerViewAdapter.MyViewHolder>() {

@@ -3,7 +3,7 @@ package com.example.ugotprototype.ui.team.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.ugotprototype.data.TeamData
+import com.example.ugotprototype.data.team.TeamData
 
 class TeamViewModel : ViewModel() {
     private val _teamItemList = MutableLiveData<ArrayList<TeamData>>()
