@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.example.ugotprototype.data.group.GroupMiddleViewData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_favorites_middle_img"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="15dp"
+                android:src="@drawable/img_sample"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/RoundedImageView"
+                app:strokeColor="@color/color_F3F3F3"
+                app:strokeWidth="1dp" />
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="wrap_content"
+                android:layout_height="2dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/color_F0F1F3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_favorites_middle_img" />
+
+            <TextView
+                android:id="@+id/tv_group_middle_group_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="3dp"
+                android:ellipsize="end"
+                android:ems="10"
+                android:maxLines="1"
+                android:text="@{vm.groupName}"
+                android:textColor="@color/black"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/iv_favorites_middle_img"
+                app:layout_constraintTop_toTopOf="@+id/iv_favorites_middle_img"
+                tools:text="그룹 제목입니다" />
+
+            <TextView
+                android:id="@+id/tv_group_middle_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:ellipsize="end"
+                android:ems="15"
+                android:maxLines="1"
+                android:text="@{vm.groupDetail}"
+                android:textColor="@color/color_80636363"
+                android:textSize="10dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_favorites_middle_img"
+                app:layout_constraintStart_toStartOf="@+id/tv_group_middle_group_name"
+                tools:text="내용 입니다" />
+
+            <ImageButton
+                android:id="@+id/ib_bookmark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_group_bookmark"
+                app:layout_constraintBottom_toTopOf="@+id/tv_group_middle_detail"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_group_middle_group_name" />
+
+            <ImageView
+                android:id="@+id/iv_group_person_cnt_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:src="@drawable/ic_group_user"
+                app:layout_constraintBottom_toBottomOf="@+id/ib_bookmark"
+                app:layout_constraintEnd_toStartOf="@+id/ib_bookmark"
+                app:layout_constraintTop_toTopOf="@+id/ib_bookmark" />
+
+            <TextView
+                android:id="@+id/iv_group_person_cnt"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="6dp"
+                android:gravity="center_vertical|start"
+                android:includeFontPadding="false"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:text="@{vm.groupPersonCnt}"
+                android:textColor="#80636363"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_group_person_cnt_img"
+                app:layout_constraintStart_toEndOf="@+id/iv_group_person_cnt_img"
+                app:layout_constraintTop_toTopOf="@+id/iv_group_person_cnt_img"
+                tools:text="3" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -11,7 +11,7 @@
         tools:layout="@layout/fragment_community" />
     <fragment
         android:id="@+id/item_group"
-        android:name="com.example.ugotprototype.ui.group.GroupFragment"
+        android:name="com.example.ugotprototype.ui.group.view.GroupFragment"
         android:label="GroupFragment"
         tools:layout="@layout/fragment_group" />
     <fragment
