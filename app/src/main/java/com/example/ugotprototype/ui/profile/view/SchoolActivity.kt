@@ -15,8 +15,8 @@ class SchoolActivity : AppCompatActivity() {
 
     }
 
-    private fun modifySchool(){
-        binding.profileSchoolModifyBtn.setOnClickListener {
+    private fun saveSchool(){
+        binding.btSchoolSave.setOnClickListener {
 
         }
     }

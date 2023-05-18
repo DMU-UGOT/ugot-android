@@ -50,7 +50,7 @@ class ProfileFragment : Fragment() {
                 }
             }
 
-        binding.profileSchoolBtn.setOnClickListener {
+        binding.tvFgSchool.setOnClickListener {
             goToSchoolResultLauncher.launch(Intent(requireContext(),SchoolActivity::class.java))
         }
 
@@ -69,7 +69,7 @@ class ProfileFragment : Fragment() {
                 }
             }
 
-        binding.profileStackBtn.setOnClickListener {
+        binding.tvFgStack.setOnClickListener {
             goToStackResultLauncher.launch(Intent(requireContext(),StackActivity::class.java))
         }
 
@@ -90,8 +90,25 @@ class ProfileFragment : Fragment() {
                 }
             }
 
-        binding.profileAlarmOptionBtn.setOnClickListener {
+        binding.tvFgAlarm.setOnClickListener {
             goToAlarmResultLauncher.launch(Intent(requireContext(),AlarmActivity::class.java))
+        }
+    }
+
+    private fun goToAlarmChat(){
+        var goToAlarmChatResultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    val data: Intent? = result.data
+                    val resultText = data?.getStringExtra("resultText")
+                    if (resultText != null) {
+                        Log.d("main", resultText)
+                    }
+                }
+            }
+
+        binding.tvFgAlarmChat.setOnClickListener {
+            goToAlarmChatResultLauncher.launch(Intent(requireContext(),ChatActivity::class.java))
         }
 
     }

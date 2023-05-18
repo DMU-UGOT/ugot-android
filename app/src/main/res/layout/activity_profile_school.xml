@@ -8,344 +8,484 @@
         android:layout_height="match_parent"
         tools:context=".ui.profile.view.SchoolActivity">
 
-        <ScrollView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             tools:ignore="MissingConstraints">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/nsv_school_main"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="42dp"
                 android:orientation="vertical"
-                tools:ignore="MissingConstraints">
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <View
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:background="#d3d3d3" />
+                    android:layout_height="wrap_content">
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="30dp"
-                    android:paddingBottom="30dp"
-                    android:src="@drawable/dmulogo" />
+                    <!--상단 이미지-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_top"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:background="#d3d3d3" />
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
-                <!--학과            -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                            <View
+                                android:id="@+id/v1"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:background="#d3d3d3" />
 
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="50dp"
-                        android:paddingLeft="20dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:text="학과"
-                        android:textColor="@color/black"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
+                            <ImageView
+                                android:id="@+id/iv_school"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="30dp"
+                                android:paddingBottom="30dp"
+                                android:src="@drawable/dmulogo"
+                                app:layout_constraintBottom_toTopOf="@id/v2"
+                                app:layout_constraintTop_toBottomOf="@id/v1" />
 
-                    <TextView
+
+                            <View
+                                android:id="@+id/v2"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:background="#d3d3d3"
+                                app:layout_constraintTop_toBottomOf="@+id/iv_school" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <!--중간-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_medium"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="10dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:text="컴퓨터 소프트웨어 공학과"
-                        android:textSize="18dp" />
-                </LinearLayout>
+                        app:layout_constraintTop_toBottomOf="@id/layout_top">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="#d3d3d3" />
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <!--학과-->
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/layout_department"
+                                android:layout_width="match_parent"
+                                android:layout_height="55dp">
+
+                                <TextView
+                                    android:id="@+id/tv_department"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="310dp"
+                                    android:paddingStart="20dp"
+                                    android:paddingTop="10dp"
+                                    android:paddingBottom="10dp"
+                                    android:text="학과"
+                                    android:textColor="@color/black"
+                                    android:textSize="18dp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/tv_department_input"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="100dp"
+                                    android:paddingStart="10dp"
+                                    android:paddingTop="10dp"
+                                    android:paddingBottom="10dp"
+                                    android:text="컴퓨터 소프트웨어 공학과"
+                                    android:textSize="18dp"
+                                    app:layout_constraintLeft_toRightOf="@id/tv_department" />
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="2dp"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="10dp"
+                                    android:background="#d3d3d3"
+                                    app:layout_constraintTop_toBottomOf="@+id/tv_department" />
 
 
-                <!-- 분반      -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="50dp"
-                        android:paddingLeft="20dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:text="분반"
-                        android:textColor="@color/black"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
+                            <!--학년-->
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/layout_grade"
+                                android:layout_width="match_parent"
+                                android:layout_height="55dp"
+                                app:layout_constraintTop_toBottomOf="@+id/layout_department">
 
-                    <EditText
-                        android:id="@+id/profile_class"
-                        android:layout_width="300dp"
-                        android:layout_height="50dp"
-                        android:background="@null"
-                        android:paddingLeft="10dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp" />
-                </LinearLayout>
+                                <TextView
+                                    android:id="@+id/tv_grade"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="310dp"
+                                    android:paddingStart="20dp"
+                                    android:paddingTop="10dp"
+                                    android:paddingBottom="10dp"
+                                    android:text="학년"
+                                    android:textColor="@color/black"
+                                    android:textSize="18dp"
+                                    android:textStyle="bold" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="#d3d3d3" />
+                                <TextView
+                                    android:id="@+id/tv_grade_input"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="100dp"
+                                    android:paddingStart="10dp"
+                                    android:paddingTop="10dp"
+                                    android:paddingBottom="10dp"
+                                    android:textSize="18dp"
+                                    app:layout_constraintLeft_toRightOf="@+id/tv_grade"
+                                    tools:text="1/2/3/4 스피너로 제작 예정" />
 
-                <!--학년        -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="50dp"
-                        android:paddingLeft="20dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:text="학년"
-                        android:textColor="@color/black"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="2dp"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="10dp"
+                                    android:background="#d3d3d3"
+                                    app:layout_constraintTop_toBottomOf="@+id/tv_grade" />
 
-                    <TextView
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <!--반-->
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/layout_class"
+                                android:layout_width="match_parent"
+                                android:layout_height="55dp"
+                                app:layout_constraintTop_toBottomOf="@+id/layout_grade">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                    <TextView
+                                        android:id="@+id/tv_class"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="310dp"
+                                        android:paddingStart="20dp"
+                                        android:paddingTop="10dp"
+                                        android:paddingBottom="10dp"
+                                        android:text="분반"
+                                        android:textColor="@color/black"
+                                        android:textSize="18dp"
+                                        android:textStyle="bold" />
+
+                                    <EditText
+                                        android:id="@+id/et_class_input"
+                                        android:layout_width="300dp"
+                                        android:layout_height="50dp"
+                                        android:background="@null"
+                                        android:hint="YJ"
+                                        android:paddingStart="10dp"
+                                        android:paddingTop="10dp"
+                                        android:paddingBottom="10dp"
+                                        app:layout_constraintLeft_toRightOf="@+id/tv_class" />
+
+
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="2dp"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginRight="10dp"
+                                        android:background="#d3d3d3"
+                                        app:layout_constraintTop_toBottomOf="@+id/tv_class" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <!--이름-->
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/layout_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="55dp"
+                                app:layout_constraintTop_toBottomOf="@+id/layout_class">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                    <TextView
+                                        android:id="@+id/tv_name"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="310dp"
+                                        android:paddingStart="20dp"
+                                        android:paddingTop="10dp"
+                                        android:paddingBottom="10dp"
+                                        android:text="이름"
+                                        android:textColor="@color/black"
+                                        android:textSize="18dp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/tv_name_input"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="100dp"
+                                        android:paddingStart="10dp"
+                                        android:paddingTop="10dp"
+                                        android:paddingBottom="10dp"
+                                        android:textSize="18dp"
+                                        app:layout_constraintLeft_toRightOf="@+id/tv_name"
+                                        tools:text="김동양" />
+
+
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="2dp"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginRight="10dp"
+                                        android:background="#d3d3d3"
+                                        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <!--                        닉네임-->
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/layout_nickname"
+                                android:layout_width="match_parent"
+                                android:layout_height="55dp"
+                                app:layout_constraintTop_toBottomOf="@+id/layout_name">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                    <TextView
+                                        android:id="@+id/tv_nickname"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="310dp"
+                                        android:paddingStart="20dp"
+                                        android:paddingTop="10dp"
+                                        android:paddingBottom="10dp"
+                                        android:text="닉네임"
+                                        android:textColor="@color/black"
+                                        android:textSize="18dp"
+                                        android:textStyle="bold" />
+
+                                    <EditText
+                                        android:id="@+id/et_nickname_input"
+                                        android:layout_width="300dp"
+                                        android:layout_height="50dp"
+                                        android:background="@null"
+                                        android:hint="abcd@naver.com"
+                                        android:paddingStart="10dp"
+                                        android:paddingTop="10dp"
+                                        android:paddingBottom="10dp"
+                                        app:layout_constraintLeft_toRightOf="@+id/tv_nickname" />
+
+
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="2dp"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginRight="10dp"
+                                        android:background="#d3d3d3"
+                                        app:layout_constraintTop_toBottomOf="@+id/tv_nickname" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <!--성별-->
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/layout_sex"
+                                android:layout_width="match_parent"
+                                android:layout_height="55dp"
+                                app:layout_constraintTop_toBottomOf="@+id/layout_nickname">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                    <TextView
+                                        android:id="@+id/tv_sex"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="310dp"
+                                        android:paddingStart="20dp"
+                                        android:paddingTop="10dp"
+                                        android:paddingBottom="10dp"
+                                        android:text="성별"
+                                        android:textColor="@color/black"
+                                        android:textSize="18dp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/tv_sex_input"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="100dp"
+                                        android:paddingStart="10dp"
+                                        android:paddingTop="10dp"
+                                        android:paddingBottom="10dp"
+                                        android:textSize="18dp"
+                                        app:layout_constraintLeft_toRightOf="@id/tv_sex"
+                                        tools:text="남/여 스피너" />
+
+
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="2dp"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginRight="10dp"
+                                        android:background="#d3d3d3"
+                                        app:layout_constraintTop_toBottomOf="@+id/tv_sex" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <!--이메일-->
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/layout_email"
+                                android:layout_width="match_parent"
+                                android:layout_height="55dp"
+                                app:layout_constraintTop_toBottomOf="@+id/layout_sex">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+
+                                    <TextView
+                                        android:id="@+id/tv_email"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="310dp"
+                                        android:paddingStart="20dp"
+                                        android:paddingTop="10dp"
+                                        android:paddingBottom="10dp"
+                                        android:text="이메일"
+                                        android:textColor="@color/black"
+                                        android:textSize="18dp"
+                                        android:textStyle="bold" />
+
+                                    <EditText
+                                        android:id="@+id/et_email_input"
+                                        android:layout_width="300dp"
+                                        android:layout_height="50dp"
+                                        android:background="@null"
+                                        android:hint="dongyang@naver.com"
+                                        android:paddingStart="10dp"
+                                        android:paddingTop="10dp"
+                                        android:paddingBottom="10dp"
+                                        app:layout_constraintLeft_toRightOf="@id/tv_email" />
+
+
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="2dp"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginRight="10dp"
+                                        android:background="#d3d3d3"
+                                        app:layout_constraintTop_toBottomOf="@+id/tv_email" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <!-- 깃메일-->
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/layout_git"
+                                android:layout_width="match_parent"
+                                android:layout_height="55dp"
+                                app:layout_constraintTop_toBottomOf="@+id/layout_email">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+
+                                    <TextView
+                                        android:id="@+id/tv_git"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="310dp"
+                                        android:paddingStart="20dp"
+                                        android:paddingTop="10dp"
+                                        android:paddingBottom="10dp"
+                                        android:text="깃닉네임"
+                                        android:textColor="@color/black"
+                                        android:textSize="18dp"
+                                        android:textStyle="bold" />
+
+                                    <EditText
+                                        android:id="@+id/et_git_input"
+                                        android:layout_width="300dp"
+                                        android:layout_height="50dp"
+                                        android:background="@null"
+                                        android:hint="DYmirea"
+                                        android:paddingStart="10dp"
+                                        android:paddingTop="10dp"
+                                        android:paddingBottom="10dp"
+                                        app:layout_constraintLeft_toRightOf="@id/tv_git" />
+
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="2dp"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginRight="10dp"
+                                        android:background="#d3d3d3"
+                                        app:layout_constraintTop_toBottomOf="@+id/tv_git" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_bottom"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="10dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:textSize="18dp"
-                        tools:text="1/2/3/4 스피너로 제작 예정" />
-                </LinearLayout>
+                        app:layout_constraintTop_toBottomOf="@id/layout_medium">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="#d3d3d3" />
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
-                <!--  이름      -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/bt_school_save"
+                                android:layout_width="150dp"
+                                android:layout_height="50dp"
+                                android:layout_marginHorizontal="20dp"
+                                android:backgroundTint="@color/semiBlue"
+                                android:gravity="start|center_vertical"
+                                android:paddingStart="45dp"
+                                android:text="저장하기"
+                                android:textColor="@color/white"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="50dp"
-                        android:paddingLeft="20dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:text="이름"
-                        android:textColor="@color/black"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="10dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:textSize="18dp"
-                        tools:text="김동양" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="#d3d3d3" />
-
-                <!-- 닉네임        -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="50dp"
-                        android:paddingLeft="20dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:text="닉네임"
-                        android:textColor="@color/black"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/profile_nickname"
-                        android:layout_width="300dp"
-                        android:layout_height="50dp"
-                        android:background="@null"
-                        android:paddingLeft="10dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="#d3d3d3" />
-
-                <!--성별        -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="50dp"
-                        android:paddingLeft="20dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:text="성별"
-                        android:textColor="@color/black"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="10dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:textSize="18dp"
-                        tools:text="남" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="#d3d3d3" />
-
-                <!--이메일        -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="50dp"
-                        android:paddingLeft="20dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:text="이메일"
-                        android:textColor="@color/black"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/profile_email"
-                        android:layout_width="300dp"
-                        android:layout_height="50dp"
-                        android:background="@null"
-                        android:paddingLeft="10dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="#d3d3d3" />
-
-                <!--git주소        -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="50dp"
-                        android:paddingLeft="20dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:text="깃주소"
-                        android:textColor="@color/black"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/profile_git"
-                        android:layout_width="300dp"
-                        android:layout_height="50dp"
-                        android:background="@null"
-                        android:paddingLeft="10dp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="#d3d3d3" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/profile_school_modifyBtn"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginRight="30dp"
-                        android:layout_marginBottom="30dp"
-                        android:layout_weight="1"
-                        android:backgroundTint="@color/semiBlue"
-                        android:text="수정하기"
-                        android:textSize="18dp" />
-
-                    <Button
-                        android:id="@+id/profile_school_saveBtn"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginRight="30dp"
-                        android:layout_marginBottom="30dp"
-                        android:layout_weight="1"
-                        android:backgroundTint="@color/semiBlue"
-                        android:text="저장하기"
-                        android:textSize="18dp" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </ScrollView>
-
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.core.widget.NestedScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>
