@@ -45,34 +45,27 @@ class TeamPostWriteDetailActivity : AppCompatActivity() {
 
     private fun checkPostRegister() {
 
-        val totalListener =
-            object : AdapterView.OnItemSelectedListener, TextWatcher {
+        val totalListener = object : AdapterView.OnItemSelectedListener, TextWatcher {
 
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    checkFieldsAndUpdateButtonState()
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
-
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int
-                ) {
-                }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    checkFieldsAndUpdateButtonState()
-                }
-
-                override fun afterTextChanged(s: Editable?) {}
+            override fun onItemSelected(
+                parent: AdapterView<*>?, view: View?, position: Int, id: Long
+            ) {
+                checkFieldsAndUpdateButtonState()
             }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+            override fun beforeTextChanged(
+                s: CharSequence?, start: Int, count: Int, after: Int
+            ) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                checkFieldsAndUpdateButtonState()
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        }
 
         binding.classSpinner.onItemSelectedListener = totalListener
         binding.fieldSpinner.onItemSelectedListener = totalListener
@@ -83,13 +76,7 @@ class TeamPostWriteDetailActivity : AppCompatActivity() {
     }
 
     private fun checkFieldsAndUpdateButtonState() {
-        if (binding.classSpinner.selectedItemPosition != 0
-            && binding.fieldSpinner.selectedItemPosition != 0
-            && binding.etTitleName.length() != 0
-            && binding.etTitleDetail.length() != 0
-            && binding.etInputGithubLink.length() != 0
-            && binding.etInputKakaoOpenLink.length() != 0
-        ) {
+        if (binding.classSpinner.selectedItemPosition != 0 && binding.fieldSpinner.selectedItemPosition != 0 && binding.etTitleName.length() != 0 && binding.etTitleDetail.length() != 0 && binding.etInputGithubLink.length() != 0 && binding.etInputKakaoOpenLink.length() != 0) {
             teamViewModel.isTeamPostRegisterButtonState(true)
         } else {
             teamViewModel.isTeamPostRegisterButtonState(false)
@@ -115,17 +102,16 @@ class TeamPostWriteDetailActivity : AppCompatActivity() {
     }
 
     private fun backToMainActivity() {
-        val resultIntent = Intent()
 
         binding.btTeamPostRegister.setOnClickListener {
-            resultIntent.putExtra("resultText", "text")
-            setResult(Activity.RESULT_OK, resultIntent)
+            Intent().putExtra("resultText", "text")
+            setResult(Activity.RESULT_OK, Intent())
             finish()
         }
 
         binding.btBackToMain.setOnClickListener {
-            resultIntent.putExtra("resultText", "text")
-            setResult(Activity.RESULT_OK, resultIntent)
+            Intent().putExtra("resultText", "text")
+            setResult(Activity.RESULT_OK, Intent())
             finish()
         }
     }

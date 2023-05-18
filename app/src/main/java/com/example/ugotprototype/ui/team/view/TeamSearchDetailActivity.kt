@@ -12,12 +12,10 @@ import com.google.android.material.chip.Chip;
 
 class TeamSearchDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTeamSearchDetailBinding
-    private lateinit var resultIntent: Intent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_team_search_detail)
-        resultIntent = Intent()
 
         checkTextInput()
         backToMain()
@@ -26,8 +24,8 @@ class TeamSearchDetailActivity : AppCompatActivity() {
     private fun checkTextInput() {
         binding.svTextInput.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                resultIntent.putExtra("resultText", query)
-                setResult(Activity.RESULT_OK, resultIntent)
+                Intent().putExtra("resultText", query)
+                setResult(Activity.RESULT_OK, Intent())
                 finish()
                 return true
             }
@@ -40,8 +38,8 @@ class TeamSearchDetailActivity : AppCompatActivity() {
 
     private fun backToMain() {
         binding.btBackToMain.setOnClickListener {
-            resultIntent.putExtra("resultText", "text")
-            setResult(Activity.RESULT_OK, resultIntent)
+            Intent().putExtra("resultText", "text")
+            setResult(Activity.RESULT_OK, Intent())
             finish()
         }
     }
