@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.example.ugotprototype.data.group.GroupTopViewData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_favorites_top_img"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/img_sample"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/RoundedImageView"
+            app:strokeColor="@color/color_F3F3F3"
+            app:strokeWidth="1dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@{vm.groupName}"
+            android:textColor="@color/black"
+            android:textSize="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/iv_favorites_top_img"
+            app:layout_constraintStart_toStartOf="@+id/iv_favorites_top_img"
+            app:layout_constraintTop_toBottomOf="@+id/iv_favorites_top_img"
+            tools:text="즐겨찾는그룹입니다" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
