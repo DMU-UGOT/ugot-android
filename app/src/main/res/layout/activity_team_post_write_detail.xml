@@ -74,7 +74,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-
                 <EditText
                     android:id="@+id/et_title_name"
                     android:layout_width="match_parent"
@@ -235,7 +234,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:text="공유 링크"
-                    android:textSize="17dp"
+                    android:textSize="15dp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/leader_github_link_line" />
@@ -246,7 +245,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginTop="15dp"
-                    android:background="@drawable/team_post_detail_et_background"
+                    android:background="@drawable/bg_team_post_detail_et"
                     android:hint="깃헙 닉네임을 입력하세요"
                     android:padding="15dp"
                     android:textColorHint="@color/color_80636363"
@@ -261,7 +260,7 @@
                     android:layout_height="0dp"
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/team_post_detail_et_background"
+                    android:background="@drawable/bg_team_post_detail_et"
                     android:hint="카카오 오픈링크를 입력하세요"
                     android:padding="15dp"
                     android:textColorHint="@color/color_80636363"
