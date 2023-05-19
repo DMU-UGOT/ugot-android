@@ -1,5 +1,6 @@
 package com.example.ugotprototype.ui.profile.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -17,7 +18,8 @@ class SchoolActivity : AppCompatActivity() {
 
     private fun saveSchool(){
         binding.btSchoolSave.setOnClickListener {
-
+            startActivity(Intent(this, ProfileFragment::class.java))
+            finish()
         }
     }
 }

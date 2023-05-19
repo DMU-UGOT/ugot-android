@@ -17,7 +17,6 @@
                 android:id="@+id/nsv_school_main"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginTop="42dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -54,7 +53,6 @@
                                 app:layout_constraintBottom_toTopOf="@id/v2"
                                 app:layout_constraintTop_toBottomOf="@id/v1" />
 
-
                             <View
                                 android:id="@+id/v2"
                                 android:layout_width="match_parent"
@@ -63,7 +61,6 @@
                                 app:layout_constraintTop_toBottomOf="@+id/iv_school" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
-
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <!--중간-->
@@ -116,7 +113,6 @@
                                     android:background="#d3d3d3"
                                     app:layout_constraintTop_toBottomOf="@+id/tv_department" />
 
-
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <!--학년-->
@@ -150,7 +146,6 @@
                                     android:textSize="18dp"
                                     app:layout_constraintLeft_toRightOf="@+id/tv_grade"
                                     tools:text="1/2/3/4 스피너로 제작 예정" />
-
 
                                 <View
                                     android:layout_width="match_parent"
@@ -197,7 +192,6 @@
                                         android:paddingBottom="10dp"
                                         app:layout_constraintLeft_toRightOf="@+id/tv_class" />
 
-
                                     <View
                                         android:layout_width="match_parent"
                                         android:layout_height="2dp"
@@ -207,7 +201,6 @@
                                         app:layout_constraintTop_toBottomOf="@+id/tv_class" />
 
                                 </androidx.constraintlayout.widget.ConstraintLayout>
-
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <!--이름-->
@@ -246,7 +239,6 @@
                                         app:layout_constraintLeft_toRightOf="@+id/tv_name"
                                         tools:text="김동양" />
 
-
                                     <View
                                         android:layout_width="match_parent"
                                         android:layout_height="2dp"
@@ -256,10 +248,9 @@
                                         app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 
                                 </androidx.constraintlayout.widget.ConstraintLayout>
-
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
-                            <!--                        닉네임-->
+                            <!--닉네임-->
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:id="@+id/layout_nickname"
                                 android:layout_width="match_parent"
@@ -294,7 +285,6 @@
                                         android:paddingBottom="10dp"
                                         app:layout_constraintLeft_toRightOf="@+id/tv_nickname" />
 
-
                                     <View
                                         android:layout_width="match_parent"
                                         android:layout_height="2dp"
@@ -304,7 +294,6 @@
                                         app:layout_constraintTop_toBottomOf="@+id/tv_nickname" />
 
                                 </androidx.constraintlayout.widget.ConstraintLayout>
-
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <!--성별-->
@@ -343,7 +332,6 @@
                                         app:layout_constraintLeft_toRightOf="@id/tv_sex"
                                         tools:text="남/여 스피너" />
 
-
                                     <View
                                         android:layout_width="match_parent"
                                         android:layout_height="2dp"
@@ -353,7 +341,6 @@
                                         app:layout_constraintTop_toBottomOf="@+id/tv_sex" />
 
                                 </androidx.constraintlayout.widget.ConstraintLayout>
-
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <!--이메일-->
@@ -366,7 +353,6 @@
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content">
-
 
                                     <TextView
                                         android:id="@+id/tv_email"
@@ -392,7 +378,6 @@
                                         android:paddingBottom="10dp"
                                         app:layout_constraintLeft_toRightOf="@id/tv_email" />
 
-
                                     <View
                                         android:layout_width="match_parent"
                                         android:layout_height="2dp"
@@ -402,7 +387,6 @@
                                         app:layout_constraintTop_toBottomOf="@+id/tv_email" />
 
                                 </androidx.constraintlayout.widget.ConstraintLayout>
-
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <!-- 깃메일-->
@@ -416,7 +400,6 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content">
 
-
                                     <TextView
                                         android:id="@+id/tv_git"
                                         android:layout_width="match_parent"
@@ -425,7 +408,7 @@
                                         android:paddingStart="20dp"
                                         android:paddingTop="10dp"
                                         android:paddingBottom="10dp"
-                                        android:text="깃닉네임"
+                                        android:text="GitHub"
                                         android:textColor="@color/black"
                                         android:textSize="18dp"
                                         android:textStyle="bold" />
@@ -450,11 +433,8 @@
                                         app:layout_constraintTop_toBottomOf="@+id/tv_git" />
 
                                 </androidx.constraintlayout.widget.ConstraintLayout>
-
                             </androidx.constraintlayout.widget.ConstraintLayout>
-
                         </androidx.constraintlayout.widget.ConstraintLayout>
-
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
