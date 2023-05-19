@@ -112,11 +112,11 @@ class GroupFragment : Fragment() {
             RecyclerView.AdapterDataObserver() {
             override fun onChanged() {
                 super.onChanged()
-                groupViewModel.setGrouMiddleItemCount(groupMiddleViewAdapter.itemCount)
+                groupViewModel.setGroupMiddleItemCount(groupMiddleViewAdapter.itemCount)
             }
         })
 
-        binding.vm?.itemCount?.observe(viewLifecycleOwner) { count ->
+        groupViewModel.itemCount.observe(viewLifecycleOwner) { count ->
             binding.tvGroupCnt.text = count.toString()
         }
     }
