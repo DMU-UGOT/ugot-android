@@ -74,7 +74,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-
                 <EditText
                     android:id="@+id/et_title_name"
                     android:layout_width="match_parent"
@@ -235,7 +234,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:text="공유 링크"
-                    android:textSize="17dp"
+                    android:textSize="15dp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/leader_github_link_line" />
