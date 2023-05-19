@@ -25,7 +25,7 @@ class GroupViewModel : ViewModel() {
         _groupMiddleItemList.value = groupMiddleData
     }
 
-    fun setGrouMiddleItemCount(count: Int) {
+    fun setGroupMiddleItemCount(count: Int) {
         _itemCount.value = count
     }
 }
