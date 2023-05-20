@@ -38,12 +38,28 @@
         <item>3-3</item>
         <item>4-1</item>
         <item>4-2</item>
-
-
-
     </string-array>
 
+    <!-- School Activity -->
+    <string-array name="school_sex_item">
+        <item>남자</item>
+        <item>여자</item>
+    </string-array>
 
+    <string-array name="school_grade_item">
+        <item>1학년</item>
+        <item>2학년</item>
+        <item>3학년</item>
+        <item>학사</item>
+    </string-array>
 
+    <string-array name="school_class_item">
+        <item>YA</item>
+        <item>YB</item>
+        <item>YC</item>
+        <item>YD</item>
+        <item>YJ</item>
+        <item>YK</item>
+    </string-array>
 
 </resources>
