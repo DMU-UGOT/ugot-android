@@ -77,7 +77,6 @@
                                     android:textSize="15sp"
                                     app:layout_constraintTop_toBottomOf="@+id/tv_fg_name"
                                     tools:text="bagopa@naver.com" />
-
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <androidx.constraintlayout.widget.ConstraintLayout
@@ -108,9 +107,7 @@
                                     android:text="Database"
                                     android:textSize="15sp"
                                     app:layout_constraintTop_toBottomOf="@+id/tv_fg_stack_top" />
-
                             </androidx.constraintlayout.widget.ConstraintLayout>
-
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <!--중간-->
@@ -245,9 +242,7 @@
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toBottomOf="@id/fv4" />
-
                             </androidx.constraintlayout.widget.ConstraintLayout>
-
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <!--중간2-->
@@ -331,9 +326,7 @@
                                     android:layout_marginRight="10dp"
                                     android:background="#d3d3d3"
                                     app:layout_constraintTop_toBottomOf="@id/tv_fg_alarm_chat" />
-
                             </androidx.constraintlayout.widget.ConstraintLayout>
-
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <!--하단-->
@@ -396,7 +389,6 @@
                                     app:layout_constraintLeft_toRightOf="@id/tv_fg_app_version"
                                     app:layout_constraintTop_toBottomOf="@id/tv_fg_app"
                                     tools:text="1.0.1 ver" />
-
                             </androidx.constraintlayout.widget.ConstraintLayout>
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </androidx.constraintlayout.widget.ConstraintLayout>

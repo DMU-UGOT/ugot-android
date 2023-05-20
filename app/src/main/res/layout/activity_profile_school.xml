@@ -31,17 +31,27 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/layout_top"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
 
                             <View
                                 android:id="@+id/v1"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
-                                android:background="#d3d3d3" />
+                                android:background="#d3d3d3"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
                             <ImageView
                                 android:id="@+id/iv_school"
@@ -51,6 +61,8 @@
                                 android:paddingBottom="30dp"
                                 android:src="@drawable/dmulogo"
                                 app:layout_constraintBottom_toTopOf="@id/v2"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@id/v1" />
 
                             <View
@@ -58,8 +70,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:background="#d3d3d3"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/iv_school" />
-
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -68,42 +82,58 @@
                         android:id="@+id/layout_medium"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/layout_top">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
 
                             <!--학과-->
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:id="@+id/layout_department"
-                                android:layout_width="match_parent"
-                                android:layout_height="55dp">
+                                android:layout_width="wrap_content"
+                                android:layout_height="55dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
 
                                 <TextView
                                     android:id="@+id/tv_department"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginEnd="310dp"
                                     android:paddingStart="20dp"
                                     android:paddingTop="10dp"
-                                    android:paddingBottom="10dp"
+                                    android:paddingEnd="50dp"
+                                    android:paddingBottom="15dp"
                                     android:text="학과"
                                     android:textColor="@color/black"
-                                    android:textSize="18dp"
-                                    android:textStyle="bold" />
+                                    android:textSize="17sp"
+                                    android:textStyle="bold"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintRight_toLeftOf="@id/tv_department_input"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
 
                                 <TextView
                                     android:id="@+id/tv_department_input"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="100dp"
                                     android:paddingStart="10dp"
                                     android:paddingTop="10dp"
-                                    android:paddingBottom="10dp"
+                                    android:paddingEnd="10dp"
+                                    android:paddingBottom="15dp"
                                     android:text="컴퓨터 소프트웨어 공학과"
-                                    android:textSize="18dp"
-                                    app:layout_constraintLeft_toRightOf="@id/tv_department" />
+                                    android:textSize="15sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintLeft_toRightOf="@id/tv_department"
+                                    app:layout_constraintTop_toTopOf="parent" />
 
                                 <View
                                     android:layout_width="match_parent"
@@ -112,40 +142,46 @@
                                     android:layout_marginRight="10dp"
                                     android:background="#d3d3d3"
                                     app:layout_constraintTop_toBottomOf="@+id/tv_department" />
-
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <!--학년-->
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:id="@+id/layout_grade"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="55dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/layout_department">
 
                                 <TextView
                                     android:id="@+id/tv_grade"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginEnd="310dp"
                                     android:paddingStart="20dp"
                                     android:paddingTop="10dp"
-                                    android:paddingBottom="10dp"
+                                    android:paddingEnd="50dp"
+                                    android:paddingBottom="15dp"
                                     android:text="학년"
                                     android:textColor="@color/black"
-                                    android:textSize="18dp"
-                                    android:textStyle="bold" />
+                                    android:textSize="17sp"
+                                    android:textStyle="bold"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
 
-                                <TextView
-                                    android:id="@+id/tv_grade_input"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="100dp"
-                                    android:paddingStart="10dp"
+                                <Spinner
+                                    android:id="@+id/sp_grade"
+                                    android:layout_width="100dp"
+                                    android:layout_height="50dp"
+                                    android:contentDescription="본인에 맞는 학년 입력"
+                                    android:paddingStart="5dp"
                                     android:paddingTop="10dp"
-                                    android:paddingBottom="10dp"
-                                    android:textSize="18dp"
+                                    android:paddingEnd="10dp"
+                                    android:paddingBottom="15dp"
+                                    android:textSize="15sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintLeft_toRightOf="@+id/tv_grade"
-                                    tools:text="1/2/3/4 스피너로 제작 예정" />
+                                    app:layout_constraintTop_toTopOf="parent" />
 
                                 <View
                                     android:layout_width="match_parent"
@@ -154,43 +190,55 @@
                                     android:layout_marginRight="10dp"
                                     android:background="#d3d3d3"
                                     app:layout_constraintTop_toBottomOf="@+id/tv_grade" />
-
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <!--반-->
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:id="@+id/layout_class"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="55dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/layout_grade">
 
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent">
 
                                     <TextView
                                         android:id="@+id/tv_class"
-                                        android:layout_width="match_parent"
+                                        android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginEnd="310dp"
                                         android:paddingStart="20dp"
                                         android:paddingTop="10dp"
-                                        android:paddingBottom="10dp"
+                                        android:paddingEnd="50dp"
+                                        android:paddingBottom="15dp"
                                         android:text="분반"
                                         android:textColor="@color/black"
-                                        android:textSize="18dp"
-                                        android:textStyle="bold" />
+                                        android:textSize="17sp"
+                                        android:textStyle="bold"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
 
-                                    <EditText
-                                        android:id="@+id/et_class_input"
-                                        android:layout_width="300dp"
+                                    <Spinner
+                                        android:id="@+id/sp_class"
+                                        android:layout_width="100dp"
                                         android:layout_height="50dp"
-                                        android:background="@null"
-                                        android:hint="YJ"
+                                        android:contentDescription="본인에 맞는 반 입력"
                                         android:paddingStart="10dp"
                                         android:paddingTop="10dp"
-                                        android:paddingBottom="10dp"
-                                        app:layout_constraintLeft_toRightOf="@+id/tv_class" />
+                                        android:paddingEnd="10dp"
+                                        android:paddingBottom="15dp"
+                                        android:textSize="15sp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintLeft_toRightOf="@+id/tv_class"
+                                        app:layout_constraintTop_toTopOf="parent" />
 
                                     <View
                                         android:layout_width="match_parent"
@@ -199,44 +247,56 @@
                                         android:layout_marginRight="10dp"
                                         android:background="#d3d3d3"
                                         app:layout_constraintTop_toBottomOf="@+id/tv_class" />
-
                                 </androidx.constraintlayout.widget.ConstraintLayout>
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <!--이름-->
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:id="@+id/layout_name"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="55dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/layout_class">
 
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent">
 
                                     <TextView
                                         android:id="@+id/tv_name"
-                                        android:layout_width="match_parent"
+                                        android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginEnd="310dp"
                                         android:paddingStart="20dp"
                                         android:paddingTop="10dp"
-                                        android:paddingBottom="10dp"
+                                        android:paddingEnd="50dp"
+                                        android:paddingBottom="15dp"
                                         android:text="이름"
                                         android:textColor="@color/black"
-                                        android:textSize="18dp"
-                                        android:textStyle="bold" />
+                                        android:textSize="17sp"
+                                        android:textStyle="bold"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
 
                                     <TextView
                                         android:id="@+id/tv_name_input"
-                                        android:layout_width="match_parent"
+                                        android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginStart="100dp"
+                                        android:layout_marginEnd="15dp"
                                         android:paddingStart="10dp"
                                         android:paddingTop="10dp"
-                                        android:paddingBottom="10dp"
-                                        android:textSize="18dp"
+                                        android:paddingEnd="10dp"
+                                        android:paddingBottom="15dp"
+                                        android:textSize="15sp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintLeft_toRightOf="@+id/tv_name"
+                                        app:layout_constraintStart_toEndOf="@id/tv_name"
+                                        app:layout_constraintTop_toTopOf="parent"
                                         tools:text="김동양" />
 
                                     <View
@@ -246,44 +306,59 @@
                                         android:layout_marginRight="10dp"
                                         android:background="#d3d3d3"
                                         app:layout_constraintTop_toBottomOf="@+id/tv_name" />
-
                                 </androidx.constraintlayout.widget.ConstraintLayout>
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <!--닉네임-->
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:id="@+id/layout_nickname"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="55dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/layout_name">
 
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent">
 
                                     <TextView
                                         android:id="@+id/tv_nickname"
-                                        android:layout_width="match_parent"
+                                        android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginEnd="310dp"
                                         android:paddingStart="20dp"
                                         android:paddingTop="10dp"
-                                        android:paddingBottom="10dp"
+                                        android:paddingEnd="35dp"
+                                        android:paddingBottom="15dp"
                                         android:text="닉네임"
                                         android:textColor="@color/black"
-                                        android:textSize="18dp"
-                                        android:textStyle="bold" />
+                                        android:textSize="17sp"
+                                        android:textStyle="bold"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintRight_toLeftOf="@id/et_nickname_input"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
 
                                     <EditText
                                         android:id="@+id/et_nickname_input"
-                                        android:layout_width="300dp"
+                                        android:layout_width="290dp"
                                         android:layout_height="50dp"
                                         android:background="@null"
                                         android:hint="abcd@naver.com"
-                                        android:paddingStart="10dp"
+                                        android:inputType="text"
+                                        android:paddingStart="5dp"
                                         android:paddingTop="10dp"
-                                        android:paddingBottom="10dp"
-                                        app:layout_constraintLeft_toRightOf="@+id/tv_nickname" />
+                                        android:paddingEnd="10dp"
+                                        android:paddingBottom="15dp"
+                                        android:textSize="15sp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintLeft_toRightOf="@+id/tv_nickname"
+                                        app:layout_constraintTop_toTopOf="parent" />
 
                                     <View
                                         android:layout_width="match_parent"
@@ -292,15 +367,16 @@
                                         android:layout_marginRight="10dp"
                                         android:background="#d3d3d3"
                                         app:layout_constraintTop_toBottomOf="@+id/tv_nickname" />
-
                                 </androidx.constraintlayout.widget.ConstraintLayout>
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <!--성별-->
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:id="@+id/layout_sex"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="55dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/layout_nickname">
 
                                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -309,28 +385,33 @@
 
                                     <TextView
                                         android:id="@+id/tv_sex"
-                                        android:layout_width="match_parent"
+                                        android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginEnd="310dp"
                                         android:paddingStart="20dp"
                                         android:paddingTop="10dp"
-                                        android:paddingBottom="10dp"
+                                        android:paddingEnd="50dp"
+                                        android:paddingBottom="15dp"
                                         android:text="성별"
                                         android:textColor="@color/black"
-                                        android:textSize="18dp"
-                                        android:textStyle="bold" />
+                                        android:textSize="17dp"
+                                        android:textStyle="bold"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
 
-                                    <TextView
-                                        android:id="@+id/tv_sex_input"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="100dp"
+                                    <Spinner
+                                        android:id="@+id/sp_sex"
+                                        android:layout_width="100dp"
+                                        android:layout_height="50dp"
+                                        android:contentDescription="본인에 맞는 성별 입력"
                                         android:paddingStart="10dp"
+                                        android:paddingEnd="10dp"
                                         android:paddingTop="10dp"
-                                        android:paddingBottom="10dp"
-                                        android:textSize="18dp"
+                                        android:paddingBottom="15dp"
+                                        android:textSize="15sp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintLeft_toRightOf="@id/tv_sex"
-                                        tools:text="남/여 스피너" />
+                                        app:layout_constraintTop_toTopOf="parent" />
 
                                     <View
                                         android:layout_width="match_parent"
@@ -339,44 +420,57 @@
                                         android:layout_marginRight="10dp"
                                         android:background="#d3d3d3"
                                         app:layout_constraintTop_toBottomOf="@+id/tv_sex" />
-
                                 </androidx.constraintlayout.widget.ConstraintLayout>
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <!--이메일-->
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:id="@+id/layout_email"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="55dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/layout_sex">
 
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent">
 
                                     <TextView
                                         android:id="@+id/tv_email"
-                                        android:layout_width="match_parent"
+                                        android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginEnd="310dp"
                                         android:paddingStart="20dp"
                                         android:paddingTop="10dp"
-                                        android:paddingBottom="10dp"
+                                        android:paddingEnd="35dp"
+                                        android:paddingBottom="15dp"
                                         android:text="이메일"
                                         android:textColor="@color/black"
-                                        android:textSize="18dp"
-                                        android:textStyle="bold" />
+                                        android:textSize="17dp"
+                                        android:textStyle="bold"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
 
                                     <EditText
                                         android:id="@+id/et_email_input"
-                                        android:layout_width="300dp"
+                                        android:layout_width="290dp"
                                         android:layout_height="50dp"
                                         android:background="@null"
                                         android:hint="dongyang@naver.com"
                                         android:paddingStart="10dp"
                                         android:paddingTop="10dp"
-                                        android:paddingBottom="10dp"
-                                        app:layout_constraintLeft_toRightOf="@id/tv_email" />
+                                        android:paddingEnd="10dp"
+                                        android:paddingBottom="15dp"
+                                        android:textSize="15sp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintLeft_toRightOf="@id/tv_email"
+                                        app:layout_constraintTop_toTopOf="parent" />
 
                                     <View
                                         android:layout_width="match_parent"
@@ -385,44 +479,57 @@
                                         android:layout_marginRight="10dp"
                                         android:background="#d3d3d3"
                                         app:layout_constraintTop_toBottomOf="@+id/tv_email" />
-
                                 </androidx.constraintlayout.widget.ConstraintLayout>
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <!-- 깃메일-->
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:id="@+id/layout_git"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="55dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/layout_email">
 
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent">
 
                                     <TextView
                                         android:id="@+id/tv_git"
-                                        android:layout_width="match_parent"
+                                        android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginEnd="310dp"
                                         android:paddingStart="20dp"
                                         android:paddingTop="10dp"
-                                        android:paddingBottom="10dp"
+                                        android:paddingEnd="25dp"
+                                        android:paddingBottom="15dp"
                                         android:text="GitHub"
                                         android:textColor="@color/black"
-                                        android:textSize="18dp"
-                                        android:textStyle="bold" />
+                                        android:textSize="17dp"
+                                        android:textStyle="bold"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
 
                                     <EditText
                                         android:id="@+id/et_git_input"
-                                        android:layout_width="300dp"
+                                        android:layout_width="290dp"
                                         android:layout_height="50dp"
                                         android:background="@null"
                                         android:hint="DYmirea"
                                         android:paddingStart="10dp"
                                         android:paddingTop="10dp"
-                                        android:paddingBottom="10dp"
-                                        app:layout_constraintLeft_toRightOf="@id/tv_git" />
+                                        android:paddingBottom="15dp"
+                                        android:textSize="15sp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintLeft_toRightOf="@id/tv_git"
+                                        app:layout_constraintTop_toTopOf="parent" />
 
                                     <View
                                         android:layout_width="match_parent"
@@ -431,7 +538,6 @@
                                         android:layout_marginRight="10dp"
                                         android:background="#d3d3d3"
                                         app:layout_constraintTop_toBottomOf="@+id/tv_git" />
-
                                 </androidx.constraintlayout.widget.ConstraintLayout>
                             </androidx.constraintlayout.widget.ConstraintLayout>
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -439,13 +545,21 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/layout_bottom"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/layout_medium">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="130dp"
+                            android:paddingEnd="130dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
 
                             <com.google.android.material.button.MaterialButton
                                 android:id="@+id/bt_school_save"
@@ -461,7 +575,6 @@
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
-
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -35,16 +35,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.profile.view.AlarmActivity"
-            android:exported="true"/>
-        <activity
-            android:name=".ui.profile.view.ChatActivity"
-            android:exported="true"/>
-        <activity
             android:name=".ui.profile.view.SchoolActivity"
-            android:exported="true" />
-        <activity
-            android:name=".ui.profile.view.StackActivity"
             android:exported="true" />
     </application>
 
