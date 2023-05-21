@@ -14,6 +14,7 @@ class GroupDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_group_detail)
 
+        backToMain()
         dataSet()
     }
 
@@ -21,5 +22,11 @@ class GroupDetailActivity : AppCompatActivity() {
         binding.tvGroupDetailTeamTitle.text = intent.getStringExtra("groupName")
         binding.tvGroupDetailTeamCnt.text = intent.getStringExtra("groupPersonCnt")
         binding.tvGroupDetailStory.text = intent.getStringExtra("groupDetail")
+    }
+
+    private fun backToMain() {
+        binding.ibGroupDetailPrev.setOnClickListener {
+            finish()
+        }
     }
 }
