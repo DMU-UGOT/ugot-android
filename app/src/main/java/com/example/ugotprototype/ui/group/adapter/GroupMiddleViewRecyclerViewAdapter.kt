@@ -5,18 +5,34 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ugotprototype.data.group.GroupMiddleViewData
-import com.example.ugotprototype.data.group.GroupTopViewData
 import com.example.ugotprototype.databinding.ItemGroupMiddleListBinding
-import com.example.ugotprototype.ui.group.viewmodel.GroupViewModel
 
 class GroupMiddleViewRecyclerViewAdapter() :
     RecyclerView.Adapter<GroupMiddleViewRecyclerViewAdapter.MyViewHolder>() {
 
-    var groupMiddleItemList = arrayListOf<GroupMiddleViewData>()
+    private var groupMiddleItemList = arrayListOf<GroupMiddleViewData>()
+    private var listener: OnItemClickListener? = null
+
+    interface OnItemClickListener {
+        fun onItemClick(groupMiddleViewData: GroupMiddleViewData)
+    }
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.listener = listener
+    }
 
     // 생성된 뷰 홀더에 값 지정
-    class MyViewHolder(val binding: ItemGroupMiddleListBinding) :
+    inner class MyViewHolder(val binding: ItemGroupMiddleListBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        init {
+            itemView.setOnClickListener {
+                val position = bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    listener?.onItemClick(groupMiddleItemList[position])
+                }
+            }
+        }
+
         fun bind(currentGroupData: GroupMiddleViewData) {
             binding.vm = currentGroupData
         }
@@ -32,6 +48,7 @@ class GroupMiddleViewRecyclerViewAdapter() :
     // 뷰 홀더에 데이터 바인딩
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bind(groupMiddleItemList[position])
+
     }
 
     // 뷰 홀더의 개수 리턴

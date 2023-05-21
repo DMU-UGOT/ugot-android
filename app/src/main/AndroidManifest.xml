@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Ugotprototype"
         tools:targetApi="31">
         <activity
+            android:name=".ui.group.view.GroupDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.team.view.TeamPostWriteDetailActivity"
             android:exported="false" />
         <activity
