@@ -17,6 +17,9 @@ class GroupViewModel : ViewModel() {
     private val _itemCount = MutableLiveData<Int>()
     val itemCount: LiveData<Int> = _itemCount
 
+    private val _selectedItem = MutableLiveData<GroupMiddleViewData>()
+    val selectedItem: LiveData<GroupMiddleViewData> = _selectedItem
+
     fun setGroupTopData(groupTopData: ArrayList<GroupTopViewData>) {
         _groupTopItemList.value = groupTopData
     }
@@ -27,5 +30,9 @@ class GroupViewModel : ViewModel() {
 
     fun setGroupMiddleItemCount(count: Int) {
         _itemCount.value = count
+    }
+
+    fun onItemClick(item: GroupMiddleViewData) {
+        _selectedItem.value = item
     }
 }

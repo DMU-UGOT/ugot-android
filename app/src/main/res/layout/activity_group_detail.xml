@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.example.ugotprototype.ui.group.viewmodel.GroupViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="@drawable/bg_group_detail_gradient"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="250dp"
+                    android:background="@drawable/bg_group_detail_card_radius"
+                    app:cardElevation="4dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <TextView
+                        android:id="@+id/tv_group_detail_team_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:text="코딩을 위한 소모임"
+                        android:textColor="@color/black"
+                        android:textSize="17dp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_group_detail_team_leader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/bg_group_detail_title"
+                        android:padding="3dp"
+                        android:text="회장"
+                        android:textColor="@color/white"
+                        android:textSize="12dp"
+                        app:layout_constraintStart_toStartOf="@+id/tv_group_detail_team_title"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_group_detail_team_title" />
+
+                    <TextView
+                        android:id="@+id/tv_group_detail_team_leader_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="닉네임"
+                        android:textColor="#636363"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_group_detail_team_leader"
+                        app:layout_constraintStart_toEndOf="@+id/tv_group_detail_team_leader"
+                        app:layout_constraintTop_toTopOf="@+id/tv_group_detail_team_leader" />
+
+                    <TextView
+                        android:id="@+id/tv_middle_point"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:gravity="center|right"
+                        android:text="·"
+                        android:textSize="40dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_group_detail_team_leader_name"
+                        app:layout_constraintStart_toEndOf="@+id/tv_group_detail_team_leader_name"
+                        app:layout_constraintTop_toTopOf="@+id/tv_group_detail_team_leader_name" />
+
+                    <ImageView
+                        android:id="@+id/iv_group_detail_person_cnt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:src="@drawable/ic_group_detail_user_cnt"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_middle_point"
+                        app:layout_constraintStart_toEndOf="@+id/tv_middle_point"
+                        app:layout_constraintTop_toTopOf="@+id/tv_middle_point" />
+
+                    <TextView
+                        android:id="@+id/tv_group_detail_team_cnt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="1"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_group_detail_person_cnt"
+                        app:layout_constraintStart_toEndOf="@+id/iv_group_detail_person_cnt"
+                        app:layout_constraintTop_toTopOf="@+id/iv_group_detail_person_cnt" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/mb_group_detail_fire"
+                        style="@style/NoShadowMaterialButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginEnd="20dp"
+                        android:backgroundTint="#70F0F1F3"
+                        android:paddingHorizontal="15dp"
+                        android:paddingVertical="10dp"
+                        android:text="모닥불 0단계"
+                        android:textSize="13dp"
+                        app:icon="@drawable/ic_group_detail_fire"
+                        app:iconGravity="textStart"
+                        app:iconSize="24dp"
+                        app:iconTint="@null"
+                        app:layout_constraintEnd_toStartOf="@id/guidelineCenter"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_group_detail_team_leader" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/mb_group_detail_attend_check"
+                        style="@style/NoShadowMaterialButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:backgroundTint="#70F0F1F3"
+                        android:paddingHorizontal="15dp"
+                        android:paddingVertical="10dp"
+                        android:text="모임 출석 체크"
+                        android:textSize="13dp"
+                        app:icon="@drawable/ic_group_detail_attend_check"
+                        app:iconSize="24dp"
+                        app:iconTint="@null"
+                        app:layout_constraintBottom_toBottomOf="@+id/mb_group_detail_fire"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/guidelineCenter"
+                        app:layout_constraintTop_toTopOf="@id/mb_group_detail_fire" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guidelineCenter"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.5" />
+
+                    <View
+                        android:id="@+id/line_middle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@color/color_F0F1F3"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/mb_group_detail_fire" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/mb_group_detail_calendar"
+                        style="@style/NoShadowMaterialButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:text="캘린더"
+                        android:textSize="12dp"
+                        app:icon="@drawable/ic_group_detail_calendar"
+                        app:iconGravity="textTop"
+                        app:iconSize="32dp"
+                        app:iconTint="@null"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/line_middle"
+                        app:layout_constraintWidth_percent="0.25" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/mb_group_detail_progress"
+                        style="@style/NoShadowMaterialButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:text="참여도"
+                        android:textSize="12dp"
+                        app:icon="@drawable/ic_group_detail_progress"
+                        app:iconGravity="textTop"
+                        app:iconSize="32dp"
+                        app:iconTint="@null"
+                        app:layout_constraintEnd_toStartOf="@+id/mb_group_detail_team_information"
+                        app:layout_constraintStart_toEndOf="@+id/mb_group_detail_calendar"
+                        app:layout_constraintTop_toTopOf="@+id/mb_group_detail_calendar"
+                        app:layout_constraintWidth_percent="0.25" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/mb_group_detail_team_information"
+                        style="@style/NoShadowMaterialButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:text="팀원정보"
+                        android:textSize="12dp"
+                        app:icon="@drawable/ic_group_detail_team_information"
+                        app:iconGravity="textTop"
+                        app:iconSize="32dp"
+                        app:iconTint="@null"
+                        app:layout_constraintStart_toEndOf="@+id/mb_group_detail_progress"
+                        app:layout_constraintTop_toTopOf="@+id/mb_group_detail_calendar"
+                        app:layout_constraintWidth_percent="0.25" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/mb_group_detail_communication"
+                        style="@style/NoShadowMaterialButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:text="소통공간"
+                        android:textSize="12dp"
+                        app:icon="@drawable/ic_group_detail_communication_room"
+                        app:iconGravity="textTop"
+                        app:iconSize="32dp"
+                        app:iconTint="@null"
+                        app:layout_constraintStart_toEndOf="@+id/mb_group_detail_team_information"
+                        app:layout_constraintTop_toTopOf="@+id/mb_group_detail_calendar"
+                        app:layout_constraintWidth_percent="0.25" />
+
+                    <View
+                        android:id="@+id/line_bottom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="2dp"
+                        android:background="@color/color_F0F1F3"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/mb_group_detail_communication" />
+
+                    <TextView
+                        android:id="@+id/tv_group_detail_college_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="동양미래대학교 "
+                        android:textColor="@color/black"
+                        android:textSize="14dp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/tv_group_detail_team_title"
+                        app:layout_constraintTop_toBottomOf="@+id/line_bottom" />
+
+                    <TextView
+                        android:id="@+id/tv_group_detail_story"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="안드로이드 코딩을 위한 그룹"
+                        app:layout_constraintStart_toStartOf="@+id/tv_group_detail_college_name"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_group_detail_college_name" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/mb_group_detail_announcement"
+                        style="@style/NoShadowMaterialButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:backgroundTint="@color/color_F0F1F3"
+                        android:gravity="start|center_vertical"
+                        android:text="공지사항"
+                        android:textSize="12dp"
+                        app:icon="@drawable/ic_group_detail_megaphone"
+                        app:iconSize="18dp"
+                        app:iconTint="@color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/tv_group_detail_story"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_group_detail_story" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

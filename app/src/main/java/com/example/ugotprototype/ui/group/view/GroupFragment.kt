@@ -1,5 +1,6 @@
 package com.example.ugotprototype.ui.group.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,7 +9,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ugotprototype.R
 import com.example.ugotprototype.data.group.GroupMiddleViewData
@@ -62,6 +62,7 @@ class GroupFragment : Fragment() {
         }
 
         changeMyGroupCount()
+        rvClickEvent()
     }
 
     private fun testData() {
@@ -118,6 +119,22 @@ class GroupFragment : Fragment() {
 
         groupViewModel.itemCount.observe(viewLifecycleOwner) { count ->
             binding.tvGroupCnt.text = count.toString()
+        }
+    }
+
+    private fun rvClickEvent() {
+        groupMiddleViewAdapter.setOnItemClickListener(object :
+            GroupMiddleViewRecyclerViewAdapter.OnItemClickListener {
+            override fun onItemClick(groupMiddleViewData: GroupMiddleViewData) {
+                binding.vm?.onItemClick(groupMiddleViewData)
+            }
+        })
+        groupViewModel.selectedItem.observe(viewLifecycleOwner) {
+            startActivity(Intent(requireContext(), GroupDetailActivity::class.java).apply {
+                putExtra("groupName", it.groupName)
+                putExtra("groupDetail", it.groupDetail)
+                putExtra("groupPersonCnt", it.groupPersonCnt)
+            })
         }
     }
 }
