@@ -180,7 +180,7 @@
                         android:textSize="12dp"
                         app:icon="@drawable/ic_group_detail_calendar"
                         app:iconGravity="textTop"
-                        app:iconSize="32dp"
+                        app:iconSize="24dp"
                         app:iconTint="@null"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/line_middle"
@@ -196,7 +196,7 @@
                         android:textSize="12dp"
                         app:icon="@drawable/ic_group_detail_progress"
                         app:iconGravity="textTop"
-                        app:iconSize="32dp"
+                        app:iconSize="24dp"
                         app:iconTint="@null"
                         app:layout_constraintEnd_toStartOf="@+id/mb_group_detail_team_information"
                         app:layout_constraintStart_toEndOf="@+id/mb_group_detail_calendar"
@@ -213,7 +213,7 @@
                         android:textSize="12dp"
                         app:icon="@drawable/ic_group_detail_team_information"
                         app:iconGravity="textTop"
-                        app:iconSize="32dp"
+                        app:iconSize="24dp"
                         app:iconTint="@null"
                         app:layout_constraintStart_toEndOf="@+id/mb_group_detail_progress"
                         app:layout_constraintTop_toTopOf="@+id/mb_group_detail_calendar"
@@ -229,7 +229,7 @@
                         android:textSize="12dp"
                         app:icon="@drawable/ic_group_detail_communication_room"
                         app:iconGravity="textTop"
-                        app:iconSize="32dp"
+                        app:iconSize="24dp"
                         app:iconTint="@null"
                         app:layout_constraintStart_toEndOf="@+id/mb_group_detail_team_information"
                         app:layout_constraintTop_toTopOf="@+id/mb_group_detail_calendar"
@@ -258,10 +258,12 @@
 
                     <TextView
                         android:id="@+id/tv_group_detail_story"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
+                        android:layout_marginEnd="20dp"
                         android:text="안드로이드 코딩을 위한 그룹"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/tv_group_detail_college_name"
                         app:layout_constraintTop_toBottomOf="@+id/tv_group_detail_college_name" />
 
@@ -285,5 +287,14 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
+
+        <ImageButton
+            android:id="@+id/ib_group_detail_prev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_group_detail_prev"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
