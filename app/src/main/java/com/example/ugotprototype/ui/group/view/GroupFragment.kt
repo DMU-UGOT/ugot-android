@@ -2,7 +2,6 @@ package com.example.ugotprototype.ui.group.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +16,6 @@ import com.example.ugotprototype.databinding.FragmentGroupBinding
 import com.example.ugotprototype.ui.group.adapter.GroupMiddleViewRecyclerViewAdapter
 import com.example.ugotprototype.ui.group.adapter.GroupTopViewRecyclerViewAdapter
 import com.example.ugotprototype.ui.group.viewmodel.GroupViewModel
-import kotlin.properties.Delegates
 
 class GroupFragment : Fragment() {
     private lateinit var binding: FragmentGroupBinding
@@ -30,15 +28,13 @@ class GroupFragment : Fragment() {
     private lateinit var groupMiddleViewAdapter: GroupMiddleViewRecyclerViewAdapter
     private var groupMiddleItems = ArrayList<GroupMiddleViewData>()
 
-    private var isGroupDetailOpened by Delegates.notNull<Boolean>()
+    private var isGroupDetailOpened: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_group, container, false)
         binding.vm = groupViewModel
-
-        isGroupDetailOpened = false
 
         return binding.root
     }
@@ -128,15 +124,12 @@ class GroupFragment : Fragment() {
     }
 
     private fun rvClickEvent() {
-        groupMiddleViewAdapter.setOnItemClickListener(object :
-            GroupMiddleViewRecyclerViewAdapter.OnItemClickListener {
-            override fun onItemClick(groupMiddleViewData: GroupMiddleViewData) {
-                if (!isGroupDetailOpened) {
-                    isGroupDetailOpened = true
-                    binding.vm?.onItemClick(groupMiddleViewData)
-                }
+        groupMiddleViewAdapter.setOnOkClickListener {
+            if (!isGroupDetailOpened) {
+                isGroupDetailOpened = true
+                groupViewModel.onItemClick(it)
             }
-        })
+        }
 
         groupViewModel.selectedItem.observe(viewLifecycleOwner) {
             if (it != null && isGroupDetailOpened) {

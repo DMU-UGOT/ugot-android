@@ -119,7 +119,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="40dp"
-                        android:layout_marginEnd="20dp"
+                        android:layout_marginEnd="10dp"
                         android:backgroundTint="#70F0F1F3"
                         android:paddingHorizontal="15dp"
                         android:paddingVertical="10dp"
@@ -129,16 +129,17 @@
                         app:iconGravity="textStart"
                         app:iconSize="24dp"
                         app:iconTint="@null"
-                        app:layout_constraintEnd_toStartOf="@id/guidelineCenter"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tv_group_detail_team_leader" />
+                        app:layout_constraintTop_toBottomOf="@id/tv_group_detail_team_leader"
+                        app:layout_constraintWidth_percent="0.4" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/mb_group_detail_attend_check"
                         style="@style/NoShadowMaterialButton"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="40dp"
                         android:layout_marginEnd="20dp"
                         android:backgroundTint="#70F0F1F3"
                         android:paddingHorizontal="15dp"
@@ -148,17 +149,10 @@
                         app:icon="@drawable/ic_group_detail_attend_check"
                         app:iconSize="24dp"
                         app:iconTint="@null"
-                        app:layout_constraintBottom_toBottomOf="@+id/mb_group_detail_fire"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/guidelineCenter"
-                        app:layout_constraintTop_toTopOf="@id/mb_group_detail_fire" />
+                        app:layout_constraintTop_toBottomOf="@id/tv_group_detail_team_leader"
+                        app:layout_constraintWidth_percent="0.4" />
 
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/guidelineCenter"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.5" />
 
                     <View
                         android:id="@+id/line_middle"
@@ -287,7 +281,6 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
-
         <ImageButton
             android:id="@+id/ib_group_detail_prev"
             android:layout_width="wrap_content"

@@ -11,30 +11,29 @@ class GroupMiddleViewRecyclerViewAdapter() :
     RecyclerView.Adapter<GroupMiddleViewRecyclerViewAdapter.MyViewHolder>() {
 
     private var groupMiddleItemList = arrayListOf<GroupMiddleViewData>()
-    private var listener: OnItemClickListener? = null
+    private lateinit var listener: OnOkClickListener
 
-    interface OnItemClickListener {
-        fun onItemClick(groupMiddleViewData: GroupMiddleViewData)
+    fun setOnOkClickListener(listener: (GroupMiddleViewData) -> Unit) {
+        this.listener = object : OnOkClickListener {
+            override fun onClick(groupMiddleViewData: GroupMiddleViewData) {
+                listener(groupMiddleViewData)
+            }
+        }
     }
 
-    fun setOnItemClickListener(listener: OnItemClickListener) {
-        this.listener = listener
+    interface OnOkClickListener {
+        fun onClick(groupMiddleViewData: GroupMiddleViewData)
     }
+
 
     // 생성된 뷰 홀더에 값 지정
     inner class MyViewHolder(val binding: ItemGroupMiddleListBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        init {
-            itemView.setOnClickListener {
-                val position = bindingAdapterPosition
-                if (position != RecyclerView.NO_POSITION) {
-                    listener?.onItemClick(groupMiddleItemList[position])
-                }
-            }
-        }
-
         fun bind(currentGroupData: GroupMiddleViewData) {
             binding.vm = currentGroupData
+            binding.root.setOnClickListener {
+                listener.onClick(currentGroupData)
+            }
         }
     }
 
