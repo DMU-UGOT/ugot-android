@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="vmst"
+            type="com.example.ugotprototype.ui.study.viewmodel.StudyViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -15,23 +22,101 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-            
-            <androidx.constraintlayout.widget.Constraints
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_study"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:listitem="@layout/item_study_list">
-                    
+                    tools:listitem="@layout/item_study_list" />
 
-                </androidx.recyclerview.widget.RecyclerView>
-            </androidx.constraintlayout.widget.Constraints>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/study_bottom_div"
+                    android:layout_width="match_parent"
+                    android:layout_height="122dp"
+                    android:background="@color/color_F0F1F3"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <TextView
+                        android:id="@+id/tv_st_slash"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="/"
+                        android:textColor="@color/color_9DA1A6"
+                        android:textSize="13dp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/bt_study_next"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/bt_study_next"
+                        tools:text="/" />
+
+                    <TextView
+                        android:id="@+id/study_page_first_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="1"
+                        android:textColor="@color/black"
+                        android:textSize="13dp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@+id/tv_st_slash"
+                        app:layout_constraintTop_toTopOf="@+id/tv_st_slash"
+                        tools:text="1" />
+
+                    <TextView
+                        android:id="@+id/study_page_second_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="5"
+                        android:textColor="@color/color_9DA1A6"
+                        android:textSize="13dp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/tv_st_slash"
+                        app:layout_constraintTop_toTopOf="@+id/tv_st_slash"
+                        tools:text="5" />
+
+                    <ImageButton
+                        android:id="@+id/bt_study_prev"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="16dp"
+                        android:backgroundTint="@color/color_FFFFFF"
+                        android:src="@drawable/ic_team_prev_page"
+                        app:layout_constraintEnd_toStartOf="@+id/study_page_first_text"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageButton
+                        android:id="@+id/bt_study_next"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:backgroundTint="@color/color_FFFFFF"
+                        android:src="@drawable/ic_team_next_page"
+                        app:layout_constraintStart_toEndOf="@+id/study_page_second_text"
+                        app:layout_constraintTop_toTopOf="@+id/bt_study_prev" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_study"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/plus"
+            app:borderWidth="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/nsv_study"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/black" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
     
