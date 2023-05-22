@@ -32,6 +32,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toTopOf="@id/study_bottom_div"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:listitem="@layout/item_study_list" />
 
@@ -111,12 +112,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/black"
             android:src="@drawable/plus"
             app:borderWidth="0dp"
             app:layout_constraintBottom_toBottomOf="@+id/nsv_study"
             app:layout_constraintEnd_toEndOf="parent"
-            app:tint="@color/black" />
+            app:tint="@color/white" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
     
