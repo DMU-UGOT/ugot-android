@@ -27,9 +27,7 @@ class TeamFragment : Fragment() {
 
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_team, container, false)
@@ -62,35 +60,15 @@ class TeamFragment : Fragment() {
                 "팀명은 UGOT에 프로젝트명은 DmuIT로 동양미래대학교의 컴퓨터공학부 팀프로젝트에서 반 변경을 위한 앱입니다",
                 "분야 : Android",
                 "인원 : 3/8",
-                "댓글 : 8"
-            ),
-            TeamData(
-                "Web 팀원 모집",
-                "Web FrontEnd 팀원모집중",
-                "분야 : FrontEnd",
-                "인원 : 2/4",
-                "댓글 : 4"
-            ),
-            TeamData(
-                "Web 팀원 모집",
-                "Web FrontEnd 팀원모집중",
-                "분야 : FrontEnd",
-                "인원 : 2/4",
-                "댓글 : 4"
-            ),
-            TeamData(
-                "Web 팀원 모집",
-                "Web FrontEnd 팀원모집중",
-                "분야 : FrontEnd",
-                "인원 : 2/4",
-                "댓글 : 4"
-            ),
-            TeamData(
-                "Web 팀원 모집",
-                "Web FrontEnd 팀원모집중",
-                "분야 : FrontEnd",
-                "인원 : 2/4",
-                "댓글 : 4"
+                "조회수 : 8"
+            ), TeamData(
+                "Web 팀원 모집", "Web FrontEnd 팀원모집중", "분야 : FrontEnd", "인원 : 2/4", "조회수 : 4"
+            ), TeamData(
+                "Web 팀원 모집", "Web FrontEnd 팀원모집중", "분야 : FrontEnd", "인원 : 2/4", "조회수 : 4"
+            ), TeamData(
+                "Web 팀원 모집", "Web FrontEnd 팀원모집중", "분야 : FrontEnd", "인원 : 2/4", "조회수 : 4"
+            ), TeamData(
+                "Web 팀원 모집", "Web FrontEnd 팀원모집중", "분야 : FrontEnd", "인원 : 2/4", "조회수 : 4"
             )
         )
     }
@@ -111,8 +89,7 @@ class TeamFragment : Fragment() {
         binding.btGoDetailSearch.setOnClickListener {
             goToSearchResultLauncher.launch(
                 Intent(
-                    requireContext(),
-                    TeamSearchDetailActivity::class.java
+                    requireContext(), TeamSearchDetailActivity::class.java
                 )
             )
         }
@@ -134,8 +111,7 @@ class TeamFragment : Fragment() {
         binding.fabTeam.setOnClickListener {
             goToPostWriteResultLauncher.launch(
                 Intent(
-                    requireContext(),
-                    TeamPostWriteDetailActivity::class.java
+                    requireContext(), TeamPostWriteDetailActivity::class.java
                 )
             )
         }
