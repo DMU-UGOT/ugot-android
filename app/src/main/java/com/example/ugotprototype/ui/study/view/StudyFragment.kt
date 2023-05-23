@@ -28,7 +28,7 @@ class StudyFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_study, container, false)
         // fragment_study.xml에 적용
-        binding.vmst = studyViewModel
+        binding.vm = studyViewModel
 
         return binding.root
     }
