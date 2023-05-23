@@ -29,9 +29,17 @@
                 android:src="@drawable/img_sample"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:shapeAppearanceOverlay="@style/RoundedImageView"
-                app:strokeColor="@color/color_F3F3F3"
-                app:strokeWidth="1dp" />
+                app:shapeAppearanceOverlay="@style/RoundedImageView" />
+
+            <ImageView
+                android:id="@+id/group_bookmark_item"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/bg_group_item_border"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_favorites_middle_img"
+                app:layout_constraintEnd_toEndOf="@+id/iv_favorites_middle_img"
+                app:layout_constraintStart_toStartOf="@+id/iv_favorites_middle_img"
+                app:layout_constraintTop_toTopOf="@+id/iv_favorites_middle_img" />
 
             <View
                 android:id="@+id/line"

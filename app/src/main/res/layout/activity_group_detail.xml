@@ -281,10 +281,12 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
+
         <ImageButton
             android:id="@+id/ib_group_detail_prev"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:background="@android:color/transparent"
             android:src="@drawable/ic_group_detail_prev"
             app:layout_constraintStart_toStartOf="parent"
