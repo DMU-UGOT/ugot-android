@@ -1,5 +1,6 @@
 package com.example.ugotprototype.ui.group.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil

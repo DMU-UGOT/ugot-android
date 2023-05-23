@@ -28,8 +28,6 @@ class GroupFragment : Fragment() {
     private lateinit var groupMiddleViewAdapter: GroupMiddleViewRecyclerViewAdapter
     private var groupMiddleItems = ArrayList<GroupMiddleViewData>()
 
-    private var isGroupDetailOpened: Boolean = false
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -63,7 +61,6 @@ class GroupFragment : Fragment() {
         }
 
         changeMyGroupCount()
-        rvClickEvent()
     }
 
     private fun testData() {
@@ -121,29 +118,5 @@ class GroupFragment : Fragment() {
         groupViewModel.itemCount.observe(viewLifecycleOwner) { count ->
             binding.tvGroupCnt.text = count.toString()
         }
-    }
-
-    private fun rvClickEvent() {
-        groupMiddleViewAdapter.setOnOkClickListener {
-            if (!isGroupDetailOpened) {
-                isGroupDetailOpened = true
-                groupViewModel.onItemClick(it)
-            }
-        }
-
-        groupViewModel.selectedItem.observe(viewLifecycleOwner) {
-            if (it != null && isGroupDetailOpened) {
-                startActivity(Intent(requireContext(), GroupDetailActivity::class.java).apply {
-                    putExtra("groupName", it.groupName)
-                    putExtra("groupDetail", it.groupDetail)
-                    putExtra("groupPersonCnt", it.groupPersonCnt)
-                })
-            }
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        isGroupDetailOpened = false
     }
 }

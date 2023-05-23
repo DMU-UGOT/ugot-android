@@ -1,30 +1,19 @@
 package com.example.ugotprototype.ui.group.adapter
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ugotprototype.data.group.GroupMiddleViewData
 import com.example.ugotprototype.databinding.ItemGroupMiddleListBinding
+import com.example.ugotprototype.ui.group.view.GroupDetailActivity
 
 class GroupMiddleViewRecyclerViewAdapter() :
     RecyclerView.Adapter<GroupMiddleViewRecyclerViewAdapter.MyViewHolder>() {
 
     private var groupMiddleItemList = arrayListOf<GroupMiddleViewData>()
-    private lateinit var listener: OnOkClickListener
-
-    fun setOnOkClickListener(listener: (GroupMiddleViewData) -> Unit) {
-        this.listener = object : OnOkClickListener {
-            override fun onClick(groupMiddleViewData: GroupMiddleViewData) {
-                listener(groupMiddleViewData)
-            }
-        }
-    }
-
-    interface OnOkClickListener {
-        fun onClick(groupMiddleViewData: GroupMiddleViewData)
-    }
-
 
     // 생성된 뷰 홀더에 값 지정
     inner class MyViewHolder(val binding: ItemGroupMiddleListBinding) :
@@ -32,7 +21,13 @@ class GroupMiddleViewRecyclerViewAdapter() :
         fun bind(currentGroupData: GroupMiddleViewData) {
             binding.vm = currentGroupData
             binding.root.setOnClickListener {
-                listener.onClick(currentGroupData)
+                binding.root.context.startActivity(Intent(
+                    binding.root.context, GroupDetailActivity::class.java
+                ).apply {
+                    putExtra("groupName", currentGroupData.groupName)
+                    putExtra("groupDetail", currentGroupData.groupDetail)
+                    putExtra("groupPersonCnt", currentGroupData.groupPersonCnt)
+                })
             }
         }
     }
