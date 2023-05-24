@@ -1,6 +1,7 @@
 package com.example.ugotprototype.ui.group.adapter
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
@@ -21,13 +22,7 @@ class GroupMiddleViewRecyclerViewAdapter() :
         fun bind(currentGroupData: GroupMiddleViewData) {
             binding.vm = currentGroupData
             binding.root.setOnClickListener {
-                binding.root.context.startActivity(Intent(
-                    binding.root.context, GroupDetailActivity::class.java
-                ).apply {
-                    putExtra("groupName", currentGroupData.groupName)
-                    putExtra("groupDetail", currentGroupData.groupDetail)
-                    putExtra("groupPersonCnt", currentGroupData.groupPersonCnt)
-                })
+                goToPostDetail(currentGroupData, binding.root.context)
             }
         }
     }
@@ -56,5 +51,14 @@ class GroupMiddleViewRecyclerViewAdapter() :
     fun setData(data: ArrayList<GroupMiddleViewData>) {
         groupMiddleItemList = data
         notifyDataSetChanged()
+    }
+
+    fun goToPostDetail(item: GroupMiddleViewData, context: Context) {
+        Intent(context, GroupDetailActivity::class.java).apply {
+            putExtra("groupName", item.groupName)
+            putExtra("groupDetail", item.groupDetail)
+            putExtra("groupPersonCnt", item.groupPersonCnt)
+            context.startActivity(this)
+        }
     }
 }

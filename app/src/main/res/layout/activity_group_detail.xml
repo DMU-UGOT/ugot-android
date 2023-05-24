@@ -286,9 +286,9 @@
             android:id="@+id/ib_group_detail_prev"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="15dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/ic_group_detail_prev"
+            android:src="@drawable/ic_group_title_prev"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
