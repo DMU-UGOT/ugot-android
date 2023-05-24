@@ -1,11 +1,11 @@
 package com.example.ugotprototype.ui.group.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.ugotprototype.data.group.GroupMiddleViewData
 import com.example.ugotprototype.data.group.GroupTopViewData
+import java.time.YearMonth
 
 class GroupViewModel : ViewModel() {
     private val _groupTopItemList = MutableLiveData<ArrayList<GroupTopViewData>>()
@@ -17,8 +17,9 @@ class GroupViewModel : ViewModel() {
     private val _itemCount = MutableLiveData<Int>()
     val itemCount: LiveData<Int> = _itemCount
 
-    private val _selectedItem = MutableLiveData<GroupMiddleViewData>()
-    val selectedItem: LiveData<GroupMiddleViewData> = _selectedItem
+    private val _currentMonth = MutableLiveData<YearMonth>()
+    val currentMonth: LiveData<YearMonth> get() = _currentMonth
+
 
     fun setGroupTopData(groupTopData: ArrayList<GroupTopViewData>) {
         _groupTopItemList.value = groupTopData
@@ -32,7 +33,7 @@ class GroupViewModel : ViewModel() {
         _itemCount.value = count
     }
 
-    fun onItemClick(item: GroupMiddleViewData) {
-        _selectedItem.value = item
+    fun setCurrentMonth(month: YearMonth) {
+        _currentMonth.value = month
     }
 }

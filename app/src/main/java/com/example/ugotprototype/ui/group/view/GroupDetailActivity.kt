@@ -17,6 +17,7 @@ class GroupDetailActivity : AppCompatActivity() {
 
         backToMain()
         dataSet()
+        goToDetailPage()
     }
 
     private fun dataSet() {
@@ -28,6 +29,12 @@ class GroupDetailActivity : AppCompatActivity() {
     private fun backToMain() {
         binding.ibGroupDetailPrev.setOnClickListener {
             finish()
+        }
+    }
+
+    private fun goToDetailPage() {
+        binding.mbGroupDetailCalendar.setOnClickListener {
+            startActivity(Intent(this, GroupDetailCalendarActivity::class.java))
         }
     }
 }
