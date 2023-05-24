@@ -9,7 +9,14 @@ class StudyViewModel : ViewModel() {
     private val _studyItemList = MutableLiveData<ArrayList<StudyData>>() // 뷰 모델에서 데이터 처리를 하는 변수
     val studyItemList: LiveData<ArrayList<StudyData>> = _studyItemList
 
+    private val _studyMaxPersonnel = MutableLiveData<Int>()
+    var studyMaxPersonnel: LiveData<Int> = _studyMaxPersonnel
+
     fun setStudyData(studyData: ArrayList<StudyData>) {
         _studyItemList.value = studyData
+    }
+
+    fun studyMaxPersonnel(maxPersonnel: Int) {
+        _studyMaxPersonnel.value = maxPersonnel
     }
 }

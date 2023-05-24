@@ -1,9 +1,13 @@
 package com.example.ugotprototype.ui.study.view
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -45,6 +49,10 @@ class StudyFragment : Fragment() {
         studyViewModel.studyItemList.observe(viewLifecycleOwner) {
             studyRecyclerViewAdapter.setData(it)
         }
+
+        goToStudySearchDetail()
+        StudySearchDetailActivity()
+        goToStudyNewGroup()
     }
 
     private fun testStudyData() {
@@ -85,5 +93,51 @@ class StudyFragment : Fragment() {
                 "인원 : 1/4"
             )
         )
+    }
+
+    private fun goToStudySearchDetail() {
+
+        val goToStudySearchResultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    val data: Intent? = result.data
+                    val resultText = data?.getStringExtra("resultText")
+                    if (resultText != null) {
+                        Log.d("main", resultText)
+                    }
+                }
+            }
+
+        binding.btStGoDetailSearch.setOnClickListener {
+            goToStudySearchResultLauncher.launch(
+                Intent(
+                    requireContext(),
+                    StudySearchDetailActivity::class.java
+                )
+            )
+        }
+    }
+
+    private fun goToStudyNewGroup() {
+
+        val goToStudyNewGroupResultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    val data: Intent? = result.data
+                    val resultText = data?.getStringExtra("resultText")
+                    if (resultText != null) {
+                        Log.d("main", resultText)
+                    }
+                }
+            }
+
+        binding.fabStudy.setOnClickListener {
+            goToStudyNewGroupResultLauncher.launch(
+                Intent(
+                    requireContext(),
+                    StudyNewGroupActivity::class.java
+                )
+            )
+        }
     }
 }

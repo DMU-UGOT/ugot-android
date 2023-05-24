@@ -62,4 +62,9 @@
         <item>YK</item>
     </string-array>
 
+<!--Study New Group Activity-->
+    <string-array name="study_new_group_meet">
+        <item>대면</item>
+        <item>비대면</item>
+    </string-array>
 </resources>
