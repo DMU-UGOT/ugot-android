@@ -44,7 +44,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/test"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="@+id/day_title_name"
@@ -56,11 +55,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:gravity="center_vertical"
                 android:text="2023년 5월"
                 android:textColor="@color/black"
-                android:textSize="13dp"
+                android:textSize="16dp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -90,13 +89,89 @@
             android:id="@+id/day_title_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="110dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/top_view">
 
-            <include
-                android:id="@+id/titlesContainer"
-                layout="@layout/group_calendar_title_container" />
+            <TextView
+                android:id="@+id/tv_sun"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="일"
+                android:textColor="#ff0000"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/tv_mon"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_mon"
+                style="@style/groupDayTitleTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="월"
+                app:layout_constraintEnd_toStartOf="@+id/tv_tue"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@+id/tv_sun"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_tue"
+                style="@style/groupDayTitleTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="화"
+                app:layout_constraintEnd_toStartOf="@+id/tv_wed"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@+id/tv_mon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_wed"
+                style="@style/groupDayTitleTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="수"
+                app:layout_constraintEnd_toStartOf="@+id/tv_thu"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@+id/tv_tue"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_thu"
+                style="@style/groupDayTitleTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="목"
+                app:layout_constraintEnd_toStartOf="@+id/tv_fri"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@+id/tv_wed"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_fri"
+                style="@style/groupDayTitleTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="금"
+                app:layout_constraintEnd_toStartOf="@+id/tv_sat"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@+id/tv_thu"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_sat"
+                style="@style/groupDayTitleTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="토"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@+id/tv_fri"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.kizitonwose.calendar.view.CalendarView
