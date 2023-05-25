@@ -80,7 +80,6 @@ class GroupDetailCalendarActivity : AppCompatActivity() {
         }
     }
 
-    @SuppressLint("SetTextI18n")
     private fun observeDataSet(currentMonth: YearMonth) {
         updateCalendar(currentMonth)
         binding.calendarView.scrollToMonth(currentMonth)
