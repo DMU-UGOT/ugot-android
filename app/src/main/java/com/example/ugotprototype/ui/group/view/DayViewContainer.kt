@@ -1,5 +1,6 @@
 package com.example.ugotprototype.ui.group.view
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.View
 import android.widget.TextView
@@ -15,6 +16,7 @@ class DayViewContainer(
     private val bind = GroupCalendarDayBinding.bind(view)
     private lateinit var day: CalendarDay
 
+    @SuppressLint("SetTextI18n")
     fun bind(
         day: CalendarDay, currentMonth: YearMonth, tvMiddle: TextView
     ) {
