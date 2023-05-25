@@ -73,11 +73,13 @@
 
                 <EditText
                     android:id="@+id/et_st_new_title_name"
-                    android:layout_width="390dp"
-                    android:layout_height="50dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:background="@android:color/transparent"
                     android:hint="제목"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
                     android:textColorHint="@color/color_80636363"
                     android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -131,9 +133,9 @@
                 <Spinner
                     android:id="@+id/sp_st_meet"
                     android:layout_width="80dp"
-                    android:layout_height="30dp"
+                    android:layout_height="50dp"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="190dp"
                     android:layout_marginBottom="10dp"
                     android:contentDescription="대면 여부 선택"
@@ -221,12 +223,12 @@
                     android:text="공유 링크"
                     android:textSize="15sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@id/et_st_new_input_github_link"
+                    app:layout_constraintBottom_toTopOf="@id/et_st_new_git_link"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/st_new_v4" />
 
                 <EditText
-                    android:id="@+id/et_st_new_input_github_link"
+                    android:id="@+id/et_st_new_git_link"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
@@ -236,25 +238,10 @@
                     android:padding="15dp"
                     android:textColorHint="@color/color_80636363"
                     android:textSize="15sp"
-                    app:layout_constraintBottom_toTopOf="@id/et_st_new_input_kakao_open_link"
+                    app:layout_constraintBottom_toTopOf="@id/st_new_v5"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_st_new_github_title" />
-
-                <EditText
-                    android:id="@+id/et_st_new_input_kakao_open_link"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/bg_team_post_detail_et"
-                    android:hint="카카오 오픈링크를 입력하세요"
-                    android:padding="15dp"
-                    android:textColorHint="@color/color_80636363"
-                    android:textSize="15sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/et_st_new_input_github_link" />
 
                 <View
                     android:id="@+id/st_new_v5"
@@ -264,7 +251,7 @@
                     android:background="@color/color_F0F1F3"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/et_st_new_input_kakao_open_link" />
+                    app:layout_constraintTop_toBottomOf="@+id/et_st_new_git_link" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

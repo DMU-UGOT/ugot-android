@@ -1,10 +1,12 @@
 package com.example.ugotprototype.ui.study.adapter
 
+import android.text.style.ClickableSpan
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ugotprototype.data.study.StudyData
 import com.example.ugotprototype.databinding.ItemStudyListBinding
+import com.example.ugotprototype.ui.study.view.StudyFragment
 
 class StudyRecyclerViewAdapter : RecyclerView.Adapter<StudyRecyclerViewAdapter.StudyViewHolder>() {
 
@@ -13,14 +15,25 @@ class StudyRecyclerViewAdapter : RecyclerView.Adapter<StudyRecyclerViewAdapter.S
     // 생성된 뷰 홀더에 값 지정
     class StudyViewHolder(val binding: ItemStudyListBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
         fun bind(currentStudyData: StudyData) {
             binding.studyItem = currentStudyData
+            binding.ivStBookmark.isSelected = currentStudyData.bookmark
+
+            binding.ivStBookmark.setOnClickListener {
+                if(binding.ivStBookmark.isSelected == true){
+                    binding.ivStBookmark.isSelected = false
+                }else{
+                    binding.ivStBookmark.isSelected = true
+                }
+            }
         }
     }
 
     // 어떤 xml 으로 뷰 홀더를 생성할지 지정
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudyViewHolder {
-        val binding = ItemStudyListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemStudyListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return StudyViewHolder(binding)
     }
 
