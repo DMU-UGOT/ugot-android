@@ -1,14 +1,10 @@
 package com.example.ugotprototype.ui.group.view
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
 import androidx.activity.viewModels
-import androidx.core.view.children
 import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.ActivityGroupDetailCalendarBinding
@@ -16,10 +12,7 @@ import com.example.ugotprototype.ui.group.viewmodel.GroupViewModel
 import com.kizitonwose.calendar.core.CalendarDay
 import com.kizitonwose.calendar.core.daysOfWeek
 import com.kizitonwose.calendar.view.MonthDayBinder
-import java.time.DayOfWeek
 import java.time.YearMonth
-import java.time.format.TextStyle
-import java.util.Locale
 
 class GroupDetailCalendarActivity : AppCompatActivity() {
 
@@ -46,7 +39,6 @@ class GroupDetailCalendarActivity : AppCompatActivity() {
         binding.calendarView.setup(startMonth, endMonth, daysOfWeek.first())
         binding.calendarView.scrollToMonth(currentMonth)
 
-        setTitleDay(daysOfWeek)
         updateCalendar(currentMonth)
 
         goToPreviousMonth()
@@ -71,38 +63,26 @@ class GroupDetailCalendarActivity : AppCompatActivity() {
         }
     }
 
-    private fun setTitleDay(daysOfWeek: List<DayOfWeek>) {
-        val titleContainer: ViewGroup = binding.titlesContainer as ViewGroup
-        titleContainer.children.map { it as TextView }.forEachIndexed { index, textView ->
-            val dayOfWeek = daysOfWeek[index]
-            val title = dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.KOREA)
-            textView.text = title
-            textView.setTextColor(if (index == 0) Color.RED else Color.BLACK)
-        }
-    }
-
-    @SuppressLint("SetTextI18n")
     private fun updateCalendar(currentMonth: YearMonth) {
-        val dayBinder = object : MonthDayBinder<DayViewContainer> {
-            override fun create(view: View) = DayViewContainer(view)
+        binding.calendarView.dayBinder = object : MonthDayBinder<DayViewContainer> {
+            override fun bind(container: DayViewContainer, data: CalendarDay) =
+                container.bind(data, currentMonth, binding.tvMiddleTitle)
 
-            override fun bind(container: DayViewContainer, data: CalendarDay) {
-                container.dayTextView.text = data.date.dayOfMonth.toString()
-                if (data.date.month == currentMonth.month) {
-                    container.dayTextView.setTextColor(Color.parseColor("#90636363"))
-                } else {
-                    container.dayTextView.setTextColor(Color.parseColor("#40636363"))
-                }
-            }
+            override fun create(view: View): DayViewContainer = DayViewContainer(view)
         }
-        binding.calendarView.dayBinder = dayBinder
-        binding.calendarView.scrollToMonth(currentMonth)
-        binding.tvMiddleTitle.text = "${currentMonth.year}년 ${currentMonth.monthValue}월"
     }
 
     private fun observeUpdate() {
         groupViewModel.currentMonth.observe(this) { currentMonth ->
-            currentMonth?.let { updateCalendar(it) }
+            currentMonth?.let {
+                observeDataSet(it)
+            }
         }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun observeDataSet(currentMonth: YearMonth) {
+        updateCalendar(currentMonth)
+        binding.calendarView.scrollToMonth(currentMonth)
     }
 }

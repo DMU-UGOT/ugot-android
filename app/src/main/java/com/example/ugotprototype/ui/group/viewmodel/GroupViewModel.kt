@@ -18,8 +18,7 @@ class GroupViewModel : ViewModel() {
     val itemCount: LiveData<Int> = _itemCount
 
     private val _currentMonth = MutableLiveData<YearMonth>()
-    val currentMonth: LiveData<YearMonth> get() = _currentMonth
-
+    val currentMonth: LiveData<YearMonth> = _currentMonth
 
     fun setGroupTopData(groupTopData: ArrayList<GroupTopViewData>) {
         _groupTopItemList.value = groupTopData
