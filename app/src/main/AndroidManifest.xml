@@ -43,6 +43,9 @@
         <activity
             android:name=".ui.profile.view.SchoolActivity"
             android:exported="true" />
+        <activity
+            android:name=".ui.study.view.StudyNewGroupActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
