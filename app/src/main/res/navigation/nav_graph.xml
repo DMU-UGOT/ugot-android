@@ -21,7 +21,7 @@
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/item_study"
-        android:name="com.example.ugotprototype.ui.study.StudyFragment"
+        android:name="com.example.ugotprototype.ui.study.view.StudyFragment"
         android:label="StudyFragment"
         tools:layout="@layout/fragment_study" />
     <fragment

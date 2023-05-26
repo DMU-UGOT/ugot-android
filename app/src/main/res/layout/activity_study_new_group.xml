@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.study.view.StudyNewGroupActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_st_new_top_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/bt_st_new_back_to_main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:padding="5dp"
+                android:src="@drawable/ic_team_post_close"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="스터디 생성하기"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/bt_st_new_back_to_main"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/bt_st_new_back_to_main"
+                tools:text="스터디 생성하기" />
+
+            <ImageButton
+                android:id="@+id/bt_st_new_post_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:padding="5dp"
+                android:src="@drawable/ic_team_post_register"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/post_register_top_line"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#E0E0E0"
+                app:layout_constraintTop_toBottomOf="@+id/bt_st_new_back_to_main" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_st_new_top_view">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/et_st_new_title_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@android:color/transparent"
+                    android:hint="제목"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:textColorHint="@color/color_80636363"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/st_new_v1"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/color_F0F1F3"
+                    app:layout_constraintTop_toBottomOf="@+id/et_st_new_title_name" />
+
+                <EditText
+                    android:id="@+id/et_title_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_margin="10dp"
+                    android:background="@android:color/transparent"
+                    android:gravity="top|start"
+                    android:hint="내용을 입력하세요"
+                    android:maxLength="10"
+                    android:textColorHint="@color/color_80636363"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toTopOf="@id/st_new_v2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/st_new_v1" />
+
+                <View
+                    android:id="@+id/st_new_v2"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/color_F0F1F3"
+                    app:layout_constraintTop_toBottomOf="@+id/et_title_detail" />
+
+                <TextView
+                    android:id="@+id/tv_st_meet_choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="대면 여부"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@id/sp_st_meet"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/st_new_v2" />
+
+                <Spinner
+                    android:id="@+id/sp_st_meet"
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="190dp"
+                    android:layout_marginBottom="10dp"
+                    android:paddingStart="5dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="15dp"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toTopOf="@id/st_new_v3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_st_meet_choice" />
+
+                <View
+                    android:id="@+id/st_new_v3"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/color_F0F1F3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/sp_st_meet" />
+
+                <TextView
+                    android:id="@+id/tv_max_member"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="모집 인원"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/st_new_v3" />
+
+                <TextView
+                    android:id="@+id/tv_st_new_min_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1명"
+                    app:layout_constraintBottom_toBottomOf="@+id/seekBar"
+                    app:layout_constraintEnd_toStartOf="@+id/seekBar"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/seekBar"
+                    tools:text="1명" />
+
+                <SeekBar
+                    android:id="@+id/seekBar"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="100dp"
+                    android:max="15"
+                    android:min="1"
+                    android:progress="1"
+                    app:layout_constraintBottom_toTopOf="@id/st_new_v3"
+                    app:layout_constraintEnd_toEndOf="@id/tv_st_new_max_number"
+                    app:layout_constraintStart_toStartOf="@id/tv_st_new_min_number"
+                    app:layout_constraintTop_toBottomOf="@id/tv_max_member" />
+
+                <TextView
+                    android:id="@+id/tv_st_new_max_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="15명"
+                    app:layout_constraintBottom_toBottomOf="@+id/seekBar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/seekBar"
+                    app:layout_constraintTop_toTopOf="@+id/seekBar"
+                    tools:text="15명" />
+
+                <View
+                    android:id="@+id/st_new_v4"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/color_F0F1F3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_st_new_max_number" />
+
+                <TextView
+                    android:id="@+id/tv_st_new_github_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="공유 링크"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@id/et_st_new_git_link"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/st_new_v4" />
+
+                <EditText
+                    android:id="@+id/et_st_new_git_link"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/bg_team_post_detail_et"
+                    android:hint="깃헙 닉네임을 입력하세요"
+                    android:padding="15dp"
+                    android:textColorHint="@color/color_80636363"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toTopOf="@id/st_new_v5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_st_new_github_title" />
+
+                <View
+                    android:id="@+id/st_new_v5"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/color_F0F1F3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_st_new_git_link" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

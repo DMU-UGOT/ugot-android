@@ -18,7 +18,7 @@ class SchoolActivity : AppCompatActivity() {
         saveSchool()
         spinnerGradePostSet()
         spinnerClassPostSet()
-        spinnerSexPostSet()
+        spinnerGenderPostSet()
     }
 
     private fun saveSchool(){
@@ -44,11 +44,11 @@ class SchoolActivity : AppCompatActivity() {
         binding.spClass.adapter = adapter
     }
 
-    private fun spinnerSexPostSet() {
+    private fun spinnerGenderPostSet() {
         val adapter = ArrayAdapter.createFromResource(
-            this, R.array.school_sex_item, android.R.layout.simple_spinner_item
+            this, R.array.school_gender_item, android.R.layout.simple_spinner_item
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.spSex.adapter = adapter
+        binding.spGender.adapter = adapter
     }
 }
