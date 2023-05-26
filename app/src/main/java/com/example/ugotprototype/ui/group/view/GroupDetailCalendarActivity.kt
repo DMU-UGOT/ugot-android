@@ -3,6 +3,7 @@ package com.example.ugotprototype.ui.group.view
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
@@ -11,8 +12,10 @@ import com.example.ugotprototype.databinding.ActivityGroupDetailCalendarBinding
 import com.example.ugotprototype.ui.group.viewmodel.GroupViewModel
 import com.kizitonwose.calendar.core.CalendarDay
 import com.kizitonwose.calendar.core.daysOfWeek
+import com.kizitonwose.calendar.sample.shared.DateSelection
 import com.kizitonwose.calendar.view.MonthDayBinder
 import java.time.YearMonth
+import java.util.Date
 
 class GroupDetailCalendarActivity : AppCompatActivity() {
 
@@ -68,7 +71,7 @@ class GroupDetailCalendarActivity : AppCompatActivity() {
             override fun bind(container: DayViewContainer, data: CalendarDay) =
                 container.bind(data, currentMonth, binding.tvMiddleTitle)
 
-            override fun create(view: View): DayViewContainer = DayViewContainer(view)
+            override fun create(view: View): DayViewContainer = DayViewContainer(view, binding.calendarView)
         }
     }
 
@@ -84,4 +87,5 @@ class GroupDetailCalendarActivity : AppCompatActivity() {
         updateCalendar(currentMonth)
         binding.calendarView.scrollToMonth(currentMonth)
     }
+
 }
