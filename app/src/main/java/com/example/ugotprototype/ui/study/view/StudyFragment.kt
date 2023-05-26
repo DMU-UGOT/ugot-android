@@ -1,7 +1,6 @@
 package com.example.ugotprototype.ui.study.view
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -17,6 +16,7 @@ import com.example.ugotprototype.data.study.StudyData
 import com.example.ugotprototype.databinding.FragmentStudyBinding
 import com.example.ugotprototype.ui.study.adapter.StudyRecyclerViewAdapter
 import com.example.ugotprototype.ui.study.viewmodel.StudyViewModel
+import com.example.ugotprototype.ui.team.view.TeamSearchDetailActivity
 
 class StudyFragment : Fragment() {
     private lateinit var binding: FragmentStudyBinding
@@ -52,7 +52,7 @@ class StudyFragment : Fragment() {
         }
 
         goToStudySearchDetail()
-        StudySearchDetailActivity()
+        TeamSearchDetailActivity()
         goToStudyNewGroup()
     }
 
@@ -118,7 +118,7 @@ class StudyFragment : Fragment() {
             goToStudySearchResultLauncher.launch(
                 Intent(
                     requireContext(),
-                    StudySearchDetailActivity::class.java
+                    TeamSearchDetailActivity::class.java
                 )
             )
         }
