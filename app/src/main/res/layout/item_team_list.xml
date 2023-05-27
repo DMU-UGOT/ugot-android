@@ -50,13 +50,11 @@
                     android:layout_marginStart="20dp"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:layout_marginTop="5dp"
                     android:text="@{teamItem.title}"
                     android:textColor="@color/black"
                     android:textSize="15dp"
                     android:layout_marginEnd="10dp"
                     android:textStyle="bold"
-
                     app:layout_constraintEnd_toStartOf="@+id/iv_team_bookmark"
                     app:layout_constraintStart_toEndOf="@+id/iv_team_logo"
                     app:layout_constraintTop_toTopOf="parent"
@@ -66,7 +64,6 @@
                     android:id="@+id/iv_team_bookmark"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_margin="5dp"
                     android:padding="5dp"
                     android:src="@drawable/selector_study_bookmark"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -78,13 +75,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:ellipsize="end"
-                    android:maxLines="2"
+                    android:maxLines="3"
                     android:text="@{teamItem.detailTitle}"
                     android:textSize="13dp"
                     app:layout_constraintEnd_toEndOf="@+id/tv_title"
                     app:layout_constraintStart_toEndOf="@+id/iv_team_logo"
                     app:layout_constraintTop_toBottomOf="@+id/tv_title"
-                    app:layout_constraintBottom_toTopOf="@+id/tv_topic"
+
                     tools:text="팀명은 UGOT에 프로젝트명은 DmuIT로 동양미래대학교의 컴퓨터 공학고 팀프로젝트" />
 
                 <TextView
