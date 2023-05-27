@@ -16,6 +16,9 @@ class TeamRecyclerViewAdapter : RecyclerView.Adapter<TeamRecyclerViewAdapter.MyV
         RecyclerView.ViewHolder(binding.root) {
         fun bind(currentTeamData: TeamData) {
             binding.teamItem = currentTeamData
+            binding.ivTeamBookmark.setOnClickListener{
+                binding.ivTeamBookmark.isSelected = binding.ivTeamBookmark.isSelected != true
+            }
         }
     }
 
