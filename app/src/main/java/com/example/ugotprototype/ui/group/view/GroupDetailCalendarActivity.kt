@@ -3,7 +3,6 @@ package com.example.ugotprototype.ui.group.view
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
@@ -12,10 +11,9 @@ import com.example.ugotprototype.databinding.ActivityGroupDetailCalendarBinding
 import com.example.ugotprototype.ui.group.viewmodel.GroupViewModel
 import com.kizitonwose.calendar.core.CalendarDay
 import com.kizitonwose.calendar.core.daysOfWeek
-import com.kizitonwose.calendar.sample.shared.DateSelection
 import com.kizitonwose.calendar.view.MonthDayBinder
+import java.time.LocalDate
 import java.time.YearMonth
-import java.util.Date
 
 class GroupDetailCalendarActivity : AppCompatActivity() {
 
@@ -33,14 +31,22 @@ class GroupDetailCalendarActivity : AppCompatActivity() {
         spawnCalendarView()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun spawnCalendarView() {
         val currentMonth = YearMonth.now()
         val startMonth = currentMonth.minusMonths(100)
         val endMonth = currentMonth.plusMonths(100)
         val daysOfWeek = daysOfWeek()
 
+        val now = LocalDate.now()
+        binding.tvYearMonthDay.text = "${now.year}-${String.format("%02d", now.monthValue)}-${
+            String.format(
+                "%02d", now.dayOfMonth
+            )
+        }"
         binding.calendarView.setup(startMonth, endMonth, daysOfWeek.first())
         binding.calendarView.scrollToMonth(currentMonth)
+
 
         updateCalendar(currentMonth)
 
@@ -69,7 +75,7 @@ class GroupDetailCalendarActivity : AppCompatActivity() {
     private fun updateCalendar(currentMonth: YearMonth) {
         binding.calendarView.dayBinder = object : MonthDayBinder<DayViewContainer> {
             override fun bind(container: DayViewContainer, data: CalendarDay) =
-                container.bind(data, currentMonth, binding.tvMiddleTitle)
+                container.bind(data, currentMonth, binding.tvMiddleTitle, binding.tvYearMonthDay)
 
             override fun create(view: View): DayViewContainer = DayViewContainer(view, binding.calendarView)
         }
