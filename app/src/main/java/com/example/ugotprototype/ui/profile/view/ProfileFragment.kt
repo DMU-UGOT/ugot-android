@@ -28,6 +28,7 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         goToSchool()
+        goToStack()
     }
 
 
@@ -39,5 +40,10 @@ class ProfileFragment : Fragment() {
         }
     }
 
-
+    // 스택 페이지 이동
+    private fun goToStack() {
+        binding.tvFgStack.setOnClickListener {
+            startActivity(Intent(requireActivity(), StackActivity::class.java))
+        }
+    }
 }
