@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.view.View
 import android.widget.TextView
 import com.example.ugotprototype.databinding.GroupCalendarDayBinding
+import com.example.ugotprototype.ui.group.viewmodel.GroupViewModel
 import com.kizitonwose.calendar.core.CalendarDay
 import com.kizitonwose.calendar.core.CalendarMonth
 import com.kizitonwose.calendar.core.DayPosition
@@ -14,7 +15,7 @@ import java.time.LocalDate
 import java.time.YearMonth
 
 class DayViewContainer(
-    view: View, calendarView: CalendarView
+    view: View, private val calendarView: CalendarView, private var vm: GroupViewModel
 ) : ViewContainer(view) {
     private val bind = GroupCalendarDayBinding.bind(view)
     private lateinit var day: CalendarDay
@@ -22,6 +23,11 @@ class DayViewContainer(
     private lateinit var currentMonth: YearMonth
 
     companion object {
+        fun clearSelection(calendarView: CalendarView) {
+            selectedDate = LocalDate.now()
+            calendarView.notifyCalendarChanged()
+        }
+
         private var selectedDate: LocalDate? = null
     }
 
@@ -36,13 +42,18 @@ class DayViewContainer(
                 selectDate(calendarView)
             }
         }
+
         calendarView.monthScrollListener = {
             updateTitle(it)
         }
     }
 
     fun bind(
-        day: CalendarDay, currentMonth: YearMonth, tvMiddle: TextView, tvYearMonthDay: TextView
+        day: CalendarDay,
+        currentMonth: YearMonth,
+        tvMiddle: TextView,
+        tvYearMonthDay: TextView,
+        noticeTitle: Map<LocalDate, String>
     ) {
         this.day = day
         this.tvMiddleText = tvMiddle
@@ -64,6 +75,7 @@ class DayViewContainer(
 
         //날짜 중복클릭 처리
         dayOnlyOneClick(tvYearMonthDay)
+        setDayTitleNotice(noticeTitle)
     }
 
     private fun selectDate(calendarView: CalendarView) {
@@ -73,6 +85,7 @@ class DayViewContainer(
             oldDate?.let { calendarView.notifyDateChanged(it) }
             calendarView.notifyDateChanged(day.date)
 
+            selectedDate?.let { vm.onDateClicked(it) }
         }
     }
 
@@ -94,7 +107,16 @@ class DayViewContainer(
             }
         }
     }
-}/*@SuppressLint("ResourceAsColor")
+
+    private fun setDayTitleNotice(noticeTitle: Map<LocalDate, String>) {
+        if (noticeTitle.containsKey(day.date)) {
+            bind.tvTitleCalendar.text = noticeTitle[day.date]
+            bind.calendarDayView.setBackgroundColor(Color.parseColor("#202f80ed"))
+        }
+
+    }
+}
+/*@SuppressLint("ResourceAsColor")
 private fun configureBinders() {
 
     val textView = bind.calendarDayText

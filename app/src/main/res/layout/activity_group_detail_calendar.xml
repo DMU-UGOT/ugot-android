@@ -198,6 +198,7 @@
                         app:cv_outDateStyle="endOfGrid" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_middle_textview"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:background="@color/color_F0F1F3"
@@ -214,7 +215,19 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_notice_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/layout_middle_textview"
+                        tools:listitem="@layout/item_group_calendar_notice_list" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.core.widget.NestedScrollView>
         </FrameLayout>
