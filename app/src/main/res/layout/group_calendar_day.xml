@@ -24,5 +24,18 @@
             android:textSize="12dp"
             android:textStyle="bold"
             tools:text="22" />
+
+        <TextView
+            android:id="@+id/tv_title_calendar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="2dp"
+            android:layout_marginTop="20dp"
+            android:ellipsize="end"
+            android:gravity="top|center"
+            android:maxLines="1"
+            android:textSize="8dp"
+            android:textStyle="bold"
+            tools:text="22" />
     </FrameLayout>
 </layout>
