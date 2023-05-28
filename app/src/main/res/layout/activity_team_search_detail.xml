@@ -11,7 +11,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/top_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -19,10 +19,11 @@
             <ImageButton
                 android:id="@+id/bt_back_to_main"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:background="@android:color/transparent"
                 android:padding="5dp"
                 android:src="@drawable/ic_team_search_prev"
+                app:layout_constraintBottom_toBottomOf="@+id/top_view"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
