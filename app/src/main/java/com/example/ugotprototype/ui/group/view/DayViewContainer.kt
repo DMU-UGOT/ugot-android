@@ -1,6 +1,7 @@
 package com.example.ugotprototype.ui.group.view
 
 import android.graphics.Color
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import com.example.ugotprototype.databinding.GroupCalendarDayBinding
@@ -55,9 +56,11 @@ class DayViewContainer(
         tvYearMonthDay: TextView,
         noticeTitle: Map<LocalDate, String>
     ) {
+        Log.d("test", "test2")
         this.day = day
         this.tvMiddleText = tvMiddle
         this.currentMonth = currentMonth
+
 
         bind.calendarDayText.text = day.date.dayOfMonth.toString()
 
@@ -74,8 +77,8 @@ class DayViewContainer(
         }
 
         //날짜 중복클릭 처리
-        dayOnlyOneClick(tvYearMonthDay)
-        setDayTitleNotice(noticeTitle)
+        dayOnlyOneClick(tvYearMonthDay, noticeTitle)
+
     }
 
     private fun selectDate(calendarView: CalendarView) {
@@ -93,9 +96,23 @@ class DayViewContainer(
         tvMiddleText.text = "${calendarMonth.yearMonth}"
     }
 
-    private fun dayOnlyOneClick(tvYearMonthDay: TextView) {
+    private fun dayOnlyOneClick(tvYearMonthDay: TextView, noticeTitle: Map<LocalDate, String>) {
         if (day.position == DayPosition.MonthDate) {
             when (day.date) {
+                noticeTitle.keys.find { it == day.date } -> {
+                    bind.tvTitleCalendar.text = noticeTitle[day.date]
+                    bind.calendarDayView.setBackgroundColor(Color.parseColor("#202f80ed"))
+
+                    val oldDate = selectedDate
+                    if (oldDate != null && oldDate == day.date) {
+                        bind.calendarDayView.setBackgroundColor(Color.parseColor("#402f80ed"))
+                        tvYearMonthDay.text = selectedDate.toString()
+                    } else {
+                        bind.calendarDayView.setBackgroundColor(Color.parseColor("#202f80ed"))
+                        tvYearMonthDay.text = selectedDate.toString()
+                    }
+                }
+
                 selectedDate -> {
                     bind.calendarDayView.setBackgroundColor(Color.parseColor("#202f80ed"))
                     tvYearMonthDay.text = selectedDate.toString()
@@ -107,16 +124,7 @@ class DayViewContainer(
             }
         }
     }
-
-    private fun setDayTitleNotice(noticeTitle: Map<LocalDate, String>) {
-        if (noticeTitle.containsKey(day.date)) {
-            bind.tvTitleCalendar.text = noticeTitle[day.date]
-            bind.calendarDayView.setBackgroundColor(Color.parseColor("#202f80ed"))
-        }
-
-    }
-}
-/*@SuppressLint("ResourceAsColor")
+}/*@SuppressLint("ResourceAsColor")
 private fun configureBinders() {
 
     val textView = bind.calendarDayText
