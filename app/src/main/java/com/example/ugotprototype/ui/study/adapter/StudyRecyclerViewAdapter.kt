@@ -1,12 +1,10 @@
 package com.example.ugotprototype.ui.study.adapter
 
-import android.text.style.ClickableSpan
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ugotprototype.data.study.StudyData
 import com.example.ugotprototype.databinding.ItemStudyListBinding
-import com.example.ugotprototype.ui.study.view.StudyFragment
 
 class StudyRecyclerViewAdapter : RecyclerView.Adapter<StudyRecyclerViewAdapter.StudyViewHolder>() {
 

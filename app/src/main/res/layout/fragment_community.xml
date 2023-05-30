@@ -1,15 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="커뮤니티 페이지입니다"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/top_com_view"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginVertical="5dp"
+            app:layout_constraintBottom_toTopOf="@id/layout_community_tab"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/bt_com_go_detail_search"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="20dp"
+                android:backgroundTint="@color/color_F0F1F3"
+                android:gravity="start|center_vertical"
+                android:text="찾고 싶은 게시글을 검색해주세요"
+                android:textColor="@color/color_80636363"
+                app:cornerRadius="20dp"
+                app:icon="@drawable/ic_team_search"
+                app:iconTint="#636363"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/layout_community_tab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:elevation="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/top_com_view"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/color_F0F1F3"
+            app:tabIndicatorHeight="3dp"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/black"
+            app:tabTextColor="@color/black">
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/item_tab_general"
+                android:layout_width="wrap_content"
+                android:textSize="15dp"
+                android:layout_height="wrap_content"
+                android:background="@color/color_F0F1F3"
+                android:text="일반 게시글"/>
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/item_tab_change"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/color_F0F1F3"
+                android:text="반 변경 게시글"/>
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fcv_community"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:defaultNavHost="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_community_tab" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

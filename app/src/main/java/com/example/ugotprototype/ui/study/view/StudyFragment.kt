@@ -52,7 +52,6 @@ class StudyFragment : Fragment() {
         }
 
         goToStudySearchDetail()
-        TeamSearchDetailActivity()
         goToStudyNewGroup()
     }
 

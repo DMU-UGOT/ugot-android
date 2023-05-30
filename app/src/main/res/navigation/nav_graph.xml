@@ -6,7 +6,7 @@
     app:startDestination="@id/item_team">
     <fragment
         android:id="@+id/item_community"
-        android:name="com.example.ugotprototype.ui.community.CommunityFragment"
+        android:name="com.example.ugotprototype.ui.community.view.CommunityFragment"
         android:label="CommunityFragment"
         tools:layout="@layout/fragment_community" />
     <fragment

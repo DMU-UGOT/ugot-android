@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="communityChangeItem"
+            type="com.example.ugotprototype.data.community.CommunityChangeViewData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <View
+                android:id="@+id/community_change_v1"
+                android:layout_width="wrap_content"
+                android:layout_height="2dp"
+                android:background="@color/color_F0F1F3"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_community_change_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:ems="15"
+                android:maxLines="1"
+                android:text="@{communityChangeItem.comChangeName}"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="컴소 3학년 YB -> YA반 1:1 교환 하실분?" />
+
+            <TextView
+                android:id="@+id/tv_community_change_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:ellipsize="end"
+                android:ems="20"
+                android:maxLines="1"
+                android:text="@{communityChangeItem.comChangeText}"
+                android:textColor="@color/color_80636363"
+                android:textSize="13dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/tv_community_change_name"
+                app:layout_constraintTop_toBottomOf="@id/tv_community_change_name"
+                tools:text="저는 컴퓨터 소프트웨어 공학과 3학년 YB반 입니다. YA반 학생 분과 1:1 교환 원합니다." />
+
+            <ImageView
+                android:id="@+id/iv_community_change_chat_img"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_community_chat"
+                app:layout_constraintBottom_toTopOf="@id/community_change_v1"
+                app:layout_constraintStart_toStartOf="@id/tv_community_change_name"
+                app:layout_constraintTop_toBottomOf="@id/tv_community_change_text" />
+
+            <TextView
+                android:id="@+id/tv_community_change_chat_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="10dp"
+                android:text="@{communityChangeItem.comChangeChat}"
+                android:textSize="13dp"
+                app:layout_constraintBottom_toTopOf="@id/community_change_v1"
+                app:layout_constraintStart_toEndOf="@id/iv_community_change_chat_img"
+                app:layout_constraintTop_toBottomOf="@id/tv_community_change_text"
+                tools:text="1" />
+
+            <ImageView
+                android:id="@+id/iv_community_change_inquire_img"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_community_inquire"
+                app:layout_constraintBottom_toTopOf="@id/community_change_v1"
+                app:layout_constraintStart_toStartOf="@id/tv_community_change_chat_input"
+                app:layout_constraintTop_toBottomOf="@id/tv_community_change_text" />
+
+            <TextView
+                android:id="@+id/tv_community_change_inquire_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="10dp"
+                android:text="@{communityChangeItem.comChangeInquire}"
+                android:textSize="13dp"
+                app:layout_constraintBottom_toTopOf="@id/community_change_v1"
+                app:layout_constraintStart_toEndOf="@id/iv_community_change_inquire_img"
+                app:layout_constraintTop_toBottomOf="@id/tv_community_change_text"
+                tools:text="1" />
+
+            <TextView
+                android:id="@+id/tv_community_change_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:text="게시일 :"
+                android:textSize="13dp"
+                app:layout_constraintBottom_toTopOf="@id/community_change_v1"
+                app:layout_constraintStart_toEndOf="@id/tv_community_change_inquire_input"
+                app:layout_constraintTop_toBottomOf="@id/tv_community_change_text" />
+
+            <TextView
+                android:id="@+id/tv_community_change_date_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="10dp"
+                android:text="@{communityChangeItem.comChangeDate}"
+                android:textSize="13dp"
+                app:layout_constraintBottom_toTopOf="@id/community_change_v1"
+                app:layout_constraintStart_toEndOf="@id/tv_community_change_date"
+                app:layout_constraintTop_toBottomOf="@id/tv_community_change_text"
+                tools:text="5/28" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
