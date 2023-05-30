@@ -84,13 +84,12 @@
                 app:layout_constraintStart_toStartOf="@+id/tv_group_middle_group_name"
                 tools:text="내용 입니다" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/ib_bookmark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginEnd="15dp"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_group_bookmark"
+                android:src="@drawable/selector_group_bookmark"
                 app:layout_constraintBottom_toTopOf="@+id/tv_group_middle_detail"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_group_middle_group_name" />

@@ -298,7 +298,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:backgroundTint="@color/black"
-            android:src="@drawable/ic_team_fab"
+            android:src="@drawable/ic_group_megaphone"
             app:borderWidth="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -105,7 +105,7 @@ class DayViewContainer(
 
                     val oldDate = selectedDate
                     if (oldDate != null && oldDate == day.date) {
-                        bind.calendarDayView.setBackgroundColor(Color.parseColor("#402f80ed"))
+                        bind.calendarDayView.setBackgroundColor(Color.parseColor("#602f80ed"))
                         tvYearMonthDay.text = selectedDate.toString()
                     } else {
                         bind.calendarDayView.setBackgroundColor(Color.parseColor("#202f80ed"))
