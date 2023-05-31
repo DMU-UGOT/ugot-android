@@ -1,12 +1,18 @@
 package com.example.ugotprototype.ui.community.adapter
 
+import android.app.Dialog
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ugotprototype.R
 import com.example.ugotprototype.data.community.CommunityChangeViewData
 import com.example.ugotprototype.databinding.ItemCommunityChangeListBinding
 
-class CommunityChangeRecyclerViewAdapter : RecyclerView.Adapter<CommunityChangeRecyclerViewAdapter.CommunityChangeViewHolder>(){
+class CommunityChangeRecyclerViewAdapter :
+    RecyclerView.Adapter<CommunityChangeRecyclerViewAdapter.CommunityChangeViewHolder>() {
 
     var communityChangeItemList = arrayListOf<CommunityChangeViewData>()
 
@@ -16,15 +22,40 @@ class CommunityChangeRecyclerViewAdapter : RecyclerView.Adapter<CommunityChangeR
 
         fun bind(currentCommunityChangeViewData: CommunityChangeViewData) {
             binding.communityChangeItem = currentCommunityChangeViewData
+            binding.ivCommunityChangeMessage.setOnClickListener {
+//                showInputDialog(currentCommunityChangeViewData)
+            }
         }
+//
+//        private fun showInputDialog(item: CommunityChangeViewData) {
+//            val dialog = Dialog(binding.root.context)
+//            val dialogBinding = ItemCommunityChangeListBinding.inflate(LayoutInflater.from(dialog.context))
+//            dialog.setContentView(dialogBinding.root)
+//
+////            dialogBinding.titleTextView.text = item.title
+//
+//
+//            dialogBinding.ivCommunityChangeMessage.setOnClickListener {
+////                val userInput = dialogBinding.editText.text.toString()
+//                // 사용자의 입력 처리 코드 작성
+//                // item에 대한 작업 수행
+//
+//                dialog.dismiss() // 모달 창 닫기
+//            }
+//            dialog.show() // 모달 창 표시
+//        }
     }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ):CommunityChangeViewHolder {
+    ): CommunityChangeViewHolder {
         val binding =
-            ItemCommunityChangeListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemCommunityChangeListBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
         return CommunityChangeViewHolder(binding)
     }
 

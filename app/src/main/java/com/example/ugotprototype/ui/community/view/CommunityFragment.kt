@@ -28,28 +28,6 @@ class CommunityFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_community, container, false)
 
-        binding.layoutCommunityTab.addOnTabSelectedListener(object :
-            TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                when (tab?.position) {
-                    0 -> {
-                        replaceView(tab1)
-                    }
-                    1 -> {
-                        replaceView(tab2)
-                    }
-                    else -> {
-                        replaceView(tab1)
-                    }
-                }
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-            }
-        })
         return binding.root
     }
 
@@ -59,16 +37,29 @@ class CommunityFragment : Fragment() {
         tab1 = CommunityGeneralFragment()
         tab2 = CommunityChangeFragment()
 
+        binding.layoutCommunityTab.addOnTabSelectedListener(object :
+            TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                if (tab?.position == 0) {
+                    replaceView(tab1)
+                } else if (tab?.position == 1) {
+                    replaceView(tab2)
+                } else {
+                    replaceView(tab1)
+                }
+            }
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+            }
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+        })
+
         goToCommunitySearchDetail()
-        childFragmentManager.beginTransaction().add(R.id.fcv_community, tab1).commit()
+        childFragmentManager.beginTransaction().replace(R.id.fcv_community, tab1).commit()
     }
 
     private fun replaceView(tab: Fragment) {
-        var selectedFragment: Fragment? = null
-        selectedFragment = tab
-        selectedFragment?.let {
-            childFragmentManager.beginTransaction().replace(R.id.fcv_community, it).commit()
-        }
+        childFragmentManager.beginTransaction().replace(R.id.fcv_community, tab).commit()
     }
 
     private fun goToCommunitySearchDetail() {
