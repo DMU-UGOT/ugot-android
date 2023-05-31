@@ -15,9 +15,6 @@
         android:theme="@style/Theme.Ugotprototype"
         tools:targetApi="31">
         <activity
-            android:name=".CommunityChangeModal"
-            android:exported="false" />
-        <activity
             android:name=".ui.community.view.CommunityChangeFragment"
             android:exported="false" />
         <activity
