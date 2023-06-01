@@ -88,7 +88,7 @@ class CommunityChangeFragment : Fragment() {
                 "4학년",
                 "YJ",
                 "YK",
-                "교환 가능",
+                "교환 완료",
                 "06/01"
             ),
             CommunityChangeViewData(
@@ -111,6 +111,27 @@ class CommunityChangeFragment : Fragment() {
                 "YB",
                 "교환 가능",
                 "06/02"
+            ),
+            CommunityChangeViewData(
+                "1학년",
+                "YD",
+                "YB",
+                "교환 가능",
+                "06/02"
+            ),
+            CommunityChangeViewData(
+                "2학년",
+                "YA",
+                "YC",
+                "교환 가능",
+                "06/02"
+            ),
+            CommunityChangeViewData(
+                "4학년",
+                "YK",
+                "YJ",
+                "교환 가능",
+                "06/03"
             )
         )
     }

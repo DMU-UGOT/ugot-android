@@ -34,9 +34,9 @@
                 android:id="@+id/tv_community_change_grade"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="23dp"
                 android:layout_marginTop="5dp"
-                android:text="학년 :"
+                android:text="학년"
                 android:textColor="@color/black"
                 android:textSize="15dp"
                 android:textStyle="bold"
@@ -47,130 +47,129 @@
                 android:id="@+id/tv_community_change_grade_input"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
                 android:text="@{communityChangeItem.comChangeGrade}"
                 android:textColor="@color/black"
                 android:textSize="15dp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@id/tv_community_change_grade"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_community_change_grade"
                 tools:text="3학년" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="70dp"
+                android:background="@color/color_F0F1F3"
+                app:layout_constraintBottom_toTopOf="@id/community_change_v1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_community_change_now_class"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
-                android:text="현재 반 :"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="30dp"
+                android:text="현재 반"
                 android:textColor="@color/black"
                 android:textSize="15dp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_community_change_grade" />
+                app:layout_constraintEnd_toStartOf="@id/iv_community_change_right"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_community_change_now_class_input"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="45dp"
                 android:layout_marginBottom="10dp"
                 android:text="@{communityChangeItem.comChangeNowClass}"
                 android:textColor="@color/black"
                 android:textSize="15dp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/tv_community_change_now_class"
-                app:layout_constraintTop_toBottomOf="@id/tv_community_change_grade"
+                app:layout_constraintEnd_toStartOf="@id/iv_community_change_right"
+                app:layout_constraintTop_toBottomOf="@id/tv_community_change_now_class"
                 tools:text="YA" />
+
+            <ImageView
+                android:id="@+id/iv_community_change_right"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="180dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/ic_community_right"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_community_change_class"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="65dp"
-                android:layout_marginTop="10dp"
-                android:text="변경 반 :"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="5dp"
+                android:text="변경 반"
                 android:textColor="@color/black"
                 android:textSize="15dp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@id/tv_community_change_now_class_input"
-                app:layout_constraintTop_toBottomOf="@id/tv_community_change_grade" />
+                app:layout_constraintStart_toEndOf="@id/iv_community_change_right"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_community_change_class_input"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginBottom="10dp"
                 android:text="@{communityChangeItem.comChangeClass}"
                 android:textColor="@color/black"
                 android:textSize="15dp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/tv_community_change_class"
+                app:layout_constraintStart_toEndOf="@+id/iv_community_change_right"
                 app:layout_constraintTop_toBottomOf="@id/tv_community_change_grade"
                 tools:text="YB" />
-
-            <TextView
-                android:id="@+id/tv_community_change_exchange"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="변경 여부 :"
-                android:textSize="13dp"
-                app:layout_constraintBottom_toTopOf="@id/community_change_v1"
-                app:layout_constraintStart_toStartOf="@id/tv_community_change_now_class"
-                app:layout_constraintTop_toBottomOf="@id/tv_community_change_now_class" />
 
             <TextView
                 android:id="@+id/tv_community_change_exchange_input"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="20dp"
                 android:text="@{communityChangeItem.comChangeExchange}"
-                android:textSize="13dp"
-                app:layout_constraintBottom_toTopOf="@id/community_change_v1"
-                app:layout_constraintStart_toEndOf="@id/tv_community_change_exchange"
-                app:layout_constraintTop_toBottomOf="@id/tv_community_change_now_class"
-                tools:text="교환 가능"/>
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="교환 가능" />
 
             <TextView
                 android:id="@+id/tv_community_change_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
                 android:text="게시일 :"
                 android:textSize="13dp"
                 app:layout_constraintBottom_toTopOf="@id/community_change_v1"
-                app:layout_constraintStart_toEndOf="@id/tv_community_change_exchange_input"
+                app:layout_constraintEnd_toStartOf="@id/tv_community_change_date_input"
                 app:layout_constraintTop_toBottomOf="@id/tv_community_change_now_class" />
 
             <TextView
                 android:id="@+id/tv_community_change_date_input"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="5dp"
                 android:text="@{communityChangeItem.comChangeDate}"
                 android:textSize="13dp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@id/community_change_v1"
-                app:layout_constraintStart_toEndOf="@id/tv_community_change_date"
-                app:layout_constraintTop_toBottomOf="@id/tv_community_change_now_class"
-                tools:text="5/28" />
-
-            <ImageView
-                android:id="@+id/iv_community_change_message"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="15dp"
-                android:src="@drawable/ic_community_message"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                tools:text="5/28" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

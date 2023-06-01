@@ -22,28 +22,7 @@ class CommunityChangeRecyclerViewAdapter :
 
         fun bind(currentCommunityChangeViewData: CommunityChangeViewData) {
             binding.communityChangeItem = currentCommunityChangeViewData
-            binding.ivCommunityChangeMessage.setOnClickListener {
-//                showInputDialog(currentCommunityChangeViewData)
-            }
         }
-//
-//        private fun showInputDialog(item: CommunityChangeViewData) {
-//            val dialog = Dialog(binding.root.context)
-//            val dialogBinding = ItemCommunityChangeListBinding.inflate(LayoutInflater.from(dialog.context))
-//            dialog.setContentView(dialogBinding.root)
-//
-////            dialogBinding.titleTextView.text = item.title
-//
-//
-//            dialogBinding.ivCommunityChangeMessage.setOnClickListener {
-////                val userInput = dialogBinding.editText.text.toString()
-//                // 사용자의 입력 처리 코드 작성
-//                // item에 대한 작업 수행
-//
-//                dialog.dismiss() // 모달 창 닫기
-//            }
-//            dialog.show() // 모달 창 표시
-//        }
     }
 
     override fun onCreateViewHolder(
