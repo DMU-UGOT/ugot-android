@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/top_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_team_prev"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:padding="5dp"
+                android:src="@drawable/ic_group_title_prev"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="게시글 상세"
+                android:textColor="#0D0D0D"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#E0E0E0"
+                app:layout_constraintTop_toBottomOf="@+id/iv_team_prev" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/top_view">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/tv_post_field"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:background="@drawable/bg_team_post_project_field"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="2dp"
+                        android:text="Android"
+                        android:textColor="#90000000"
+                        android:textSize="13dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_post_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="15dp"
+                        android:maxLines="2"
+                        android:text="제목을 위한 테스트제목으로 게시글 상세페이지의 테스트를 하기 위해 적음"
+                        android:textColor="@color/black"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        app:layout_constrainedWidth="true"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/tv_post_field"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_post_field" />
+
+                    <TextView
+                        android:id="@+id/tv_team_nick_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="strawberry"
+                        android:textColor="@color/black"
+                        android:textSize="16dp"
+                        app:layout_constraintStart_toStartOf="@+id/tv_post_title"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_post_title" />
+
+                    <TextView
+                        android:id="@+id/tv_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2023.03.23 23:14"
+                        app:layout_constraintStart_toStartOf="@+id/tv_post_title"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_team_nick_name" />
+
+                    <TextView
+                        android:id="@+id/tv_team_post_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:textColor="#0d0d0d"
+                        android:textSize="13dp"
+                        app:layout_constrainedWidth="true"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_post_title"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/tv_post_title"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_time"
+                        tools:text="스타트업의 팀원을 찾을 수 있는 모바일 앱을 만들 인원을 구합니다 저는 현재 모바일 창업을 맡고있는 사람으로 해당프로젝트는 플랫폼 서비스의 극초기 모델로 고객 유입을 최대한 이끌어내며 그 이후 비즈니스 모델에 대한 가설을 세울 수 있는 환경을 구축해야한다" />
+
+                    <View
+                        android:id="@+id/line_project_field"
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:layout_marginTop="30dp"
+                        android:background="@color/color_F0F1F3"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_team_post_detail" />
+
+                    <TextView
+                        android:id="@+id/tv_project_field_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="프로젝트 분야"
+                        android:textColor="@color/black"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/tv_post_field"
+                        app:layout_constraintTop_toBottomOf="@+id/line_project_field" />
+
+                    <TextView
+                        android:id="@+id/tv_field_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="분야"
+                        android:textColor="@color/black"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="@+id/tv_project_field_title"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_project_field_title" />
+
+                    <TextView
+                        android:id="@+id/tv_project_field"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:background="@drawable/bg_team_post_border"
+                        android:paddingHorizontal="15dp"
+                        android:paddingVertical="8dp"
+                        android:text="Android"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_field_detail"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/tv_field_detail" />
+
+                    <View
+                        android:id="@+id/line_person_cnt"
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@color/color_F0F1F3"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_field_detail" />
+
+                    <TextView
+                        android:id="@+id/tv_person_cnt_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="모집현황"
+                        android:textColor="@color/black"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/tv_post_title"
+                        app:layout_constraintTop_toBottomOf="@+id/line_person_cnt" />
+
+                    <TextView
+                        android:id="@+id/tv_person_cnt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="총 인원"
+                        android:textColor="@color/black"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="@+id/tv_person_cnt_title"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_person_cnt_title" />
+
+                    <TextView
+                        android:id="@+id/tv_person_cnt_check"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:background="@drawable/bg_team_post_border"
+                        android:paddingHorizontal="15dp"
+                        android:paddingVertical="8dp"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_person_cnt"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/tv_person_cnt"
+                        tools:text="모집 중" />
+
+                    <TextView
+                        android:id="@+id/tv_total_person_cnt_end"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:text="6"
+                        android:textColor="@color/black"
+                        android:textSize="16dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_person_cnt_check"
+                        app:layout_constraintEnd_toStartOf="@+id/tv_person_cnt_check"
+                        app:layout_constraintTop_toTopOf="@+id/tv_person_cnt_check" />
+
+                    <TextView
+                        android:id="@+id/tv_total_person_cnt_slash"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="3dp"
+                        android:text="/"
+                        android:textColor="@color/black"
+                        android:textSize="16dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_person_cnt_check"
+                        app:layout_constraintEnd_toStartOf="@+id/tv_total_person_cnt_end"
+                        app:layout_constraintTop_toTopOf="@+id/tv_person_cnt_check" />
+
+                    <TextView
+                        android:id="@+id/tv_total_person_cnt_first"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="3dp"
+                        android:text="2"
+                        android:textColor="#60000000"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_person_cnt_check"
+                        app:layout_constraintEnd_toStartOf="@+id/tv_total_person_cnt_slash"
+                        app:layout_constraintTop_toTopOf="@+id/tv_person_cnt_check" />
+
+                    <View
+                        android:id="@+id/line_post_link"
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@color/color_F0F1F3"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_person_cnt" />
+
+
+                    <TextView
+                        android:id="@+id/tv_team_post_link"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="참고링크"
+                        android:textColor="@color/black"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/tv_post_title"
+                        app:layout_constraintTop_toBottomOf="@+id/line_post_link" />
+
+                    <ImageView
+                        android:id="@+id/git_border"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/bg_team_post_link_border"
+                        app:layout_constraintStart_toStartOf="@+id/tv_team_post_link"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_team_post_link" />
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/siv_github"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/img_git_logo"
+                        app:layout_constraintBottom_toBottomOf="@+id/git_border"
+                        app:layout_constraintEnd_toEndOf="@+id/git_border"
+                        app:layout_constraintStart_toStartOf="@+id/git_border"
+                        app:layout_constraintTop_toTopOf="@+id/git_border"
+                        app:shapeAppearanceOverlay="@style/CircleImageView" />
+
+                    <TextView
+                        android:id="@+id/tv_github_link"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginHorizontal="15dp"
+                        android:background="@drawable/bg_team_post_border"
+                        android:gravity="center_vertical"
+                        android:paddingStart="10dp"
+                        android:text="https://github.com/DMU-UGOT/ugot-android.git"
+                        android:textColor="@color/black"
+                        android:textSize="12dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/siv_github"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/git_border"
+                        app:layout_constraintTop_toTopOf="@+id/siv_github" />
+
+                    <ImageView
+                        android:id="@+id/iv_kakao_border"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/bg_team_post_link_border"
+                        app:layout_constraintStart_toStartOf="@+id/tv_team_post_link"
+                        app:layout_constraintTop_toBottomOf="@+id/git_border" />
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/iv_kakao"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/img_kakao_logo"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_kakao_border"
+                        app:layout_constraintEnd_toEndOf="@+id/iv_kakao_border"
+                        app:layout_constraintStart_toStartOf="@+id/iv_kakao_border"
+                        app:layout_constraintTop_toTopOf="@+id/iv_kakao_border"
+                        app:shapeAppearanceOverlay="@style/CircleImageView" />
+
+                    <TextView
+                        android:id="@+id/tv_kakao_link"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginHorizontal="15dp"
+                        android:background="@drawable/bg_team_post_border"
+                        android:gravity="center_vertical"
+                        android:paddingStart="10dp"
+                        android:text="https://open.kakao.com/o/gnX95XH"
+                        android:textColor="@color/black"
+                        android:textSize="12dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_kakao"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/git_border"
+                        app:layout_constraintTop_toTopOf="@+id/iv_kakao" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@color/color_F0F1F3"
+                        app:layout_constraintTop_toBottomOf="@+id/iv_kakao_border" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

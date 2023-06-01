@@ -48,13 +48,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:layout_marginTop="5dp"
                     android:text="@{teamItem.title}"
                     android:textColor="@color/black"
                     android:textSize="15dp"
-                    android:layout_marginEnd="10dp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toStartOf="@+id/iv_team_bookmark"
                     app:layout_constraintStart_toEndOf="@+id/iv_team_logo"
@@ -75,8 +75,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:ellipsize="end"
                     android:layout_marginTop="5dp"
+                    android:ellipsize="end"
                     android:maxLines="3"
                     android:text="@{teamItem.detailTitle}"
                     android:textSize="13dp"
@@ -92,11 +92,20 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginBottom="5dp"
-                    android:text="@{teamItem.topic}"
+                    android:text="분야 : "
                     android:textSize="12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/iv_team_logo"
-                    tools:text="분야 : Android" />
+                    tools:text="분야 : " />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{teamItem.topic}"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_topic"
+                    app:layout_constraintStart_toEndOf="@+id/tv_topic"
+                    tools:text="Android" />
 
                 <TextView
                     android:id="@+id/tv_status_cnt"
@@ -104,11 +113,44 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="95dp"
                     android:layout_marginBottom="5dp"
-                    android:text="@{teamItem.statusCnt}"
+                    android:text="인원 : "
                     android:textSize="12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/tv_title"
-                    tools:text="인원 : 3/8" />
+                    tools:text="인원 : " />
+
+                <TextView
+                    android:id="@+id/tv_cnt_first"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:gravity="center_vertical"
+                    android:text="@{teamItem.statusCntFirst}"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_status_cnt"
+                    app:layout_constraintStart_toEndOf="@+id/tv_status_cnt"
+                    tools:text="3" />
+
+                <TextView
+                    android:id="@+id/slash"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:gravity="center_vertical"
+                    android:text="/"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_status_cnt"
+                    app:layout_constraintStart_toEndOf="@+id/tv_cnt_first" />
+
+                <TextView
+                    android:id="@+id/tv_cnt_end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:gravity="center_vertical"
+                    android:text="@{teamItem.statusCntEnd}"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_status_cnt"
+                    app:layout_constraintStart_toEndOf="@+id/slash"
+                    tools:text="6" />
+                "
 
                 <TextView
                     android:id="@+id/tv_reply"

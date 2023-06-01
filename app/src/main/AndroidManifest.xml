@@ -15,6 +15,12 @@
         android:theme="@style/Theme.Ugotprototype"
         tools:targetApi="31">
         <activity
+            android:name=".ui.team.view.TeamInformationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.team.view.TeamPostDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.profile.view.StackActivity"
             android:exported="false" />
         <activity

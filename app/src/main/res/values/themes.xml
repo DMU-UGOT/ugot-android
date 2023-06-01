@@ -13,13 +13,20 @@
         <item name="android:statusBarColor">@color/gray400</item>
     </style>
 
-    <style name="TeamAppSearchView" parent="Widget.AppCompat.SearchView" >
+    <style name="TeamAppSearchView" parent="Widget.AppCompat.SearchView">
         <item name="android:textSize">12dp</item>
     </style>
 
     <style name="RoundedImageView" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">16dp</item>
+    </style>
+
+    <style name="CircleImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="strokeColor">#F0F1F3</item>
     </style>
 
     <style name="NoShadowMaterialButton" parent="Widget.MaterialComponents.Button">
