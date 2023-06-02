@@ -16,7 +16,11 @@ class TeamInformationRecyclerViewAdapter :
     inner class MyViewHolder(val binding: ItemTeamInformationBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind() {
-            teamLeaderMark(bindingAdapterPosition, binding.ivTeamLeader)
+            if (bindingAdapterPosition == 0) {
+                binding.ivTeamLeader.visibility = View.VISIBLE
+            } else {
+                binding.ivTeamLeader.visibility = View.INVISIBLE
+            }
         }
     }
 
@@ -46,13 +50,5 @@ class TeamInformationRecyclerViewAdapter :
             teamItemList.add(i)
         }
         notifyDataSetChanged()
-    }
-
-    fun teamLeaderMark(bindingAdapterPosition: Int, ivTeamLeader: ImageView) {
-        if (bindingAdapterPosition == 0) {
-            ivTeamLeader.visibility = View.VISIBLE
-        } else {
-            ivTeamLeader.visibility = View.INVISIBLE
-        }
     }
 }
