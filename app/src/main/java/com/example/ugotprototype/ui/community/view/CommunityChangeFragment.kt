@@ -60,77 +60,77 @@ class CommunityChangeFragment : Fragment() {
                 "3학년",
                 "YA",
                 "YB",
-                "교환 완료",
+                "완료",
                 "05/27"
             ),
             CommunityChangeViewData(
                 "2학년",
                 "YC",
                 "YA",
-                "교환 가능",
+                "가능",
                 "05/28"
             ),
             CommunityChangeViewData(
                 "1학년",
                 "YD",
                 "YA",
-                "교환 가능",
+                "대기",
                 "05/29"
             ),
             CommunityChangeViewData(
                 "4학년",
                 "YJ",
                 "YK",
-                "교환 가능",
+                "가능",
                 "05/30"
             ),
             CommunityChangeViewData(
                 "4학년",
                 "YJ",
                 "YK",
-                "교환 완료",
+                "완료",
                 "06/01"
             ),
             CommunityChangeViewData(
                 "2학년",
                 "YD",
                 "YB",
-                "교환 완료",
+                "완료",
                 "06/01"
             ),
             CommunityChangeViewData(
                 "3학년",
                 "YD",
                 "YA",
-                "교환 가능",
+                "대기",
                 "06/02"
             ),
             CommunityChangeViewData(
                 "3학년",
                 "YD",
                 "YB",
-                "교환 가능",
+                "가능",
                 "06/02"
             ),
             CommunityChangeViewData(
                 "1학년",
                 "YD",
                 "YB",
-                "교환 가능",
+                "가능",
                 "06/02"
             ),
             CommunityChangeViewData(
                 "2학년",
                 "YA",
                 "YC",
-                "교환 가능",
+                "가능",
                 "06/02"
             ),
             CommunityChangeViewData(
                 "4학년",
                 "YK",
                 "YJ",
-                "교환 가능",
+                "가능",
                 "06/03"
             )
         )
