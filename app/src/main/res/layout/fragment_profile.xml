@@ -15,27 +15,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageButton
-                android:contentDescription="이전 페이지"
-                android:id="@+id/bt_profile_back_to_main"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:padding="5dp"
-                android:src="@drawable/ic_team_post_close"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <TextView
+                android:id="@+id/tv_profile_top_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="마이 페이지"
                 android:textSize="18dp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/bt_profile_back_to_main"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                app:layout_constraintBottom_toBottomOf="@id/profile_post_register_top_line"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/bt_profile_back_to_main"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="마이 페이지" />
 
             <View
@@ -43,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="#E0E0E0"
-                app:layout_constraintTop_toBottomOf="@+id/bt_profile_back_to_main" />
+                app:layout_constraintTop_toBottomOf="@id/tv_profile_top_name" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.core.widget.NestedScrollView
