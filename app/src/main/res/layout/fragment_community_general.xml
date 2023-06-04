@@ -39,6 +39,7 @@
                     android:id="@+id/community_general_bottom_div"
                     android:layout_width="match_parent"
                     android:layout_height="122dp"
+                    app:layout_constraintTop_toBottomOf="@id/rv_community"
                     android:background="@color/color_F0F1F3"
                     app:layout_constraintBottom_toBottomOf="parent">
 
