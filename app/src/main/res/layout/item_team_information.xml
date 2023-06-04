@@ -66,7 +66,10 @@
             android:id="@+id/tv_git_link"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:autoLink="web"
+            android:linksClickable="true"
             android:text="https://github.com/arab1209"
+            android:textColorLink="@color/black"
             app:layout_constraintBottom_toBottomOf="@+id/tv_git"
             app:layout_constraintStart_toEndOf="@+id/tv_git" />
 
@@ -84,7 +87,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:autoLink="web"
+            android:linksClickable="true"
             android:text="https://dev-baik.tistory.com/"
+            android:textColorLink="@color/black"
             app:layout_constraintBottom_toBottomOf="@+id/tv_blog"
             app:layout_constraintStart_toEndOf="@+id/tv_blog" />
 
