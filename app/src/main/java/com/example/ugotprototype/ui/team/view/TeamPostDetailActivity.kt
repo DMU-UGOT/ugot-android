@@ -44,5 +44,12 @@ class TeamPostDetailActivity : AppCompatActivity() {
                 startActivity(this)
             }
         }
+
+        binding.tvPersonCntTitle.setOnClickListener{
+            Intent(this, TeamInformationActivity::class.java).apply {
+                putExtra("nowPersonCnt", teamStatusCnt)
+                startActivity(this)
+            }
+        }
     }
 }
