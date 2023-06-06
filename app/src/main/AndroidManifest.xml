@@ -30,6 +30,9 @@
             android:name=".ui.profile.view.StackActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.group.view.GroupTeamInformationActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.group.view.GroupDetailCalendarActivity"
             android:exported="false" />
         <activity
