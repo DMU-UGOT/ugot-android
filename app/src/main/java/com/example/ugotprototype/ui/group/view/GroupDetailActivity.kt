@@ -10,6 +10,7 @@ import com.example.ugotprototype.databinding.ActivityGroupDetailBinding
 class GroupDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityGroupDetailBinding
+    private lateinit var personCnt: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,11 +19,20 @@ class GroupDetailActivity : AppCompatActivity() {
         backToMain()
         dataSet()
         goToDetailPage()
+
+        binding.mbGroupDetailTeamInformation.setOnClickListener {
+            startActivity(
+                Intent(
+                    this, GroupTeamInformationActivity::class.java
+                ).putExtra("nowPersonCnt", personCnt)
+            )
+        }
     }
 
     private fun dataSet() {
+        this.personCnt = intent.getStringExtra("groupPersonCnt").toString()
         binding.tvGroupDetailTeamTitle.text = intent.getStringExtra("groupName")
-        binding.tvGroupDetailTeamCnt.text = intent.getStringExtra("groupPersonCnt")
+        binding.tvGroupDetailTeamCnt.text = personCnt
         binding.tvGroupDetailStory.text = intent.getStringExtra("groupDetail")
     }
 

@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Ugotprototype"
         tools:targetApi="31">
         <activity
+            android:name=".ui.group.view.GroupTeamInformationActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.group.view.GroupDetailCalendarActivity"
             android:exported="false" />
         <activity
