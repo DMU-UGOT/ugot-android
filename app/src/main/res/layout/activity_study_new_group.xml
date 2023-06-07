@@ -6,8 +6,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.study.view.StudyNewGroupActivity">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_st_new_top_view"
@@ -134,7 +133,6 @@
                     android:layout_height="50dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginEnd="190dp"
                     android:layout_marginBottom="10dp"
                     android:paddingStart="5dp"
                     android:paddingTop="10dp"

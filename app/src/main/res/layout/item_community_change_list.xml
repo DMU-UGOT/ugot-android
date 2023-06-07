@@ -62,7 +62,7 @@
                 android:id="@+id/tv_community_change_now_class"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="35dp"
+                android:layout_marginStart="30dp"
                 android:text="현재 반"
                 android:textColor="@color/black"
                 android:textSize="15dp"
@@ -74,7 +74,7 @@
                 android:id="@+id/tv_community_change_now_class_input"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="45dp"
                 android:layout_marginTop="5dp"
                 android:text="@{communityChangeItem.comChangeNowClass}"
                 android:textColor="@color/black"
@@ -88,7 +88,7 @@
                 android:id="@+id/iv_community_change_right"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="30dp"
+                android:layout_marginStart="25dp"
                 android:layout_marginTop="15dp"
                 android:src="@drawable/ic_community_right"
                 app:layout_constraintStart_toEndOf="@id/tv_community_change_now_class"
@@ -98,7 +98,7 @@
                 android:id="@+id/tv_community_change_class"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
+                android:layout_marginStart="25dp"
                 android:text="변경 반"
                 android:textColor="@color/black"
                 android:textSize="15dp"
@@ -110,7 +110,7 @@
                 android:id="@+id/tv_community_change_class_input"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="43dp"
+                android:layout_marginStart="37dp"
                 android:layout_marginTop="5dp"
                 android:text="@{communityChangeItem.comChangeClass}"
                 android:textColor="@color/black"
@@ -133,19 +133,6 @@
                 tools:text="가능" />
 
             <TextView
-                android:id="@+id/tv_community_change_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="10dp"
-                android:text="게시일 :"
-                android:textSize="13dp"
-                app:layout_constraintBottom_toTopOf="@id/community_change_v1"
-                app:layout_constraintEnd_toStartOf="@id/tv_community_change_date_input"
-                app:layout_constraintTop_toBottomOf="@id/tv_community_change_now_class" />
-
-            <TextView
                 android:id="@+id/tv_community_change_date_input"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -153,12 +140,12 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="10dp"
                 android:text="@{communityChangeItem.comChangeDate}"
-                android:textSize="13dp"
+                android:textSize="12dp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@id/community_change_v1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_community_change_now_class"
-                tools:text="5/28" />
+                tools:text="2023.05.23 12:22" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

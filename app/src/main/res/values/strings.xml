@@ -67,4 +67,12 @@
         <item>대면</item>
         <item>비대면</item>
     </string-array>
+
+    <!--Change New Group Activity-->
+    <string-array name="change_new_grade">
+        <item>1학년</item>
+        <item>2학년</item>
+        <item>3학년</item>
+        <item>4학년</item>
+    </string-array>
 </resources>
