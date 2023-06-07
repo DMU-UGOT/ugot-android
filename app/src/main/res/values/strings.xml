@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ugotprototype</string>
+    <string name="app_name">DmuIT</string>
 
     <!-- Main Activity -->
     <string name="main_go_home_activity">홈 이동</string>
