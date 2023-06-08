@@ -28,6 +28,9 @@ class GroupViewModel : ViewModel() {
     private val _selectedDate = MutableLiveData<LocalDate>()
     val selectedDate: LiveData<LocalDate> = _selectedDate
 
+    private val _isNoticeWriteButtonState = MutableLiveData<Boolean>()
+    val isNoticeWriteButtonState: LiveData<Boolean> = _isNoticeWriteButtonState
+
     fun setGroupTopData(groupTopData: ArrayList<GroupTopViewData>) {
         _groupTopItemList.value = groupTopData
     }
@@ -50,5 +53,9 @@ class GroupViewModel : ViewModel() {
 
     fun onDateClicked(date: LocalDate) {
         _selectedDate.value = date
+    }
+
+    fun isNoticeWriteStateButton(enabled: Boolean) {
+        _isNoticeWriteButtonState.value = enabled
     }
 }

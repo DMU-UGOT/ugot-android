@@ -1,8 +1,11 @@
 package com.example.ugotprototype.ui.group.view
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.ActivityGroupDetailBinding
@@ -26,6 +29,21 @@ class GroupDetailActivity : AppCompatActivity() {
                     this, GroupTeamInformationActivity::class.java
                 ).putExtra("nowPersonCnt", personCnt)
             )
+        }
+
+        var goToPostWriteResultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    val data: Intent? = result.data
+                    val resultText = data?.getStringExtra("resultText")
+                    val ymd = data?.getStringExtra("yearMonthDay")
+                    Log.d("main", "$resultText")
+                    Log.d("main", "$ymd")
+                }
+            }
+
+        binding.fabGroupNoticeWrite.setOnClickListener {
+            goToPostWriteResultLauncher.launch(Intent(this, GroupNoticeWriteActivity::class.java))
         }
     }
 
