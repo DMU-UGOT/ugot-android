@@ -22,7 +22,6 @@ class CommunityGeneralRecyclerViewAdapter : RecyclerView.Adapter<CommunityGenera
 
             binding.root.setOnClickListener {
                 goToCommunityPostDetail(currentCommunityGeneralViewData, binding.root.context)
-                Log.d("sssss1",currentCommunityGeneralViewData.ComGeneralName)
             }
         }
     }

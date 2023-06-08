@@ -71,6 +71,21 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
                 "유후앤다아이츠모어댄라잌",
                 "저도 가능할까요?!",
                 "2023.05.29 20:44"
+            ),
+            CommunityGeneralChatViewData(
+                "삼겹살에쏘주한잔",
+                "오늘삼쏘어떠세요",
+                "2023.05.30 10:01"
+            ),
+            CommunityGeneralChatViewData(
+                "미치겠다시험때매",
+                "삼쏘파티 저도 초대좀!",
+                "2023.05.30 12:22"
+            ),
+            CommunityGeneralChatViewData(
+                "볼빨간사춘기의사촌",
+                "저도같이 먹고싶어요",
+                "2023.05.30 14:33"
             )
         )
     }
