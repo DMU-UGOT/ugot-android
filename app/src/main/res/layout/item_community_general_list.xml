@@ -17,7 +17,9 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -34,7 +36,6 @@
                 android:id="@+id/tv_community_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
                 android:ellipsize="end"
                 android:ems="15"
@@ -119,26 +120,26 @@
                 android:id="@+id/tv_community_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
+                android:layout_marginEnd="3dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
                 android:text="게시일 :"
                 android:textSize="13dp"
                 app:layout_constraintBottom_toTopOf="@id/community_v1"
-                app:layout_constraintStart_toEndOf="@id/tv_community_inquire_input"
+                app:layout_constraintEnd_toStartOf="@id/tv_community_date_input"
                 app:layout_constraintTop_toBottomOf="@id/tv_community_text" />
 
             <TextView
                 android:id="@+id/tv_community_date_input"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
+                android:layout_marginEnd="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
                 android:text="@{communityGeneralItem.comGeneralDate}"
                 android:textSize="13dp"
                 app:layout_constraintBottom_toTopOf="@id/community_v1"
-                app:layout_constraintStart_toEndOf="@id/tv_community_date"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_community_text"
                 tools:text="5/28" />
         </androidx.constraintlayout.widget.ConstraintLayout>
