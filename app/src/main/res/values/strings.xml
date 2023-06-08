@@ -75,4 +75,24 @@
         <item>3학년</item>
         <item>4학년</item>
     </string-array>
+
+    <string-array name="change_new_now_class">
+        <item>미선택</item>
+        <item>YA</item>
+        <item>YB</item>
+        <item>YC</item>
+        <item>YD</item>
+        <item>YJ</item>
+        <item>YK</item>
+    </string-array>
+
+    <string-array name="change_new_now_change_class">
+        <item>미선택</item>
+        <item>YA</item>
+        <item>YB</item>
+        <item>YC</item>
+        <item>YD</item>
+        <item>YJ</item>
+        <item>YK</item>
+    </string-array>
 </resources>

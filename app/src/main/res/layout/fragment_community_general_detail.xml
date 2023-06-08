@@ -50,6 +50,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ScrollView
+            android:id="@+id/sv_general_detail"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -100,6 +101,7 @@
                     android:layout_marginTop="20dp"
                     android:textColor="#0d0d0d"
                     android:textSize="13dp"
+                    android:gravity="left"
                     app:layout_constrainedWidth="true"
                     app:layout_constraintEnd_toEndOf="@+id/tv_community_general_name"
                     app:layout_constraintStart_toStartOf="@+id/tv_community_general_name"
@@ -146,45 +148,6 @@
                     app:layout_constraintStart_toStartOf="@id/tv_community_general_text"
                     app:layout_constraintTop_toBottomOf="@id/community_general_detail_v1" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layout_community_chat_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginHorizontal="15dp"
-                    app:layout_constraintTop_toBottomOf="@id/community_general_detail_chat">
-
-                    <EditText
-                        android:id="@+id/general_chat_input"
-                        android:layout_width="290dp"
-                        android:layout_height="wrap_content"
-                        android:hint="댓글을 입력하세요"
-                        android:layout_marginHorizontal="10dp"
-                        android:paddingTop="8dp"
-                        android:paddingStart="10dp"
-                        android:paddingBottom="8dp"
-                        android:textSize="13dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:background="@color/color_F0F1F3"
-                        android:inputType="textMultiLine"
-                        android:maxLines="5" />
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/bt_general_detail_chat_input"
-                        android:layout_width="80dp"
-                        android:layout_height="38dp"
-                        android:textSize="13dp"
-                        android:layout_marginStart="10dp"
-                        android:background="@color/color_F0F1F3"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/general_chat_input"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:text="입력"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_community_general_chat"
                     android:layout_width="match_parent"
@@ -193,9 +156,51 @@
                     android:layout_marginTop="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/layout_community_chat_input"
+                    app:layout_constraintTop_toBottomOf="@id/community_general_detail_chat"
                     tools:listitem="@layout/item_community_general_chat_list" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_community_chat_input"
+            android:layout_width="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <EditText
+                android:id="@+id/general_chat_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="댓글을 입력하세요"
+                android:layout_marginHorizontal="10dp"
+                android:paddingTop="8dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bg_community_detail_chat"
+                android:layout_marginBottom="5dp"
+                android:layout_marginStart="15dp"
+                android:paddingBottom="8dp"
+                android:paddingStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:paddingEnd="40dp"
+                android:textSize="13dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:inputType="textMultiLine"
+                android:maxLines="5" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="25dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="@color/color_F0F1F3"
+                android:src="@drawable/ic_community_send"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

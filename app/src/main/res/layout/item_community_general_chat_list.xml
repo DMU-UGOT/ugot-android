@@ -32,20 +32,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <ImageView
-                android:id="@+id/iv_community_general_people"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="5dp"
-                android:src="@drawable/ic_community_general_people"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <TextView
                 android:id="@+id/tv_community_general_item_nick_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
                 android:layout_marginTop="5dp"
                 android:ellipsize="end"
                 android:ems="15"
@@ -54,7 +44,7 @@
                 android:textColor="@color/black"
                 android:textSize="13dp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@id/iv_community_general_people"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="서폿만 하는 사람" />
 
@@ -80,7 +70,7 @@
                 android:textSize="13dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_community_general_people"
+                app:layout_constraintTop_toBottomOf="@id/tv_community_general_item_nick_name"
                 tools:text="저요!!" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

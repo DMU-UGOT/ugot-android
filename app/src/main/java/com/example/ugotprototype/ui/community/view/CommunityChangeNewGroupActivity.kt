@@ -19,6 +19,8 @@ class CommunityChangeNewGroupActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_community_change_new_group)
 
         spinnerChangeNewChoice()
+        spinnerChangeNowClassNewChoice()
+        spinnerChangeClassGroupNewChoice()
         backCommunityChangeNewToMainActivity()
     }
 
@@ -28,6 +30,22 @@ class CommunityChangeNewGroupActivity : AppCompatActivity() {
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spChangeNewGrade.adapter = adapter
+    }
+
+    private fun spinnerChangeNowClassNewChoice() {
+        val adapter = ArrayAdapter.createFromResource(
+            this, R.array.change_new_now_class, android.R.layout.simple_spinner_item
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spChangeNewNowClass.adapter = adapter
+    }
+
+    private fun spinnerChangeClassGroupNewChoice() {
+        val adapter = ArrayAdapter.createFromResource(
+            this, R.array.change_new_now_change_class, android.R.layout.simple_spinner_item
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spChangeNewChangeClass.adapter = adapter
     }
 
     private fun backCommunityChangeNewToMainActivity() {
