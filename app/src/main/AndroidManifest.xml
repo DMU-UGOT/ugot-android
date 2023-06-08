@@ -8,9 +8,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_dmuit"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_dmuit_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ugotprototype"
         tools:targetApi="31" >
@@ -46,6 +46,8 @@
             android:exported="false" />
         <activity
             android:name=".ui.group.view.GroupDetailActivity"
+            android:exported="false" />
+        <activity android:name=".ui.group.view.GroupTeamInformationActivity"
             android:exported="false" />
         <activity
             android:name=".ui.team.view.TeamPostWriteDetailActivity"
