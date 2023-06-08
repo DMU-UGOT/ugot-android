@@ -15,6 +15,18 @@
         android:theme="@style/Theme.Ugotprototype"
         tools:targetApi="31" >
         <activity
+            android:name=".ui.community.view.CommunityChangeNewGroupActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ui.community.view.CommunityGeneralNewGroupActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ui.community.view.CommunityChangeDetailActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ui.community.view.CommunityGeneralDetailActivity"
+            android:exported="false"/>
+        <activity
             android:name=".ui.community.view.CommunityChangeFragment"
             android:exported="false" />
         <activity
