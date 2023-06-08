@@ -1,19 +1,20 @@
 package com.example.ugotprototype.ui.group.view
 
-import android.app.Activity
+import BottomSheetHelper
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.ActivityGroupDetailBinding
+import com.example.ugotprototype.ui.group.viewmodel.GroupViewModel
 
 class GroupDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityGroupDetailBinding
     private lateinit var personCnt: String
+    private val groupViewModel: GroupViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,20 +32,10 @@ class GroupDetailActivity : AppCompatActivity() {
             )
         }
 
-        var goToPostWriteResultLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                if (result.resultCode == Activity.RESULT_OK) {
-                    val data: Intent? = result.data
-                    val resultText = data?.getStringExtra("resultText")
-                    val ymd = data?.getStringExtra("yearMonthDay")
-                    Log.d("main", "$resultText")
-                    Log.d("main", "$ymd")
-                }
-            }
-
         binding.fabGroupNoticeWrite.setOnClickListener {
-            goToPostWriteResultLauncher.launch(Intent(this, GroupNoticeWriteActivity::class.java))
+            bottomSheetDialogCreate()
         }
+
     }
 
     private fun dataSet() {
@@ -64,5 +55,10 @@ class GroupDetailActivity : AppCompatActivity() {
         binding.mbGroupDetailCalendar.setOnClickListener {
             startActivity(Intent(this, GroupDetailCalendarActivity::class.java))
         }
+    }
+
+    private fun bottomSheetDialogCreate() {
+        val bottomSheetHelper = BottomSheetHelper(this@GroupDetailActivity, this, groupViewModel)
+        bottomSheetHelper.createBottomSheet()
     }
 }
