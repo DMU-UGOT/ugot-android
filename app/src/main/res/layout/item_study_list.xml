@@ -110,17 +110,48 @@
                     tools:text="비대면" />
 
                 <TextView
-                    android:id="@+id/tv_st_member"
+                    android:id="@+id/tv_status_cnt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="95dp"
-                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
-                    android:text="@{studyItem.member}"
+                    android:text="인원 : "
                     android:textSize="12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/tv_st_title"
-                    tools:text="인원 : 1/3" />
+                    app:layout_constraintStart_toStartOf="@+id/tv_st_title"
+                    tools:text="인원 : " />
+
+                <TextView
+                    android:id="@+id/tv_cnt_first"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:gravity="center_vertical"
+                    android:text="@{studyItem.statusCntFirst}"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_status_cnt"
+                    app:layout_constraintStart_toEndOf="@+id/tv_status_cnt"
+                    tools:text="3" />
+
+                <TextView
+                    android:id="@+id/slash"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:gravity="center_vertical"
+                    android:text="/"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_status_cnt"
+                    app:layout_constraintStart_toEndOf="@+id/tv_cnt_first" />
+
+                <TextView
+                    android:id="@+id/tv_cnt_end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:gravity="center_vertical"
+                    android:text="@{studyItem.statusCntEnd}"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_status_cnt"
+                    app:layout_constraintStart_toEndOf="@+id/slash"
+                    tools:text="6" />
 
                 <TextView
                     android:id="@+id/tv_st_inquire"
