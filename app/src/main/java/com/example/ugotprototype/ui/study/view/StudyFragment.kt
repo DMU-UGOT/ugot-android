@@ -26,9 +26,7 @@ class StudyFragment : Fragment() {
     private var studyItems = ArrayList<StudyData>()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_study, container, false)
@@ -52,7 +50,6 @@ class StudyFragment : Fragment() {
         }
 
         goToStudySearchDetail()
-        TeamSearchDetailActivity()
         goToStudyNewGroup()
     }
 
@@ -63,40 +60,36 @@ class StudyFragment : Fragment() {
                 "Android 공부할 분들 모집합니다. Discord 화면 공유로 공부하실 분 구해요!",
                 "조회수 : 1",
                 "비대면",
-                "인원 : 1/5",
-                true
-            ),
-            StudyData(
+                "1",
+                "5",
+            ), StudyData(
                 "Spring Tools Study",
                 "Spring Tool 기반 FrontEnd 스터디 하실 분들 찾습니다. 강의 관련 주제로 협업 프로젝트 진행 예정입니다. 2학년이면 좋겠습니다",
                 "조회수 : 8",
                 "대면",
-                "인원 : 1/6",
-                true
-            ),
-            StudyData(
+                "1",
+                "6"
+            ), StudyData(
                 "React.js Study",
                 "FrontEnd 툴 관련 React.js 스터디 구해요! 저는 3학년 YB반이고 프로젝트를 하기 전에 같이 공부하고 싶어요! 친구와 같이 배우고 싶습니다",
                 "조회수 : 22",
                 "대면",
-                "인원 : 2/4",
-                false
-            ),
-            StudyData(
+                "2",
+                "4"
+            ), StudyData(
                 "정보처리기사 자격증 스터디",
                 "정보처리기사 자격증 같이 공부하실 분 구합니다. 정보처리기사 시험을 이번년도에 보시는 분만 지원 넣어주세요! 저는 정보처리산업기사 자격증 있고, 같이 CBT문제를 푸는 형식으로 진행됩니다.",
                 "조회수 : 55",
                 "비대면",
-                "인원 : 5/8",
-                false
-            ),
-            StudyData(
+                "5",
+                "8"
+            ), StudyData(
                 "AWS 자격증 스터디",
                 "AWS 자격증 학교에서 지원해 주는 프로그램 신청해서 같이 공부하실 분 찾습니다. 문제지 문제와 CBT위주 공부로 진행되고 문제 풀고 맞추는 형식으로 진행됩니다.",
                 "조회수 : 41",
                 "대면",
-                "인원 : 1/4",
-                false
+                "1",
+                "4"
             )
         )
     }
@@ -117,8 +110,7 @@ class StudyFragment : Fragment() {
         binding.btStGoDetailSearch.setOnClickListener {
             goToStudySearchResultLauncher.launch(
                 Intent(
-                    requireContext(),
-                    TeamSearchDetailActivity::class.java
+                    requireContext(), TeamSearchDetailActivity::class.java
                 )
             )
         }
@@ -140,8 +132,7 @@ class StudyFragment : Fragment() {
         binding.fabStudy.setOnClickListener {
             goToStudyNewGroupResultLauncher.launch(
                 Intent(
-                    requireContext(),
-                    StudyNewGroupActivity::class.java
+                    requireContext(), StudyNewGroupActivity::class.java
                 )
             )
         }
