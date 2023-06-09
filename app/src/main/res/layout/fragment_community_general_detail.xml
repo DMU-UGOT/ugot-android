@@ -53,7 +53,7 @@
             android:id="@+id/sv_general_detail"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/layout_community_chat_input"
             app:layout_constraintTop_toBottomOf="@+id/community_general_top_view">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -157,8 +157,10 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/community_general_detail_chat"
+                    app:layout_constraintVertical_bias="0.0"
                     tools:listitem="@layout/item_community_general_chat_list" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
@@ -167,7 +169,6 @@
             android:id="@+id/layout_community_chat_input"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginVertical="5dp"
             android:background="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

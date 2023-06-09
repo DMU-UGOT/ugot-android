@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_login_kakao_background">
+
+        <ImageView
+            android:id="@+id/iv_login_kakao_mark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="75dp"
+            android:src="@drawable/ic_login_kakao_mark2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="60dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toTopOf="@id/login_kakao_v2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_login_kakao_mark">
+
+            <EditText
+                android:id="@+id/et_login_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:ellipsize="none"
+                android:hint="카카오계정 (이메일 또는 전화번호)"
+                android:maxLines="1"
+                android:padding="15dp"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toTopOf="@id/login_kakao_v1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/login_kakao_v1"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@color/color_F3F3F3"
+                app:layout_constraintBottom_toTopOf="@id/et_login_pwd"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_login_email" />
+
+            <EditText
+                android:id="@+id/et_login_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:hint="비밀번호"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:padding="15dp"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/login_kakao_v1" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bt_login_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/color_F0F1F3"
+                android:text="로그인"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_login_pwd" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_login_kakao_find_id"
+            android:layout_width="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:layout_height="wrap_content"
+            android:background="#00ff0000"
+            android:text="카카오 계정 찾기"
+            android:textSize="13dp"
+            android:textStyle="bold"
+            android:layout_marginEnd="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/login_kakao_v2" />
+
+        <View
+            android:id="@+id/login_kakao_v2"
+            android:layout_width="2dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="40dp"
+            android:background="@color/color_9DA1A6"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_login_kakao_find_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00ff0000"
+            android:text="비밀번호 재설정"
+            android:textSize="13dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginBottom="30dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/login_kakao_v2" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -9,7 +9,7 @@ import android.os.Looper
 import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.ActivitySplashBinding
-import com.example.ugotprototype.ui.login.LoginActivity
+import com.example.ugotprototype.ui.login.view.LoginActivity
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
