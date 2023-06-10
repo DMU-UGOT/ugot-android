@@ -16,13 +16,8 @@ class LoginActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
 
-        binding.btGohomeactivity.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        }
-
         binding.btLoginKakao.setOnClickListener {
-            startActivity(Intent(this, LoginKakaoActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
     }

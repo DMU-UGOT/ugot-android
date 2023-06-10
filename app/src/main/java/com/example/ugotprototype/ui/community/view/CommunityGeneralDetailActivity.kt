@@ -1,8 +1,10 @@
 package com.example.ugotprototype.ui.community.view
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -42,6 +44,7 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
         }
 
         dataGeneralSet()
+        chatInputBtn()
         backCommunityGeneralToMainActivity()
     }
 
@@ -104,5 +107,17 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
             setResult(Activity.RESULT_OK, Intent())
             finish()
         }
+    }
+
+    private fun chatInputBtn(){
+        binding.btGeneralDetailChatInput.setOnClickListener {
+            binding.generalChatInput.text.clear()
+            hideKeyboard()
+        }
+    }
+
+    private fun hideKeyboard() {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(binding.generalChatInput.windowToken, 0)
     }
 }
