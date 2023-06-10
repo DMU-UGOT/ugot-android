@@ -50,7 +50,7 @@
             <View
                 android:id="@+id/community_change_v2"
                 android:layout_width="1dp"
-                android:layout_height="45dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginBottom="10dp"
                 android:background="@color/color_F0F1F3"
@@ -59,65 +59,44 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_community_change_now_class"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:text="현재 반"
-                android:textColor="@color/black"
-                android:textSize="15dp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@id/community_change_v2"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
                 android:id="@+id/tv_community_change_now_class_input"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="45dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginBottom="15dp"
                 android:text="@{communityChangeItem.comChangeNowClass}"
-                android:textColor="@color/black"
-                android:textSize="15dp"
+                android:textSize="18dp"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/community_change_v2"
-                app:layout_constraintTop_toBottomOf="@id/tv_community_change_now_class"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="YA" />
 
             <ImageView
                 android:id="@+id/iv_community_change_right"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="25dp"
+                android:layout_marginStart="35dp"
                 android:layout_marginTop="15dp"
+                android:layout_marginBottom="30dp"
                 android:src="@drawable/ic_community_right"
-                app:layout_constraintStart_toEndOf="@id/tv_community_change_now_class"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_community_change_class"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:text="변경 반"
-                android:textColor="@color/black"
-                android:textSize="15dp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@id/iv_community_change_right"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_community_change_now_class_input"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_community_change_class_input"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="37dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginStart="35dp"
+                android:layout_marginBottom="15dp"
                 android:text="@{communityChangeItem.comChangeClass}"
                 android:textColor="@color/black"
-                android:textSize="15dp"
+                android:textSize="18dp"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/iv_community_change_right"
-                app:layout_constraintTop_toBottomOf="@id/tv_community_change_class"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="YB" />
 
             <TextView
@@ -128,6 +107,7 @@
                 android:text="@{communityChangeItem.comChangeExchange}"
                 android:textSize="15dp"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/tv_community_change_date_input"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="가능" />
@@ -136,15 +116,13 @@
                 android:id="@+id/tv_community_change_date_input"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="15dp"
                 android:text="@{communityChangeItem.comChangeDate}"
                 android:textSize="12dp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/community_change_v1"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_community_change_now_class"
                 tools:text="2023.05.23 12:22" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

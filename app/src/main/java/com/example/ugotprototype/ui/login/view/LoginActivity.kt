@@ -1,6 +1,7 @@
 package com.example.ugotprototype.ui.login.view
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -20,5 +21,34 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
+
+        binding.btLoginMainInput.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
+
+        binding.btLoginMainFindId.setOnClickListener {
+            openMainEmailUrl()
+            finish()
+        }
+
+        binding.btLoginMainFindPwd.setOnClickListener {
+            openMainPwdUrl()
+            finish()
+        }
+    }
+
+    fun openMainEmailUrl() {
+        val url = "https://accounts.kakao.com/weblogin/find_account?lang=ko&continue=%2Flogin%3Fcontinue%3Dhttps%253A%252F%252Faccounts.kakao.com%252Fweblogin%252Faccount%252Finfo"
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+    }
+
+    fun openMainPwdUrl() {
+        val url = "https://accounts.kakao.com/weblogin/find_password?lang=ko&continue=%2Flogin%3Fcontinue%3Dhttps%253A%252F%252Faccounts.kakao.com%252Fweblogin%252Faccount%252Finfo"
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
     }
 }
