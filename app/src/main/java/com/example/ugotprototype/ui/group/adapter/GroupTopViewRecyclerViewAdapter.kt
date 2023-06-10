@@ -1,10 +1,14 @@
 package com.example.ugotprototype.ui.group.adapter
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ugotprototype.data.group.GroupMiddleViewData
 import com.example.ugotprototype.data.group.GroupTopViewData
 import com.example.ugotprototype.databinding.ItemGroupTopListBinding
+import com.example.ugotprototype.ui.group.view.GroupDetailActivity
 
 class GroupTopViewRecyclerViewAdapter :
     RecyclerView.Adapter<GroupTopViewRecyclerViewAdapter.MyViewHolder>() {
@@ -12,10 +16,14 @@ class GroupTopViewRecyclerViewAdapter :
     var groupTopItemList = arrayListOf<GroupTopViewData>()
 
     // 생성된 뷰 홀더에 값 지정
-    class MyViewHolder(val binding: ItemGroupTopListBinding) :
+    inner class MyViewHolder(val binding: ItemGroupTopListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(currentGroupData: GroupTopViewData) {
             binding.vm = currentGroupData
+
+            binding.root.setOnClickListener {
+                goToPostDetail(currentGroupData, binding.root.context)
+            }
         }
     }
 
@@ -41,5 +49,14 @@ class GroupTopViewRecyclerViewAdapter :
     fun setData(data: ArrayList<GroupTopViewData>) {
         groupTopItemList = data
         notifyDataSetChanged()
+    }
+
+    fun goToPostDetail(item: GroupTopViewData, context: Context) {
+        Intent(context, GroupDetailActivity::class.java).apply {
+            putExtra("groupName", item.groupName)
+            putExtra("groupDetail", item.groupDetail)
+            putExtra("groupPersonCnt", item.groupPersonCnt)
+            context.startActivity(this)
+        }
     }
 }

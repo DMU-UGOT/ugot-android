@@ -40,6 +40,9 @@ class GroupDetailCalendarActivity : AppCompatActivity() {
         }
 
         spawnCalendarView()
+
+        DayViewContainer.clearSelection(binding.calendarView)
+        adapterDataAdd(now)
     }
 
     @SuppressLint("SetTextI18n")
@@ -202,8 +205,8 @@ class GroupDetailCalendarActivity : AppCompatActivity() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onDestroy() {
+        super.onDestroy()
         DayViewContainer.clearSelection(binding.calendarView)
         adapterDataAdd(now)
     }
