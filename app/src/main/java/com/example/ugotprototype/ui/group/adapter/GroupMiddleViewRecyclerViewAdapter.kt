@@ -25,6 +25,10 @@ class GroupMiddleViewRecyclerViewAdapter() :
                 goToPostDetail(currentGroupData, binding.root.context)
             }
 
+            if (bindingAdapterPosition < 4) {
+                binding.ibBookmark.isSelected = true
+            }
+
             binding.ibBookmark.setOnClickListener {
                 binding.ibBookmark.isSelected = binding.ibBookmark.isSelected != true
             }
