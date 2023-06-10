@@ -4,11 +4,14 @@ import BottomSheetHelper
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.ActivityGroupDetailBinding
 import com.example.ugotprototype.ui.group.viewmodel.GroupViewModel
+import com.google.android.material.button.MaterialButton
 
 class GroupDetailActivity : AppCompatActivity() {
 
@@ -60,5 +63,13 @@ class GroupDetailActivity : AppCompatActivity() {
     private fun bottomSheetDialogCreate() {
         val bottomSheetHelper = BottomSheetHelper(this@GroupDetailActivity, this, groupViewModel)
         bottomSheetHelper.createBottomSheet()
+
+        groupViewModel.bottomSheetClickCheck.observe(this) {
+            if (it) {
+                Toast.makeText(this, "공지사항 등록 완료", Toast.LENGTH_LONG).show()
+                groupViewModel.isBottomSheetClickCheck(false)
+            }
+        }
+
     }
 }
