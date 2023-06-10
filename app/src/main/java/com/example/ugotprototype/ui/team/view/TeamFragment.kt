@@ -61,15 +61,16 @@ class TeamFragment : Fragment() {
                 "Android",
                 "3",
                 "8",
-                "조회수 : 8"
+                "조회수 : 8",
+                "YJ"
             ), TeamData(
-                "Web 팀원 모집", "Web FrontEnd 팀원모집중", "FrontEnd", "1", "7", "조회수 : 4"
+                "Web 팀원 모집", "Web FrontEnd 팀원모집중", "FrontEnd", "1", "7", "조회수 : 4", "YJ"
             ), TeamData(
-                "BackEnd 모집중", "BackEnd 팀원 모집중", "BackEnd", "6", "9", "조회수 : 4"
+                "BackEnd 모집중", "BackEnd 팀원 모집중", "BackEnd", "6", "9", "조회수 : 4", "YK"
             ), TeamData(
-                "SoftWare 개발 팀원 구인중", "SoftWare 개발 팀원 구인중", "Software", "4", "4", "조회수 : 4"
+                "SoftWare 개발 팀원 구인중", "SoftWare 개발 팀원 구인중", "Software", "4", "4", "조회수 : 4", "YJ"
             ), TeamData(
-                "Security 팀원 모집중", "Security 팀원 모집중", "Security", "3", "5", "조회수 : 4"
+                "Security 팀원 모집중", "Security 팀원 모집중", "Security", "3", "5", "조회수 : 4", "YK"
             )
         )
     }

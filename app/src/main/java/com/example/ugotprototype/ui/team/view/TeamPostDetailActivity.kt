@@ -34,7 +34,7 @@ class TeamPostDetailActivity : AppCompatActivity() {
         binding.tvTotalPersonCntFirst.text = teamStatusCnt
         binding.tvTotalPersonCntEnd.text = intent.getStringExtra("teamStatusCntEnd")
         binding.tvPersonCntCheck.text = intent.getStringExtra("teamCurrent")
-
+        binding.tvNowClassText.text = intent.getStringExtra("teamLeaderClass")
     }
 
     private fun goToTeamInformation() {
@@ -45,7 +45,7 @@ class TeamPostDetailActivity : AppCompatActivity() {
             }
         }
 
-        binding.tvPersonCntTitle.setOnClickListener{
+        binding.tvPersonCntTitle.setOnClickListener {
             Intent(this, TeamInformationActivity::class.java).apply {
                 putExtra("nowPersonCnt", teamStatusCnt)
                 startActivity(this)

@@ -268,6 +268,51 @@
                         android:background="@color/color_F0F1F3"
                         app:layout_constraintTop_toBottomOf="@+id/tv_person_cnt" />
 
+                    <TextView
+                        android:id="@+id/tv_leader_class_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="현재 반"
+                        android:textColor="@color/black"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/tv_post_title"
+                        app:layout_constraintTop_toBottomOf="@+id/line_post_link" />
+
+                    <TextView
+                        android:id="@+id/tv_now_class"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="반"
+                        android:textColor="@color/black"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="@+id/tv_leader_class_title"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_leader_class_title" />
+
+                    <TextView
+                        android:id="@+id/tv_now_class_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:background="@drawable/bg_team_post_border"
+                        android:paddingHorizontal="15dp"
+                        android:paddingVertical="8dp"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_now_class"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/tv_now_class"
+                        tools:text="YJ" />
+
+                    <View
+                        android:id="@+id/line_now_class"
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@color/color_F0F1F3"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_now_class" />
+
 
                     <TextView
                         android:id="@+id/tv_team_post_link"
@@ -279,7 +324,7 @@
                         android:textSize="18dp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="@+id/tv_post_title"
-                        app:layout_constraintTop_toBottomOf="@+id/line_post_link" />
+                        app:layout_constraintTop_toBottomOf="@+id/line_now_class" />
 
                     <ImageView
                         android:id="@+id/git_border"

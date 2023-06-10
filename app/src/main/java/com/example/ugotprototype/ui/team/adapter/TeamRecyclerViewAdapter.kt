@@ -61,6 +61,7 @@ class TeamRecyclerViewAdapter : RecyclerView.Adapter<TeamRecyclerViewAdapter.MyV
             putExtra("teamTopic", item.topic)
             putExtra("teamStatusCnt", item.statusCntFirst)
             putExtra("teamStatusCntEnd", item.statusCntEnd)
+            putExtra("teamLeaderClass", item.teamLeaderClass)
 
             //모집중인지 모집완료인지 모집현황 체크
             if (item.statusCntEnd == item.statusCntFirst) {

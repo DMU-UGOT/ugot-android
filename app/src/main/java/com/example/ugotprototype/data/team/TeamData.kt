@@ -6,5 +6,6 @@ class TeamData(
     val topic: String,
     val statusCntFirst: String,
     val statusCntEnd: String,
-    val reply: String
+    val reply: String,
+    val teamLeaderClass: String
 )
