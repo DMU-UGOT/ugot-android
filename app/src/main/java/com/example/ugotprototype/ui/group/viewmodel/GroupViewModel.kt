@@ -31,6 +31,9 @@ class GroupViewModel : ViewModel() {
     private val _isNoticeWriteButtonState = MutableLiveData<Boolean>()
     val isNoticeWriteButtonState: LiveData<Boolean> = _isNoticeWriteButtonState
 
+    private val _bottomSheetClickCheck = MutableLiveData<Boolean>()
+    val bottomSheetClickCheck: LiveData<Boolean> = _bottomSheetClickCheck
+
     fun setGroupTopData(groupTopData: ArrayList<GroupTopViewData>) {
         _groupTopItemList.value = groupTopData
     }
@@ -57,5 +60,9 @@ class GroupViewModel : ViewModel() {
 
     fun isNoticeWriteStateButton(enabled: Boolean) {
         _isNoticeWriteButtonState.value = enabled
+    }
+
+    fun isBottomSheetClickCheck(enabled: Boolean) {
+        _bottomSheetClickCheck.value = enabled
     }
 }

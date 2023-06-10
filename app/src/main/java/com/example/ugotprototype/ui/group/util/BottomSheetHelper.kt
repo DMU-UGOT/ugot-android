@@ -2,9 +2,12 @@ import android.app.DatePickerDialog
 import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.LifecycleOwner
 import com.example.ugotprototype.R
 import com.example.ugotprototype.ui.group.viewmodel.GroupViewModel
@@ -16,11 +19,11 @@ import java.util.Calendar
 class BottomSheetHelper(
     private val lifecycleOwner: LifecycleOwner,
     private val context: Context,
-    private val groupViewModel: GroupViewModel
+    private val groupViewModel: GroupViewModel,
 ) {
 
     fun createBottomSheet() {
-        val bottomSheet = BottomSheetDialog(context)
+        val bottomSheet = BottomSheetDialog(context, R.style.AppBottomSheetDialogTheme)
         val view = LayoutInflater.from(context).inflate(R.layout.activity_group_notice_write, null)
         bottomSheet.setContentView(view)
 
@@ -34,6 +37,7 @@ class BottomSheetHelper(
             }
 
             mbNoticeFinish.setOnClickListener {
+                groupViewModel.isBottomSheetClickCheck(true)
                 bottomSheet.dismiss()
             }
 
