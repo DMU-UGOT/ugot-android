@@ -182,7 +182,7 @@
 
                         <Spinner
                             android:id="@+id/sp_grade"
-                            android:layout_width="100dp"
+                            android:layout_width="0dp"
                             android:layout_height="50dp"
                             android:layout_marginStart="33dp"
                             android:textSize="15dp"
@@ -224,11 +224,11 @@
 
                         <Spinner
                             android:id="@+id/sp_class"
-                            android:layout_width="100dp"
+                            android:layout_width="0dp"
                             android:layout_height="50dp"
                             android:layout_marginStart="33dp"
-                            android:paddingStart="10dp"
                             android:textSize="15dp"
+                            android:paddingStart="3dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/tv_class"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -272,6 +272,7 @@
                             android:layout_marginStart="30dp"
                             android:paddingStart="10dp"
                             android:textSize="15dp"
+                            android:text="김동양"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@id/tv_name"
                             app:layout_constraintTop_toTopOf="parent"
@@ -358,11 +359,11 @@
 
                         <Spinner
                             android:id="@+id/sp_gender"
-                            android:layout_width="100dp"
+                            android:layout_width="0dp"
                             android:layout_height="50dp"
                             android:layout_marginStart="33dp"
-                            android:paddingStart="10dp"
                             android:textSize="15sp"
+                            android:paddingStart="3dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@id/tv_gender"
                             app:layout_constraintTop_toTopOf="parent" />

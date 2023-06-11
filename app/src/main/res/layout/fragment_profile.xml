@@ -21,29 +21,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <View
-                    android:id="@+id/profile_v0"
-                    android:layout_width="match_parent"
-                    android:layout_height="3dp"
-                    android:background="@color/color_F3F3F3"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_fg_profile_top"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:paddingTop="35dp"
-                    android:paddingBottom="35dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
                     app:layout_constraintBottom_toTopOf="@id/layout_fg_medium"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/profile_v0">
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
                         android:id="@+id/tv_fg_name"
-                        android:layout_width="200dp"
+                        android:layout_width="180dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
                         android:ellipsize="end"
@@ -59,7 +50,7 @@
 
                     <TextView
                         android:id="@+id/tv_fg_email"
-                        android:layout_width="200dp"
+                        android:layout_width="180dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
                         android:ellipsize="end"
@@ -76,8 +67,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="75dp"
-                        android:text="주 기술"
                         android:layout_marginBottom="10dp"
+                        android:text="주 기술"
                         android:textColor="@color/black"
                         android:textSize="15dp"
                         app:layout_constraintBottom_toBottomOf="@id/tv_fg_profile_stack_input"
@@ -104,6 +95,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
+                    android:paddingBottom="5dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/layout_fg_profile_top">
 
@@ -120,7 +112,6 @@
                         android:id="@+id/tv_fg_id"
                         android:layout_width="0dp"
                         android:layout_height="40dp"
-                        android:layout_marginTop="10dp"
                         android:gravity="center_vertical"
                         android:paddingStart="20dp"
                         android:text="계정"
@@ -180,6 +171,7 @@
                         android:id="@+id/layout_profile_stack"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:paddingBottom="5dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/layout_profile_school">
@@ -224,30 +216,18 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <View
-                        android:id="@+id/fv3"
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_marginHorizontal="10dp"
-                        android:background="@color/color_F0F1F3"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/layout_profile_stack" />
-
-
-                    <View
                         android:id="@+id/profile_v2"
                         android:layout_width="match_parent"
                         android:layout_height="5dp"
                         android:background="@color/color_F3F3F3"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/fv3" />
+                        app:layout_constraintTop_toBottomOf="@id/layout_profile_stack" />
 
                     <TextView
                         android:id="@+id/tv_fg_option"
                         android:layout_width="0dp"
                         android:layout_height="40dp"
-                        android:layout_marginTop="10dp"
                         android:gravity="center_vertical"
                         android:paddingStart="20dp"
                         android:text="앱 설정"
@@ -260,6 +240,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/layout_profile_app_setting"
                         android:layout_width="match_parent"
+                        android:paddingBottom="5dp"
                         android:layout_height="wrap_content"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -330,6 +311,7 @@
                         android:id="@+id/layout_profile_version"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:paddingBottom="5dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_fg_app">
@@ -388,7 +370,6 @@
                         android:id="@+id/tv_fg_login_setting"
                         android:layout_width="0dp"
                         android:layout_height="40dp"
-                        android:layout_marginTop="10dp"
                         android:gravity="center_vertical"
                         android:paddingStart="20dp"
                         android:text="로그인"
@@ -402,6 +383,7 @@
                         android:id="@+id/layout_profile_logout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:paddingBottom="5dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_fg_login_setting">
@@ -448,6 +430,7 @@
                         android:id="@+id/layout_profile_checkout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:paddingBottom="5dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/layout_profile_logout">
