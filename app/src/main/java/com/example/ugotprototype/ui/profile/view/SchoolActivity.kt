@@ -49,7 +49,8 @@ class SchoolActivity : AppCompatActivity() {
 
     private fun backProfileSchoolNewToMainActivity() {
         binding.btSchoolNewPostRegister.setOnClickListener {
-            startActivity(Intent(this, ProfileFragment::class.java))
+            Intent().putExtra("resultText", "text")
+            setResult(Activity.RESULT_OK, Intent())
             finish()
         }
 
