@@ -1,5 +1,6 @@
 package com.example.ugotprototype.ui.profile.view
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,18 +16,12 @@ class SchoolActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_profile_school)
 
-        saveSchool()
         spinnerGradePostSet()
         spinnerClassPostSet()
         spinnerGenderPostSet()
+        backProfileSchoolNewToMainActivity()
     }
 
-    private fun saveSchool(){
-        binding.btSchoolSave.setOnClickListener {
-            startActivity(Intent(this, ProfileFragment::class.java))
-            finish()
-        }
-    }
 
     private fun spinnerGradePostSet() {
         val adapter = ArrayAdapter.createFromResource(
@@ -50,5 +45,18 @@ class SchoolActivity : AppCompatActivity() {
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spGender.adapter = adapter
+    }
+
+    private fun backProfileSchoolNewToMainActivity() {
+        binding.btSchoolNewPostRegister.setOnClickListener {
+            startActivity(Intent(this, ProfileFragment::class.java))
+            finish()
+        }
+
+        binding.btSchoolNewBackToMain.setOnClickListener {
+            Intent().putExtra("resultText", "text")
+            setResult(Activity.RESULT_OK, Intent())
+            finish()
+        }
     }
 }

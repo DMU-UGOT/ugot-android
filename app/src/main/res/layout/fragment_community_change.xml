@@ -117,6 +117,7 @@
                     android:layout_height="wrap_content"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_editor_absoluteX="48dp"
                     tools:listitem="@layout/item_community_change_list" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -124,7 +125,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="122dp"
                     android:background="@color/color_F0F1F3"
+                    android:layout_marginBottom="50dp"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/rv_community_change">
 
                     <TextView
@@ -199,7 +203,7 @@
             android:backgroundTint="@color/black"
             android:src="@drawable/plus"
             app:borderWidth="0dp"
-            app:layout_constraintBottom_toBottomOf="@+id/nsv_com_change_main"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:tint="@color/white" />
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -31,18 +31,16 @@ class ProfileFragment : Fragment() {
         goToStack()
     }
 
-
-
     // 개인 정보 페이지 이동
     private fun goToSchool() {
-        binding.tvFgSchool.setOnClickListener {
+        binding.layoutProfileSchool.setOnClickListener {
             startActivity(Intent(requireActivity(), SchoolActivity::class.java))
         }
     }
 
     // 스택 페이지 이동
     private fun goToStack() {
-        binding.tvFgStack.setOnClickListener {
+        binding.layoutProfileStack.setOnClickListener {
             startActivity(Intent(requireActivity(), StackActivity::class.java))
         }
     }

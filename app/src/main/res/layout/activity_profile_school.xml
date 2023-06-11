@@ -8,6 +8,54 @@
         android:layout_height="match_parent"
         tools:context=".ui.profile.view.SchoolActivity">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_school_new_top_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/bt_school_new_back_to_main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:padding="5dp"
+                android:src="@drawable/ic_team_post_close"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="학교 정보 관리"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/bt_school_new_back_to_main"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/bt_school_new_back_to_main"
+                tools:text="학교 정보 관리" />
+
+            <ImageButton
+                android:id="@+id/bt_school_new_post_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:padding="5dp"
+                android:src="@drawable/ic_team_post_register"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/post_register_top_line"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#E0E0E0"
+                app:layout_constraintTop_toBottomOf="@+id/bt_school_new_back_to_main" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nsv_school_main"
             android:layout_width="0dp"
@@ -16,7 +64,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/layout_school_new_top_view">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -32,16 +80,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <View
-                        android:id="@+id/v1"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:background="@color/color_F0F1F3"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toTopOf="@id/iv_school"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
                     <ImageView
                         android:id="@+id/iv_school"
                         android:layout_width="match_parent"
@@ -52,12 +90,12 @@
                         app:layout_constraintBottom_toTopOf="@id/v2"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/v1" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <View
                         android:id="@+id/v2"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="10dp"
                         android:background="@color/color_F0F1F3"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -70,8 +108,6 @@
                     android:id="@+id/layout_medium"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/layout_top">
@@ -81,6 +117,7 @@
                         android:id="@+id/layout_department"
                         android:layout_width="0dp"
                         android:layout_height="55dp"
+                        android:layout_marginHorizontal="30dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
@@ -89,17 +126,11 @@
                             android:id="@+id/tv_department"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="310dp"
-                            android:paddingStart="20dp"
-                            android:paddingTop="10dp"
-                            android:paddingEnd="50dp"
-                            android:paddingBottom="15dp"
                             android:text="학과"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintRight_toLeftOf="@id/tv_department_input"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -107,12 +138,10 @@
                             android:id="@+id/tv_department_input"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="30dp"
                             android:ellipsize="end"
                             android:maxLines="1"
                             android:paddingStart="10dp"
-                            android:paddingTop="10dp"
-                            android:paddingEnd="10dp"
-                            android:paddingBottom="15dp"
                             android:text="컴퓨터 소프트웨어 공학과"
                             android:textSize="15dp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -124,8 +153,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginHorizontal="10dp"
                         android:background="#d3d3d3"
                         app:layout_constraintTop_toBottomOf="@+id/layout_department" />
 
@@ -134,6 +162,7 @@
                         android:id="@+id/layout_grade"
                         android:layout_width="0dp"
                         android:layout_height="55dp"
+                        android:layout_marginHorizontal="30dp"
                         app:layout_constraintBottom_toTopOf="@id/layout_class"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -143,16 +172,11 @@
                             android:id="@+id/tv_grade"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingStart="20dp"
-                            android:paddingTop="10dp"
-                            android:paddingEnd="50dp"
-                            android:paddingBottom="15dp"
                             android:text="학년"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/sp_grade"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -160,14 +184,9 @@
                             android:id="@+id/sp_grade"
                             android:layout_width="100dp"
                             android:layout_height="50dp"
-                            android:layout_marginEnd="190dp"
-                            android:paddingStart="5dp"
-                            android:paddingTop="10dp"
-                            android:paddingEnd="10dp"
-                            android:paddingBottom="15dp"
+                            android:layout_marginStart="33dp"
                             android:textSize="15dp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/tv_grade"
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -175,8 +194,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginHorizontal="10dp"
                         android:background="#d3d3d3"
                         app:layout_constraintBottom_toTopOf="@id/layout_class"
                         app:layout_constraintTop_toBottomOf="@+id/layout_grade" />
@@ -186,6 +204,7 @@
                         android:id="@+id/layout_class"
                         android:layout_width="0dp"
                         android:layout_height="55dp"
+                        android:layout_marginHorizontal="30dp"
                         app:layout_constraintBottom_toTopOf="@+id/layout_name"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -195,16 +214,11 @@
                             android:id="@+id/tv_class"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingStart="20dp"
-                            android:paddingTop="10dp"
-                            android:paddingEnd="50dp"
-                            android:paddingBottom="15dp"
                             android:text="분반"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/sp_class"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -212,14 +226,10 @@
                             android:id="@+id/sp_class"
                             android:layout_width="100dp"
                             android:layout_height="50dp"
-                            android:layout_marginEnd="190dp"
+                            android:layout_marginStart="33dp"
                             android:paddingStart="10dp"
-                            android:paddingTop="10dp"
-                            android:paddingEnd="10dp"
-                            android:paddingBottom="15dp"
                             android:textSize="15dp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/tv_class"
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -227,8 +237,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginHorizontal="10dp"
                         android:background="#d3d3d3"
                         app:layout_constraintBottom_toTopOf="@id/layout_name"
                         app:layout_constraintTop_toBottomOf="@+id/layout_class" />
@@ -238,6 +247,7 @@
                         android:id="@+id/layout_name"
                         android:layout_width="0dp"
                         android:layout_height="55dp"
+                        android:layout_marginHorizontal="30dp"
                         app:layout_constraintBottom_toTopOf="@id/layout_nickname"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -247,16 +257,11 @@
                             android:id="@+id/tv_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingStart="20dp"
-                            android:paddingTop="10dp"
-                            android:paddingEnd="50dp"
-                            android:paddingBottom="15dp"
                             android:text="이름"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/tv_name_input"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -264,14 +269,10 @@
                             android:id="@+id/tv_name_input"
                             android:layout_width="220dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="70dp"
+                            android:layout_marginStart="30dp"
                             android:paddingStart="10dp"
-                            android:paddingTop="10dp"
-                            android:paddingEnd="10dp"
-                            android:paddingBottom="15dp"
                             android:textSize="15dp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/tv_name"
                             app:layout_constraintTop_toTopOf="parent"
                             tools:text="김동양" />
@@ -280,8 +281,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginHorizontal="10dp"
                         android:background="#d3d3d3"
                         app:layout_constraintBottom_toTopOf="@id/layout_nickname"
                         app:layout_constraintTop_toBottomOf="@+id/layout_name" />
@@ -291,6 +291,7 @@
                         android:id="@+id/layout_nickname"
                         android:layout_width="0dp"
                         android:layout_height="55dp"
+                        android:layout_marginHorizontal="30dp"
                         app:layout_constraintBottom_toTopOf="@id/layout_gender"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -300,16 +301,11 @@
                             android:id="@+id/tv_nickname"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingStart="20dp"
-                            android:paddingTop="10dp"
-                            android:paddingEnd="35dp"
-                            android:paddingBottom="15dp"
                             android:text="닉네임"
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintRight_toLeftOf="@id/et_nickname_input"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -317,27 +313,23 @@
                             android:id="@+id/et_nickname_input"
                             android:layout_width="280dp"
                             android:layout_height="50dp"
-                            android:layout_marginEnd="10dp"
+                            android:layout_marginStart="20dp"
                             android:background="@null"
                             android:ellipsize="end"
                             android:hint="abcd@naver.com"
                             android:inputType="text"
                             android:maxLines="1"
                             android:paddingStart="10dp"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="15dp"
                             android:textSize="15dp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintLeft_toRightOf="@+id/tv_nickname"
+                            app:layout_constraintStart_toEndOf="@id/tv_nickname"
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginHorizontal="10dp"
                         android:background="#d3d3d3"
                         app:layout_constraintBottom_toTopOf="@id/layout_gender"
                         app:layout_constraintTop_toBottomOf="@+id/layout_nickname" />
@@ -347,6 +339,7 @@
                         android:id="@+id/layout_gender"
                         android:layout_width="0dp"
                         android:layout_height="55dp"
+                        android:layout_marginHorizontal="30dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/layout_nickname">
@@ -355,16 +348,11 @@
                             android:id="@+id/tv_gender"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingStart="20dp"
-                            android:paddingTop="10dp"
-                            android:paddingEnd="50dp"
-                            android:paddingBottom="15dp"
                             android:text="성별"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/sp_gender"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -372,23 +360,18 @@
                             android:id="@+id/sp_gender"
                             android:layout_width="100dp"
                             android:layout_height="50dp"
-                            android:layout_marginEnd="190dp"
+                            android:layout_marginStart="33dp"
                             android:paddingStart="10dp"
-                            android:paddingTop="10dp"
-                            android:paddingEnd="10dp"
-                            android:paddingBottom="15dp"
                             android:textSize="15sp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintLeft_toRightOf="@id/tv_gender"
+                            app:layout_constraintStart_toEndOf="@id/tv_gender"
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginHorizontal="10dp"
                         android:background="#d3d3d3"
                         app:layout_constraintBottom_toTopOf="@id/layout_email"
                         app:layout_constraintTop_toBottomOf="@+id/layout_gender" />
@@ -398,6 +381,7 @@
                         android:id="@+id/layout_email"
                         android:layout_width="0dp"
                         android:layout_height="55dp"
+                        android:layout_marginHorizontal="30dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/layout_gender">
@@ -406,16 +390,11 @@
                             android:id="@+id/tv_email"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingStart="20dp"
-                            android:paddingTop="10dp"
-                            android:paddingEnd="35dp"
-                            android:paddingBottom="15dp"
                             android:text="이메일"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/et_email_input"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -423,24 +402,20 @@
                             android:id="@+id/et_email_input"
                             android:layout_width="290dp"
                             android:layout_height="50dp"
+                            android:layout_marginStart="20dp"
                             android:background="@null"
                             android:hint="dongyang@naver.com"
                             android:paddingStart="10dp"
-                            android:paddingTop="10dp"
-                            android:paddingEnd="10dp"
-                            android:paddingBottom="15dp"
                             android:textSize="15dp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintLeft_toRightOf="@id/tv_email"
+                            app:layout_constraintStart_toEndOf="@id/tv_email"
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginHorizontal="10dp"
                         android:background="#d3d3d3"
                         app:layout_constraintBottom_toTopOf="@id/layout_git"
                         app:layout_constraintTop_toBottomOf="@+id/layout_email" />
@@ -450,6 +425,7 @@
                         android:id="@+id/layout_git"
                         android:layout_width="0dp"
                         android:layout_height="55dp"
+                        android:layout_marginHorizontal="30dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -459,16 +435,11 @@
                             android:id="@+id/tv_git"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingStart="20dp"
-                            android:paddingTop="10dp"
-                            android:paddingEnd="25dp"
-                            android:paddingBottom="15dp"
                             android:text="GitHub"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/et_git_input"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -476,14 +447,12 @@
                             android:id="@+id/et_git_input"
                             android:layout_width="290dp"
                             android:layout_height="50dp"
+                            android:layout_marginStart="15dp"
                             android:background="@null"
                             android:hint="DYmirea"
                             android:paddingStart="10dp"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="15dp"
                             android:textSize="15dp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintLeft_toRightOf="@id/tv_git"
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -491,37 +460,9 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginHorizontal="10dp"
                         android:background="#d3d3d3"
                         app:layout_constraintTop_toBottomOf="@+id/layout_git" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layout_bottom"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/layout_medium">
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/bt_school_save"
-                        android:layout_width="150dp"
-                        android:layout_height="50dp"
-                        android:layout_marginHorizontal="20dp"
-                        android:backgroundTint="@color/semiBlue"
-                        android:gravity="start|center_vertical"
-                        android:paddingStart="45dp"
-                        android:text="저장하기"
-                        android:textSize="15dp"
-                        android:textColor="@color/white"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
