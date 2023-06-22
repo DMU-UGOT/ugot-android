@@ -26,6 +26,7 @@ class GroupDetailActivity : AppCompatActivity() {
         backToMain()
         dataSet()
         goToDetailPage()
+        goToDetailCommunityPage()
 
         binding.mbGroupDetailTeamInformation.setOnClickListener {
             startActivity(
@@ -70,6 +71,11 @@ class GroupDetailActivity : AppCompatActivity() {
                 groupViewModel.isBottomSheetClickCheck(false)
             }
         }
+    }
 
+    private fun goToDetailCommunityPage() {
+        binding.mbGroupDetailCommunication.setOnClickListener {
+            startActivity(Intent(this, GroupCommunityActivity::class.java))
+        }
     }
 }
