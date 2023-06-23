@@ -1,4 +1,4 @@
-package com.example.ugotprototype.ui.group.viewmodel
+package com.example.ugotprototype.data.group
 
 data class GroupCommunityChatViewData (
     val GroupCmuNickName:String,

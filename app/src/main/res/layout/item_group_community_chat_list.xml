@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="groupCmuChatItem"
+            type="com.example.ugotprototype.data.group.GroupCommunityChatViewData" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -12,6 +19,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
             android:layout_marginTop="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -24,7 +33,7 @@
                 android:ellipsize="end"
                 android:ems="15"
                 android:maxLines="1"
-                android:text="제리만 하는 사람"
+                android:text="@{groupCmuChatItem.groupCmuNickName}"
                 android:textColor="@color/black"
                 android:textSize="13dp"
                 android:textStyle="bold"
@@ -36,15 +45,32 @@
                 android:id="@+id/tv_group_cmu_item_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLines="4"
-                android:textSize="13dp"
                 android:layout_marginTop="5dp"
-                android:padding="10dp"
                 android:background="@drawable/bg_group_chat_border"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:maxLines="4"
+                android:paddingStart="15dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="15dp"
+                android:textColor="@color/black"
+                android:text="@{groupCmuChatItem.groupCmuChatText}"
+                android:paddingBottom="10dp"
+                android:textSize="13dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_item_group_cmu_nick_name"
                 tools:text="오늘 프로젝트 진행하나요?" />
+
+            <TextView
+                android:id="@+id/tv_item_group_cmu_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black"
+                android:text="@{groupCmuChatItem.groupCmuChatTime}"
+                android:textSize="13dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="2023.06.23 16:22" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
