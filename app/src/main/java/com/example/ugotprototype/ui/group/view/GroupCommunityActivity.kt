@@ -44,6 +44,7 @@ class GroupCommunityActivity : AppCompatActivity() {
             groupCommunityRecyclerViewAdapter.setData(it)
         }
 
+        titleTeamName()
         backGroupCommunityToMainActivity()
         chatInputBtn()
     }
@@ -111,5 +112,23 @@ class GroupCommunityActivity : AppCompatActivity() {
                 "2023.06.23 17:27"
             )
         )
+    }
+
+    private fun titleTeamName() {
+        val teamNumber = intent.getIntExtra("TEAM_NUMBER", 1)
+        val teamName = getTeamName(teamNumber)
+        binding.tvGroupCmuTitle.text = teamName
+    }
+
+    private fun getTeamName(teamNumber: Int): String {
+        return when (teamNumber) {
+            1 -> "UGOT"
+            2 -> "2팀"
+            3 -> "삼놈"
+            4 -> "사시미"
+            5 -> "오리무중"
+            6 -> "육교"
+            else -> "Unknown Team"
+        }
     }
 }

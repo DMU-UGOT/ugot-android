@@ -30,15 +30,30 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/tv_group_cmu_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="그룹 소통 공간"
+                android:textColor="#0D0D0D"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                tools:text="UGOT"
+                android:layout_marginEnd="80dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_group_cmu_title2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="팀 소통 공간"
+                android:layout_marginStart="5dp"
                 android:textColor="#0D0D0D"
                 android:textSize="16dp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_group_cmu_title"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <View
