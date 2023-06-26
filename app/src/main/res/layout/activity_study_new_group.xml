@@ -6,7 +6,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".ui.study.view.StudyNewGroupActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_st_new_top_view"
@@ -30,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="스터디 생성하기"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/bt_st_new_back_to_main"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -78,7 +79,7 @@
                     android:paddingTop="15dp"
                     android:paddingBottom="15dp"
                     android:textColorHint="@color/color_80636363"
-                    android:textSize="15dp"
+                    android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -100,7 +101,7 @@
                     android:hint="내용을 입력하세요"
                     android:maxLength="10"
                     android:textColorHint="@color/color_80636363"
-                    android:textSize="15dp"
+                    android:textSize="15sp"
                     app:layout_constraintBottom_toTopOf="@id/st_new_v2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -121,7 +122,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:text="대면 여부"
-                    android:textSize="15dp"
+                    android:textSize="15sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@id/sp_st_meet"
                     app:layout_constraintStart_toStartOf="parent"
@@ -129,16 +130,17 @@
 
                 <Spinner
                     android:id="@+id/sp_st_meet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginEnd="190dp"
                     android:layout_marginBottom="10dp"
                     android:paddingStart="5dp"
                     android:paddingTop="10dp"
                     android:paddingEnd="10dp"
                     android:paddingBottom="15dp"
-                    android:textSize="15dp"
+                    android:textSize="15sp"
                     app:layout_constraintBottom_toTopOf="@id/st_new_v3"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_st_meet_choice" />
@@ -160,7 +162,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:text="모집 인원"
-                    android:textSize="15dp"
+                    android:textSize="15sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/st_new_v3" />
@@ -216,7 +218,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:text="공유 링크"
-                    android:textSize="15dp"
+                    android:textSize="15sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@id/et_st_new_git_link"
                     app:layout_constraintStart_toStartOf="parent"
@@ -232,7 +234,7 @@
                     android:hint="깃헙 닉네임을 입력하세요"
                     android:padding="15dp"
                     android:textColorHint="@color/color_80636363"
-                    android:textSize="15dp"
+                    android:textSize="15sp"
                     app:layout_constraintBottom_toTopOf="@id/st_new_v5"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
