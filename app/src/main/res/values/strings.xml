@@ -42,11 +42,13 @@
 
     <!-- School Activity -->
     <string-array name="school_gender_item">
+        <item>미선택</item>
         <item>남자</item>
         <item>여자</item>
     </string-array>
 
     <string-array name="school_grade_item">
+        <item>미선택</item>
         <item>1학년</item>
         <item>2학년</item>
         <item>3학년</item>
@@ -54,6 +56,7 @@
     </string-array>
 
     <string-array name="school_class_item">
+        <item>미선택</item>
         <item>YA</item>
         <item>YB</item>
         <item>YC</item>
@@ -70,6 +73,7 @@
 
     <!--Change New Group Activity-->
     <string-array name="change_new_grade">
+        <item>미선택</item>
         <item>1학년</item>
         <item>2학년</item>
         <item>3학년</item>
