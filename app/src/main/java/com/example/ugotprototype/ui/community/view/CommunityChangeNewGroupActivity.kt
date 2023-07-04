@@ -14,7 +14,6 @@ import com.example.ugotprototype.databinding.ActivityDialogMessageBinding
 
 class CommunityChangeNewGroupActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCommunityChangeNewGroupBinding
-    private lateinit var dialogBinding: ActivityDialogMessageBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,8 +70,6 @@ class CommunityChangeNewGroupActivity : AppCompatActivity() {
         }
 
         binding.btChangeNewBackToMain.setOnClickListener {
-            binding.spChangeNewNowClass.setSelection(0) // 현재 반 선택을 초기화합니다.
-            binding.spChangeNewChangeClass.setSelection(0) // 변경할 반 선택을 초기화합니다.
             showConfirmationDialog()
         }
     }

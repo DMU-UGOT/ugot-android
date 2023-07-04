@@ -83,7 +83,7 @@
 
                 <Spinner
                     android:id="@+id/sp_change_new_grade"
-                    android:layout_width="wrap_content"
+                    android:layout_width="115dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="20dp"
@@ -117,7 +117,7 @@
 
                 <Spinner
                     android:id="@+id/sp_change_new_now_class"
-                    android:layout_width="wrap_content"
+                    android:layout_width="115dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="25dp"
@@ -152,7 +152,7 @@
 
                 <Spinner
                     android:id="@+id/sp_change_new_change_class"
-                    android:layout_width="wrap_content"
+                    android:layout_width="115dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="25dp"
