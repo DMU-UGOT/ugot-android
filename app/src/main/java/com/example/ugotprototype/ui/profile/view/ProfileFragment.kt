@@ -29,6 +29,7 @@ class ProfileFragment : Fragment() {
 
         goToSchool()
         goToStack()
+        goToMessage()
     }
 
     // 개인 정보 페이지 이동
@@ -42,6 +43,13 @@ class ProfileFragment : Fragment() {
     private fun goToStack() {
         binding.layoutProfileStack.setOnClickListener {
             startActivity(Intent(requireActivity(), StackActivity::class.java))
+        }
+    }
+
+    // 쪽지 관리 페이지 이동
+    private fun goToMessage() {
+        binding.layoutProfileMessage.setOnClickListener {
+            startActivity(Intent(requireActivity(), MessageActivity::class.java))
         }
     }
 }

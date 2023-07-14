@@ -5,8 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="com.example.ugotprototype.di.api.MyApplication"
-        tools:replace="android:name"
+        android:name=".di.api.MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -15,7 +14,14 @@
         android:roundIcon="@mipmap/ic_dmuit_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ugotprototype"
+        tools:replace="android:name"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.profile.view.ProfileMessageDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.profile.view.MessageActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.group.view.GroupCommunityActivity"
             android:exported="false" />
