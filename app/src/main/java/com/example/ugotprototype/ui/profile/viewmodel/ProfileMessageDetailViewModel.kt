@@ -14,4 +14,5 @@ class ProfileMessageDetailViewModel : ViewModel() {
     fun setProfileMessageDetailData(profileMessageDetailData: ArrayList<ProfileMessageDetailData>) {
         _profileMessageDetailItemList.value = profileMessageDetailData
     }
+
 }

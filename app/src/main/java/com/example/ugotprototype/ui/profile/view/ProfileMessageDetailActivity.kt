@@ -31,8 +31,13 @@ class ProfileMessageDetailActivity : AppCompatActivity() {
         testProfileDetailMessageData()
         profileMessageDetailViewModel.setProfileMessageDetailData(profileMessageDetailItems)
 
+        // 왼쪽 RecyclerView Adapter 초기화
         profileMessageDetailRecyclerViewAdapter = ProfileMessageDetailRecyclerViewAdapter()
         binding.rvProfileMessageDetail.adapter = profileMessageDetailRecyclerViewAdapter
+
+        // 오른쪽 RecyclerView 어댑터 초기화
+        val profileMessageDetailRightRecyclerViewAdapter = ProfileMessageDetailRecyclerViewAdapter()
+        binding.rvProfileMessageDetailRight.adapter = profileMessageDetailRightRecyclerViewAdapter
 
         // RecyclerView의 레이아웃 매니저를 LinearLayoutManager로 설정
         val layoutManager = LinearLayoutManager(this)
@@ -40,31 +45,52 @@ class ProfileMessageDetailActivity : AppCompatActivity() {
 
         profileMessageDetailViewModel.setProfileMessageDetailData(profileMessageDetailItems)
 
+        // 데이터를 왼쪽 RecyclerView 어댑터에 설정
         profileMessageDetailViewModel.profileMessageDetailItemList.observe(this) {
             profileMessageDetailRecyclerViewAdapter.setData(it)
         }
 
         chatMessageDetailInputBtn()
-        allDeleteDetailMessage()
         messageDetailBackToMainActivity()
     }
 
     private fun testProfileDetailMessageData() {
         profileMessageDetailItems = arrayListOf(
             ProfileMessageDetailData(
+                "John Park",
+                "내일 13시에 학과사무실 앞에서 만나죠",
+                "2023.07.02 13:03",
+                true //내 대화
+            ),
+            ProfileMessageDetailData(
+                "서브웨이꿀조합",
+                "넵!! 언제가 좋으실까요?",
+                "2023.07.02 13:01",
+                false //상대방 대화
+            ),
+            ProfileMessageDetailData(
+                "John Park",
+                "연락드렸는데 안받으셔서 쪽지로 남겨요. 바꾸죠",
+                "2023.07.02 11:59",
+                true
+            ),
+            ProfileMessageDetailData(
                 "서브웨이꿀조합",
                 "답장 부탁드립니다. 진심으로 바꾸고 싶습니다.",
-                "2023.07.02 10:11"
+                "2023.07.02 10:11",
+                false //상대방 대화
             ),
             ProfileMessageDetailData(
                 "서브웨이꿀조합",
                 "YB반 학생인데 교환 가능한가요??",
-                "2023.07.01 16:25"
+                "2023.07.01 16:25",
+                false
             ),
             ProfileMessageDetailData(
                 "서브웨이꿀조합",
                 "YB반인 저랑 교환할 생각 있으신가요!? 010-1111-1111로 연락주세요",
-                "2023.07.01 12:48"
+                "2023.07.01 12:48",
+                false
             )
         )
     }
@@ -74,15 +100,6 @@ class ProfileMessageDetailActivity : AppCompatActivity() {
             Intent().putExtra("resultText", "text")
             setResult(Activity.RESULT_OK, Intent())
             finish()
-        }
-    }
-
-    private fun allDeleteDetailMessage(){
-        binding.btProfileDetailDelete.setOnClickListener {
-            // RecyclerView의 아이템을 전부 삭제하는 작업
-            (binding.rvProfileMessageDetail.adapter as? ProfileMessageDetailRecyclerViewAdapter)?.apply {
-                clearItems()
-            }
         }
     }
 
