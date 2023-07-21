@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.ugotprototype.data.profile.ProfileMessageData
-import com.example.ugotprototype.data.profile.ProfileMessageSendData
 
 class ProfileMessageViewModel : ViewModel() {
     private val _profileMessageItemList =

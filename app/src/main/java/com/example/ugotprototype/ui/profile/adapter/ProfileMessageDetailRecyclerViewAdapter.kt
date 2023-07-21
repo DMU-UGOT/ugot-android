@@ -11,7 +11,6 @@ class ProfileMessageDetailRecyclerViewAdapter : RecyclerView.Adapter<RecyclerVie
 
     private val VIEW_TYPE_LEFT = 1
     private val VIEW_TYPE_RIGHT = 2
-
     private val profileMessageDetailItemList = arrayListOf<ProfileMessageDetailData>()
 
     // ViewHolder 클래스 추가
