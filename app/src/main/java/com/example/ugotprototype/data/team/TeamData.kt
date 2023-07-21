@@ -1,5 +1,6 @@
 package com.example.ugotprototype.data.team
 
+
 class TeamData(
     val title: String,
     val detailTitle: String,
@@ -7,5 +8,6 @@ class TeamData(
     val statusCntFirst: String,
     val statusCntEnd: String,
     val reply: String,
-    val teamLeaderClass: String
+    val teamLeaderClass: String,
+    val imageUrl: String
 )

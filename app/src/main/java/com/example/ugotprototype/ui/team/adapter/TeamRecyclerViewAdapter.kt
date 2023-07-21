@@ -6,6 +6,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.ugotprototype.ui.team.view.TeamPostDetailActivity
 import com.example.ugotprototype.data.team.TeamData
 import com.example.ugotprototype.databinding.ItemTeamListBinding
@@ -27,6 +28,9 @@ class TeamRecyclerViewAdapter : RecyclerView.Adapter<TeamRecyclerViewAdapter.MyV
             binding.ivTeamBookmark.setOnClickListener {
                 binding.ivTeamBookmark.isSelected = binding.ivTeamBookmark.isSelected != true
             }
+
+            Glide.with(binding.root.context).load(currentTeamData.imageUrl).into(binding.ivTeamLogo)
+
         }
     }
 
