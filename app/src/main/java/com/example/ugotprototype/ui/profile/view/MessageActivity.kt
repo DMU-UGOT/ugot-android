@@ -42,6 +42,16 @@ class MessageActivity : AppCompatActivity() {
             profileMessageRecyclerViewAdapter.setData(it)
         }
 
+        // RecyclerView 아이템 클릭 이벤트 리스너 설정
+        profileMessageRecyclerViewAdapter.setOnItemClickListener(object : ProfileMessageRecyclerViewAdapter.OnItemClickListener {
+            override fun onItemClick(messageData: ProfileMessageData) {
+                // 클릭한 아이템의 MessageName을 ProfileMessageDetailActivity로 전달하고 화면 열기
+                val intent = Intent(this@MessageActivity, ProfileMessageDetailActivity::class.java)
+                intent.putExtra("MessageName", messageData.MessageName)
+                startActivity(intent)
+            }
+        })
+
         allDeleteMessage()
         messageBackToMainActivity()
     }

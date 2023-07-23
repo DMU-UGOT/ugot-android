@@ -35,10 +35,6 @@ class ProfileMessageDetailActivity : AppCompatActivity() {
         profileMessageDetailRecyclerViewAdapter = ProfileMessageDetailRecyclerViewAdapter()
         binding.rvProfileMessageDetail.adapter = profileMessageDetailRecyclerViewAdapter
 
-        // 오른쪽 RecyclerView 어댑터 초기화
-        val profileMessageDetailRightRecyclerViewAdapter = ProfileMessageDetailRecyclerViewAdapter()
-        binding.rvProfileMessageDetailRight.adapter = profileMessageDetailRightRecyclerViewAdapter
-
         // RecyclerView의 레이아웃 매니저를 LinearLayoutManager로 설정
         val layoutManager = LinearLayoutManager(this)
         binding.rvProfileMessageDetail.layoutManager = layoutManager
@@ -48,6 +44,14 @@ class ProfileMessageDetailActivity : AppCompatActivity() {
         // 데이터를 왼쪽 RecyclerView 어댑터에 설정
         profileMessageDetailViewModel.profileMessageDetailItemList.observe(this) {
             profileMessageDetailRecyclerViewAdapter.setData(it)
+        }
+
+        // 데이터 수신 및 표시
+        val messageName = intent.getStringExtra("MessageName")
+        if (messageName != null) {
+            // TODO: 이 부분에서 messageName을 활용하여 해당 대화의 상세 정보를 가져와서 표시하는 작업을 진행합니다.
+            // 예를 들어, 해당 대화에 속하는 메시지들을 가져와 RecyclerView에 표시하거나, 상단의 텍스트뷰 등에 표시할 수 있습니다.
+            // (예시로 사용한 testProfileMessageData() 함수와 유사한 방식으로 데이터를 가져오시면 됩니다.)
         }
 
         chatMessageDetailInputBtn()

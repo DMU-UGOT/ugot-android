@@ -14,6 +14,24 @@ class ProfileMessageRecyclerViewAdapter :
     var profileMessageItemList = arrayListOf<ProfileMessageData>()
     private val dataList: MutableList<ProfileMessageData> = mutableListOf()
 
+    // 아이템 클릭 이벤트 리스너 인터페이스 정의
+    interface OnItemClickListener {
+        fun onItemClick(messageData: ProfileMessageData)
+    }
+
+    // 아이템 클릭 이벤트 리스너 변수 선언
+    private var itemClickListener: OnItemClickListener? = null
+
+
+    // 아이템 클릭 이벤트 리스너 설정 메서드
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.itemClickListener = listener
+    }
+
+    override fun onBindViewHolder(holder: ProfileMessageViewHolder, position: Int) {
+        holder.bind(profileMessageItemList[position])
+    }
+
     // 생성된 뷰 홀더에 값 지정
     inner class ProfileMessageViewHolder(val binding: ItemProfileMessageBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -21,8 +39,9 @@ class ProfileMessageRecyclerViewAdapter :
         fun bind(currentProfileMessageViewData: ProfileMessageData) {
             binding.profileMessageItem = currentProfileMessageViewData
 
+            // 아이템 뷰를 클릭하면 아이템 클릭 이벤트 리스너 호출
             binding.root.setOnClickListener {
-                goToMessageDetail(currentProfileMessageViewData, binding.root.context)
+                itemClickListener?.onItemClick(currentProfileMessageViewData)
             }
         }
     }
@@ -37,10 +56,6 @@ class ProfileMessageRecyclerViewAdapter :
     }
 
     override fun getItemCount() = profileMessageItemList.size
-
-    override fun onBindViewHolder(holder: ProfileMessageViewHolder, position: Int) {
-        holder.bind(profileMessageItemList[position])
-    }
 
     override fun getItemId(position: Int): Long {
         return position.toLong()
