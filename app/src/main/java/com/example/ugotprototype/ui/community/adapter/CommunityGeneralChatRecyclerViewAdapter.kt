@@ -1,14 +1,10 @@
 package com.example.ugotprototype.ui.community.adapter
 
-import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ugotprototype.data.community.CommunityGeneralChatViewData
-import com.example.ugotprototype.data.community.CommunityGeneralViewData
 import com.example.ugotprototype.databinding.ItemCommunityGeneralChatListBinding
-import com.example.ugotprototype.ui.community.view.CommunityGeneralDetailActivity
 
 class CommunityGeneralChatRecyclerViewAdapter : RecyclerView.Adapter<CommunityGeneralChatRecyclerViewAdapter.CommunityGeneralChatViewHolder>() {
 

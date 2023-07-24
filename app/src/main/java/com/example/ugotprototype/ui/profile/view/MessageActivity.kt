@@ -52,8 +52,15 @@ class MessageActivity : AppCompatActivity() {
             }
         })
 
+        changeMyGeneralChatCount()
         allDeleteMessage()
         messageBackToMainActivity()
+    }
+
+    private fun changeMyGeneralChatCount() {
+        profileMessageViewModel.itemCount.observe(this) { count ->
+            binding.tvCommunityGeneralCnt.text = count.toString()
+        }
     }
 
     private fun testProfileMessageData() {

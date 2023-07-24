@@ -10,7 +10,6 @@ import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.ActivityCommunityChangeDetailBinding
 import com.example.ugotprototype.databinding.ActivityCommunityChangeSendMessageBinding
-import com.example.ugotprototype.databinding.ActivityDialogMessageBinding
 
 class CommunityChangeDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCommunityChangeDetailBinding

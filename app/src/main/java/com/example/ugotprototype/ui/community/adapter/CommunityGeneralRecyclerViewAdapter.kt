@@ -2,7 +2,6 @@ package com.example.ugotprototype.ui.community.adapter
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +10,7 @@ import com.example.ugotprototype.databinding.ItemCommunityGeneralListBinding
 import com.example.ugotprototype.ui.community.view.CommunityGeneralDetailActivity
 
 class CommunityGeneralRecyclerViewAdapter : RecyclerView.Adapter<CommunityGeneralRecyclerViewAdapter.CommunityGeneralViewHolder>(){
-    var communityGeneralItemList = arrayListOf<CommunityGeneralViewData>()
+    private var communityGeneralItemList = arrayListOf<CommunityGeneralViewData>()
 
     // 생성된 뷰 홀더에 값 지정
     inner class CommunityGeneralViewHolder(val binding: ItemCommunityGeneralListBinding) :

@@ -81,6 +81,19 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <TextView
+                    android:id="@+id/tv_community_general_cnt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:textColor="#FFb4bf"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@id/message_view1"
+                    app:layout_constraintStart_toEndOf="@id/tv_message_1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="5" />
+
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/bt_profile_delete"
                     android:layout_width="wrap_content"

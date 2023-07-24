@@ -46,6 +46,7 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
         dataGeneralSet()
         chatInputBtn()
         backCommunityGeneralToMainActivity()
+        changeMyGeneralChatCount()
     }
 
     private fun testCommunityGeneralChatData() {
@@ -119,5 +120,11 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
     private fun hideKeyboard() {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(binding.generalChatInput.windowToken, 0)
+    }
+
+    private fun changeMyGeneralChatCount() {
+        communityGeneralChatViewModel.itemCount.observe(this) { count ->
+            binding.tvCommunityGeneralCnt.text = count.toString()
+        }
     }
 }

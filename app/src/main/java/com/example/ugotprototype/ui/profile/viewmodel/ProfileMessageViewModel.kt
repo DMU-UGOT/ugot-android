@@ -11,7 +11,12 @@ class ProfileMessageViewModel : ViewModel() {
     val profileMessageItemList: LiveData<ArrayList<ProfileMessageData>> =
         _profileMessageItemList
 
+    private val _itemCount = MutableLiveData<Int>()
+    val itemCount: LiveData<Int> = _itemCount
+
+
     fun setProfileMessageData(profileMessageData: ArrayList<ProfileMessageData>) {
         _profileMessageItemList.value = profileMessageData
+        _itemCount.value = profileMessageData.size
     }
 }

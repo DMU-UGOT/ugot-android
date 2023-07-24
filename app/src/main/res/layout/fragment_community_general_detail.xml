@@ -150,6 +150,19 @@
                     app:layout_constraintStart_toStartOf="@id/tv_community_general_text"
                     app:layout_constraintTop_toBottomOf="@id/community_general_detail_v1" />
 
+                <TextView
+                    android:id="@+id/tv_community_general_cnt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:textColor="#FFb4bf"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/rv_community_general_chat"
+                    app:layout_constraintStart_toEndOf="@+id/community_general_detail_chat"
+                    app:layout_constraintTop_toBottomOf="@id/community_general_detail_v1"
+                    tools:text="8" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_community_general_chat"
                     android:layout_width="match_parent"
