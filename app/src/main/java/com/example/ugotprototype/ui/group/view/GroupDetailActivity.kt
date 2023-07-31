@@ -36,6 +36,14 @@ class GroupDetailActivity : AppCompatActivity() {
             )
         }
 
+        binding.mbGroupDetailProgress.setOnClickListener {
+            startActivity(
+                Intent(
+                    this, GroupEngagementRateActivity::class.java
+                )
+            )
+        }
+
         binding.fabGroupNoticeWrite.setOnClickListener {
             bottomSheetDialogCreate()
         }
