@@ -65,13 +65,14 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_community_name"
                 tools:text="오후 5시 수업 끝나고 같이 PC방 가서 5인랭 할사람 있나? 저는 서폿만 하니까 원딜 구해서 듀오도 가요" />
 
-            <ImageView
-                android:id="@+id/iv_community_chat_img"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
+            <TextView
+                android:id="@+id/tv_community_chat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
-                android:src="@drawable/ic_community_chat"
+                android:text="댓글 수 :"
+                android:textSize="13dp"
                 app:layout_constraintBottom_toTopOf="@id/community_v1"
                 app:layout_constraintStart_toStartOf="@id/tv_community_name"
                 app:layout_constraintTop_toBottomOf="@id/tv_community_text" />
@@ -86,18 +87,19 @@
                 android:text="@{communityGeneralItem.comGeneralChat}"
                 android:textSize="13dp"
                 app:layout_constraintBottom_toTopOf="@id/community_v1"
-                app:layout_constraintStart_toEndOf="@id/iv_community_chat_img"
+                app:layout_constraintStart_toEndOf="@id/tv_community_chat"
                 app:layout_constraintTop_toBottomOf="@id/tv_community_text"
                 tools:text="1" />
 
-            <ImageView
-                android:id="@+id/iv_community_inquire_img"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
+            <TextView
+                android:id="@+id/tv_community_inquire"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
-                android:src="@drawable/ic_community_inquire"
+                android:text="조회 수 : "
+                android:textSize="13dp"
                 app:layout_constraintBottom_toTopOf="@id/community_v1"
                 app:layout_constraintStart_toStartOf="@id/tv_community_chat_input"
                 app:layout_constraintTop_toBottomOf="@id/tv_community_text" />
@@ -112,7 +114,7 @@
                 android:text="@{communityGeneralItem.comGeneralInquire}"
                 android:textSize="13dp"
                 app:layout_constraintBottom_toTopOf="@id/community_v1"
-                app:layout_constraintStart_toEndOf="@id/iv_community_inquire_img"
+                app:layout_constraintStart_toEndOf="@id/tv_community_inquire"
                 app:layout_constraintTop_toBottomOf="@id/tv_community_text"
                 tools:text="1" />
 

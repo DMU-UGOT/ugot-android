@@ -16,6 +16,9 @@ import com.example.ugotprototype.data.community.CommunityChangeViewData
 import com.example.ugotprototype.databinding.FragmentCommunityChangeBinding
 import com.example.ugotprototype.ui.community.adapter.CommunityChangeRecyclerViewAdapter
 import com.example.ugotprototype.ui.community.viewmodel.CommunityChangeViewModel
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class CommunityChangeFragment : Fragment() {
     private lateinit var binding: FragmentCommunityChangeBinding
@@ -50,7 +53,6 @@ class CommunityChangeFragment : Fragment() {
         communityChangeViewModel.communityChangeItemList.observe(viewLifecycleOwner) {
             communityChangeRecyclerViewAdapter.setData(it)
         }
-
         goToCommunityChangeNewGroup()
     }
 
@@ -61,90 +63,97 @@ class CommunityChangeFragment : Fragment() {
                 "탑sin",
                 "YA",
                 "YB",
-                "완료",
-                "2023.05.27 06:54"
+                "교환 완료",
+                parseDateString("23.05.27 06:54")
             ),
             CommunityChangeViewData(
                 "2학년",
                 "YAHO",
                 "YC",
                 "YA",
-                "가능",
-                "2023.05.27 15:13"
+                "교환 가능",
+                parseDateString("23.05.29 15:13")
             ),
             CommunityChangeViewData(
                 "1학년",
                 "나혼자산다",
                 "YD",
                 "YA",
-                "대기",
-                "2023.05.28 11:48"
+                "교환 대기",
+                parseDateString("23.05.30 11:48")
             ),
             CommunityChangeViewData(
                 "4학년",
                 "vnlsdnvjlk",
                 "YJ",
                 "YK",
-                "가능",
-                "2023.05.29 18:59"
+                "교환 가능",
+                parseDateString("23.06.04 18:59")
             ),
             CommunityChangeViewData(
                 "4학년",
                 "Ash Island",
                 "YJ",
                 "YK",
-                "완료",
-                "2023.05.30 20:11"
+                "교환 완료",
+                parseDateString("23.06.12 20:11")
             ),
             CommunityChangeViewData(
                 "2학년",
                 "ADHD경고",
                 "YD",
                 "YB",
-                "완료",
-                "2023.06.01 01:24"
+                "교환 완료",
+                parseDateString("23.06.15 01:24")
             ),
             CommunityChangeViewData(
                 "3학년",
                 "집이제일좋은사람",
                 "YD",
                 "YA",
-                "대기",
-                "2023.06.01 17:57"
+                "교환 대기",
+                parseDateString("23.07.11 17:57")
             ),
             CommunityChangeViewData(
                 "3학년",
                 "홍대에만있음",
                 "YD",
                 "YB",
-                "가능",
-                "2023.06.02 00:01"
+                "교환 가능",
+                parseDateString("23.07.14 00:01")
             ),
             CommunityChangeViewData(
                 "1학년",
                 "여름이시러",
                 "YD",
                 "YB",
-                "가능",
-                "2023.06.02 14:29"
+                "교환 완료",
+                parseDateString("23.07.19 14:29")
             ),
             CommunityChangeViewData(
                 "2학년",
                 "된장찌개가좋아",
                 "YA",
                 "YC",
-                "가능",
-                "2023.06.02 20:00"
+                "교환 대기",
+                parseDateString("23.07.22 20:00")
             ),
             CommunityChangeViewData(
                 "4학년",
                 "나부터빨리좀",
                 "YK",
                 "YJ",
-                "가능",
-                "2023.06.03 01:14"
+                "교환 가능",
+                parseDateString("23.08.02 08:14")
             )
         )
+        communityChangeViewModel.setCommunityChangeData(communityChangeItems)
+    }
+
+    // 문자열로 된 날짜를 Date 객체로 변환하는 함수 추가
+    private fun parseDateString(dateString: String): Date {
+        val dateFormat = SimpleDateFormat("yyyy.MM.dd HH:mm", Locale.getDefault())
+        return dateFormat.parse(dateString) ?: Date()
     }
 
     private fun goToCommunityChangeNewGroup() {
