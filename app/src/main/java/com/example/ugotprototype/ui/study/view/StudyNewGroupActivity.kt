@@ -4,6 +4,9 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.SeekBar
 import androidx.activity.viewModels
@@ -21,11 +24,13 @@ class StudyNewGroupActivity : AppCompatActivity() {
         setContentView(R.layout.activity_study_new_group)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_study_new_group)
+        binding.lifecycleOwner = this
 
         studyViewModel.studyMaxPersonnel.observe(this) { maxPersonnel ->
             binding.tvStNewMaxNumber.text = maxPersonnel.toString() + "명"
         }
 
+        setupEditTextHeightListener()
         spinnerMeetChoice()
         studyMaxPersonnel()
         backStudyNewToMainActivity()
@@ -66,5 +71,16 @@ class StudyNewGroupActivity : AppCompatActivity() {
             setResult(Activity.RESULT_OK, Intent())
             finish()
         }
+    }
+
+    private fun setupEditTextHeightListener() {
+        binding.etTitleDetail.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+        })
     }
 }

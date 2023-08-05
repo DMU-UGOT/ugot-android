@@ -31,6 +31,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="일반 게시글"
@@ -43,13 +44,14 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <View
+                android:id="@+id/view"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="#E0E0E0"
                 app:layout_constraintTop_toBottomOf="@+id/iv_community_general_back" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.core.widget.NestedScrollView
+        <ScrollView
             android:id="@+id/sv_general_detail"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -176,13 +178,14 @@
                     app:layout_constraintTop_toBottomOf="@id/community_general_detail_chat"
                     tools:listitem="@layout/item_community_general_chat_list" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.core.widget.NestedScrollView>
+        </ScrollView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_community_chat_input"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:background="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/sv_general_detail"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -190,17 +193,19 @@
             <EditText
                 android:id="@+id/general_chat_input"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:layout_marginStart="15dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginEnd="15dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_marginEnd="10dp"
                 android:layout_marginBottom="5dp"
                 android:background="@drawable/bg_community_detail_chat"
                 android:gravity="start|center_vertical"
                 android:hint="댓글을 입력하세요"
                 android:inputType="textMultiLine"
-                android:maxLines="5"
+                android:maxLines="4"
                 android:paddingStart="15dp"
                 android:paddingEnd="40dp"
                 android:textSize="13dp"
