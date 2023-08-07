@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.ugotprototype.data.team.TeamData
+import com.example.ugotprototype.data.team.TeamPostData
 import com.example.ugotprototype.di.api.response.OrgMemberDataResponse
 
 class TeamViewModel : ViewModel() {
@@ -19,6 +20,9 @@ class TeamViewModel : ViewModel() {
     private val _teamInforList = MutableLiveData<List<OrgMemberDataResponse>>()
     var isTeamInforList: LiveData<List<OrgMemberDataResponse>> = _teamInforList
 
+    private val _teamCreateData = MutableLiveData<TeamPostData>()
+    val teamCreateData: LiveData<TeamPostData> = _teamCreateData
+
     fun setTeamData(teamData: ArrayList<TeamData>) {
         _teamItemList.value = teamData
     }
@@ -33,5 +37,9 @@ class TeamViewModel : ViewModel() {
 
     fun setTeamInforData(teamInforData: List<OrgMemberDataResponse>) {
         _teamInforList.value = teamInforData
+    }
+
+    fun setTeamPostData(teamPostData: TeamPostData) {
+        _teamCreateData.value = teamPostData
     }
 }
