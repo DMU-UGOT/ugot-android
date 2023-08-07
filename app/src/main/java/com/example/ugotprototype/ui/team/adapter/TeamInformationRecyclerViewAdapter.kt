@@ -1,16 +1,20 @@
 package com.example.ugotprototype.ui.team.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.ugotprototype.databinding.ItemTeamInformationBinding
+import com.example.ugotprototype.di.api.response.OrgMemberDataResponse
+import com.example.ugotprototype.ui.team.view.TeamInformationActivity
 
 class TeamInformationRecyclerViewAdapter :
     RecyclerView.Adapter<TeamInformationRecyclerViewAdapter.MyViewHolder>() {
 
-    var teamItemList = arrayListOf<Int>()
+    var teamItemList: List<OrgMemberDataResponse> = emptyList()
 
     // 생성된 뷰 홀더에 값 지정
     inner class MyViewHolder(val binding: ItemTeamInformationBinding) :
@@ -21,6 +25,12 @@ class TeamInformationRecyclerViewAdapter :
             } else {
                 binding.ivTeamLeader.visibility = View.INVISIBLE
             }
+
+            binding.tvTeamInforName.text = teamItemList[bindingAdapterPosition].login
+            binding.tvGitLink.text = teamItemList[bindingAdapterPosition].htmlUrl
+            binding.tvInforTeamName.text = TeamInformationActivity.githubOrgName
+            Glide.with(binding.root.context).load(teamItemList[bindingAdapterPosition].avatarUrl)
+                .into(binding.ivProfileImage)
         }
     }
 
@@ -43,12 +53,9 @@ class TeamInformationRecyclerViewAdapter :
         return position.toLong()
     }
 
-    fun setData(nowPersonCnt: Int) {
-
-        // 현재 모집한 인원수만큼 리사이클러뷰 더미 아이템 추가
-        for (i in 0 until nowPersonCnt) {
-            teamItemList.add(i)
-        }
+    fun setData(memberList: List<OrgMemberDataResponse>) {
+        Log.d("test", "$memberList")
+        teamItemList = memberList
         notifyDataSetChanged()
     }
 }

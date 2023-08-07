@@ -7,17 +7,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <ImageView
+            android:id="@+id/iv_profile_image"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/tv_team_infor_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:text="닉네임"
             android:textColor="@color/black"
             android:textSize="18dp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/iv_profile_image"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="닉네임" />
 
         <ImageView
             android:id="@+id/iv_team_leader"
@@ -43,12 +52,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="UGOT PROJECT"
             android:textColor="@color/black"
             android:textSize="18dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/tv_infor_field"
-            app:layout_constraintTop_toBottomOf="@+id/tv_infor_field" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_infor_field"
+            tools:text="UGOT PROJECT" />
 
         <TextView
             android:id="@+id/tv_git"
@@ -68,10 +77,10 @@
             android:layout_height="wrap_content"
             android:autoLink="web"
             android:linksClickable="true"
-            android:text="https://github.com/arab1209"
             android:textColorLink="@color/black"
             app:layout_constraintBottom_toBottomOf="@+id/tv_git"
-            app:layout_constraintStart_toEndOf="@+id/tv_git" />
+            app:layout_constraintStart_toEndOf="@+id/tv_git"
+            tools:text="https://github.com/arab1209" />
 
         <TextView
             android:id="@+id/tv_blog"
