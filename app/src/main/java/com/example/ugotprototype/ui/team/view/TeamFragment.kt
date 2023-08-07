@@ -1,5 +1,6 @@
 package com.example.ugotprototype.ui.team.view
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -16,6 +17,8 @@ import com.example.ugotprototype.R
 import com.example.ugotprototype.data.team.TeamData
 import com.example.ugotprototype.databinding.FragmentTeamBinding
 import com.example.ugotprototype.di.api.ApiService
+import com.example.ugotprototype.di.api.BackEndService
+import com.example.ugotprototype.di.api.response.TeamPostResponse
 import com.example.ugotprototype.ui.team.adapter.TeamRecyclerViewAdapter
 import com.example.ugotprototype.ui.team.viewmodel.TeamViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,7 +34,13 @@ class TeamFragment : Fragment() {
     private val teamViewModel: TeamViewModel by viewModels()
 
     private lateinit var teamRecyclerViewAdapter: TeamRecyclerViewAdapter
-    private var teamItems = ArrayList<TeamData>()
+    private var teamItems: List<TeamPostResponse> = emptyList()
+
+    @Inject
+    lateinit var backEndService: BackEndService
+
+    private var currentPage = 1
+    private var totalPages = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -46,8 +55,10 @@ class TeamFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        testData()
+        testData(currentPage)
         teamViewModel.setTeamData(teamItems)
+
+        postPageNextOrPrev()
 
         teamRecyclerViewAdapter = TeamRecyclerViewAdapter()
         binding.rvTeam.adapter = teamRecyclerViewAdapter
@@ -56,42 +67,28 @@ class TeamFragment : Fragment() {
             teamRecyclerViewAdapter.setData(it)
         }
 
+        teamViewModel.postLastPage.observe(viewLifecycleOwner) {
+            binding.teamPageSecondText.text = it.toString()
+        }
+
         goToTeamSearchDetail()
         goToTeamPostWriteDetail()
     }
 
-    private fun testData() {
+    private fun testData(pageNumber: Int) {
         lifecycleScope.launch {
             try {
-                val response = apiService.getOrganization("DMU-UGOT")
-                val org = response?.avatarUrl
-
-                val teamDataList = arrayListOf(
-                    TeamData(
-                        "스타트업 안드로이드 플랫폼 꾸준히 이어나갈 팀원 모집합니다",
-                        "스타트업의 팀원을 찾을 수 있는 모바일 앱을 만들 인원을 구합니다 저는 현재 모바일 창업을 맡고있는 사람으로 해당프로젝트는 플랫폼 서비스의 극초기 모델로 고객 유입을 최대한 이끌어내며 그 이후 비즈니스 모델에 대한 가설을 세울 수 있는 환경을 구축해야한다",
-                        "Android",
-                        "3",
-                        "8",
-                        "조회수 : 8",
-                        "YJ",
-                        org ?: ""
-                    ),
-                    TeamData(
-                        "Web 팀원 모집", "Web FrontEnd 팀원모집중", "FrontEnd", "1", "7", "조회수 : 4", "YJ", org ?: ""
-                    ),
-                    TeamData(
-                        "BackEnd 모집중", "BackEnd 팀원 모집중", "BackEnd", "6", "9", "조회수 : 4", "YK", org ?: ""
-                    ),
-                    TeamData(
-                        "SoftWare 개발 팀원 구인중", "SoftWare 개발 팀원 구인중", "Software", "4", "4", "조회수 : 4", "YJ", org ?: ""
-                    ),
-                    TeamData(
-                        "Security 팀원 모집중", "Security 팀원 모집중", "Security", "3", "5", "조회수 : 4", "YK", org ?: ""
-                    )
-                )
-                teamViewModel.setTeamData(teamDataList)
-            } catch(_: Exception) { }
+                //val response = apiService.getOrganization("DMU-UGOT")
+                //val org = response?.avatarUrl
+                val response = backEndService.getTeams(pageNumber, 5)
+                val teams = response.data
+                teamViewModel.setTeamData(teams)
+                currentPage = response.pageInfo.page
+                totalPages = response.pageInfo.totalPages
+                teamViewModel.setPostLastPage(totalPages)
+            } catch (e: Exception) {
+                Log.d("test", "$e")
+            }
         }
     }
 
@@ -136,6 +133,29 @@ class TeamFragment : Fragment() {
                     requireContext(), TeamPostWriteDetailActivity::class.java
                 )
             )
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun postPageNextOrPrev() {
+        binding.btTeamPrev.setOnClickListener {
+            if (currentPage > 1) {
+                testData(currentPage - 1)
+                binding.teamPageFirstText.text =
+                    (binding.teamPageFirstText.text.toString().toInt() - 1).toString()
+            } else {
+                Log.d("teams", "뒤로가기버튼안됨")
+            }
+        }
+
+        binding.btTeamNext.setOnClickListener {
+            if (currentPage < totalPages) {
+                testData(currentPage + 1)
+                binding.teamPageFirstText.text =
+                    (binding.teamPageFirstText.text.toString().toInt() + 1).toString()
+            } else {
+                Log.d("teams", "다음페이지가기버튼안됨")
+            }
         }
     }
 }

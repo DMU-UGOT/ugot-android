@@ -5,10 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.ugotprototype.data.team.TeamData
 import com.example.ugotprototype.di.api.response.OrgMemberDataResponse
+import com.example.ugotprototype.di.api.response.TeamPostResponse
 
 class TeamViewModel : ViewModel() {
-    private val _teamItemList = MutableLiveData<ArrayList<TeamData>>()
-    val teamItemList: LiveData<ArrayList<TeamData>> = _teamItemList
+    private val _teamItemList = MutableLiveData<List<TeamPostResponse>>()
+    val teamItemList: LiveData<List<TeamPostResponse>> = _teamItemList
 
     private val _isTeamPostRegisterBtnEnabled = MutableLiveData<Boolean>()
     var isTeamPostRegisterBtnEnabled: LiveData<Boolean> = _isTeamPostRegisterBtnEnabled
@@ -19,7 +20,10 @@ class TeamViewModel : ViewModel() {
     private val _teamInforList = MutableLiveData<List<OrgMemberDataResponse>>()
     var isTeamInforList: LiveData<List<OrgMemberDataResponse>> = _teamInforList
 
-    fun setTeamData(teamData: ArrayList<TeamData>) {
+    private val _postLastPage =  MutableLiveData<Int>()
+    var postLastPage: LiveData<Int> =  _postLastPage
+
+    fun setTeamData(teamData: List<TeamPostResponse>) {
         _teamItemList.value = teamData
     }
 
@@ -33,5 +37,9 @@ class TeamViewModel : ViewModel() {
 
     fun setTeamInforData(teamInforData: List<OrgMemberDataResponse>) {
         _teamInforList.value = teamInforData
+    }
+
+    fun setPostLastPage(pageNum: Int){
+        _postLastPage.value = pageNum
     }
 }
