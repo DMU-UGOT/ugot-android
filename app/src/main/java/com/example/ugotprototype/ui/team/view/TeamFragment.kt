@@ -42,6 +42,11 @@ class TeamFragment : Fragment() {
     private var currentPage = 1
     private var totalPages = 1
 
+    override fun onStart() {
+        super.onStart()
+        testData(currentPage)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -55,7 +60,6 @@ class TeamFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        testData(currentPage)
         teamViewModel.setTeamData(teamItems)
 
         postPageNextOrPrev()

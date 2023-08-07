@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.ugotprototype.data.team.TeamData
+import com.example.ugotprototype.data.team.TeamPostData
 import com.example.ugotprototype.di.api.response.OrgMemberDataResponse
 import com.example.ugotprototype.di.api.response.TeamPostResponse
 
@@ -23,6 +24,9 @@ class TeamViewModel : ViewModel() {
     private val _postLastPage =  MutableLiveData<Int>()
     var postLastPage: LiveData<Int> =  _postLastPage
 
+    private val _teamCreateData = MutableLiveData<TeamPostData>()
+    val teamCreateData: LiveData<TeamPostData> = _teamCreateData
+
     fun setTeamData(teamData: List<TeamPostResponse>) {
         _teamItemList.value = teamData
     }
@@ -41,5 +45,9 @@ class TeamViewModel : ViewModel() {
 
     fun setPostLastPage(pageNum: Int){
         _postLastPage.value = pageNum
+    }
+
+    fun setTeamPostData(teamPostData: TeamPostData) {
+        _teamCreateData.value = teamPostData
     }
 }
