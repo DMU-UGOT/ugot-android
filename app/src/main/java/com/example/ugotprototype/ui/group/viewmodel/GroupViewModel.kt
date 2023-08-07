@@ -1,10 +1,11 @@
 package com.example.ugotprototype.ui.group.viewmodel
 
+import androidx.constraintlayout.widget.Group
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.ugotprototype.data.group.GroupCalendarData
-import com.example.ugotprototype.data.group.GroupEngagementRateData
+import com.example.ugotprototype.data.group.GroupEngagementData
 import com.example.ugotprototype.data.group.GroupMiddleViewData
 import com.example.ugotprototype.data.group.GroupTopViewData
 import java.time.LocalDate
@@ -35,8 +36,8 @@ class GroupViewModel : ViewModel() {
     private val _bottomSheetClickCheck = MutableLiveData<Boolean>()
     val bottomSheetClickCheck: LiveData<Boolean> = _bottomSheetClickCheck
 
-    private val _engagementRate = MutableLiveData<ArrayList<GroupEngagementRateData>>()
-    val engagementRateData: LiveData<ArrayList<GroupEngagementRateData>> = _engagementRate
+    private val _engagementRate = MutableLiveData<ArrayList<GroupEngagementData>>()
+    val engagementRateData: LiveData<ArrayList<GroupEngagementData>> = _engagementRate
 
     fun setGroupTopData(groupTopData: ArrayList<GroupTopViewData>) {
         _groupTopItemList.value = groupTopData
@@ -66,11 +67,12 @@ class GroupViewModel : ViewModel() {
         _isNoticeWriteButtonState.value = enabled
     }
 
+
     fun isBottomSheetClickCheck(enabled: Boolean) {
         _bottomSheetClickCheck.value = enabled
     }
 
-    fun setEngagementRate(data: ArrayList<GroupEngagementRateData>) {
+    fun setEngagementRate(data: ArrayList<GroupEngagementData>) {
         _engagementRate.value = data
     }
 }
