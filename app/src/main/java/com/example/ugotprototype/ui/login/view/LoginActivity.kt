@@ -11,7 +11,6 @@ import androidx.lifecycle.lifecycleScope
 import com.example.ugotprototype.MainActivity
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.ActivityLoginBinding
-import com.example.ugotprototype.di.api.ApiClient
 import com.example.ugotprototype.di.api.ApiService
 import com.example.ugotprototype.ui.login.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint

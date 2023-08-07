@@ -1,5 +1,6 @@
 package com.example.ugotprototype.ui.group.view
 
+import android.content.Intent
 import android.icu.lang.UCharacter.GraphemeClusterBreak.L
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -42,6 +43,10 @@ class GroupEngagementRateActivity : AppCompatActivity() {
         groupViewModel.engagementRateData.observe(this) {
             groupEngagementRateRecyclerViewAdapter.setData(groupEngagementData)
             Log.d("group", "$groupEngagementData")
+        }
+
+        binding.ibEngagementPrev.setOnClickListener {
+            finish()
         }
     }
 
