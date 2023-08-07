@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/object_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_user_index"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginVertical="15dp"
+            tools:text="1"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_user_img"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="70dp"
+            android:src="@drawable/img_sample"
+            app:layout_constraintBottom_toBottomOf="@id/tv_user_index"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_user_index"
+            app:shapeAppearanceOverlay="@style/RoundedImageView" />
+
+        <ImageView
+            android:id="@+id/iv_user_img_border"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_group_item_border"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_user_img"
+            app:layout_constraintEnd_toEndOf="@+id/iv_user_img"
+            app:layout_constraintStart_toStartOf="@+id/iv_user_img"
+            app:layout_constraintTop_toTopOf="@+id/iv_user_img" />
+
+        <TextView
+            android:id="@+id/tv_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            tools:text="testName1"
+            android:textColor="@color/black"
+            android:textSize="13dp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_user_img"
+            app:layout_constraintStart_toEndOf="@id/iv_user_img"
+            app:layout_constraintTop_toTopOf="@id/iv_user_img" />
+
+        <TextView
+            android:id="@+id/tv_commit_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="30"
+            android:textSize="13dp"
+            android:textColor="@color/black"
+            android:layout_marginEnd="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_user_index" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
