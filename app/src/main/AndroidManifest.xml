@@ -8,6 +8,7 @@
         android:name="com.example.ugotprototype.di.api.MyApplication"
         tools:replace="android:name"
         android:allowBackup="true"
+        android:usesCleartextTraffic="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_dmuit"
