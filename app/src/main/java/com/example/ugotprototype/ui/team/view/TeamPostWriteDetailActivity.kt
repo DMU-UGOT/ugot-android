@@ -6,19 +6,30 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.SeekBar
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import com.example.ugotprototype.R
+import com.example.ugotprototype.data.team.TeamPostData
 import com.example.ugotprototype.databinding.ActivityTeamPostWriteDetailBinding
+import com.example.ugotprototype.di.api.BackEndService
 import com.example.ugotprototype.ui.team.viewmodel.TeamViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class TeamPostWriteDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTeamPostWriteDetailBinding
     private val teamViewModel: TeamViewModel by viewModels()
+
+    @Inject
+    lateinit var backEndService: BackEndService
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +44,10 @@ class TeamPostWriteDetailActivity : AppCompatActivity() {
 
         teamViewModel.teamMaxPersonnel.observe(this) { maxPersonnel ->
             binding.tvMaxNumber.text = maxPersonnel.toString() + "명"
+        }
 
+        teamViewModel.teamCreateData.observe(this) {
+            createSubmitTeam(it)
         }
 
         postFieldSet()
@@ -104,6 +118,14 @@ class TeamPostWriteDetailActivity : AppCompatActivity() {
     private fun backToMainActivity() {
 
         binding.btTeamPostRegister.setOnClickListener {
+            var teamData = TeamPostData(
+                title = binding.etTitleName.text.toString(),
+                content = binding.etTitleDetail.text.toString(),
+                field = binding.fieldSpinner.selectedItem.toString(),
+                _class = binding.classSpinner.selectedItem.toString(),
+                personnel = binding.seekBar.progress
+            )
+            teamViewModel.setTeamPostData(teamData)
             Intent().putExtra("resultText", "text")
             setResult(Activity.RESULT_OK, Intent())
             finish()
@@ -128,5 +150,15 @@ class TeamPostWriteDetailActivity : AppCompatActivity() {
             override fun onStopTrackingTouch(seekBar: SeekBar) {
             }
         })
+    }
+
+    private fun createSubmitTeam(data: TeamPostData) {
+        lifecycleScope.launch{
+            try {
+                val response = backEndService.createTeam(data)
+            }catch(e: Exception) {
+                Log.d("e", "$e")
+            }
+        }
     }
 }
