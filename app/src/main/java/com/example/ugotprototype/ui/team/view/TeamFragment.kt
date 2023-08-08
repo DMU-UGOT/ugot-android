@@ -52,7 +52,6 @@ class TeamFragment : Fragment() {
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_team, container, false)
-        binding.vm = teamViewModel
 
         return binding.root
     }
