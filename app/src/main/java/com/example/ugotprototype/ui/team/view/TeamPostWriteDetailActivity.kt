@@ -123,7 +123,9 @@ class TeamPostWriteDetailActivity : AppCompatActivity() {
                 content = binding.etTitleDetail.text.toString(),
                 field = binding.fieldSpinner.selectedItem.toString(),
                 _class = binding.classSpinner.selectedItem.toString(),
-                personnel = binding.seekBar.progress
+                allPersonnel = binding.seekBar.progress,
+                gitHubLink = binding.etInputGithubLink.text.toString(),
+                kakaoOpenLink = binding.etInputKakaoOpenLink.text.toString()
             )
             teamViewModel.setTeamPostData(teamData)
             Intent().putExtra("resultText", "text")
