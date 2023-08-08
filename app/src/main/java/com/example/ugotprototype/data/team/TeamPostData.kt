@@ -6,5 +6,7 @@ data class TeamPostData(
     val content: String,
     val field: String,
     val _class: String,
-    val personnel: Int
+    val allPersonnel: Int,
+    val kakaoOpenLink: String,
+    val gitHubLink: String
 )
