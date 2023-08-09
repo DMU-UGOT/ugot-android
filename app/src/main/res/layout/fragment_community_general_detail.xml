@@ -185,10 +185,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            app:layout_constraintTop_toBottomOf="@id/sv_general_detail"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sv_general_detail">
 
             <EditText
                 android:id="@+id/general_chat_input"
@@ -197,17 +197,17 @@
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="5dp"
                 android:background="@drawable/bg_community_detail_chat"
                 android:gravity="start|center_vertical"
                 android:hint="댓글을 입력하세요"
                 android:inputType="textMultiLine"
-                android:maxLines="4"
+                android:maxLines="2"
                 android:paddingStart="15dp"
+                android:paddingTop="10dp"
                 android:paddingEnd="40dp"
+                android:paddingBottom="10dp"
                 android:textSize="13dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
