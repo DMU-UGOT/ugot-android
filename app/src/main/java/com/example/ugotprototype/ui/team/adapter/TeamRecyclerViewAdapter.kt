@@ -76,6 +76,7 @@ class TeamRecyclerViewAdapter : RecyclerView.Adapter<TeamRecyclerViewAdapter.MyV
             putExtra("teamLeaderClass", item._class)
             putExtra("teamGitHubLink", item.gitHubLink)
             putExtra("teamKakaoLink", item.kakaoOpenLink)
+            putExtra("teamCreateTime", item.createdAt)
 
             // 총명수는 api 데이터에 있지만 현재명수가 없어가지고 현재명수 받고해야함
             if (item.nowPersonnel == item.allPersonnel) {

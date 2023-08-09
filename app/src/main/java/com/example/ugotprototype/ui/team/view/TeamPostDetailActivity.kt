@@ -8,6 +8,10 @@ import android.util.Log
 import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.ActivityTeamPostDetailBinding
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 class TeamPostDetailActivity : AppCompatActivity() {
 
@@ -40,6 +44,9 @@ class TeamPostDetailActivity : AppCompatActivity() {
         binding.tvNowClassText.text = intent.getStringExtra("teamLeaderClass")
         binding.tvGithubLink.text = "https://github.com/" + intent.getStringExtra("teamGitHubLink")
         binding.tvKakaoLink.text = intent.getStringExtra("teamKakaoLink")
+
+        val formattedDateTime = LocalDateTime.parse(intent.getStringExtra(("teamCreateTime"))).format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm"))
+        binding.tvTime.text = formattedDateTime
     }
 
     private fun goToTeamInformation() {

@@ -10,5 +10,6 @@ data class TeamPostResponse(
     val nowPersonnel: Int,
     val kakaoOpenLink: String,
     val gitHubLink: String,
-    var avatarUrl: String
+    var avatarUrl: String,
+    val createdAt: String
 )
