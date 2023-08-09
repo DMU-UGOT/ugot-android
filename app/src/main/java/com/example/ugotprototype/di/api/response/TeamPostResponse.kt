@@ -5,6 +5,10 @@ data class TeamPostResponse(
     val content: String,
     val field: String,
     val _class: String,
-    var personnel: Int,
-    val viewCount: Int
+    var allPersonnel: Int,
+    val viewCount: Int,
+    val nowPersonnel: Int,
+    val kakaoOpenLink: String,
+    val gitHubLink: String,
+    var avatarUrl: String
 )

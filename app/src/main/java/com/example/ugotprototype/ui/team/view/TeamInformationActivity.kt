@@ -47,7 +47,7 @@ class TeamInformationActivity : AppCompatActivity() {
         binding.rvTeamInformation.adapter = rvAdapter
         lifecycleScope.launch {
             try {
-                teamViewModel.setTeamInforData(apiService.getOrganizationMembers(githubOrgName))
+                teamViewModel.setTeamInforData(apiService.getOrganizationMembers(githubOrgName, "Bearer ${TeamFragment.tokenData}"))
             } catch (_: Exception) {
             }
         }

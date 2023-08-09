@@ -14,7 +14,8 @@ import com.example.ugotprototype.databinding.ItemTeamSearchListBinding
 import com.example.ugotprototype.di.api.response.OrgMemberDataResponse
 import com.example.ugotprototype.di.api.response.TeamPostResponse
 
-class TeamSearchRecyclerViewAdapter : RecyclerView.Adapter<TeamSearchRecyclerViewAdapter.MyViewHolder>() {
+class TeamSearchRecyclerViewAdapter :
+    RecyclerView.Adapter<TeamSearchRecyclerViewAdapter.MyViewHolder>() {
 
     var teamItemList: List<TeamPostResponse> = emptyList()
 
@@ -33,9 +34,11 @@ class TeamSearchRecyclerViewAdapter : RecyclerView.Adapter<TeamSearchRecyclerVie
             binding.tvTitle.text = teamItemList[bindingAdapterPosition].title
             binding.tvDetailTitle.text = teamItemList[bindingAdapterPosition].content
             binding.tvFieldName.text = teamItemList[bindingAdapterPosition].field
-            binding.tvCntEnd.text = teamItemList[bindingAdapterPosition].personnel.toString()
+            binding.tvCntEnd.text = teamItemList[bindingAdapterPosition].allPersonnel.toString()
             binding.tvViewCountNum.text = teamItemList[bindingAdapterPosition].viewCount.toString()
-//            Glide.with(binding.root.context).load(currentTeamData.imageUrl).into(binding.ivTeamLogo)
+            binding.tvCntFirst.text = teamItemList[bindingAdapterPosition].nowPersonnel.toString()
+            Glide.with(binding.root.context).load(currentTeamPostResponse.avatarUrl)
+                .into(binding.ivTeamLogo)
 
         }
     }
@@ -63,19 +66,21 @@ class TeamSearchRecyclerViewAdapter : RecyclerView.Adapter<TeamSearchRecyclerVie
 
     fun goToTeamPostDetail(item: TeamPostResponse, context: Context) {
         Intent(context, TeamPostDetailActivity::class.java).apply {
+
             putExtra("teamTitle", item.title)
             putExtra("teamDetail", item.content)
             putExtra("teamTopic", item.field)
-            putExtra("teamStatusCnt", 3)
-            putExtra("teamStatusCntEnd", item.personnel)
+            putExtra("teamStatusCnt", item.nowPersonnel)
+            putExtra("teamStatusCntEnd", item.allPersonnel)
             putExtra("teamLeaderClass", item._class)
+            putExtra("teamGitHubLink", item.gitHubLink)
+            putExtra("teamKakaoLink", item.kakaoOpenLink)
 
-            // 총명수는 api 데이터에 있지만 현재명수가 없어가지고 현재명수 받고해야함
-            /*if (item.statusCntEnd == item.statusCntFirst) {
+            if (item.nowPersonnel == item.allPersonnel) {
                 putExtra("teamCurrent", "모집 완료")
             } else {
                 putExtra("teamCurrent", "모집 중")
-            }*/
+            }
 
             context.startActivity(this)
         }

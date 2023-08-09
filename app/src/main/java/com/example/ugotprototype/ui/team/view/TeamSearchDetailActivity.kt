@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.ActivityTeamSearchDetailBinding
+import com.example.ugotprototype.di.api.ApiService
 import com.example.ugotprototype.di.api.BackEndService
 import com.example.ugotprototype.di.api.response.TeamPostResponse
 import com.example.ugotprototype.ui.team.adapter.TeamRecyclerViewAdapter
@@ -34,6 +35,9 @@ class TeamSearchDetailActivity : AppCompatActivity() {
 
     @Inject
     lateinit var backEndService: BackEndService
+
+    @Inject
+    lateinit var apiService: ApiService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,6 +86,19 @@ class TeamSearchDetailActivity : AppCompatActivity() {
                 while (true) {
                     val response = backEndService.getTeams(currentPage, 5)
                     val teams = response.data ?: emptyList()
+
+                    for (team in teams) {
+                        Log.d("team", "$team")
+                        try {
+                            val imgResponse = apiService.getOrganization(
+                                team.gitHubLink, "Bearer ${TeamFragment.tokenData}"
+                            )
+                            val org = imgResponse?.avatarUrl
+                            team.avatarUrl = org ?: ""
+                        } catch (e: Exception) {
+                        }
+                    }
+
                     allTeams.addAll(teams)
                     if (currentPage >= (response.pageInfo.totalPages ?: 0)) {
                         break

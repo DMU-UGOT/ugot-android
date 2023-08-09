@@ -1,8 +1,10 @@
 package com.example.ugotprototype.ui.team.view
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.ActivityTeamPostDetailBinding
@@ -23,18 +25,21 @@ class TeamPostDetailActivity : AppCompatActivity() {
         goToTeamInformation()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun dataSet() {
 
-        this.teamStatusCnt = intent.getStringExtra("teamStatusCnt").toString()
+        this.teamStatusCnt = intent.getIntExtra("teamStatusCnt", 0).toString()
 
         binding.tvPostField.text = intent.getStringExtra("teamTopic")
         binding.tvPostTitle.text = intent.getStringExtra("teamTitle")
         binding.tvTeamPostDetail.text = intent.getStringExtra("teamDetail")
         binding.tvProjectField.text = intent.getStringExtra("teamTopic")
         binding.tvTotalPersonCntFirst.text = teamStatusCnt
-        binding.tvTotalPersonCntEnd.text = intent.getStringExtra("teamStatusCntEnd")
+        binding.tvTotalPersonCntEnd.text = intent.getIntExtra("teamStatusCntEnd", 0).toString()
         binding.tvPersonCntCheck.text = intent.getStringExtra("teamCurrent")
         binding.tvNowClassText.text = intent.getStringExtra("teamLeaderClass")
+        binding.tvGithubLink.text = "https://github.com/" + intent.getStringExtra("teamGitHubLink")
+        binding.tvKakaoLink.text = intent.getStringExtra("teamKakaoLink")
     }
 
     private fun goToTeamInformation() {

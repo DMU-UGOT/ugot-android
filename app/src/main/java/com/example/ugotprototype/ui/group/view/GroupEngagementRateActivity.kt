@@ -15,6 +15,7 @@ import com.example.ugotprototype.databinding.ActivityGroupEngagementRateBinding
 import com.example.ugotprototype.di.api.ApiService
 import com.example.ugotprototype.ui.group.adapter.GroupEngagementRateRecyclerViewAdapter
 import com.example.ugotprototype.ui.group.viewmodel.GroupViewModel
+import com.example.ugotprototype.ui.team.view.TeamFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -53,22 +54,29 @@ class GroupEngagementRateActivity : AppCompatActivity() {
     private fun fetchMembers() {
         lifecycleScope.launch {
             try {
-                val members = apiService.getOrganizationMembers("githubapi-testad")
+                val members = apiService.getOrganizationMembers(
+                    "githubapi-testad", "Bearer ${TeamFragment.tokenData}"
+                )
+                Log.d("members", "$members")
                 for (member in members) {
-                    val repositories = apiService.getOrganizationRepositories("githubapi-testad")
+                    val repositories = apiService.getOrganizationRepositories(
+                        "githubapi-testad", "Bearer ${TeamFragment.tokenData}"
+                    )
+                    Log.d("repositories", "$repositories")
                     var totalContributions = 0
                     for (repo in repositories) {
-                        val contributors =
-                            apiService.getRepositoryContributors("githubapi-testad", repo.name)
-                        Log.d("constributors", "$contributors")
-                        val userContributions =
-                            contributors.find { it.login == member.login }?.contributions ?: 0
-                        totalContributions += userContributions
+                        Log.d("test", repo.name)
+                        try {
+                            val contributors = apiService.getRepositoryContributors(
+                                "githubapi-testad", repo.name, "Bearer ${TeamFragment.tokenData}"
+                            )
+
+                            val userContributions =
+                                contributors?.find { it.login == member.login }?.contributions ?: 0
+                            totalContributions += userContributions
+                        } catch (e: Exception) {
+                        }
                     }
-                    Log.d(
-                        "GitHubActivity",
-                        "${member.login} 님의 총 커밋 수: $totalContributions, 프로필 이미지 URL: ${member.avatarUrl}"
-                    )
                     groupEngagementData.add(
                         GroupEngagementData(
                             member.login, member.avatarUrl, totalContributions
@@ -77,7 +85,6 @@ class GroupEngagementRateActivity : AppCompatActivity() {
                 }
                 groupViewModel.setEngagementRate(groupEngagementData)
             } catch (e: Exception) {
-                Log.d("e", "$e")
             }
         }
     }

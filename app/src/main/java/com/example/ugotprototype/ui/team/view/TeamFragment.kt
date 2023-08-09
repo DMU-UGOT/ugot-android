@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.ugotprototype.BuildConfig
 import com.example.ugotprototype.R
 import com.example.ugotprototype.data.team.TeamData
 import com.example.ugotprototype.databinding.FragmentTeamBinding
@@ -41,6 +42,10 @@ class TeamFragment : Fragment() {
 
     private var currentPage = 1
     private var totalPages = 1
+
+    companion object{
+        val tokenData = BuildConfig.GITHUB_KEY
+    }
 
     override fun onStart() {
         super.onStart()
@@ -81,10 +86,19 @@ class TeamFragment : Fragment() {
     private fun testData(pageNumber: Int) {
         lifecycleScope.launch {
             try {
-                //val response = apiService.getOrganization("DMU-UGOT")
-                //val org = response?.avatarUrl
                 val response = backEndService.getTeams(pageNumber, 5)
                 val teams = response.data
+
+                for (team in teams) {
+                    Log.d("team", "$team")
+                    try {
+                        val imgResponse = apiService.getOrganization(team.gitHubLink, "Bearer $tokenData")
+                        val org = imgResponse?.avatarUrl
+                        team.avatarUrl = org ?: ""
+                    } catch (e: Exception) {
+                    }
+                }
+
                 teamViewModel.setTeamData(teams)
                 currentPage = response.pageInfo.page
                 totalPages = response.pageInfo.totalPages
