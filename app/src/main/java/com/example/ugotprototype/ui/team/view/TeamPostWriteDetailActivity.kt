@@ -1,124 +1,79 @@
 package com.example.ugotprototype.ui.team.view
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
-import android.view.View
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.SeekBar
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.lifecycleScope
 import com.example.ugotprototype.R
 import com.example.ugotprototype.data.team.TeamPostData
 import com.example.ugotprototype.databinding.ActivityTeamPostWriteDetailBinding
-import com.example.ugotprototype.di.api.BackEndService
-import com.example.ugotprototype.ui.team.viewmodel.TeamViewModel
+import com.example.ugotprototype.di.api.TeamBuildingService
+import com.example.ugotprototype.ui.team.viewmodel.TeamPostWriteViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class TeamPostWriteDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTeamPostWriteDetailBinding
-    private val teamViewModel: TeamViewModel by viewModels()
+    private val teamPostWriteViewModel: TeamPostWriteViewModel by viewModels()
 
     @Inject
-    lateinit var backEndService: BackEndService
+    lateinit var teamBuildingService: TeamBuildingService
 
-
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_team_post_write_detail)
-        binding.lifecycleOwner = this
-        binding.vm = teamViewModel
+        binding.vm = teamPostWriteViewModel
 
-        teamViewModel.isTeamPostRegisterBtnEnabled.observe(this) { enabled ->
+        teamPostWriteViewModel.isTeamPostRegisterBtnEnabled.observe(this) { enabled ->
             binding.btTeamPostRegister.isEnabled = enabled
         }
 
-        teamViewModel.teamMaxPersonnel.observe(this) { maxPersonnel ->
-            binding.tvMaxNumber.text = maxPersonnel.toString() + "명"
+        teamPostWriteViewModel.teamCreateData.observe(this) {
+            teamPostWriteViewModel.sendTeamData(it)
         }
 
-        teamViewModel.teamCreateData.observe(this) {
-            createSubmitTeam(it)
+        teamPostWriteViewModel.etText.observe(this) {
+            checkAllFields()
         }
 
-        postFieldSet()
-        postClassSet()
-        checkPostRegister()
+        teamPostWriteViewModel.seekBar.observe(this) {
+            checkAllFields()
+            binding.tvMaxNumber.text = it.toString() + "명"
+        }
+
+        teamPostWriteViewModel.selectSpinner.observe(this) {
+            checkAllFields()
+        }
+
+        spinnerSetting()
         backToMainActivity()
-        teamMaxPersonnel()
     }
 
-    private fun checkPostRegister() {
+    private fun spinnerSetting() {
 
-        val totalListener = object : AdapterView.OnItemSelectedListener, TextWatcher {
-
-            override fun onItemSelected(
-                parent: AdapterView<*>?, view: View?, position: Int, id: Long
-            ) {
-                checkFieldsAndUpdateButtonState()
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-
-            override fun beforeTextChanged(
-                s: CharSequence?, start: Int, count: Int, after: Int
-            ) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                checkFieldsAndUpdateButtonState()
-            }
-
-            override fun afterTextChanged(s: Editable?) {}
-        }
-
-        binding.classSpinner.onItemSelectedListener = totalListener
-        binding.fieldSpinner.onItemSelectedListener = totalListener
-        binding.etTitleName.addTextChangedListener(totalListener)
-        binding.etTitleDetail.addTextChangedListener(totalListener)
-        binding.etInputGithubLink.addTextChangedListener(totalListener)
-        binding.etInputKakaoOpenLink.addTextChangedListener(totalListener)
-    }
-
-    private fun checkFieldsAndUpdateButtonState() {
-        if (binding.classSpinner.selectedItemPosition != 0 && binding.fieldSpinner.selectedItemPosition != 0 && binding.etTitleName.length() != 0 && binding.etTitleDetail.length() != 0 && binding.etInputGithubLink.length() != 0 && binding.etInputKakaoOpenLink.length() != 0) {
-            teamViewModel.isTeamPostRegisterButtonState(true)
-        } else {
-            teamViewModel.isTeamPostRegisterButtonState(false)
-        }
-    }
-
-    private fun postFieldSet() {
-
-        val adapter = ArrayAdapter.createFromResource(
+        val fieldAdapter = ArrayAdapter.createFromResource(
             this, R.array.team_post_field_item, android.R.layout.simple_spinner_item
         )
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.fieldSpinner.adapter = adapter
-    }
+        fieldAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.fieldSpinner.adapter = fieldAdapter
 
-    private fun postClassSet() {
-
-        val adapter = ArrayAdapter.createFromResource(
+        val classAdapter = ArrayAdapter.createFromResource(
             this, R.array.team_post_class_item, android.R.layout.simple_spinner_item
         )
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.classSpinner.adapter = adapter
+        classAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.classSpinner.adapter = classAdapter
     }
 
     private fun backToMainActivity() {
 
         binding.btTeamPostRegister.setOnClickListener {
-            var teamData = TeamPostData(
+            val teamData = TeamPostData(
                 title = binding.etTitleName.text.toString(),
                 content = binding.etTitleDetail.text.toString(),
                 field = binding.fieldSpinner.selectedItem.toString(),
@@ -127,40 +82,27 @@ class TeamPostWriteDetailActivity : AppCompatActivity() {
                 gitHubLink = binding.etInputGithubLink.text.toString(),
                 kakaoOpenLink = binding.etInputKakaoOpenLink.text.toString()
             )
-            teamViewModel.setTeamPostData(teamData)
-            Intent().putExtra("resultText", "text")
+            teamPostWriteViewModel.setTeamPostData(teamData)
             setResult(Activity.RESULT_OK, Intent())
             finish()
         }
 
         binding.btBackToMain.setOnClickListener {
-            Intent().putExtra("resultText", "text")
             setResult(Activity.RESULT_OK, Intent())
             finish()
         }
     }
 
-    private fun teamMaxPersonnel() {
-        binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                teamViewModel.teamMaxPersonnel(progress)
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar) {
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar) {
-            }
-        })
-    }
-
-    private fun createSubmitTeam(data: TeamPostData) {
-        lifecycleScope.launch{
-            try {
-                val response = backEndService.createTeam(data)
-            }catch(e: Exception) {
-                Log.d("e", "$e")
-            }
+    private fun checkAllFields() {
+        if (binding.classSpinner.selectedItemPosition != 0
+            && binding.fieldSpinner.selectedItemPosition != 0
+            && binding.etTitleName.length() != 0
+            && binding.etTitleDetail.length() != 0
+            && binding.etInputGithubLink.length() != 0
+            && binding.etInputKakaoOpenLink.length() != 0) {
+            teamPostWriteViewModel.isTeamPostRegisterButtonState(true)
+        } else {
+            teamPostWriteViewModel.isTeamPostRegisterButtonState(false)
         }
     }
 }

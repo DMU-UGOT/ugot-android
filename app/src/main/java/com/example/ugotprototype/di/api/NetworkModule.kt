@@ -25,6 +25,7 @@ object NetworkModule {
             .writeTimeout(30, TimeUnit.SECONDS)
             .build()
     }
+
     @Provides
     @Singleton
     @GitRetrofit
@@ -54,7 +55,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideBackEndService(retrofit: Retrofit): BackEndService{
-        return retrofit.create(BackEndService::class.java)
+    fun provideBackEndService(retrofit: Retrofit): TeamBuildingService {
+        return retrofit.create(TeamBuildingService::class.java)
     }
 }

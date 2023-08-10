@@ -3,16 +3,22 @@ package com.example.ugotprototype.ui.team.adapter
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.ugotprototype.ui.team.view.TeamPostDetailActivity
-import com.example.ugotprototype.data.team.TeamData
+import com.example.ugotprototype.data.response.TeamPostResponse
 import com.example.ugotprototype.databinding.ItemTeamListBinding
-import com.example.ugotprototype.di.api.response.OrgMemberDataResponse
-import com.example.ugotprototype.di.api.response.TeamPostResponse
+import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_DETAIL
+import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_GITHUB_LINK
+import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_KAKAO_LINK
+import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_LEADER_CLASS
+import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_STATUS
+import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_STATUS_CNT
+import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_STATUS_CNT_END
+import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_TITLE
+import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_TOPIC
+import com.example.ugotprototype.ui.team.view.TeamPostDetailActivity
 
 class TeamRecyclerViewAdapter : RecyclerView.Adapter<TeamRecyclerViewAdapter.MyViewHolder>() {
 
@@ -21,23 +27,24 @@ class TeamRecyclerViewAdapter : RecyclerView.Adapter<TeamRecyclerViewAdapter.MyV
     // 생성된 뷰 홀더에 값 지정
     inner class MyViewHolder(val binding: ItemTeamListBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(currentTeamPostResponse: TeamPostResponse) {
+        fun bind(item: TeamPostResponse) {
             binding.root.setOnClickListener {
-                goToTeamPostDetail(currentTeamPostResponse, binding.root.context)
+                goToTeamPostDetail(item, binding.root.context)
             }
 
             binding.ivTeamBookmark.setOnClickListener {
                 binding.ivTeamBookmark.isSelected = binding.ivTeamBookmark.isSelected != true
             }
 
-            binding.tvTitle.text = teamItemList[bindingAdapterPosition].title
-            binding.tvDetailTitle.text = teamItemList[bindingAdapterPosition].content
-            binding.tvFieldName.text = teamItemList[bindingAdapterPosition].field
-            binding.tvCntEnd.text = teamItemList[bindingAdapterPosition].allPersonnel.toString()
-            binding.tvViewCountNum.text = teamItemList[bindingAdapterPosition].viewCount.toString()
-            binding.tvCntFirst.text = teamItemList[bindingAdapterPosition].nowPersonnel.toString()
-            Glide.with(binding.root.context).load(currentTeamPostResponse.avatarUrl).into(binding.ivTeamLogo)
-
+            with(binding) {
+                tvTitle.text = item.title
+                tvDetailTitle.text = item.content
+                tvFieldName.text = item.field
+                tvCntEnd.text = item.allPersonnel.toString()
+                tvViewCountNum.text = item.viewCount.toString()
+                tvCntFirst.text = item.nowPersonnel.toString()
+                Glide.with(root.context).load(item.avatarUrl).into(ivTeamLogo)
+            }
         }
     }
 
@@ -68,21 +75,20 @@ class TeamRecyclerViewAdapter : RecyclerView.Adapter<TeamRecyclerViewAdapter.MyV
     fun goToTeamPostDetail(item: TeamPostResponse, context: Context) {
         Intent(context, TeamPostDetailActivity::class.java).apply {
 
-            putExtra("teamTitle", item.title)
-            putExtra("teamDetail", item.content)
-            putExtra("teamTopic", item.field)
-            putExtra("teamStatusCnt", item.nowPersonnel)
-            putExtra("teamStatusCntEnd", item.allPersonnel)
-            putExtra("teamLeaderClass", item._class)
-            putExtra("teamGitHubLink", item.gitHubLink)
-            putExtra("teamKakaoLink", item.kakaoOpenLink)
-            putExtra("teamCreateTime", item.createdAt)
+            putExtra(TEAM_TITLE, item.title)
+            putExtra(TEAM_DETAIL, item.content)
+            putExtra(TEAM_TOPIC, item.field)
+            putExtra(TEAM_STATUS_CNT, item.nowPersonnel)
+            putExtra(TEAM_STATUS_CNT_END, item.allPersonnel)
+            putExtra(TEAM_LEADER_CLASS, item._class)
+            putExtra(TEAM_GITHUB_LINK, item.gitHubLink)
+            putExtra(TEAM_KAKAO_LINK, item.kakaoOpenLink)
+            //putExtra(TEAM_CREATE_TIME, item.createdAt)
 
-            // 총명수는 api 데이터에 있지만 현재명수가 없어가지고 현재명수 받고해야함
             if (item.nowPersonnel == item.allPersonnel) {
-                putExtra("teamCurrent", "모집 완료")
+                putExtra(TEAM_STATUS, "모집 완료")
             } else {
-                putExtra("teamCurrent", "모집 중")
+                putExtra(TEAM_STATUS, "모집 중")
             }
 
             context.startActivity(this)

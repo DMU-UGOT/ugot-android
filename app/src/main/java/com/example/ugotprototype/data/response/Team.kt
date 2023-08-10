@@ -1,13 +1,15 @@
-package com.example.ugotprototype.di.api.response
+package com.example.ugotprototype.data.response
 
-data class TeamPostResponse(
+data class Team(
+    val teamId: Int,
     val title: String,
     val content: String,
     val field: String,
     val _class: String,
-    var allPersonnel: Int,
-    val viewCount: Int,
+    val allPersonnel: Int,
     val nowPersonnel: Int,
+    val viewCount: Int,
+    val bookmarked: Int,
     val kakaoOpenLink: String,
     val gitHubLink: String,
     var avatarUrl: String,

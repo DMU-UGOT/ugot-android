@@ -7,39 +7,37 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.ugotprototype.ui.team.view.TeamPostDetailActivity
-import com.example.ugotprototype.data.team.TeamData
-import com.example.ugotprototype.databinding.ItemTeamListBinding
+import com.example.ugotprototype.data.response.Team
 import com.example.ugotprototype.databinding.ItemTeamSearchListBinding
-import com.example.ugotprototype.di.api.response.OrgMemberDataResponse
-import com.example.ugotprototype.di.api.response.TeamPostResponse
+import com.example.ugotprototype.ui.team.view.TeamFragment
+import com.example.ugotprototype.ui.team.view.TeamPostDetailActivity
 
 class TeamSearchRecyclerViewAdapter :
     RecyclerView.Adapter<TeamSearchRecyclerViewAdapter.MyViewHolder>() {
 
-    var teamItemList: List<TeamPostResponse> = emptyList()
+    var teamItemList: List<Team> = emptyList()
 
     // 생성된 뷰 홀더에 값 지정
     inner class MyViewHolder(val binding: ItemTeamSearchListBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(currentTeamPostResponse: TeamPostResponse) {
+        fun bind(item: Team) {
             binding.root.setOnClickListener {
-                goToTeamPostDetail(currentTeamPostResponse, binding.root.context)
+                goToTeamPostDetail(item, binding.root.context)
             }
 
             binding.ivTeamBookmark.setOnClickListener {
                 binding.ivTeamBookmark.isSelected = binding.ivTeamBookmark.isSelected != true
             }
 
-            binding.tvTitle.text = teamItemList[bindingAdapterPosition].title
-            binding.tvDetailTitle.text = teamItemList[bindingAdapterPosition].content
-            binding.tvFieldName.text = teamItemList[bindingAdapterPosition].field
-            binding.tvCntEnd.text = teamItemList[bindingAdapterPosition].allPersonnel.toString()
-            binding.tvViewCountNum.text = teamItemList[bindingAdapterPosition].viewCount.toString()
-            binding.tvCntFirst.text = teamItemList[bindingAdapterPosition].nowPersonnel.toString()
-            Glide.with(binding.root.context).load(currentTeamPostResponse.avatarUrl)
-                .into(binding.ivTeamLogo)
-
+            with(binding) {
+                tvTitle.text = item.title
+                tvDetailTitle.text = item.content
+                tvFieldName.text = item.field
+                tvCntEnd.text = item.allPersonnel.toString()
+                tvViewCountNum.text = item.viewCount.toString()
+                tvCntFirst.text = item.nowPersonnel.toString()
+                Glide.with(root.context).load(item.avatarUrl).into(ivTeamLogo)
+            }
         }
     }
 
@@ -59,28 +57,28 @@ class TeamSearchRecyclerViewAdapter :
         return position.toLong()
     }
 
-    fun setData(data: List<TeamPostResponse>) {
+    fun setData(data: List<Team>) {
         teamItemList = data
         notifyDataSetChanged()
     }
 
-    fun goToTeamPostDetail(item: TeamPostResponse, context: Context) {
+    fun goToTeamPostDetail(item: Team, context: Context) {
         Intent(context, TeamPostDetailActivity::class.java).apply {
 
-            putExtra("teamTitle", item.title)
-            putExtra("teamDetail", item.content)
-            putExtra("teamTopic", item.field)
-            putExtra("teamStatusCnt", item.nowPersonnel)
-            putExtra("teamStatusCntEnd", item.allPersonnel)
-            putExtra("teamLeaderClass", item._class)
-            putExtra("teamGitHubLink", item.gitHubLink)
-            putExtra("teamKakaoLink", item.kakaoOpenLink)
-            putExtra("teamCreateTime", item.createdAt)
+            putExtra(TeamFragment.TEAM_TITLE, item.title)
+            putExtra(TeamFragment.TEAM_DETAIL, item.content)
+            putExtra(TeamFragment.TEAM_TOPIC, item.field)
+            putExtra(TeamFragment.TEAM_STATUS_CNT, item.nowPersonnel)
+            putExtra(TeamFragment.TEAM_STATUS_CNT_END, item.allPersonnel)
+            putExtra(TeamFragment.TEAM_LEADER_CLASS, item._class)
+            putExtra(TeamFragment.TEAM_GITHUB_LINK, item.gitHubLink)
+            putExtra(TeamFragment.TEAM_KAKAO_LINK, item.kakaoOpenLink)
+            //putExtra(TeamFragment.TEAM_CREATE_TIME, item.createdAt)
 
             if (item.nowPersonnel == item.allPersonnel) {
-                putExtra("teamCurrent", "모집 완료")
+                putExtra(TeamFragment.TEAM_STATUS, "모집 완료")
             } else {
-                putExtra("teamCurrent", "모집 중")
+                putExtra(TeamFragment.TEAM_STATUS, "모집 중")
             }
 
             context.startActivity(this)

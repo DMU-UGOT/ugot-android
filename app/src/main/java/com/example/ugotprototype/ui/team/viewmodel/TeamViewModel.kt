@@ -1,53 +1,69 @@
 package com.example.ugotprototype.ui.team.viewmodel
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.ugotprototype.data.team.TeamData
-import com.example.ugotprototype.data.team.TeamPostData
-import com.example.ugotprototype.di.api.response.OrgMemberDataResponse
-import com.example.ugotprototype.di.api.response.TeamPostResponse
+import androidx.lifecycle.viewModelScope
+import com.example.ugotprototype.data.response.TeamPostResponse
+import com.example.ugotprototype.di.api.ApiService
+import com.example.ugotprototype.di.api.TeamBuildingService
+import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TOKEN_DATA
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class TeamViewModel : ViewModel() {
+@HiltViewModel
+class TeamViewModel @Inject constructor(
+    private val apiService: ApiService, private val teamBuildingService: TeamBuildingService
+) : ViewModel() {
     private val _teamItemList = MutableLiveData<List<TeamPostResponse>>()
     val teamItemList: LiveData<List<TeamPostResponse>> = _teamItemList
 
-    private val _isTeamPostRegisterBtnEnabled = MutableLiveData<Boolean>()
-    var isTeamPostRegisterBtnEnabled: LiveData<Boolean> = _isTeamPostRegisterBtnEnabled
+    private val _totalPage = MutableLiveData<Int>()
+    var totalPage: LiveData<Int> = _totalPage
 
-    private val _teamMaxPersonnel = MutableLiveData<Int>()
-    var teamMaxPersonnel: LiveData<Int> = _teamMaxPersonnel
+    private val _currentPage = MutableLiveData<Int>()
+    val currentPage: LiveData<Int> = _currentPage
 
-    private val _teamInforList = MutableLiveData<List<OrgMemberDataResponse>>()
-    var isTeamInforList: LiveData<List<OrgMemberDataResponse>> = _teamInforList
-
-    private val _postLastPage =  MutableLiveData<Int>()
-    var postLastPage: LiveData<Int> =  _postLastPage
-
-    private val _teamCreateData = MutableLiveData<TeamPostData>()
-    val teamCreateData: LiveData<TeamPostData> = _teamCreateData
-
-    fun setTeamData(teamData: List<TeamPostResponse>) {
-        _teamItemList.value = teamData
+    val onPrevButtonClickListener = View.OnClickListener {
+        if (_currentPage.value!! > 1) {
+            _currentPage.value = _currentPage.value!! - 1
+        }
     }
 
-    fun isTeamPostRegisterButtonState(enabled: Boolean) {
-        _isTeamPostRegisterBtnEnabled.value = enabled
+    val onNextButtonClickListener = View.OnClickListener {
+        if (_currentPage.value!! < _totalPage.value!!) {
+            _currentPage.value = _currentPage.value!! + 1
+        }
     }
 
-    fun teamMaxPersonnel(maxPersonnel: Int) {
-        _teamMaxPersonnel.value = maxPersonnel
+    fun setCurrentPage(data: Int) {
+        _currentPage.value = data
     }
 
-    fun setTeamInforData(teamInforData: List<OrgMemberDataResponse>) {
-        _teamInforList.value = teamInforData
+    fun setTotalPage(data: Int) {
+        _totalPage.value = data
     }
 
-    fun setPostLastPage(pageNum: Int){
-        _postLastPage.value = pageNum
-    }
+    fun getTeamList() {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                val pageResponse = teamBuildingService.getTeams(_currentPage.value!!, 5)
+                val teamsResponse = pageResponse.data
 
-    fun setTeamPostData(teamPostData: TeamPostData) {
-        _teamCreateData.value = teamPostData
+                teamsResponse.forEach { team ->
+                    kotlin.runCatching {
+                        val avatarUrl = apiService.getOrganization(
+                            team.gitHubLink, "Bearer $TOKEN_DATA"
+                        )?.avatarUrl
+                        team.avatarUrl = avatarUrl ?: ""
+                    }
+                }
+
+                _teamItemList.value = teamsResponse
+                _totalPage.value = pageResponse.pageInfo.totalPages
+            }
+        }
     }
 }

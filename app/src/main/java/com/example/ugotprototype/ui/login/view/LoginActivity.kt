@@ -79,7 +79,7 @@ class LoginActivity : AppCompatActivity() {
         lifecycleScope.launch {
             try {
                 val response =
-                    apiService.getUser(githubUserName, "Bearer ${TeamFragment.tokenData}")
+                    apiService.getUser(githubUserName, "Bearer ${TeamFragment.TOKEN_DATA}")
                 Log.d("[계정확인]", "해당 계정 존재 : $response")
             } catch (e: Exception) {
                 Log.d("[계정확인 불가능]", "해당 계정 미존재")

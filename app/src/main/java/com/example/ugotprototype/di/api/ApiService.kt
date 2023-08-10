@@ -1,15 +1,13 @@
 package com.example.ugotprototype.di.api
 
-import com.example.ugotprototype.di.api.response.Contributor
-import com.example.ugotprototype.di.api.response.GitHubRepository
-import com.example.ugotprototype.di.api.response.OrgDataResponse
-import com.example.ugotprototype.di.api.response.OrgMemberDataResponse
-import com.example.ugotprototype.di.api.response.UserDataResponse
-import okhttp3.Call
+import com.example.ugotprototype.data.response.Contributor
+import com.example.ugotprototype.data.response.GitHubRepository
+import com.example.ugotprototype.data.response.OrgDataResponse
+import com.example.ugotprototype.data.response.OrgMemberDataResponse
+import com.example.ugotprototype.data.response.UserDataResponse
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
-import java.lang.reflect.Member
 
 interface ApiService {
     @GET("users/{username}")

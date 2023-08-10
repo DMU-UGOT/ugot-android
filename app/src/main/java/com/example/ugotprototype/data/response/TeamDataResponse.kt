@@ -1,6 +1,4 @@
-package com.example.ugotprototype.di.api.response
-
-import android.graphics.pdf.PdfDocument
+package com.example.ugotprototype.data.response
 
 data class TeamDataResponse(
     val data: List<TeamPostResponse>,

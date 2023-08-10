@@ -117,6 +117,7 @@
                         android:layout_marginTop="20dp"
                         android:layout_marginEnd="16dp"
                         android:backgroundTint="@color/color_FFFFFF"
+                        android:onClick="@{vm.onPrevButtonClickListener}"
                         android:src="@drawable/ic_team_prev_page"
                         app:layout_constraintEnd_toStartOf="@+id/team_page_first_text"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -128,6 +129,7 @@
                         android:layout_marginStart="16dp"
                         android:backgroundTint="@color/color_FFFFFF"
                         android:src="@drawable/ic_team_next_page"
+                        android:onClick="@{vm.onNextButtonClickListener}"
                         app:layout_constraintStart_toEndOf="@+id/team_page_second_text"
                         app:layout_constraintTop_toTopOf="@+id/bt_team_prev" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
