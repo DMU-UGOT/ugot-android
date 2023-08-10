@@ -22,6 +22,10 @@ android {
         properties.load(rootProject.file('local.properties').newDataInputStream())
         buildConfigField "String", "GITHUB_KEY", properties['github_api_key']
         manifestPlaceholders = [GITHUB_KEY: properties['github_api_key']]
+
+        buildConfigField "String", "BASE_URL", properties['base_url']
+        manifestPlaceholders = [BASE_URL: properties['base_url']]
+
     }
     buildTypes {
         release {
