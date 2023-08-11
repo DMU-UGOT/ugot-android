@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.ActivityTeamPostDetailBinding
+import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_CREATE_TIME
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_DETAIL
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_GITHUB_LINK
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_KAKAO_LINK
@@ -16,6 +17,8 @@ import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_STATUS
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_STATUS_CNT_END
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_TITLE
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_TOPIC
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class TeamPostDetailActivity : AppCompatActivity() {
 
@@ -48,7 +51,8 @@ class TeamPostDetailActivity : AppCompatActivity() {
             tvNowClassText.text = intent.getStringExtra(TEAM_LEADER_CLASS)
             tvGithubLink.text = "https://github.com/" + intent.getStringExtra(TEAM_GITHUB_LINK)
             tvKakaoLink.text = intent.getStringExtra(TEAM_KAKAO_LINK)
-            //tvTime.text = LocalDateTime.parse(intent.getStringExtra((TEAM_CREATE_TIME)))?.format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm"))?: ""
+            tvTime.text = LocalDateTime.parse(intent.getStringExtra((TEAM_CREATE_TIME)))?.format(
+                DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm"))?: ""
         }
     }
 

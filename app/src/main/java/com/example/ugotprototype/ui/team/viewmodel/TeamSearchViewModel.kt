@@ -23,7 +23,6 @@ class TeamSearchViewModel @Inject constructor(
     val teams: LiveData<List<Team>> = _teams
 
     fun searchTeams(query: String) {
-        Log.d("test", "test")
         viewModelScope.launch {
             kotlin.runCatching {
                 val allMatchingTeams = mutableListOf<Team>()
@@ -49,7 +48,7 @@ class TeamSearchViewModel @Inject constructor(
                     currentPage++
                 }
                 _teams.value = allMatchingTeams
-            }.onFailure { Log.d("Test", "$it") }
+            }
         }
     }
 }

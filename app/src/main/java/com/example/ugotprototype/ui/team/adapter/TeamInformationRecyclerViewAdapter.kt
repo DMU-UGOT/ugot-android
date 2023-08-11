@@ -1,7 +1,6 @@
 package com.example.ugotprototype.ui.team.adapter
 
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +24,6 @@ class TeamInformationRecyclerViewAdapter :
                 binding.ivTeamLeader.visibility = View.INVISIBLE
             }
 
-            Log.d("viewHolder", "viewHolder")
             with(binding) {
                 tvTeamInforName.text = item.login
                 tvGitLink.text = item.htmlUrl

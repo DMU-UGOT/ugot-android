@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ugotprototype.data.response.TeamPostResponse
 import com.example.ugotprototype.databinding.ItemTeamListBinding
+import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_CREATE_TIME
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_DETAIL
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_GITHUB_LINK
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_KAKAO_LINK
@@ -83,7 +84,7 @@ class TeamRecyclerViewAdapter : RecyclerView.Adapter<TeamRecyclerViewAdapter.MyV
             putExtra(TEAM_LEADER_CLASS, item._class)
             putExtra(TEAM_GITHUB_LINK, item.gitHubLink)
             putExtra(TEAM_KAKAO_LINK, item.kakaoOpenLink)
-            //putExtra(TEAM_CREATE_TIME, item.createdAt)
+            putExtra(TEAM_CREATE_TIME, item.createdAt)
 
             if (item.nowPersonnel == item.allPersonnel) {
                 putExtra(TEAM_STATUS, "모집 완료")

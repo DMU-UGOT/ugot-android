@@ -73,7 +73,7 @@ class TeamSearchRecyclerViewAdapter :
             putExtra(TeamFragment.TEAM_LEADER_CLASS, item._class)
             putExtra(TeamFragment.TEAM_GITHUB_LINK, item.gitHubLink)
             putExtra(TeamFragment.TEAM_KAKAO_LINK, item.kakaoOpenLink)
-            //putExtra(TeamFragment.TEAM_CREATE_TIME, item.createdAt)
+            putExtra(TeamFragment.TEAM_CREATE_TIME, item.createdAt)
 
             if (item.nowPersonnel == item.allPersonnel) {
                 putExtra(TeamFragment.TEAM_STATUS, "모집 완료")
