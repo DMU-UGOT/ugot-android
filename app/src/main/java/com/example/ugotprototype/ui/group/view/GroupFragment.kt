@@ -1,14 +1,18 @@
 package com.example.ugotprototype.ui.group.view
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ugotprototype.BuildConfig
 import com.example.ugotprototype.R
 import com.example.ugotprototype.data.group.GroupMiddleViewData
 import com.example.ugotprototype.data.group.GroupTopViewData
@@ -16,15 +20,13 @@ import com.example.ugotprototype.databinding.FragmentGroupBinding
 import com.example.ugotprototype.ui.group.adapter.GroupMiddleViewRecyclerViewAdapter
 import com.example.ugotprototype.ui.group.adapter.GroupTopViewRecyclerViewAdapter
 import com.example.ugotprototype.ui.group.viewmodel.GroupViewModel
+import com.google.android.material.imageview.ShapeableImageView
 
 class GroupFragment : Fragment() {
     private lateinit var binding: FragmentGroupBinding
-
     private val groupViewModel: GroupViewModel by viewModels()
-
     private lateinit var groupTopViewAdapter: GroupTopViewRecyclerViewAdapter
     private var groupTopItems = ArrayList<GroupTopViewData>()
-
     private lateinit var groupMiddleViewAdapter: GroupMiddleViewRecyclerViewAdapter
     private var groupMiddleItems = ArrayList<GroupMiddleViewData>()
 
@@ -59,7 +61,7 @@ class GroupFragment : Fragment() {
         groupViewModel.groupMiddleItemList.observe(viewLifecycleOwner) {
             groupMiddleViewAdapter.setData(it)
         }
-
+        goToNewGroup()
         changeMyGroupCount()
     }
 
@@ -119,6 +121,27 @@ class GroupFragment : Fragment() {
 
         groupViewModel.itemCount.observe(viewLifecycleOwner) { count ->
             binding.tvGroupCnt.text = count.toString()
+        }
+    }
+
+    private fun goToNewGroup() {
+        val goToNewGroupResultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    val data: Intent? = result.data
+                    val resultText = data?.getStringExtra("resultText")
+                    if (resultText != null) {
+                        Log.d("main", resultText)
+                    }
+                }
+            }
+
+        binding.fabGroup.setOnClickListener {
+            goToNewGroupResultLauncher.launch(
+                Intent(
+                    requireContext(), GroupNewGenerate::class.java
+                )
+            )
         }
     }
 }

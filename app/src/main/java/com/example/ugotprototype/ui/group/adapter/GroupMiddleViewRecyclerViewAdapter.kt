@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ugotprototype.R
 import com.example.ugotprototype.data.group.GroupMiddleViewData
 import com.example.ugotprototype.databinding.ItemGroupMiddleListBinding
 import com.example.ugotprototype.ui.group.view.GroupDetailActivity
@@ -23,6 +24,14 @@ class GroupMiddleViewRecyclerViewAdapter() :
             binding.vm = currentGroupData
             binding.root.setOnClickListener {
                 goToPostDetail(currentGroupData, binding.root.context)
+            }
+
+            // 이메일 유효성 검사
+            val inputGithubUrl = currentGroupData.groupDetail
+            if (isValidEmailFormat(inputGithubUrl)) {
+                binding.ivFavoritesMiddleImg.setImageResource(R.drawable.img_git_logo)
+            } else {
+                binding.ivFavoritesMiddleImg.setImageResource(R.drawable.img_sample)
             }
 
             if (bindingAdapterPosition < 4) {
@@ -68,5 +77,11 @@ class GroupMiddleViewRecyclerViewAdapter() :
             putExtra("groupPersonCnt", item.groupPersonCnt)
             context.startActivity(this)
         }
+    }
+
+    // 이메일 형식 유효성 검사 함수
+    fun isValidEmailFormat(email: String): Boolean {
+        val pattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
+        return email.matches(Regex(pattern))
     }
 }

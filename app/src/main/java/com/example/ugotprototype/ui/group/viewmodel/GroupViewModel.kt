@@ -1,6 +1,5 @@
 package com.example.ugotprototype.ui.group.viewmodel
 
-import androidx.constraintlayout.widget.Group
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -39,6 +38,9 @@ class GroupViewModel : ViewModel() {
     private val _engagementRate = MutableLiveData<ArrayList<GroupEngagementData>>()
     val engagementRateData: LiveData<ArrayList<GroupEngagementData>> = _engagementRate
 
+    private val _groupMaxPersonnel = MutableLiveData<Int>()
+    var groupMaxPersonnel: LiveData<Int> = _groupMaxPersonnel
+
     fun setGroupTopData(groupTopData: ArrayList<GroupTopViewData>) {
         _groupTopItemList.value = groupTopData
     }
@@ -74,5 +76,9 @@ class GroupViewModel : ViewModel() {
 
     fun setEngagementRate(data: ArrayList<GroupEngagementData>) {
         _engagementRate.value = data
+    }
+
+    fun groupMaxPersonnel(maxPersonnel: Int) {
+        _groupMaxPersonnel.value = maxPersonnel
     }
 }
