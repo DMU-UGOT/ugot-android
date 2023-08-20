@@ -35,9 +35,6 @@
             android:name=".ui.study.view.StudyPostDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.login.view.LoginKakaoActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.community.view.CommunityChangeNewGroupActivity"
             android:exported="false" />
         <activity
@@ -76,7 +73,6 @@
         <activity
             android:name=".ui.login.view.LoginActivity"
             android:exported="true" />
-
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
@@ -87,7 +83,7 @@
 
                 <!-- Redirect URI: "kakao${NATIVE_APP_KEY}://oauth" -->
                 <data android:host="oauth"
-                    android:scheme="kakao${KAKAO_NATIVE_KEY}" />
+                    android:scheme="kakaoc1a49f7cebd62750bdae86557602e334" />
             </intent-filter>
         </activity>
 
