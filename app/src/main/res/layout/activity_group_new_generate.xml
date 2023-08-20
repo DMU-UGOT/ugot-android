@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_group_new_top_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/bt_group_new_back_to_main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:padding="5dp"
+                android:src="@drawable/ic_team_post_close"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="새 그룹 생성"
+                android:textColor="#0D0D0D"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/bt_group_new_back_to_main"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/bt_group_new_back_to_main"
+                tools:text="새 그룹 생성" />
+
+            <ImageButton
+                android:id="@+id/bt_group_new_post_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:padding="5dp"
+                android:src="@drawable/ic_team_post_register"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/post_register_top_line"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#E0E0E0"
+                app:layout_constraintTop_toBottomOf="@+id/bt_group_new_back_to_main" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_group_new_top_view">
+
+            <EditText
+                android:id="@+id/et_group_new_title_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@android:color/transparent"
+                android:hint="제목"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:textColorHint="@color/color_80636363"
+                android:textSize="15dp"
+                android:maxLength="20"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/group_new_v1"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/color_F0F1F3"
+                app:layout_constraintTop_toBottomOf="@+id/et_group_new_title_name" />
+
+            <EditText
+                android:id="@+id/et_group_text_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@android:color/transparent"
+                android:gravity="top|start"
+                android:hint="소개글을 입력하세요\n\n\n\n\n"
+                android:inputType="textMultiLine"
+                android:maxLines="10"
+                android:textColorHint="@color/color_80636363"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/group_new_v1" />
+
+            <View
+                android:id="@+id/group_new_v2"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/color_F0F1F3"
+                app:layout_constraintTop_toBottomOf="@+id/et_group_text_detail" />
+
+<!--총 인원-->
+            <TextView
+                android:id="@+id/tv_group_max_member"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:text="총 인원"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/group_new_v2" />
+
+            <TextView
+                android:id="@+id/tv_group_new_min_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1명"
+                app:layout_constraintBottom_toBottomOf="@+id/seekBar"
+                app:layout_constraintEnd_toStartOf="@+id/seekBar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/seekBar"
+                tools:text="1명" />
+
+            <SeekBar
+                android:id="@+id/seekBar"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:max="20"
+                android:min="1"
+                android:progress="1"
+                app:layout_constraintEnd_toEndOf="@id/tv_group_new_max_number"
+                app:layout_constraintStart_toStartOf="@id/tv_group_new_min_number"
+                app:layout_constraintTop_toBottomOf="@id/tv_group_max_member" />
+
+            <TextView
+                android:id="@+id/tv_group_new_max_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1명"
+                app:layout_constraintBottom_toBottomOf="@+id/seekBar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/seekBar"
+                app:layout_constraintTop_toTopOf="@+id/seekBar"
+                tools:text="1명" />
+
+            <View
+                android:id="@+id/group_new_v3"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/color_F0F1F3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_group_new_max_number" />
+
+            <TextView
+                android:id="@+id/tv_group_github_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="GitHub"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/group_new_v3" />
+
+            <EditText
+                android:id="@+id/et_group_input_github_link"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/bg_team_post_detail_et"
+                android:hint="GitHub Url을 입력하세요"
+                android:padding="15dp"
+                android:textColorHint="@color/color_80636363"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_group_github_title" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -3,10 +3,11 @@ package com.example.ugotprototype.ui.group.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.ugotprototype.R
 import com.example.ugotprototype.data.group.GroupMiddleViewData
 import com.example.ugotprototype.databinding.ItemGroupMiddleListBinding
 import com.example.ugotprototype.ui.group.view.GroupDetailActivity
@@ -23,6 +24,14 @@ class GroupMiddleViewRecyclerViewAdapter() :
             binding.vm = currentGroupData
             binding.root.setOnClickListener {
                 goToPostDetail(currentGroupData, binding.root.context)
+            }
+
+            if (currentGroupData.groupImageUrl != null) {
+                Glide.with(binding.root.context)
+                    .load(currentGroupData.groupImageUrl)
+                    .into(binding.ivFavoritesMiddleImg)
+            } else {
+                binding.ivFavoritesMiddleImg.setImageResource(R.drawable.img_sample)
             }
 
             if (bindingAdapterPosition < 4) {
