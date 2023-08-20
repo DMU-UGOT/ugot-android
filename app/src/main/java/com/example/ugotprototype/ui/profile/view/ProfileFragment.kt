@@ -29,6 +29,8 @@ class ProfileFragment : Fragment() {
         goToSchool()
         goToStack()
         goToMessage()
+        goToMyPost()
+        goToMyBookmark()
     }
 
     // 개인 정보 페이지 이동
@@ -49,6 +51,17 @@ class ProfileFragment : Fragment() {
     private fun goToMessage() {
         binding.layoutProfileMessage.setOnClickListener {
             startActivity(Intent(requireActivity(), MessageActivity::class.java))
+        }
+    }
+
+    private fun goToMyPost() {
+        binding.layoutMypost.setOnClickListener {
+            startActivity((Intent(requireContext(), MypageMypostActivity::class.java)))
+        }
+    }
+    private fun goToMyBookmark() {
+        binding.layoutMybookmark.setOnClickListener {
+            startActivity((Intent(requireContext(), MypageMybookmarkActivity::class.java)))
         }
     }
 }

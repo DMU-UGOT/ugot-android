@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.example.ugotprototype.ui.team.viewmodel.TeamViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/top_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_my_page_prev"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:padding="5dp"
+                android:src="@drawable/ic_study_title_prev"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="북마크"
+                android:textColor="#0D0D0D"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#E0E0E0"
+                app:layout_constraintTop_toBottomOf="@+id/iv_my_page_prev" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nsv_main"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/top_view">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_my_bookmark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toTopOf="@+id/my_bookmark_bottom_div"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:listitem="@layout/item_team_list" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/my_bookmark_bottom_div"
+                    android:layout_width="match_parent"
+                    android:layout_height="122dp"
+                    android:background="@color/color_F0F1F3"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <TextView
+                        android:id="@+id/tv_slash"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="/"
+                        android:textColor="@color/color_9DA1A6"
+                        android:textSize="13dp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/bt_team_next"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/bt_team_next"
+                        tools:text="/" />
+
+                    <TextView
+                        android:id="@+id/tv_my_bookmark_first_cnt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="1"
+                        android:textColor="@color/black"
+                        android:textSize="13dp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@+id/tv_slash"
+                        app:layout_constraintTop_toTopOf="@+id/tv_slash"
+                        tools:text="1" />
+
+                    <TextView
+                        android:id="@+id/tv_my_bookmark_second_cnt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="13"
+                        android:textColor="@color/color_9DA1A6"
+                        android:textSize="13dp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/tv_slash"
+                        app:layout_constraintTop_toTopOf="@+id/tv_slash"
+                        tools:text="13" />
+
+                    <ImageButton
+                        android:id="@+id/bt_bookmark_prev"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="16dp"
+                        android:backgroundTint="@color/color_FFFFFF"
+                        android:onClick="@{vm.onPrevButtonClickListener}"
+                        android:src="@drawable/ic_team_prev_page"
+                        app:layout_constraintEnd_toStartOf="@+id/tv_my_bookmark_first_cnt"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageButton
+                        android:id="@+id/bt_team_next"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:backgroundTint="@color/color_FFFFFF"
+                        android:onClick="@{vm.onNextButtonClickListener}"
+                        android:src="@drawable/ic_team_next_page"
+                        app:layout_constraintStart_toEndOf="@+id/tv_my_bookmark_second_cnt"
+                        app:layout_constraintTop_toTopOf="@+id/bt_bookmark_prev" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
