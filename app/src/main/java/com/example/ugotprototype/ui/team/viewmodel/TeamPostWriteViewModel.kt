@@ -10,14 +10,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ugotprototype.data.team.TeamPostData
+import com.example.ugotprototype.di.api.ApiService
 import com.example.ugotprototype.di.api.TeamBuildingService
+import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TOKEN_DATA
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class TeamPostWriteViewModel @Inject constructor(private val teamBuildingService: TeamBuildingService) :
-    ViewModel() {
+class TeamPostWriteViewModel @Inject constructor(
+    private val teamBuildingService: TeamBuildingService, private val apiService: ApiService
+) : ViewModel() {
 
     private val _isTeamPostRegisterBtnEnabled = MutableLiveData<Boolean>()
     var isTeamPostRegisterBtnEnabled: LiveData<Boolean> = _isTeamPostRegisterBtnEnabled
@@ -34,6 +37,9 @@ class TeamPostWriteViewModel @Inject constructor(private val teamBuildingService
     private val _selectSpinner = MutableLiveData<Int>()
     val selectSpinner: LiveData<Int> = _selectSpinner
 
+    private val _isTeamExists = MutableLiveData<Boolean>()
+    val isTeamExists: LiveData<Boolean> = _isTeamExists
+
 
     fun isTeamPostRegisterButtonState(enabled: Boolean) {
         _isTeamPostRegisterBtnEnabled.value = enabled
@@ -41,6 +47,14 @@ class TeamPostWriteViewModel @Inject constructor(private val teamBuildingService
 
     fun setTeamPostData(teamPostData: TeamPostData) {
         _teamCreateData.value = teamPostData
+    }
+
+    fun isTeamExists(gitHubLink: String) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                apiService.getOrganization(gitHubLink, "Bearer $TOKEN_DATA")
+            }.onSuccess { _isTeamExists.value = true }.onFailure { _isTeamExists.value = false }
+        }
     }
 
     fun sendTeamData(teamPostData: TeamPostData) {
@@ -52,13 +66,13 @@ class TeamPostWriteViewModel @Inject constructor(private val teamBuildingService
     }
 
     val textWatcher = object : TextWatcher {
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             _etText.value = s.toString()
         }
 
-        override fun afterTextChanged(s: Editable?) { }
+        override fun afterTextChanged(s: Editable?) {}
     }
 
     val onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -66,7 +80,7 @@ class TeamPostWriteViewModel @Inject constructor(private val teamBuildingService
             _selectSpinner.value = position
         }
 
-        override fun onNothingSelected(parent: AdapterView<*>?) { }
+        override fun onNothingSelected(parent: AdapterView<*>?) {}
     }
 
     val onSeekBarChangeListener = object : SeekBar.OnSeekBarChangeListener {
@@ -74,8 +88,8 @@ class TeamPostWriteViewModel @Inject constructor(private val teamBuildingService
             _seekBar.value = progress
         }
 
-        override fun onStartTrackingTouch(seekBar: SeekBar?) { }
+        override fun onStartTrackingTouch(seekBar: SeekBar?) {}
 
-        override fun onStopTrackingTouch(seekBar: SeekBar?) { }
+        override fun onStopTrackingTouch(seekBar: SeekBar?) {}
     }
 }

@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -51,6 +52,10 @@ class TeamPostWriteDetailActivity : AppCompatActivity() {
             checkAllFields()
         }
 
+        teamPostWriteViewModel.isTeamExists.observe(this) {
+            checkOrganizationExistence(it)
+        }
+
         spinnerSetting()
         backToMainActivity()
     }
@@ -71,8 +76,26 @@ class TeamPostWriteDetailActivity : AppCompatActivity() {
     }
 
     private fun backToMainActivity() {
-
         binding.btTeamPostRegister.setOnClickListener {
+            teamPostWriteViewModel.isTeamExists(binding.etInputGithubLink.text.toString())
+        }
+
+        binding.btBackToMain.setOnClickListener {
+            setResult(Activity.RESULT_OK, Intent())
+            finish()
+        }
+    }
+
+    private fun checkAllFields() {
+        if (binding.classSpinner.selectedItemPosition != 0 && binding.fieldSpinner.selectedItemPosition != 0 && binding.etTitleName.length() != 0 && binding.etTitleDetail.length() != 0 && binding.etInputGithubLink.length() != 0 && binding.etInputKakaoOpenLink.length() != 0) {
+            teamPostWriteViewModel.isTeamPostRegisterButtonState(true)
+        } else {
+            teamPostWriteViewModel.isTeamPostRegisterButtonState(false)
+        }
+    }
+
+    private fun checkOrganizationExistence(isOrgCheck: Boolean) {
+        if (isOrgCheck) {
             val teamData = TeamPostData(
                 title = binding.etTitleName.text.toString(),
                 content = binding.etTitleDetail.text.toString(),
@@ -85,24 +108,8 @@ class TeamPostWriteDetailActivity : AppCompatActivity() {
             teamPostWriteViewModel.setTeamPostData(teamData)
             setResult(Activity.RESULT_OK, Intent())
             finish()
-        }
-
-        binding.btBackToMain.setOnClickListener {
-            setResult(Activity.RESULT_OK, Intent())
-            finish()
-        }
-    }
-
-    private fun checkAllFields() {
-        if (binding.classSpinner.selectedItemPosition != 0
-            && binding.fieldSpinner.selectedItemPosition != 0
-            && binding.etTitleName.length() != 0
-            && binding.etTitleDetail.length() != 0
-            && binding.etInputGithubLink.length() != 0
-            && binding.etInputKakaoOpenLink.length() != 0) {
-            teamPostWriteViewModel.isTeamPostRegisterButtonState(true)
         } else {
-            teamPostWriteViewModel.isTeamPostRegisterButtonState(false)
+            Toast.makeText(this, "해당 깃허브 조직은 존재하지 않습니다", Toast.LENGTH_SHORT).show()
         }
     }
 }
