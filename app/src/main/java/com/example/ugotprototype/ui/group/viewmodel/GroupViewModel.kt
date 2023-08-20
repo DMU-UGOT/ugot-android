@@ -1,16 +1,26 @@
 package com.example.ugotprototype.ui.group.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.ugotprototype.data.group.GroupCalendarData
 import com.example.ugotprototype.data.group.GroupEngagementData
 import com.example.ugotprototype.data.group.GroupMiddleViewData
 import com.example.ugotprototype.data.group.GroupTopViewData
+import com.example.ugotprototype.di.api.ApiService
+import com.example.ugotprototype.ui.group.view.GroupFragment
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.YearMonth
+import javax.inject.Inject
 
-class GroupViewModel : ViewModel() {
+@HiltViewModel
+class GroupViewModel @Inject constructor(
+    private val apiService: ApiService
+) : ViewModel() {
     private val _groupTopItemList = MutableLiveData<ArrayList<GroupTopViewData>>()
     val groupTopItemList: LiveData<ArrayList<GroupTopViewData>> = _groupTopItemList
 
@@ -41,6 +51,9 @@ class GroupViewModel : ViewModel() {
     private val _groupMaxPersonnel = MutableLiveData<Int>()
     var groupMaxPersonnel: LiveData<Int> = _groupMaxPersonnel
 
+    private val _currentPage = MutableLiveData<Int>()
+    val currentPage: LiveData<Int> = _currentPage
+
     fun setGroupTopData(groupTopData: ArrayList<GroupTopViewData>) {
         _groupTopItemList.value = groupTopData
     }
@@ -69,7 +82,6 @@ class GroupViewModel : ViewModel() {
         _isNoticeWriteButtonState.value = enabled
     }
 
-
     fun isBottomSheetClickCheck(enabled: Boolean) {
         _bottomSheetClickCheck.value = enabled
     }
@@ -80,5 +92,16 @@ class GroupViewModel : ViewModel() {
 
     fun groupMaxPersonnel(maxPersonnel: Int) {
         _groupMaxPersonnel.value = maxPersonnel
+    }
+
+    fun getGroupList() {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                val avatarUrl = apiService.getOrganization(
+                    "DMU-UGOT", "Bearer ${GroupFragment.TOKEN_DATA}"
+                )?.avatarUrl
+                Log.d("aaaaa1", avatarUrl.toString())
+            }
+        }
     }
 }

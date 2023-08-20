@@ -12,7 +12,9 @@ import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.ActivityDialogMessageBinding
 import com.example.ugotprototype.databinding.ActivityGroupNewGenerateBinding
 import com.example.ugotprototype.ui.group.viewmodel.GroupViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class GroupNewGenerate : AppCompatActivity() {
     private lateinit var binding: ActivityGroupNewGenerateBinding
     private val groupViewModel: GroupViewModel by viewModels()
