@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_skill_title"
+            style="@style/SignTitleTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="기술스택"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_skill_title">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/skill_javas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="Java script" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/skill_java"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="Java" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/skill_html5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="HTML5" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/skill_css3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="CSS3" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/skill_mysql"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="MySQL" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/skill_python"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="Python" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/skill_react"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="React" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/skill_spring"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="Spring" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/skill_oracle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="Oracle" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/skill_springboot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="Spring Boot" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/skill_nodejs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="Node.js" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/skill_c"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="c++" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/skill_typescript"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="Typescript" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/skill_ai"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="AI" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/skill_android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="android" />
+        </com.google.android.material.chip.ChipGroup>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

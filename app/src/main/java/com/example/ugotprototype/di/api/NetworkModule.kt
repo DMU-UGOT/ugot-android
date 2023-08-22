@@ -57,4 +57,10 @@ object NetworkModule {
     fun provideBackEndService(retrofit: Retrofit): BackEndService{
         return retrofit.create(BackEndService::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideSignService(retrofit: Retrofit): SignService {
+        return retrofit.create(SignService::class.java)
+    }
 }

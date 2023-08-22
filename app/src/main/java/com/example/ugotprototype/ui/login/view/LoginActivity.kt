@@ -1,5 +1,6 @@
 package com.example.ugotprototype.ui.login.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
@@ -8,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.ActivityLoginBinding
 import com.example.ugotprototype.ui.login.viewmodel.LoginViewModel
+import com.example.ugotprototype.ui.sign.view.SignActivity
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
@@ -21,6 +23,11 @@ class LoginActivity : AppCompatActivity() {
     private val viewModel: LoginViewModel by viewModels()
     private val kakaoClient: UserApiClient by lazy { UserApiClient.instance }
 
+    companion object {
+        const val LOGIN_EMAIL = "loginEmail"
+        const val LOGIN_REAL_NAME = "loginRealName"
+    }
+
     // 카카오계정으로 로그인 공통 callback 구성
     // 카카오톡으로 로그인 할 수 없어 카카오계정으로 로그인할 경우 사용됨
     private val kakaOAuthCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
@@ -33,7 +40,7 @@ class LoginActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
 
         // TODO 필수 : kakao developers -> 플랫폼 -> 키 해시 등록
-        // Log.e("태그", Utility.getKeyHash(applicationContext))
+        Log.e("태그", Utility.getKeyHash(applicationContext))
 
         binding.imgKakaoLogin.setOnClickListener { kakaoLogin() }
     }
@@ -68,8 +75,15 @@ class LoginActivity : AppCompatActivity() {
                 // it.kakaoAccount?.profile?.nickname
                 if (it?.kakaoAccount?.isEmailValid == true) {
                     // TODO 이메일 정보까지 전달
+                    Intent(this, SignActivity::class.java).apply {
+                        putExtra(LOGIN_EMAIL, it.kakaoAccount?.email)
+                        putExtra(LOGIN_REAL_NAME, it.properties?.get("nickname"))
+
+                        startActivity(this)
+                    }
                     // it.kakaoAccount?.email
                 } else {
+
                     // TODO 이메일 정보 받기
                 }
             }
