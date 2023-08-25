@@ -10,6 +10,7 @@ import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.ActivityLoginBinding
 import com.example.ugotprototype.ui.login.viewmodel.LoginViewModel
 import com.example.ugotprototype.ui.sign.view.SignActivity
+import com.example.ugotprototype.ui.sign.view.SignNoEmailActivity
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
@@ -78,13 +79,12 @@ class LoginActivity : AppCompatActivity() {
                     Intent(this, SignActivity::class.java).apply {
                         putExtra(LOGIN_EMAIL, it.kakaoAccount?.email)
                         putExtra(LOGIN_REAL_NAME, it.properties?.get("nickname"))
-
                         startActivity(this)
                     }
                     // it.kakaoAccount?.email
                 } else {
-
                     // TODO 이메일 정보 받기
+                    startActivity(Intent(this, SignNoEmailActivity::class.java))
                 }
             }
         }

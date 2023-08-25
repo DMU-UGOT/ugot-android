@@ -11,8 +11,8 @@ import com.example.ugotprototype.ui.team.view.TeamPostDetailActivity
 import com.example.ugotprototype.data.team.TeamData
 import com.example.ugotprototype.databinding.ItemTeamListBinding
 import com.example.ugotprototype.databinding.ItemTeamSearchListBinding
-import com.example.ugotprototype.di.api.response.OrgMemberDataResponse
-import com.example.ugotprototype.di.api.response.TeamPostResponse
+import com.example.ugotprototype.data.response.OrgMemberDataResponse
+import com.example.ugotprototype.data.response.TeamPostResponse
 
 class TeamSearchRecyclerViewAdapter :
     RecyclerView.Adapter<TeamSearchRecyclerViewAdapter.MyViewHolder>() {

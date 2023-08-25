@@ -1,4 +1,4 @@
-package com.example.ugotprototype.di.api.response
+package com.example.ugotprototype.data.response
 
 import android.graphics.pdf.PdfDocument
 

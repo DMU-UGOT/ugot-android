@@ -8,7 +8,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ugotprototype.databinding.ItemTeamInformationBinding
-import com.example.ugotprototype.di.api.response.OrgMemberDataResponse
+import com.example.ugotprototype.data.response.OrgMemberDataResponse
 import com.example.ugotprototype.ui.team.view.TeamInformationActivity
 
 class TeamInformationRecyclerViewAdapter :

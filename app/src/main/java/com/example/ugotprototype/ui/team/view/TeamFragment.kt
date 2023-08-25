@@ -17,9 +17,9 @@ import com.example.ugotprototype.BuildConfig
 import com.example.ugotprototype.R
 import com.example.ugotprototype.data.team.TeamData
 import com.example.ugotprototype.databinding.FragmentTeamBinding
-import com.example.ugotprototype.di.api.ApiService
-import com.example.ugotprototype.di.api.BackEndService
-import com.example.ugotprototype.di.api.response.TeamPostResponse
+import com.example.ugotprototype.data.api.ApiService
+import com.example.ugotprototype.data.api.BackEndService
+import com.example.ugotprototype.data.response.TeamPostResponse
 import com.example.ugotprototype.ui.team.adapter.TeamRecyclerViewAdapter
 import com.example.ugotprototype.ui.team.viewmodel.TeamViewModel
 import dagger.hilt.android.AndroidEntryPoint

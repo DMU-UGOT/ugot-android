@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ugotprototype.data.sign.SignData
-import com.example.ugotprototype.di.api.ApiService
-import com.example.ugotprototype.di.api.SignService
+import com.example.ugotprototype.data.api.ApiService
+import com.example.ugotprototype.data.api.SignService
 import com.example.ugotprototype.ui.team.view.TeamFragment
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -46,6 +46,12 @@ class SignViewModel @Inject constructor(
     private val _gitHubLink = MutableLiveData<String>()
     val gitHubLink: LiveData<String> = _gitHubLink
 
+    private val _realName = MutableLiveData<String>()
+    val realName: LiveData<String> = _realName
+
+    private val _email = MutableLiveData<String>()
+    val email: LiveData<String> = _email
+
     init {
         _currentFragmentIndex.value = 0
     }
@@ -54,6 +60,8 @@ class SignViewModel @Inject constructor(
         private const val NICKNAME_REGEX_PATTERN = "^[A-Za-z0-9]{3,10}$"
         private const val GRADE_REGEX_PATTERN = "^[1234]$"
         private val CLASS_REGEX_PATTERN = "^(YA|YB|YC|YD|YJ|YK)$".toRegex(RegexOption.IGNORE_CASE)
+        private const val KOREAN_NAME_PATTERN = "^[가-힣]+$"
+        private const val EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}\$"
     }
 
     fun setCurrentFragmentIndex(index: Int) {
@@ -105,6 +113,14 @@ class SignViewModel @Inject constructor(
         _gitHubLink.value = gitHub
     }
 
+    fun setRealname(realName: String) {
+        _realName.value = realName
+    }
+
+    fun setEmail(email: String) {
+        _email.value = email
+    }
+
     fun checkGitHubAccount(callback: (Boolean) -> Unit) {
         viewModelScope.launch {
             kotlin.runCatching {
@@ -115,7 +131,6 @@ class SignViewModel @Inject constructor(
     }
 
     fun isMajorValid(): Boolean {
-        Log.d("test", "${major.value?.isNotEmpty() == true}")
         return (major.value?.isNotEmpty() == true && major.value.toString() != "null")
     }
 
@@ -139,14 +154,28 @@ class SignViewModel @Inject constructor(
         return blogLink.value!!.startsWith("https://") && blogLink.value!!.contains(".com")
     }
 
-    fun signUp(realName: String, email: String) {
+    fun isRealNameValid(): Boolean {
+        Log.d("realName", realName.value.toString())
+        Log.d(
+            "realName",
+            (realName.value?.matches(KOREAN_NAME_PATTERN.toRegex()) == true).toString()
+        )
+        return realName.value!!.matches(KOREAN_NAME_PATTERN.toRegex())
+    }
+
+    fun isEmailValid(): Boolean {
+        Log.d("email", email.value.toString())
+        return email.value!!.matches(EMAIL_PATTERN.toRegex())
+    }
+
+    fun signUp() {
         viewModelScope.launch {
             kotlin.runCatching {
                 signService.createAccount(
                     SignData(
-                        name = realName,
+                        name = realName.value.toString(),
                         nickname = _nickName.value.toString(),
-                        email = email,
+                        email = _email.value.toString(),
                         password = "test1234",
                         major = _major.value.toString(),
                         grade = _nowGrade.value!!,

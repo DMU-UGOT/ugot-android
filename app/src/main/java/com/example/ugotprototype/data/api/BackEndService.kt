@@ -1,7 +1,7 @@
-package com.example.ugotprototype.di.api
+package com.example.ugotprototype.data.api
 
 import com.example.ugotprototype.data.team.TeamPostData
-import com.example.ugotprototype.di.api.response.TeamDataResponse
+import com.example.ugotprototype.data.response.TeamDataResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST

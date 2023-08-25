@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.ugotprototype.data.team.TeamData
 import com.example.ugotprototype.data.team.TeamPostData
-import com.example.ugotprototype.di.api.response.OrgMemberDataResponse
-import com.example.ugotprototype.di.api.response.TeamPostResponse
+import com.example.ugotprototype.data.response.OrgMemberDataResponse
+import com.example.ugotprototype.data.response.TeamPostResponse
 
 class TeamViewModel : ViewModel() {
     private val _teamItemList = MutableLiveData<List<TeamPostResponse>>()

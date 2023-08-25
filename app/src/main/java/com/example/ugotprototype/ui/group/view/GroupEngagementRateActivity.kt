@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.ugotprototype.R
 import com.example.ugotprototype.data.group.GroupEngagementData
 import com.example.ugotprototype.databinding.ActivityGroupEngagementRateBinding
-import com.example.ugotprototype.di.api.ApiService
+import com.example.ugotprototype.data.api.ApiService
 import com.example.ugotprototype.ui.group.adapter.GroupEngagementRateRecyclerViewAdapter
 import com.example.ugotprototype.ui.group.viewmodel.GroupViewModel
 import com.example.ugotprototype.ui.team.view.TeamFragment

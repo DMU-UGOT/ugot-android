@@ -1,4 +1,4 @@
-package com.example.ugotprototype.di.api.response
+package com.example.ugotprototype.data.response
 
 data class TeamPostPageInfoResponse(
     val page: Int,

@@ -1,4 +1,4 @@
-package com.example.ugotprototype.di.api
+package com.example.ugotprototype.data.api
 
 import com.example.ugotprototype.data.sign.SignData
 import retrofit2.http.Body
