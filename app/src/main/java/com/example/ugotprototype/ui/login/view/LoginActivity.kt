@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.example.ugotprototype.MainActivity
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.ActivityLoginBinding
 import com.example.ugotprototype.ui.login.viewmodel.LoginViewModel
@@ -43,7 +44,10 @@ class LoginActivity : AppCompatActivity() {
         // TODO 필수 : kakao developers -> 플랫폼 -> 키 해시 등록
         Log.e("태그", Utility.getKeyHash(applicationContext))
 
-        binding.imgKakaoLogin.setOnClickListener { kakaoLogin() }
+        binding.imgKakaoLogin.setOnClickListener {
+            //kakaoLogin()
+            startActivity(Intent(this, MainActivity::class.java))
+        }
     }
 
     private fun kakaoLogin() {

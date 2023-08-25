@@ -9,7 +9,7 @@ import com.example.ugotprototype.data.group.GroupCalendarData
 import com.example.ugotprototype.data.group.GroupEngagementData
 import com.example.ugotprototype.data.group.GroupMiddleViewData
 import com.example.ugotprototype.data.group.GroupTopViewData
-import com.example.ugotprototype.di.api.ApiService
+import com.example.ugotprototype.data.api.ApiService
 import com.example.ugotprototype.ui.group.view.GroupFragment
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

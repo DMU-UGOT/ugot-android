@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ugotprototype.data.response.TeamPostResponse
-import com.example.ugotprototype.di.api.ApiService
-import com.example.ugotprototype.di.api.TeamBuildingService
+import com.example.ugotprototype.data.api.ApiService
+import com.example.ugotprototype.data.api.TeamBuildingService
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TOKEN_DATA
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TeamViewModel @Inject constructor(
-    private val apiService: ApiService, private val teamBuildingService: TeamBuildingService
+        private val apiService: ApiService, private val teamBuildingService: TeamBuildingService
 ) : ViewModel() {
     private val _teamItemList = MutableLiveData<List<TeamPostResponse>>()
     val teamItemList: LiveData<List<TeamPostResponse>> = _teamItemList

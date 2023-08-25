@@ -9,9 +9,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.ugotprototype.data.api.ApiService
+import com.example.ugotprototype.data.api.TeamBuildingService
 import com.example.ugotprototype.data.team.TeamPostData
-import com.example.ugotprototype.di.api.ApiService
-import com.example.ugotprototype.di.api.TeamBuildingService
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TOKEN_DATA
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TeamPostWriteViewModel @Inject constructor(
-    private val teamBuildingService: TeamBuildingService, private val apiService: ApiService
+        private val teamBuildingService: TeamBuildingService, private val apiService: ApiService
 ) : ViewModel() {
 
     private val _isTeamPostRegisterBtnEnabled = MutableLiveData<Boolean>()
@@ -40,6 +40,9 @@ class TeamPostWriteViewModel @Inject constructor(
     private val _isTeamExists = MutableLiveData<Boolean>()
     val isTeamExists: LiveData<Boolean> = _isTeamExists
 
+    private val _createFinish = MutableLiveData<Boolean>()
+    val createFinish: LiveData<Boolean> = _createFinish
+
 
     fun isTeamPostRegisterButtonState(enabled: Boolean) {
         _isTeamPostRegisterBtnEnabled.value = enabled
@@ -58,10 +61,11 @@ class TeamPostWriteViewModel @Inject constructor(
     }
 
     fun sendTeamData(teamPostData: TeamPostData) {
+        _createFinish.value = false
         viewModelScope.launch {
             kotlin.runCatching {
                 teamBuildingService.createTeam(teamPostData)
-            }
+            }.onSuccess { _createFinish.value = true }
         }
     }
 

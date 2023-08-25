@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ugotprototype.data.response.OrgMemberDataResponse
-import com.example.ugotprototype.di.api.ApiService
+import com.example.ugotprototype.data.api.ApiService
 import com.example.ugotprototype.ui.team.view.TeamFragment
 import com.example.ugotprototype.ui.team.view.TeamInformationActivity.Companion.DUMMY_DATA
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -5,10 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.ugotprototype.data.api.ApiService
+import com.example.ugotprototype.data.api.SignService
 import com.example.ugotprototype.data.sign.SignData
-import com.example.ugotprototype.di.api.ApiService
-import com.example.ugotprototype.di.api.SignService
-import com.example.ugotprototype.ui.team.view.TeamFragment
+import com.example.ugotprototype.ui.group.view.GroupFragment.Companion.TOKEN_DATA
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -124,7 +124,7 @@ class SignViewModel @Inject constructor(
     fun checkGitHubAccount(callback: (Boolean) -> Unit) {
         viewModelScope.launch {
             kotlin.runCatching {
-                gitHubLink.value?.let { apiService.getUser(it, "Bearer ${TeamFragment.tokenData}") }
+                gitHubLink.value?.let { apiService.getUser(it, "Bearer $TOKEN_DATA") }
             }.onSuccess { callback(true) }
                 .onFailure { callback(false) }
         }

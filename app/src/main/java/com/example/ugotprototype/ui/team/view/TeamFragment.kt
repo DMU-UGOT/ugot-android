@@ -39,7 +39,7 @@ class TeamFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_team, container, false)
@@ -77,15 +77,17 @@ class TeamFragment : Fragment() {
     private fun goToTeamSearchDetail() {
 
         val goToSearchResultLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                if (result.resultCode == Activity.RESULT_OK) { }
-            }
+                registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                    if (result.resultCode == Activity.RESULT_OK) {
+
+                    }
+                }
 
         binding.btGoDetailSearch.setOnClickListener {
             goToSearchResultLauncher.launch(
-                Intent(
-                    requireContext(), TeamSearchDetailActivity::class.java
-                )
+                    Intent(
+                            requireContext(), TeamSearchDetailActivity::class.java
+                    )
             )
         }
     }
@@ -93,17 +95,17 @@ class TeamFragment : Fragment() {
     private fun goToTeamPostWriteDetail() {
 
         val goToPostWriteResultLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                if (result.resultCode == Activity.RESULT_OK) {
-                    teamViewModel.getTeamList()
+                registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                    if (result.resultCode == Activity.RESULT_OK) {
+                        teamViewModel.getTeamList()
+                    }
                 }
-            }
 
         binding.fabTeam.setOnClickListener {
             goToPostWriteResultLauncher.launch(
-                Intent(
-                    requireContext(), TeamPostWriteDetailActivity::class.java
-                )
+                    Intent(
+                            requireContext(), TeamPostWriteDetailActivity::class.java
+                    )
             )
         }
     }

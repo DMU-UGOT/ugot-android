@@ -1,18 +1,15 @@
 package com.example.ugotprototype.ui.group.view
 
-import android.content.Intent
-import android.icu.lang.UCharacter.GraphemeClusterBreak.L
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
-import androidx.constraintlayout.widget.Group
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import com.example.ugotprototype.R
+import com.example.ugotprototype.data.api.ApiService
 import com.example.ugotprototype.data.group.GroupEngagementData
 import com.example.ugotprototype.databinding.ActivityGroupEngagementRateBinding
-import com.example.ugotprototype.di.api.ApiService
 import com.example.ugotprototype.ui.group.adapter.GroupEngagementRateRecyclerViewAdapter
 import com.example.ugotprototype.ui.group.viewmodel.GroupViewModel
 import com.example.ugotprototype.ui.team.view.TeamFragment

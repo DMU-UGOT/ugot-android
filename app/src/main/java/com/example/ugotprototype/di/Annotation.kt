@@ -1,4 +1,4 @@
-package com.example.ugotprototype.di.api
+package com.example.ugotprototype.di
 
 import javax.inject.Qualifier
 

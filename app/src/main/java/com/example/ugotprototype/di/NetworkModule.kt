@@ -1,7 +1,10 @@
-package com.example.ugotprototype.di.api
+package com.example.ugotprototype.di
 
 import com.example.ugotprototype.BuildConfig
 import com.example.ugotprototype.MainActivity
+import com.example.ugotprototype.data.api.ApiService
+import com.example.ugotprototype.data.api.SignService
+import com.example.ugotprototype.data.api.TeamBuildingService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -57,5 +60,11 @@ object NetworkModule {
     @Singleton
     fun provideBackEndService(retrofit: Retrofit): TeamBuildingService {
         return retrofit.create(TeamBuildingService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSignService(retrofit: Retrofit): SignService {
+        return retrofit.create(SignService::class.java)
     }
 }

@@ -12,18 +12,13 @@ import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.R
 import com.example.ugotprototype.data.team.TeamPostData
 import com.example.ugotprototype.databinding.ActivityTeamPostWriteDetailBinding
-import com.example.ugotprototype.di.api.TeamBuildingService
 import com.example.ugotprototype.ui.team.viewmodel.TeamPostWriteViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class TeamPostWriteDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTeamPostWriteDetailBinding
     private val teamPostWriteViewModel: TeamPostWriteViewModel by viewModels()
-
-    @Inject
-    lateinit var teamBuildingService: TeamBuildingService
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,6 +51,13 @@ class TeamPostWriteDetailActivity : AppCompatActivity() {
             checkOrganizationExistence(it)
         }
 
+        teamPostWriteViewModel.createFinish.observe(this) {
+            if(it) {
+                setResult(Activity.RESULT_OK, Intent())
+                finish()
+            }
+        }
+
         spinnerSetting()
         backToMainActivity()
     }
@@ -63,13 +65,13 @@ class TeamPostWriteDetailActivity : AppCompatActivity() {
     private fun spinnerSetting() {
 
         val fieldAdapter = ArrayAdapter.createFromResource(
-            this, R.array.team_post_field_item, android.R.layout.simple_spinner_item
+                this, R.array.team_post_field_item, android.R.layout.simple_spinner_item
         )
         fieldAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.fieldSpinner.adapter = fieldAdapter
 
         val classAdapter = ArrayAdapter.createFromResource(
-            this, R.array.team_post_class_item, android.R.layout.simple_spinner_item
+                this, R.array.team_post_class_item, android.R.layout.simple_spinner_item
         )
         classAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.classSpinner.adapter = classAdapter
@@ -97,17 +99,15 @@ class TeamPostWriteDetailActivity : AppCompatActivity() {
     private fun checkOrganizationExistence(isOrgCheck: Boolean) {
         if (isOrgCheck) {
             val teamData = TeamPostData(
-                title = binding.etTitleName.text.toString(),
-                content = binding.etTitleDetail.text.toString(),
-                field = binding.fieldSpinner.selectedItem.toString(),
-                _class = binding.classSpinner.selectedItem.toString(),
-                allPersonnel = binding.seekBar.progress,
-                gitHubLink = binding.etInputGithubLink.text.toString(),
-                kakaoOpenLink = binding.etInputKakaoOpenLink.text.toString()
+                    title = binding.etTitleName.text.toString(),
+                    content = binding.etTitleDetail.text.toString(),
+                    field = binding.fieldSpinner.selectedItem.toString(),
+                    _class = binding.classSpinner.selectedItem.toString(),
+                    allPersonnel = binding.seekBar.progress,
+                    gitHubLink = binding.etInputGithubLink.text.toString(),
+                    kakaoOpenLink = binding.etInputKakaoOpenLink.text.toString()
             )
             teamPostWriteViewModel.setTeamPostData(teamData)
-            setResult(Activity.RESULT_OK, Intent())
-            finish()
         } else {
             Toast.makeText(this, "해당 깃허브 조직은 존재하지 않습니다", Toast.LENGTH_SHORT).show()
         }
