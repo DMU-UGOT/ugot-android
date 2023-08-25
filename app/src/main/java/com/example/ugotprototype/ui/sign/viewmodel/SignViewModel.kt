@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ugotprototype.data.sign.SignData
-import com.example.ugotprototype.data.api.ApiService
-import com.example.ugotprototype.data.api.SignService
+import com.example.ugotprototype.di.api.ApiService
+import com.example.ugotprototype.di.api.SignService
 import com.example.ugotprototype.ui.team.view.TeamFragment
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,8 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignViewModel @Inject constructor(
-    private val apiService: ApiService,
-    private val signService: SignService
+        private val apiService: ApiService,
+        private val signService: SignService
 ) : ViewModel() {
     private val _currentFragmentIndex = MutableLiveData<Int>()
     val currentFragmentIndex: LiveData<Int> = _currentFragmentIndex

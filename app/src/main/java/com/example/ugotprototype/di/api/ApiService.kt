@@ -1,4 +1,4 @@
-package com.example.ugotprototype.data.api
+package com.example.ugotprototype.di.api
 
 import com.example.ugotprototype.data.response.Contributor
 import com.example.ugotprototype.data.response.GitHubRepository

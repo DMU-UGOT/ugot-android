@@ -17,7 +17,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.ugotprototype.R
 import com.example.ugotprototype.data.team.TeamPostData
 import com.example.ugotprototype.databinding.ActivityTeamPostWriteDetailBinding
-import com.example.ugotprototype.data.api.BackEndService
+import com.example.ugotprototype.di.api.BackEndService
 import com.example.ugotprototype.ui.team.viewmodel.TeamViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch

@@ -1,10 +1,7 @@
-package com.example.ugotprototype.di
+package com.example.ugotprototype.di.api
 
 import com.example.ugotprototype.BuildConfig
 import com.example.ugotprototype.MainActivity
-import com.example.ugotprototype.data.api.ApiService
-import com.example.ugotprototype.data.api.BackEndService
-import com.example.ugotprototype.data.api.SignService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

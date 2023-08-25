@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.ActivityTeamInformationBinding
-import com.example.ugotprototype.data.api.ApiService
+import com.example.ugotprototype.di.api.ApiService
 import com.example.ugotprototype.data.response.OrgMemberDataResponse
 import com.example.ugotprototype.ui.team.adapter.TeamInformationRecyclerViewAdapter
 import com.example.ugotprototype.ui.team.viewmodel.TeamViewModel
