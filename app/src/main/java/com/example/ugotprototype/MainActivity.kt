@@ -17,7 +17,9 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         const val GITHUB_URL = "https://api.github.com/"
+        const val KAKAO_URL = "https://kapi.kakao.com/"
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

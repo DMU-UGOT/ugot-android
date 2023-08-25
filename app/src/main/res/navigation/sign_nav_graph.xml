@@ -1,0 +1,85 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sign_nav_graph"
+    app:startDestination="@id/sign_input_name">
+
+    <fragment
+        android:id="@+id/sign_input_name"
+        android:name="com.example.ugotprototype.ui.sign.view.SignNameFragment"
+        android:label="SignNameFragment"
+        tools:layout="@layout/fragment_sign_name">
+
+        <action
+            android:id="@+id/action_sign_input_name_to_sign_input_major"
+            app:destination="@id/sign_input_major" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/sign_input_major"
+        android:name="com.example.ugotprototype.ui.sign.view.SignMajorFragment"
+        android:label="SignMajorFragment"
+        tools:layout="@layout/fragment_sign_major">
+
+        <action
+            android:id="@+id/action_sign_input_major_to_sign_input_grade"
+            app:destination="@id/sign_input_grade" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/sign_input_grade"
+        android:name="com.example.ugotprototype.ui.sign.view.SignGradeFragment"
+        android:label="SignGradeFragment"
+        tools:layout="@layout/fragment_sign_grade">
+
+        <action
+            android:id="@+id/action_sign_input_grade_to_sign_input_class"
+            app:destination="@id/sign_input_class" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/sign_input_class"
+        android:name="com.example.ugotprototype.ui.sign.view.SignClassFragment"
+        android:label="SignClassFragment"
+        tools:layout="@layout/fragment_sign_class">
+
+        <action
+            android:id="@+id/action_sign_input_class_to_sign_input_skill"
+            app:destination="@id/sign_input_skill" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/sign_input_skill"
+        android:name="com.example.ugotprototype.ui.sign.view.SignSkillFragment"
+        android:label="SignSkillFragment"
+        tools:layout="@layout/fragment_sign_skill">
+
+        <action
+            android:id="@+id/action_sign_input_skill_to_sign_input_github"
+            app:destination="@id/sign_input_github" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/sign_input_github"
+        android:name="com.example.ugotprototype.ui.sign.view.SignGithubFragment"
+        android:label="SignGithubFragment"
+        tools:layout="@layout/fragment_sign_github">
+
+        <action
+            android:id="@+id/action_sign_input_github_to_sign_input_blog"
+            app:destination="@id/sign_input_blog" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/sign_input_blog"
+        android:name="com.example.ugotprototype.ui.sign.view.SignBlogFragment"
+        android:label="SignBlogFragment"
+        tools:layout="@layout/fragment_sign_blog" />
+
+</navigation>

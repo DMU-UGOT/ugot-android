@@ -26,6 +26,9 @@ android {
         buildConfigField "String", "BASE_URL", properties['base_url']
         manifestPlaceholders = [BASE_URL: properties['base_url']]
 
+        buildConfigField "String", "KAKAO_NATIVE_KEY", properties['kakao_native_app_key']
+        manifestPlaceholders = [KAKAO_NATIVE_KEY: properties['kakao_native_app_key']]
+
     }
     buildTypes {
         release {
@@ -88,4 +91,7 @@ dependencies {
 
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+
+    // Kakao Login
+    implementation "com.kakao.sdk:v2-user:2.15.0"
 }
