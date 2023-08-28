@@ -16,10 +16,12 @@ import com.example.ugotprototype.data.community.CommunityChangeViewData
 import com.example.ugotprototype.databinding.FragmentCommunityChangeBinding
 import com.example.ugotprototype.ui.community.adapter.CommunityChangeRecyclerViewAdapter
 import com.example.ugotprototype.ui.community.viewmodel.CommunityChangeViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
+@AndroidEntryPoint
 class CommunityChangeFragment : Fragment() {
     private lateinit var binding: FragmentCommunityChangeBinding
     private val communityChangeViewModel: CommunityChangeViewModel by viewModels()
@@ -36,7 +38,6 @@ class CommunityChangeFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_community_change, container, false)
-        binding.vm = communityChangeViewModel
 
         return binding.root
     }

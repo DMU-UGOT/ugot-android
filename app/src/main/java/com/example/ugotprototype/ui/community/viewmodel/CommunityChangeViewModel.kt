@@ -4,12 +4,20 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.ugotprototype.data.api.MessageService
 import com.example.ugotprototype.data.community.CommunityChangeViewData
+import com.example.ugotprototype.data.community.CommunityMessageData
+import com.example.ugotprototype.ui.sign.viewmodel.SignViewModel.Companion.MY_TOKEN_DATA
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 import kotlin.collections.ArrayList
 
-class CommunityChangeViewModel : ViewModel() {
+@HiltViewModel
+class CommunityChangeViewModel @Inject constructor(private val messageService: MessageService) : ViewModel() {
     private val _communityChangeItemList = MutableLiveData<ArrayList<CommunityChangeViewData>>() // 뷰 모델에서 데이터 처리를 하는 변수
     val communityChangeItemList: LiveData<ArrayList<CommunityChangeViewData>> = _communityChangeItemList
 
@@ -60,5 +68,17 @@ class CommunityChangeViewModel : ViewModel() {
         return cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&
                 cal1.get(Calendar.MONTH) == cal2.get(Calendar.MONTH) &&
                 cal1.get(Calendar.DAY_OF_MONTH) == cal2.get(Calendar.DAY_OF_MONTH)
+    }
+
+    fun sendMessage(title:String, content:String) {
+        viewModelScope.launch{
+            kotlin.runCatching {
+                messageService.sendMessage(CommunityMessageData(
+                    title = title,
+                    content = content,
+                    receiverName = "미래김"
+                ), "Bearer $MY_TOKEN_DATA")
+            }
+        }
     }
 }

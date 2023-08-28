@@ -17,8 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignViewModel @Inject constructor(
-        private val apiService: ApiService,
-        private val signService: SignService
+    private val apiService: ApiService,
+    private val signService: SignService
 ) : ViewModel() {
     private val _currentFragmentIndex = MutableLiveData<Int>()
     val currentFragmentIndex: LiveData<Int> = _currentFragmentIndex
@@ -66,6 +66,7 @@ class SignViewModel @Inject constructor(
         private val CLASS_REGEX_PATTERN = "^(YA|YB|YC|YD|YJ|YK)$".toRegex(RegexOption.IGNORE_CASE)
         private const val KOREAN_NAME_PATTERN = "^[가-힣]+$"
         private const val EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}\$"
+        lateinit var MY_TOKEN_DATA: String
     }
 
     fun setCurrentFragmentIndex(index: Int) {
@@ -179,7 +180,7 @@ class SignViewModel @Inject constructor(
                         personalBlogLink = _blogLink.value?.toString() ?: ""
                     )
                 )
-            }.onSuccess { _onSignUpCompleted.value = true}
+            }.onSuccess { _onSignUpCompleted.value = true }
                 .onFailure { Log.d("실패", it.toString()) }
         }
     }
@@ -193,8 +194,11 @@ class SignViewModel @Inject constructor(
                         password = "1234"
                     )
                 )
-            }.onSuccess { _onSignInCompleted.value = true }
-                .onFailure { _onSignInCompleted.value = false }
+            }.onSuccess {
+                _onSignInCompleted.value = true
+                MY_TOKEN_DATA = it.data.accessToken
+                Log.d("test", MY_TOKEN_DATA)
+            }
         }
     }
 }

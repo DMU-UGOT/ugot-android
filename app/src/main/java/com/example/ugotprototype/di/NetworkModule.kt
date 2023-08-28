@@ -1,8 +1,10 @@
 package com.example.ugotprototype.di
 
+import android.os.Message
 import com.example.ugotprototype.BuildConfig
 import com.example.ugotprototype.MainActivity
 import com.example.ugotprototype.data.api.ApiService
+import com.example.ugotprototype.data.api.MessageService
 import com.example.ugotprototype.data.api.SignService
 import com.example.ugotprototype.data.api.TeamBuildingService
 import dagger.Module
@@ -66,5 +68,11 @@ object NetworkModule {
     @Singleton
     fun provideSignService(retrofit: Retrofit): SignService {
         return retrofit.create(SignService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideMessageService(retrofit: Retrofit): MessageService {
+        return retrofit.create(MessageService::class.java)
     }
 }

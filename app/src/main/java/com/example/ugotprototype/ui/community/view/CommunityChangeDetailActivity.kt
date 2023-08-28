@@ -3,32 +3,33 @@ package com.example.ugotprototype.ui.community.view
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.example.ugotprototype.R
 import com.example.ugotprototype.data.community.BoardService
 import com.example.ugotprototype.data.community.CommunityDetailViewInterface
 import com.example.ugotprototype.databinding.ActivityCommunityChangeDetailBinding
 import com.example.ugotprototype.databinding.ActivityCommunityChangeSendMessageBinding
 import com.example.ugotprototype.ui.community.viewmodel.CommunityChangeViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Locale
 
+@AndroidEntryPoint
 class CommunityChangeDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCommunityChangeDetailBinding
-    private lateinit var viewModel: CommunityChangeViewModel
+    private val viewModel: CommunityChangeViewModel by viewModels()
     private var boardController: CommunityDetailViewInterface = BoardService()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_community_change_detail)
 
-        viewModel = ViewModelProvider(this).get(CommunityChangeViewModel::class.java)
 
         // 글쓴이 여부 확인 (여기서는 임의로 true/false를 지정하거나 실제 데이터를 사용하여 결정)
         val isAuthor = boardController.checkBoarderOwner()
@@ -49,7 +50,8 @@ class CommunityChangeDetailActivity : AppCompatActivity() {
                 // 글쓴이가 아닌 경우
                 binding.btChangeNewMessage.visibility = View.VISIBLE // "보내기" 버튼 보이기
             }
-            binding.btChangeNewUpdate.visibility = if (isAuthor) View.VISIBLE else View.GONE // 수정하기 버튼 보이기/감추기
+            binding.btChangeNewUpdate.visibility =
+                if (isAuthor) View.VISIBLE else View.GONE // 수정하기 버튼 보이기/감추기
         })
         viewModel.setIsAuthor(isAuthor)
 
@@ -117,7 +119,7 @@ class CommunityChangeDetailActivity : AppCompatActivity() {
         return outputDateFormat.format(date)
     }
 
-    private fun clickSendMessage(){
+    private fun clickSendMessage() {
         binding.btChangeNewMessage.setOnClickListener {
             sendMessageDialog()
         }
@@ -135,7 +137,7 @@ class CommunityChangeDetailActivity : AppCompatActivity() {
         val alertDialog = builder.create()
 
         dialogBinding.btChangeSendMessage.setOnClickListener {
-            val title = dialogBinding.etChangeSendTitle.toString()
+            val title = dialogBinding.etChangeSendTitle.text.toString()
             val text = dialogBinding.etChangeSendText.text.toString()
 
             // 입력된 이름과 내용을 사용하여 보내기 동작 수행
@@ -154,6 +156,7 @@ class CommunityChangeDetailActivity : AppCompatActivity() {
         // 여기에 실제로 보내기 동작을 구현
         // 예를 들어, 서버 API 호출이나 데이터 처리 등 구현
         // 예시로 Log 출력
+        viewModel.sendMessage(title, text)
         Log.d("Send", "제목: $title, 내용: $text")
     }
 }
