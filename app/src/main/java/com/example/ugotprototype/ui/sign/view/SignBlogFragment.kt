@@ -28,8 +28,6 @@ class SignBlogFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //다음페이지나 이전페이지에 갔다왔을때
-        //입력된 값이 초기화되는걸 방지
         binding.etInputBlog.setText(signViewModel.blogLink.value?.toString() ?: "")
 
         binding.etInputBlog.addTextChangedListener(object : TextWatcher {
@@ -38,7 +36,7 @@ class SignBlogFragment : Fragment() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
             override fun afterTextChanged(s: Editable?) {
-                signViewModel.setBlogLink(s.toString())
+                signViewModel.setBlogLink("https://" + s.toString())
             }
         })
     }

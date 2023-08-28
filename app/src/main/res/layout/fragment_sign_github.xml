@@ -12,7 +12,7 @@
             style="@style/SignTitleTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="깃허브"
+            android:text="깃허브 이름을 입력해 주세요."
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,9 +21,21 @@
             style="@style/SignDetailTextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="200dp"
             android:background="@android:color/transparent"
-            android:hint="깃허브 아이디를 입력하세요."
+            android:hint="존재하는 깃허브 계정 이름"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="@+id/tv_github_title"
             app:layout_constraintTop_toBottomOf="@+id/tv_github_title" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/color_50636363"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_input_github" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

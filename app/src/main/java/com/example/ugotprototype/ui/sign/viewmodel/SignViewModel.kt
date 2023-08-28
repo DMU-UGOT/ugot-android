@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ugotprototype.data.api.ApiService
 import com.example.ugotprototype.data.api.SignService
+import com.example.ugotprototype.data.sign.SignAccountData
 import com.example.ugotprototype.data.sign.SignData
 import com.example.ugotprototype.ui.group.view.GroupFragment.Companion.TOKEN_DATA
 import com.google.android.material.chip.Chip
@@ -37,9 +38,6 @@ class SignViewModel @Inject constructor(
     private val _selectedChipTexts = MutableLiveData<List<String>>()
     val selectedChipTexts: LiveData<List<String>> = _selectedChipTexts
 
-    private val _buttonStateText = MutableLiveData<String>()
-    val buttonStateText: LiveData<String> = _buttonStateText
-
     private val _blogLink = MutableLiveData<String>()
     val blogLink: LiveData<String> = _blogLink
 
@@ -51,6 +49,12 @@ class SignViewModel @Inject constructor(
 
     private val _email = MutableLiveData<String>()
     val email: LiveData<String> = _email
+
+    private val _onSignUpCompleted = MutableLiveData<Boolean>()
+    val onSignUpCompleted: LiveData<Boolean> = _onSignUpCompleted
+
+    private val _onSignInCompleted = MutableLiveData<Boolean>()
+    val onSignInCompleted: LiveData<Boolean> = _onSignInCompleted
 
     init {
         _currentFragmentIndex.value = 0
@@ -101,10 +105,6 @@ class SignViewModel @Inject constructor(
         _selectedChipTexts.value = updatedChipTexts
     }
 
-    fun setButtonStateText(text: String) {
-        _buttonStateText.value = text
-    }
-
     fun setBlogLink(blog: String) {
         _blogLink.value = blog
     }
@@ -151,20 +151,14 @@ class SignViewModel @Inject constructor(
     }
 
     fun isBlogValid(): Boolean {
-        return blogLink.value!!.startsWith("https://") && blogLink.value!!.contains(".com")
+        return blogLink.value?.contains(".com") ?: true
     }
 
     fun isRealNameValid(): Boolean {
-        Log.d("realName", realName.value.toString())
-        Log.d(
-            "realName",
-            (realName.value?.matches(KOREAN_NAME_PATTERN.toRegex()) == true).toString()
-        )
         return realName.value!!.matches(KOREAN_NAME_PATTERN.toRegex())
     }
 
     fun isEmailValid(): Boolean {
-        Log.d("email", email.value.toString())
         return email.value!!.matches(EMAIL_PATTERN.toRegex())
     }
 
@@ -176,17 +170,31 @@ class SignViewModel @Inject constructor(
                         name = realName.value.toString(),
                         nickname = _nickName.value.toString(),
                         email = _email.value.toString(),
-                        password = "test1234",
+                        password = "1234",
                         major = _major.value.toString(),
                         grade = _nowGrade.value!!,
                         _class = _nowClass.value.toString(),
                         skill = _selectedChipTexts.value!!,
                         gitHubLink = "github.com/" + _gitHubLink.value,
-                        personalBlogLink = _blogLink.value.toString()
+                        personalBlogLink = _blogLink.value?.toString() ?: ""
                     )
                 )
-            }.onSuccess { Log.d("성공", "성공") }
+            }.onSuccess { _onSignUpCompleted.value = true}
                 .onFailure { Log.d("실패", it.toString()) }
+        }
+    }
+
+    fun attemptLogin() {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                signService.signIn(
+                    SignAccountData(
+                        email = _email.value.toString(),
+                        password = "1234"
+                    )
+                )
+            }.onSuccess { _onSignInCompleted.value = true }
+                .onFailure { _onSignInCompleted.value = false }
         }
     }
 }

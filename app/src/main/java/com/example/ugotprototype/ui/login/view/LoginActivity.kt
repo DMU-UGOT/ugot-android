@@ -45,8 +45,7 @@ class LoginActivity : AppCompatActivity() {
         Log.e("태그", Utility.getKeyHash(applicationContext))
 
         binding.imgKakaoLogin.setOnClickListener {
-            //kakaoLogin()
-            startActivity(Intent(this, MainActivity::class.java))
+            kakaoLogin()
         }
     }
 
@@ -75,9 +74,6 @@ class LoginActivity : AppCompatActivity() {
     private fun getKakaoTalkUserInfo() {
         kakaoClient.me { user, _ ->
             user.let {
-                // TODO 화면 전환
-                // it.properties?.get("nickname")
-                // it.kakaoAccount?.profile?.nickname
                 if (it?.kakaoAccount?.isEmailValid == true) {
                     // TODO 이메일 정보까지 전달
                     Intent(this, SignActivity::class.java).apply {
@@ -85,9 +81,7 @@ class LoginActivity : AppCompatActivity() {
                         putExtra(LOGIN_REAL_NAME, it.properties?.get("nickname"))
                         startActivity(this)
                     }
-                    // it.kakaoAccount?.email
                 } else {
-                    // TODO 이메일 정보 받기
                     startActivity(Intent(this, SignNoEmailActivity::class.java))
                 }
             }

@@ -28,8 +28,6 @@ class SignClassFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //다음페이지나 이전페이지에 갔다왔을때
-        //입력된 값이 초기화되는걸 방지
         binding.etNowClass.setText(signViewModel.nowClass.value?.toString() ?: "")
 
         binding.etNowClass.addTextChangedListener(object : TextWatcher {

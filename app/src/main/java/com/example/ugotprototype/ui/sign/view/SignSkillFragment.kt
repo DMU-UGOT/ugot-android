@@ -33,10 +33,6 @@ class SignSkillFragment : Fragment() {
 
         binding.chipGroup.setOnCheckedChangeListener(null)
 
-        Log.d("test", signViewModel.selectedChipTexts.value.toString())
-
-        //다음페이지나 이전페이지에 갔다왔을때
-        //입력된 값이 초기화되는걸 방지
         binding.chipGroup.children.filterIsInstance<Chip>().forEach { chip ->
             chip.isChecked =
                 signViewModel.selectedChipTexts.value?.contains(chip.text.toString()) ?: false

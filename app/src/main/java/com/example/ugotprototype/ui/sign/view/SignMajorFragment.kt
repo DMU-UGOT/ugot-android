@@ -29,8 +29,6 @@ class SignMajorFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //다음페이지나 이전페이지에 갔다왔을때
-        //선택되어있는 칩이 초기화되는걸 방지
         signViewModel.major.value?.let { selectedMajor ->
             val selectedChip = binding.chipGroup.children
                 .filterIsInstance<Chip>()
