@@ -1,11 +1,14 @@
 package com.example.ugotprototype.ui.login.view
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.example.ugotprototype.BuildConfig
 import com.example.ugotprototype.MainActivity
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.ActivityLoginBinding
@@ -13,10 +16,12 @@ import com.example.ugotprototype.ui.login.viewmodel.LoginViewModel
 import com.example.ugotprototype.ui.sign.view.SignActivity
 import com.example.ugotprototype.ui.sign.view.SignNoEmailActivity
 import com.kakao.sdk.auth.model.OAuthToken
+import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
-import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
+import com.navercorp.nid.NaverIdLoginSDK
+import com.navercorp.nid.oauth.OAuthLoginCallback
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -42,12 +47,20 @@ class LoginActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
 
         // TODO 필수 : kakao developers -> 플랫폼 -> 키 해시 등록
-        Log.e("태그", Utility.getKeyHash(applicationContext))
+        // Log.e("태그", Utility.getKeyHash(applicationContext))
+
+        binding.layoutNaverLogin.setOnClickListener {
+            loginNaver()
+        }
 
         binding.imgKakaoLogin.setOnClickListener {
             //kakaoLogin()
             startActivity(Intent(this, MainActivity::class.java))
         }
+    }
+
+    private fun setUpKaKaoLogin() {
+        KakaoSdk.init(this, BuildConfig.KAKAO_NATIVE_KEY)
     }
 
     private fun kakaoLogin() {
@@ -92,5 +105,32 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun setUpNaverLogin() {
+        NaverIdLoginSDK.initialize(
+            context = this,
+            clientId = BuildConfig.NAVER_CLIENT_ID,
+            clientSecret = BuildConfig.NAVER_CLIENT_SECRET,
+            clientName = BuildConfig.NAVER_CLIENT_ID)
+    }
+
+    private fun loginNaver() {
+        setUpNaverLogin()
+
+        val oauthLoginCallback = object : OAuthLoginCallback {
+            override fun onSuccess() {
+                // 네이버 로그인 인증이 성공했을 때 수행할 코드 추가
+                Log.e("태그", NaverIdLoginSDK.getAccessToken().toString())
+            }
+            override fun onFailure(httpStatus: Int, message: String) {
+                Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
+            }
+            override fun onError(errorCode: Int, message: String) {
+                Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        NaverIdLoginSDK.authenticate(this, oauthLoginCallback)
     }
 }

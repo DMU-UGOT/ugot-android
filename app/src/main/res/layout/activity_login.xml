@@ -16,15 +16,47 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_naver_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/bg_naver_login"
+            android:paddingVertical="3dp"
+            app:layout_constraintBottom_toTopOf="@id/img_kakao_login">
+
+            <ImageView
+                android:id="@+id/iv_naver_logo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="3dp"
+                android:src="@drawable/img_naver_logo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="네이버 로그인"
+                android:textSize="17.5dp"
+                android:textStyle="bold"
+                android:layout_marginStart="23dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <ImageView
             android:id="@+id/img_kakao_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="20dp"
             android:src="@drawable/img_kakao_login"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/bt_login_main_find_id"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/bt_login_main_find_id" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/bt_login_main_find_id"
