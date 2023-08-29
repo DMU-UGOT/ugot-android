@@ -1,17 +1,20 @@
 package com.example.ugotprototype.di
 
-import android.os.Message
 import com.example.ugotprototype.BuildConfig
 import com.example.ugotprototype.MainActivity
 import com.example.ugotprototype.data.api.ApiService
 import com.example.ugotprototype.data.api.MessageService
 import com.example.ugotprototype.data.api.SignService
 import com.example.ugotprototype.data.api.TeamBuildingService
+import com.example.ugotprototype.ui.sign.util.SharedPreference
+import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TOKEN_DATA
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Request
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -23,11 +26,12 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient {
+    fun provideOkHttpClient(authInterceptor: Interceptor): OkHttpClient {
         return OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(30, TimeUnit.SECONDS)
+            .addInterceptor(authInterceptor)
             .build()
     }
 
@@ -74,5 +78,30 @@ object NetworkModule {
     @Singleton
     fun provideMessageService(retrofit: Retrofit): MessageService {
         return retrofit.create(MessageService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAuthInterceptor(sharedPreference: SharedPreference): Interceptor {
+        return Interceptor { chain ->
+            val originalRequest: Request = chain.request()
+            val modifiedRequest: Request
+
+            if (originalRequest.url.toString().startsWith(MainActivity.GITHUB_URL)) {
+                modifiedRequest = originalRequest.newBuilder()
+                    .header("Authorization", "Bearer $TOKEN_DATA") // GitHub 토큰
+                    .build()
+            }
+
+            else if (originalRequest.url.toString().startsWith(BuildConfig.BASE_URL) && !(originalRequest.url.toString().contains("members"))) {
+                modifiedRequest = originalRequest.newBuilder()
+                    .header("Authorization", "Bearer ${sharedPreference.getToken()}")
+                    .build()
+            } else {
+                modifiedRequest = originalRequest
+            }
+
+            chain.proceed(modifiedRequest)
+        }
     }
 }

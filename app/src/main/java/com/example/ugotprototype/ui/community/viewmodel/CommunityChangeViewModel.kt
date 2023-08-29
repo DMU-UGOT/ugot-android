@@ -8,18 +8,21 @@ import androidx.lifecycle.viewModelScope
 import com.example.ugotprototype.data.api.MessageService
 import com.example.ugotprototype.data.community.CommunityChangeViewData
 import com.example.ugotprototype.data.community.CommunityMessageData
-import com.example.ugotprototype.ui.sign.viewmodel.SignViewModel.Companion.MY_TOKEN_DATA
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 @HiltViewModel
-class CommunityChangeViewModel @Inject constructor(private val messageService: MessageService) : ViewModel() {
-    private val _communityChangeItemList = MutableLiveData<ArrayList<CommunityChangeViewData>>() // 뷰 모델에서 데이터 처리를 하는 변수
-    val communityChangeItemList: LiveData<ArrayList<CommunityChangeViewData>> = _communityChangeItemList
+class CommunityChangeViewModel @Inject constructor(private val messageService: MessageService) :
+    ViewModel() {
+    private val _communityChangeItemList =
+        MutableLiveData<ArrayList<CommunityChangeViewData>>() // 뷰 모델에서 데이터 처리를 하는 변수
+    val communityChangeItemList: LiveData<ArrayList<CommunityChangeViewData>> =
+        _communityChangeItemList
 
     // 글쓴이 여부를 나타내는 LiveData 변수 추가
     private val _isAuthor = MutableLiveData<Boolean>()
@@ -70,14 +73,16 @@ class CommunityChangeViewModel @Inject constructor(private val messageService: M
                 cal1.get(Calendar.DAY_OF_MONTH) == cal2.get(Calendar.DAY_OF_MONTH)
     }
 
-    fun sendMessage(title:String, content:String) {
-        viewModelScope.launch{
+    fun sendMessage(title: String, content: String) {
+        viewModelScope.launch {
             kotlin.runCatching {
-                messageService.sendMessage(CommunityMessageData(
-                    title = title,
-                    content = content,
-                    receiverName = "미래김"
-                ), "Bearer $MY_TOKEN_DATA")
+                messageService.sendMessage(
+                    CommunityMessageData(
+                        title = title,
+                        content = content,
+                        receiverName = "미래김"
+                    )
+                )
             }
         }
     }

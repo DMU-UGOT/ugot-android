@@ -5,17 +5,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.ugotprototype.data.response.TeamPostResponse
 import com.example.ugotprototype.data.api.ApiService
 import com.example.ugotprototype.data.api.TeamBuildingService
-import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TOKEN_DATA
+import com.example.ugotprototype.data.response.TeamPostResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class TeamViewModel @Inject constructor(
-        private val apiService: ApiService, private val teamBuildingService: TeamBuildingService
+    private val apiService: ApiService, private val teamBuildingService: TeamBuildingService
 ) : ViewModel() {
     private val _teamItemList = MutableLiveData<List<TeamPostResponse>>()
     val teamItemList: LiveData<List<TeamPostResponse>> = _teamItemList
@@ -25,6 +24,9 @@ class TeamViewModel @Inject constructor(
 
     private val _currentPage = MutableLiveData<Int>()
     val currentPage: LiveData<Int> = _currentPage
+
+    private val _isTokenExpired = MutableLiveData<Boolean>()
+    val isTokenExpired: LiveData<Boolean> = _isTokenExpired
 
     val onPrevButtonClickListener = View.OnClickListener {
         if (_currentPage.value!! > 1) {
@@ -55,7 +57,7 @@ class TeamViewModel @Inject constructor(
                 teamsResponse.forEach { team ->
                     kotlin.runCatching {
                         val avatarUrl = apiService.getOrganization(
-                            team.gitHubLink, "Bearer $TOKEN_DATA"
+                            team.gitHubLink
                         )?.avatarUrl
                         team.avatarUrl = avatarUrl ?: ""
                     }
@@ -63,6 +65,8 @@ class TeamViewModel @Inject constructor(
 
                 _teamItemList.value = teamsResponse
                 _totalPage.value = pageResponse.pageInfo.totalPages
+            }.onFailure {
+                _isTokenExpired.value = true
             }
         }
     }

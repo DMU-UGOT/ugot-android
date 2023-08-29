@@ -1,6 +1,6 @@
 package com.example.ugotprototype.ui.sign.viewmodel
 
-import android.util.Log
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,16 +9,18 @@ import com.example.ugotprototype.data.api.ApiService
 import com.example.ugotprototype.data.api.SignService
 import com.example.ugotprototype.data.sign.SignAccountData
 import com.example.ugotprototype.data.sign.SignData
-import com.example.ugotprototype.ui.group.view.GroupFragment.Companion.TOKEN_DATA
+import com.example.ugotprototype.ui.sign.util.SharedPreference
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+
 @HiltViewModel
 class SignViewModel @Inject constructor(
     private val apiService: ApiService,
-    private val signService: SignService
+    private val signService: SignService,
+    private val sharedPreference: SharedPreference
 ) : ViewModel() {
     private val _currentFragmentIndex = MutableLiveData<Int>()
     val currentFragmentIndex: LiveData<Int> = _currentFragmentIndex
@@ -66,7 +68,10 @@ class SignViewModel @Inject constructor(
         private val CLASS_REGEX_PATTERN = "^(YA|YB|YC|YD|YJ|YK)$".toRegex(RegexOption.IGNORE_CASE)
         private const val KOREAN_NAME_PATTERN = "^[가-힣]+$"
         private const val EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}\$"
-        lateinit var MY_TOKEN_DATA: String
+        const val MY_TOKEN_TITLE = "myTokenData"
+        const val MY_TOKEN_DATA = "accessToken"
+        const val AUTO_LOGIN_TITLE = "myAutoLogin"
+        const val AUTO_LOGIN_DATA = "isAutoLogin"
     }
 
     fun setCurrentFragmentIndex(index: Int) {
@@ -125,9 +130,8 @@ class SignViewModel @Inject constructor(
     fun checkGitHubAccount(callback: (Boolean) -> Unit) {
         viewModelScope.launch {
             kotlin.runCatching {
-                gitHubLink.value?.let { apiService.getUser(it, "Bearer $TOKEN_DATA") }
-            }.onSuccess { callback(true) }
-                .onFailure { callback(false) }
+                gitHubLink.value?.let { apiService.getUser(it) }
+            }.onSuccess { callback(true) }.onFailure { callback(false) }
         }
     }
 
@@ -180,25 +184,26 @@ class SignViewModel @Inject constructor(
                         personalBlogLink = _blogLink.value?.toString() ?: ""
                     )
                 )
-            }.onSuccess { _onSignUpCompleted.value = true }
-                .onFailure { Log.d("실패", it.toString()) }
+            }.onSuccess {
+                _onSignUpCompleted.value = true
+            }
         }
     }
 
-    fun attemptLogin() {
+    fun attemptLogin(context: Context) {
         viewModelScope.launch {
             kotlin.runCatching {
                 signService.signIn(
                     SignAccountData(
-                        email = _email.value.toString(),
-                        password = "1234"
+                        email = _email.value.toString(), password = "1234"
                     )
                 )
             }.onSuccess {
+                sharedPreference.saveToken(it.data.accessToken)
+                sharedPreference.saveAutoLogin(true)
                 _onSignInCompleted.value = true
-                MY_TOKEN_DATA = it.data.accessToken
-                Log.d("test", MY_TOKEN_DATA)
             }
         }
     }
+
 }

@@ -2,7 +2,6 @@ package com.example.ugotprototype.ui.sign.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -45,11 +44,15 @@ class SignNoEmailActivity : AppCompatActivity() {
         }
 
         signViewModel.onSignUpCompleted.observe(this) {
-            if(it) { signViewModel.attemptLogin() }
+            if (it) {
+                signViewModel.attemptLogin(this)
+            }
         }
 
         signViewModel.onSignInCompleted.observe(this) {
-            if(it) { startActivity(Intent(this, MainActivity::class.java)) }
+            if (it) {
+                startActivity(Intent(this, MainActivity::class.java))
+            }
         }
 
         signViewModel.currentFragmentIndex.observe(this) {
@@ -85,6 +88,7 @@ class SignNoEmailActivity : AppCompatActivity() {
                     Toast.makeText(this, "입력된 이메일의 형식이 올바르지 않습니다.", Toast.LENGTH_SHORT).show()
                 }
             }
+
             3 -> {
                 if (signViewModel.isMajorValid()) {
                     navController.navigate(R.id.action_sign_input_major_to_sign_input_grade)
@@ -132,8 +136,9 @@ class SignNoEmailActivity : AppCompatActivity() {
                     }
                 }
             }
+
             8 -> {
-                if(signViewModel.isBlogValid()) {
+                if (signViewModel.isBlogValid()) {
                     signUpCheck()
                 } else {
                     Toast.makeText(this, "블로그 형식이 잘못되었습니다.", Toast.LENGTH_SHORT).show()

@@ -1,16 +1,14 @@
 package com.example.ugotprototype.ui.group.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.ugotprototype.data.api.ApiService
 import com.example.ugotprototype.data.group.GroupCalendarData
 import com.example.ugotprototype.data.group.GroupEngagementData
 import com.example.ugotprototype.data.group.GroupMiddleViewData
 import com.example.ugotprototype.data.group.GroupTopViewData
-import com.example.ugotprototype.data.api.ApiService
-import com.example.ugotprototype.ui.group.view.GroupFragment
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -98,9 +96,8 @@ class GroupViewModel @Inject constructor(
         viewModelScope.launch {
             kotlin.runCatching {
                 val avatarUrl = apiService.getOrganization(
-                    "DMU-UGOT", "Bearer ${GroupFragment.TOKEN_DATA}"
+                    "DMU-UGOT"
                 )?.avatarUrl
-                Log.d("aaaaa1", avatarUrl.toString())
             }
         }
     }

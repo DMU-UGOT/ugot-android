@@ -1,22 +1,19 @@
 package com.example.ugotprototype.ui.team.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.ugotprototype.data.response.Team
 import com.example.ugotprototype.data.api.ApiService
 import com.example.ugotprototype.data.api.TeamBuildingService
-import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TOKEN_DATA
+import com.example.ugotprototype.data.response.Team
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class TeamSearchViewModel @Inject constructor(
-        private val apiService: ApiService,
-        private val teamBuildingService: TeamBuildingService
+    private val apiService: ApiService, private val teamBuildingService: TeamBuildingService
 ) : ViewModel() {
 
     private val _teams = MutableLiveData<List<Team>>()
@@ -35,8 +32,7 @@ class TeamSearchViewModel @Inject constructor(
                     for (team in teams) {
                         if (team.title.contains(query)) {
                             val avatarUrl = apiService.getOrganization(
-                                team.gitHubLink,
-                                "Bearer ${TOKEN_DATA}"
+                                team.gitHubLink
                             )?.avatarUrl
                             team.avatarUrl = avatarUrl ?: ""
                             allMatchingTeams.add(team)

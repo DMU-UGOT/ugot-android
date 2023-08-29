@@ -12,32 +12,27 @@ import retrofit2.http.Path
 interface ApiService {
     @GET("users/{username}")
     suspend fun getUser(
-        @Path("username") username: String,
-        @Header("Authorization") token: String
+        @Path("username") username: String
     ): UserDataResponse?
 
     @GET("orgs/{orgName}")
     suspend fun getOrganization(
-        @Path("orgName") orgName: String,
-        @Header("Authorization") token: String
+        @Path("orgName") orgName: String
     ): OrgDataResponse?
 
     @GET("orgs/{org}/members")
     suspend fun getOrganizationMembers(
-        @Path("org") org: String,
-        @Header("Authorization") token: String
+        @Path("org") org: String
     ): List<OrgMemberDataResponse>
 
     @GET("orgs/{org}/repos")
     suspend fun getOrganizationRepositories(
-        @Path("org") organization: String,
-        @Header("Authorization") token: String
+        @Path("org") organization: String
     ): List<GitHubRepository>
 
     @GET("repos/{org}/{repo}/contributors")
     suspend fun getRepositoryContributors(
         @Path("org") organization: String,
-        @Path("repo") repo: String,
-        @Header("Authorization") token: String
+        @Path("repo") repo: String
     ): List<Contributor>?
 }

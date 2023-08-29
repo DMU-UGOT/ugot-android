@@ -52,12 +52,12 @@ class GroupEngagementRateActivity : AppCompatActivity() {
         lifecycleScope.launch {
             try {
                 val members = apiService.getOrganizationMembers(
-                    "githubapi-testad", "Bearer ${TeamFragment.TOKEN_DATA}"
+                    "githubapi-testad"
                 )
                 Log.d("members", "$members")
                 for (member in members) {
                     val repositories = apiService.getOrganizationRepositories(
-                        "githubapi-testad", "Bearer ${TeamFragment.TOKEN_DATA}"
+                        "githubapi-testad"
                     )
                     Log.d("repositories", "$repositories")
                     var totalContributions = 0
@@ -65,7 +65,7 @@ class GroupEngagementRateActivity : AppCompatActivity() {
                         Log.d("test", repo.name)
                         try {
                             val contributors = apiService.getRepositoryContributors(
-                                "githubapi-testad", repo.name, "Bearer ${TeamFragment.TOKEN_DATA}"
+                                "githubapi-testad", repo.name
                             )
 
                             val userContributions =

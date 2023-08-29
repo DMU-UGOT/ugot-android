@@ -12,14 +12,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.ugotprototype.data.api.ApiService
 import com.example.ugotprototype.data.api.TeamBuildingService
 import com.example.ugotprototype.data.team.TeamPostData
-import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TOKEN_DATA
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class TeamPostWriteViewModel @Inject constructor(
-        private val teamBuildingService: TeamBuildingService, private val apiService: ApiService
+    private val teamBuildingService: TeamBuildingService, private val apiService: ApiService
 ) : ViewModel() {
 
     private val _isTeamPostRegisterBtnEnabled = MutableLiveData<Boolean>()
@@ -55,7 +54,7 @@ class TeamPostWriteViewModel @Inject constructor(
     fun isTeamExists(gitHubLink: String) {
         viewModelScope.launch {
             kotlin.runCatching {
-                apiService.getOrganization(gitHubLink, "Bearer $TOKEN_DATA")
+                apiService.getOrganization(gitHubLink)
             }.onSuccess { _isTeamExists.value = true }.onFailure { _isTeamExists.value = false }
         }
     }
