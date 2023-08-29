@@ -1,7 +1,6 @@
 package com.example.ugotprototype.ui.login.view
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -21,7 +20,10 @@ import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
 import com.navercorp.nid.NaverIdLoginSDK
+import com.navercorp.nid.oauth.NidOAuthLogin
 import com.navercorp.nid.oauth.OAuthLoginCallback
+import com.navercorp.nid.profile.NidProfileCallback
+import com.navercorp.nid.profile.data.NidProfileResponse
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,7 +39,7 @@ class LoginActivity : AppCompatActivity() {
 
     // 카카오계정으로 로그인 공통 callback 구성
     // 카카오톡으로 로그인 할 수 없어 카카오계정으로 로그인할 경우 사용됨
-    private val kakaOAuthCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
+    private val kakaOAuthCallback: (OAuthToken?, Throwable?) -> Unit = { token, _ ->
         token?.let { getKakaoTalkUserInfo() }
     }
 
@@ -64,6 +66,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun kakaoLogin() {
+        setUpKaKaoLogin()
+
         // 카카오톡이 설치되어 있으면 카카오톡으로 로그인, 아니면 카카오계정으로 로그인
         if (kakaoClient.isKakaoTalkLoginAvailable(this)) {
             handleKakaoTalkLoginResult()
@@ -88,19 +92,14 @@ class LoginActivity : AppCompatActivity() {
     private fun getKakaoTalkUserInfo() {
         kakaoClient.me { user, _ ->
             user.let {
-                // TODO 화면 전환
-                // it.properties?.get("nickname")
-                // it.kakaoAccount?.profile?.nickname
                 if (it?.kakaoAccount?.isEmailValid == true) {
-                    // TODO 이메일 정보까지 전달
                     Intent(this, SignActivity::class.java).apply {
                         putExtra(LOGIN_EMAIL, it.kakaoAccount?.email)
                         putExtra(LOGIN_REAL_NAME, it.properties?.get("nickname"))
                         startActivity(this)
                     }
-                    // it.kakaoAccount?.email
                 } else {
-                    // TODO 이메일 정보 받기
+                    // 이메일 데이터 필요
                     startActivity(Intent(this, SignNoEmailActivity::class.java))
                 }
             }
@@ -112,7 +111,8 @@ class LoginActivity : AppCompatActivity() {
             context = this,
             clientId = BuildConfig.NAVER_CLIENT_ID,
             clientSecret = BuildConfig.NAVER_CLIENT_SECRET,
-            clientName = BuildConfig.NAVER_CLIENT_ID)
+            clientName = BuildConfig.NAVER_CLIENT_ID
+        )
     }
 
     private fun loginNaver() {
@@ -122,15 +122,36 @@ class LoginActivity : AppCompatActivity() {
             override fun onSuccess() {
                 // 네이버 로그인 인증이 성공했을 때 수행할 코드 추가
                 Log.e("태그", NaverIdLoginSDK.getAccessToken().toString())
+                getNaverProfile()
             }
+
             override fun onFailure(httpStatus: Int, message: String) {
                 Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
             }
+
             override fun onError(errorCode: Int, message: String) {
                 Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
             }
         }
 
         NaverIdLoginSDK.authenticate(this, oauthLoginCallback)
+    }
+
+    private fun getNaverProfile() {
+        val nidProfileCallback = object : NidProfileCallback<NidProfileResponse> {
+            override fun onSuccess(result: NidProfileResponse) {
+                Intent(this@LoginActivity, SignActivity::class.java).apply {
+                    putExtra(LOGIN_EMAIL, result.profile?.email)
+                    putExtra(LOGIN_REAL_NAME, result.profile?.name)
+                    startActivity(this)
+                }
+            }
+
+            override fun onError(errorCode: Int, message: String) {}
+
+            override fun onFailure(httpStatus: Int, message: String) {}
+        }
+
+        NidOAuthLogin().callProfileApi(nidProfileCallback)
     }
 }
