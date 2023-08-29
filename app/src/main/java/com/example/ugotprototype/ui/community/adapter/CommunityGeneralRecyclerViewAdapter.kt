@@ -30,13 +30,14 @@ class CommunityGeneralRecyclerViewAdapter :
             binding.root.setOnClickListener {
                 goToCommunityPostDetail(item, binding.root.context)
             }
+
             with(binding) {
-                this.tvCommunityId.text = item.id
-                this.tvCommunityName.text = item.title
-                this.tvCommunityText.text = item.content
-                this.tvCommunityDate.text = formatDate(item.created_at)
-                this.tvCommunityViewCount.text = formatViewCount(item.viewCount)
-                this.tvCommunityVoteCount.text = formatVoteCount(item.voteCount)
+                tvCommunityId.text = item.id
+                tvCommunityName.text = item.title
+                tvCommunityText.text = item.content
+                tvCommunityDate.text = formatDate(item.created_at)
+                tvCommunityViewCount.text = formatViewCount(item.viewCount)
+                tvCommunityVoteCount.text = formatVoteCount(item.voteCount)
             }
         }
 
