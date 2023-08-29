@@ -40,13 +40,28 @@
                 android:ellipsize="end"
                 android:ems="15"
                 android:maxLines="1"
-                android:text="@{communityGeneralItem.comGeneralName}"
+                android:text="@{communityGeneralItem.title}"
                 android:textColor="@color/black"
                 android:textSize="15dp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="롤할사람" />
+
+            <TextView
+                android:id="@+id/tv_community_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{communityGeneralItem.id}"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="1" />
 
             <TextView
                 android:id="@+id/tv_community_text"
@@ -57,7 +72,7 @@
                 android:ellipsize="end"
                 android:ems="20"
                 android:maxLines="1"
-                android:text="@{communityGeneralItem.comGeneralText}"
+                android:text="@{communityGeneralItem.content}"
                 android:textColor="@color/color_80636363"
                 android:textSize="13dp"
                 android:textStyle="bold"
@@ -78,13 +93,13 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_community_text" />
 
             <TextView
-                android:id="@+id/tv_community_chat_input"
+                android:id="@+id/tv_community_vote_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="3dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
-                android:text="@{communityGeneralItem.comGeneralChat}"
+                android:text="@{communityGeneralItem.voteCount}"
                 android:textSize="13dp"
                 app:layout_constraintBottom_toTopOf="@id/community_v1"
                 app:layout_constraintStart_toEndOf="@id/tv_community_chat"
@@ -101,17 +116,17 @@
                 android:text="조회 수 : "
                 android:textSize="13dp"
                 app:layout_constraintBottom_toTopOf="@id/community_v1"
-                app:layout_constraintStart_toStartOf="@id/tv_community_chat_input"
+                app:layout_constraintStart_toStartOf="@id/tv_community_vote_count"
                 app:layout_constraintTop_toBottomOf="@id/tv_community_text" />
 
             <TextView
-                android:id="@+id/tv_community_inquire_input"
+                android:id="@+id/tv_community_view_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="3dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
-                android:text="@{communityGeneralItem.comGeneralInquire}"
+                android:text="@{communityGeneralItem.viewCount}"
                 android:textSize="13dp"
                 app:layout_constraintBottom_toTopOf="@id/community_v1"
                 app:layout_constraintStart_toEndOf="@id/tv_community_inquire"
@@ -128,17 +143,17 @@
                 android:text="게시일 :"
                 android:textSize="13dp"
                 app:layout_constraintBottom_toTopOf="@id/community_v1"
-                app:layout_constraintEnd_toStartOf="@id/tv_community_date_input"
+                app:layout_constraintEnd_toStartOf="@id/tv_community_create_at"
                 app:layout_constraintTop_toBottomOf="@id/tv_community_text" />
 
             <TextView
-                android:id="@+id/tv_community_date_input"
+                android:id="@+id/tv_community_create_at"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
-                android:text="@{communityGeneralItem.comGeneralDate}"
+                android:text="@{communityGeneralItem.created_at}"
                 android:textSize="13dp"
                 app:layout_constraintBottom_toTopOf="@id/community_v1"
                 app:layout_constraintEnd_toEndOf="parent"

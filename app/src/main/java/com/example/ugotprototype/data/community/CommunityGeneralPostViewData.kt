@@ -1,6 +1,6 @@
 package com.example.ugotprototype.data.community
 
-data class CommunityGeneralViewData(
+data class CommunityGeneralPostViewData(
     val id : String,
     val title : String,
     val content : String,

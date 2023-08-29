@@ -58,4 +58,10 @@ object NetworkModule {
     fun provideBackEndService(retrofit: Retrofit): TeamBuildingService {
         return retrofit.create(TeamBuildingService::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideCommunityBackEndService(retrofit: Retrofit): CommunityService {
+        return retrofit.create(CommunityService::class.java)
+    }
 }

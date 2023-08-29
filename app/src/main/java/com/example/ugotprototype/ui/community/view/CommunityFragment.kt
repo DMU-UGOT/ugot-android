@@ -14,7 +14,9 @@ import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.FragmentCommunityBinding
 import com.example.ugotprototype.ui.team.view.TeamSearchDetailActivity
 import com.google.android.material.tabs.TabLayout
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CommunityFragment : Fragment() {
     private lateinit var binding: FragmentCommunityBinding
     private lateinit var tab1: CommunityGeneralFragment
