@@ -107,7 +107,6 @@
                     android:textColor="#0d0d0d"
                     android:textSize="13dp"
                     app:layout_constrainedWidth="true"
-                    app:layout_constraintEnd_toEndOf="@+id/tv_community_general_name"
                     app:layout_constraintStart_toStartOf="@+id/tv_community_general_name"
                     app:layout_constraintTop_toBottomOf="@+id/tv_community_general_time"
                     tools:text="24세 남자며 같이 밥먹고 PC방 가서 롤할 남자분 구해요. 제 티어는 플레이고 주 라인은 서폿입니다" />
@@ -149,14 +148,15 @@
                     android:textColor="@color/black"
                     android:textSize="15dp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@id/tv_community_general_text"
+                    android:layout_marginStart="15dp"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/community_general_detail_v1" />
 
                 <TextView
                     android:id="@+id/tv_community_general_cnt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="5dp"
                     android:textColor="#FFb4bf"
                     android:textSize="15dp"
                     android:textStyle="bold"

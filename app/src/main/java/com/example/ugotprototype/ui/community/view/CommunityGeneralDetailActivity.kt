@@ -1,5 +1,6 @@
 package com.example.ugotprototype.ui.community.view
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -14,6 +15,8 @@ import com.example.ugotprototype.data.community.CommunityGeneralChatViewData
 import com.example.ugotprototype.databinding.FragmentCommunityGeneralDetailBinding
 import com.example.ugotprototype.ui.community.adapter.CommunityGeneralChatRecyclerViewAdapter
 import com.example.ugotprototype.ui.community.viewmodel.CommunityGeneralChatViewModel
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class CommunityGeneralDetailActivity : AppCompatActivity() {
     private lateinit var binding: FragmentCommunityGeneralDetailBinding
@@ -94,12 +97,17 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
         )
     }
 
+    @SuppressLint("SetTextI18n")
     private fun dataGeneralSet() {
-        binding.tvCommunityGeneralName.text = intent.getStringExtra("comGeneralName")
-        binding.tvCommunityGeneralNickname.text = intent.getStringExtra("comGeneralNickName")
-        binding.tvCommunityGeneralTime.text = intent.getStringExtra("comGeneralDate")
-        binding.tvCommunityGeneralText.text = intent.getStringExtra("comGeneralText")
-        binding.tvCommunityInquireInput.text = intent.getStringExtra("comGeneralInquire")
+        with(binding) {
+            tvCommunityGeneralName.text = intent.getStringExtra(CommunityGeneralFragment.GENERAL_TITLE)
+            tvCommunityGeneralNickname.text = intent.getStringExtra(CommunityGeneralFragment.GENERAL_ID)
+            tvCommunityGeneralText.text = intent.getStringExtra(CommunityGeneralFragment.GENERAL_CONTENT)
+            tvCommunityGeneralTime.text = LocalDateTime.parse(intent.getStringExtra((CommunityGeneralFragment.GENERAL_CREATE_AT)))?.format(
+                DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm"))?: ""
+            tvCommunityGeneralCnt.text = intent.getStringExtra(CommunityGeneralFragment.GENERAL_VOTE_COUNT)
+            tvCommunityInquireInput.text = intent.getStringExtra(CommunityGeneralFragment.GENERAL_VIEW_COUNT)
+        }
     }
 
     private fun backCommunityGeneralToMainActivity() {
