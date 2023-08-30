@@ -101,7 +101,7 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
     private fun dataGeneralSet() {
         with(binding) {
             tvCommunityGeneralName.text = intent.getStringExtra(CommunityGeneralFragment.GENERAL_TITLE)
-            tvCommunityGeneralNickname.text = intent.getStringExtra(CommunityGeneralFragment.GENERAL_ID)
+            tvCommunityGeneralNickname.text = intent.getStringExtra(CommunityGeneralFragment.GENERAL_MEMBER_ID)
             tvCommunityGeneralText.text = intent.getStringExtra(CommunityGeneralFragment.GENERAL_CONTENT)
             tvCommunityGeneralTime.text = LocalDateTime.parse(intent.getStringExtra((CommunityGeneralFragment.GENERAL_CREATE_AT)))?.format(
                 DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm"))?: ""

@@ -54,12 +54,26 @@
                 android:layout_marginTop="5dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="15dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="1" />
+
+            <TextView
+                android:id="@+id/tv_community_member_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textSize="13dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="윤동주" />
 
             <TextView
                 android:id="@+id/tv_community_text"
@@ -145,7 +159,7 @@
                 android:id="@+id/tv_community_create_at"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="5dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
                 android:textSize="13dp"

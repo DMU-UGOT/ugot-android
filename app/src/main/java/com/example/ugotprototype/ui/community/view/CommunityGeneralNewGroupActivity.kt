@@ -75,7 +75,8 @@ class CommunityGeneralNewGroupActivity : AppCompatActivity() {
                 content = binding.etGeneralTextDetail.text.toString(),
                 viewCount = 0,
                 voteCount = 0,
-                created_at = "YYYY/MM/DD"
+                created_at = "YYYY/MM/DD",
+                member_id = ""
             )
             communityGeneralNewGroupViewModel.setCommunityPostData(communityGeneralViewData)
             setResult(Activity.RESULT_OK, Intent())
