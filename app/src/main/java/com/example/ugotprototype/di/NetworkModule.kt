@@ -3,6 +3,7 @@ package com.example.ugotprototype.di
 import com.example.ugotprototype.BuildConfig
 import com.example.ugotprototype.MainActivity
 import com.example.ugotprototype.data.api.ApiService
+import com.example.ugotprototype.data.api.OAuthService
 import com.example.ugotprototype.data.api.SignService
 import com.example.ugotprototype.data.api.TeamBuildingService
 import dagger.Module
@@ -66,5 +67,11 @@ object NetworkModule {
     @Singleton
     fun provideSignService(retrofit: Retrofit): SignService {
         return retrofit.create(SignService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideOAuthService(retrofit: Retrofit): OAuthService {
+        return retrofit.create(OAuthService::class.java)
     }
 }

@@ -2,7 +2,6 @@ package com.example.ugotprototype.ui.login.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.BuildConfig
 import com.example.ugotprototype.MainActivity
 import com.example.ugotprototype.R
+import com.example.ugotprototype.data.oauth.RequestLoginNaver
 import com.example.ugotprototype.databinding.ActivityLoginBinding
 import com.example.ugotprototype.ui.login.viewmodel.LoginViewModel
 import com.example.ugotprototype.ui.sign.view.SignActivity
@@ -50,6 +50,16 @@ class LoginActivity : AppCompatActivity() {
 
         // TODO 필수 : kakao developers -> 플랫폼 -> 키 해시 등록
         // Log.e("태그", Utility.getKeyHash(applicationContext))
+
+        viewModel.userAccessToken.observe(this) {
+            if (it != "") {
+                // TODO accessToken 저장
+                startActivity(Intent(this, MainActivity::class.java))
+            } else {
+                // 계졍이 없는 경우 회원가입 진행
+                getNaverProfile()
+            }
+        }
 
         binding.layoutNaverLogin.setOnClickListener {
             loginNaver()
@@ -121,8 +131,8 @@ class LoginActivity : AppCompatActivity() {
         val oauthLoginCallback = object : OAuthLoginCallback {
             override fun onSuccess() {
                 // 네이버 로그인 인증이 성공했을 때 수행할 코드 추가
-                Log.e("태그", NaverIdLoginSDK.getAccessToken().toString())
-                getNaverProfile()
+                // Log.e("태그", NaverIdLoginSDK.getAccessToken().toString())
+                viewModel.loginNaver(RequestLoginNaver(NaverIdLoginSDK.getAccessToken().toString()))
             }
 
             override fun onFailure(httpStatus: Int, message: String) {
