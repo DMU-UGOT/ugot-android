@@ -1,9 +1,11 @@
 package com.example.ugotprototype.di
 
+import android.util.Log
 import com.example.ugotprototype.BuildConfig
 import com.example.ugotprototype.MainActivity
 import com.example.ugotprototype.data.api.ApiService
 import com.example.ugotprototype.data.api.MessageService
+import com.example.ugotprototype.data.api.OAuthService
 import com.example.ugotprototype.data.api.SignService
 import com.example.ugotprototype.data.api.TeamBuildingService
 import com.example.ugotprototype.ui.sign.util.SharedPreference
@@ -27,33 +29,24 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(authInterceptor: Interceptor): OkHttpClient {
-        return OkHttpClient.Builder()
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .writeTimeout(30, TimeUnit.SECONDS)
-            .addInterceptor(authInterceptor)
-            .build()
+        return OkHttpClient.Builder().connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS).writeTimeout(30, TimeUnit.SECONDS)
+            .addInterceptor(authInterceptor).build()
     }
 
     @Provides
     @Singleton
     @GitRetrofit
     fun provideGitRetrofit(okHttpClient: OkHttpClient): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(MainActivity.GITHUB_URL)
-            .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+        return Retrofit.Builder().baseUrl(MainActivity.GITHUB_URL).client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create()).build()
     }
 
     @Provides
     @Singleton
     fun provideBackEndRetrofit(okHttpClient: OkHttpClient): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(BuildConfig.BASE_URL)
-            .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+        return Retrofit.Builder().baseUrl(BuildConfig.BASE_URL).client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create()).build()
     }
 
     @Provides
@@ -82,6 +75,12 @@ object NetworkModule {
 
     @Provides
     @Singleton
+    fun provideOAuthService(retrofit: Retrofit): OAuthService {
+        return retrofit.create(OAuthService::class.java)
+    }
+
+    @Provides
+    @Singleton
     fun provideAuthInterceptor(sharedPreference: SharedPreference): Interceptor {
         return Interceptor { chain ->
             val originalRequest: Request = chain.request()
@@ -91,12 +90,14 @@ object NetworkModule {
                 modifiedRequest = originalRequest.newBuilder()
                     .header("Authorization", "Bearer $TOKEN_DATA") // GitHub 토큰
                     .build()
-            }
+            } else if (originalRequest.url.toString()
+                    .startsWith(BuildConfig.BASE_URL) && !(originalRequest.url.toString()
+                    .contains("members")) && !(originalRequest.url.toString()
+                    .contains("auth/naver"))
+            ) {
 
-            else if (originalRequest.url.toString().startsWith(BuildConfig.BASE_URL) && !(originalRequest.url.toString().contains("members"))) {
                 modifiedRequest = originalRequest.newBuilder()
-                    .header("Authorization", "Bearer ${sharedPreference.getToken()}")
-                    .build()
+                    .header("Authorization", "Bearer ${sharedPreference.getToken()}").build()
             } else {
                 modifiedRequest = originalRequest
             }

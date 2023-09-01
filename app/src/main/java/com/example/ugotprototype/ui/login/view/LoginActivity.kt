@@ -12,6 +12,7 @@ import com.example.ugotprototype.R
 import com.example.ugotprototype.data.oauth.RequestLoginNaver
 import com.example.ugotprototype.databinding.ActivityLoginBinding
 import com.example.ugotprototype.ui.login.viewmodel.LoginViewModel
+import com.example.ugotprototype.ui.sign.util.SharedPreference
 import com.example.ugotprototype.ui.sign.view.SignActivity
 import com.example.ugotprototype.ui.sign.view.SignNoEmailActivity
 import com.kakao.sdk.auth.model.OAuthToken
@@ -29,6 +30,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var sharedPreference: SharedPreference
     private val viewModel: LoginViewModel by viewModels()
     private val kakaoClient: UserApiClient by lazy { UserApiClient.instance }
 
@@ -47,6 +49,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
+        sharedPreference = SharedPreference(this)
 
         // TODO 필수 : kakao developers -> 플랫폼 -> 키 해시 등록
         // Log.e("태그", Utility.getKeyHash(applicationContext))
@@ -54,6 +57,8 @@ class LoginActivity : AppCompatActivity() {
         viewModel.userAccessToken.observe(this) {
             if (it != "") {
                 // TODO accessToken 저장
+                sharedPreference.saveToken(it!!)
+                sharedPreference.saveAutoLogin(true)
                 startActivity(Intent(this, MainActivity::class.java))
             } else {
                 // 계졍이 없는 경우 회원가입 진행
@@ -131,7 +136,7 @@ class LoginActivity : AppCompatActivity() {
         val oauthLoginCallback = object : OAuthLoginCallback {
             override fun onSuccess() {
                 // 네이버 로그인 인증이 성공했을 때 수행할 코드 추가
-                // Log.e("태그", NaverIdLoginSDK.getAccessToken().toString())
+                //Log.e("태그", NaverIdLoginSDK.getAccessToken().toString())
                 viewModel.loginNaver(RequestLoginNaver(NaverIdLoginSDK.getAccessToken().toString()))
             }
 
