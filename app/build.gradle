@@ -21,13 +21,17 @@ android {
         Properties properties = new Properties()
         properties.load(rootProject.file('local.properties').newDataInputStream())
         buildConfigField "String", "GITHUB_KEY", properties['github_api_key']
-        manifestPlaceholders = [GITHUB_KEY: properties['github_api_key']]
 
         buildConfigField "String", "BASE_URL", properties['base_url']
-        manifestPlaceholders = [BASE_URL: properties['base_url']]
 
         buildConfigField "String", "KAKAO_NATIVE_KEY", properties['kakao_native_app_key']
         manifestPlaceholders = [KAKAO_NATIVE_KEY: properties['kakao_native_app_key']]
+
+        buildConfigField "String", "NAVER_CLIENT_ID", properties['naver_client_id']
+
+        buildConfigField "String", "NAVER_CLIENT_SECRET", properties['naver_client_secret']
+
+        buildConfigField "String", "NAVER_CLIENT_NAME", properties['naver_client_name']
 
     }
     buildTypes {
@@ -94,4 +98,8 @@ dependencies {
 
     // Kakao Login
     implementation "com.kakao.sdk:v2-user:2.15.0"
+
+    // Navor Login
+    implementation 'com.navercorp.nid:oauth:5.7.0' // jdk 11
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9'
 }
