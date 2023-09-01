@@ -7,13 +7,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ugotprototype.data.api.OAuthService
 import com.example.ugotprototype.data.oauth.RequestLoginNaver
+import com.example.ugotprototype.SharedPreference
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val oauthLogin: OAuthService
+    private val oauthLogin: OAuthService,
+    private val sharedPreference: SharedPreference
 ) : ViewModel() {
 
     private val _userAccessToken = MutableLiveData<String?>()
@@ -24,6 +26,7 @@ class LoginViewModel @Inject constructor(
             kotlin.runCatching {
                 oauthLogin.loginNaver(accessToken)
             }.onSuccess {
+                sharedPreference.saveMemberId(it.data.tokenInfo?.memberId!!)
                 _userAccessToken.value = it.data.tokenInfo?.accessToken?:""
             }.onFailure {
                 Log.e("loginError", it.toString())

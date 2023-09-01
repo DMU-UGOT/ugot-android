@@ -18,6 +18,8 @@ class MainActivity : AppCompatActivity() {
     companion object {
         const val GITHUB_URL = "https://api.github.com/"
         const val KAKAO_URL = "https://kapi.kakao.com/"
+        const val MY_MEMBER_ID_KEY = "myMemberIdKey"
+        const val MY_MEMBER_ID_DATA = "myMemberIdData"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

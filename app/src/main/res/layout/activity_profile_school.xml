@@ -30,9 +30,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="학교 정보 관리"
+                android:textColor="#0D0D0D"
                 android:textSize="16dp"
                 android:textStyle="bold"
-                android:textColor="#0D0D0D"
                 app:layout_constraintBottom_toBottomOf="@+id/bt_school_new_back_to_main"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -228,8 +228,8 @@
                             android:layout_width="0dp"
                             android:layout_height="50dp"
                             android:layout_marginStart="33dp"
-                            android:textSize="15dp"
                             android:paddingStart="3dp"
+                            android:textSize="15dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/tv_class"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -266,14 +266,15 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <TextView
-                            android:id="@+id/tv_name_input"
+                        <EditText
+                            android:id="@+id/et_name_input"
                             android:layout_width="220dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="30dp"
+                            android:background="@android:color/transparent"
+                            android:hint="김동양"
                             android:paddingStart="10dp"
                             android:textSize="15dp"
-                            android:text="김동양"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@id/tv_name"
                             app:layout_constraintTop_toTopOf="parent"
@@ -294,7 +295,6 @@
                         android:layout_width="0dp"
                         android:layout_height="55dp"
                         android:layout_marginHorizontal="30dp"
-                        app:layout_constraintBottom_toTopOf="@id/layout_gender"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/layout_name">
@@ -316,7 +316,7 @@
                             android:layout_width="280dp"
                             android:layout_height="50dp"
                             android:layout_marginStart="20dp"
-                            android:background="@null"
+                            android:background="@android:color/transparent"
                             android:ellipsize="end"
                             android:hint="abcd@naver.com"
                             android:inputType="text"
@@ -333,50 +333,8 @@
                         android:layout_height="2dp"
                         android:layout_marginHorizontal="10dp"
                         android:background="#d3d3d3"
-                        app:layout_constraintBottom_toTopOf="@id/layout_gender"
-                        app:layout_constraintTop_toBottomOf="@+id/layout_nickname" />
-
-                    <!--성별-->
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/layout_gender"
-                        android:layout_width="0dp"
-                        android:layout_height="55dp"
-                        android:layout_marginHorizontal="30dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/layout_nickname">
-
-                        <TextView
-                            android:id="@+id/tv_gender"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="성별"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <Spinner
-                            android:id="@+id/sp_gender"
-                            android:layout_width="0dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="33dp"
-                            android:textSize="15sp"
-                            android:paddingStart="3dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/tv_gender"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_marginHorizontal="10dp"
-                        android:background="#d3d3d3"
                         app:layout_constraintBottom_toTopOf="@id/layout_email"
-                        app:layout_constraintTop_toBottomOf="@+id/layout_gender" />
+                        app:layout_constraintTop_toBottomOf="@+id/layout_nickname" />
 
                     <!--이메일-->
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -386,7 +344,7 @@
                         android:layout_marginHorizontal="30dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/layout_gender">
+                        app:layout_constraintTop_toBottomOf="@+id/layout_nickname">
 
                         <TextView
                             android:id="@+id/tv_email"
@@ -405,7 +363,7 @@
                             android:layout_width="290dp"
                             android:layout_height="50dp"
                             android:layout_marginStart="20dp"
-                            android:background="@null"
+                            android:background="@android:color/transparent"
                             android:hint="dongyang@naver.com"
                             android:paddingStart="10dp"
                             android:textSize="15dp"
@@ -450,7 +408,7 @@
                             android:layout_width="290dp"
                             android:layout_height="50dp"
                             android:layout_marginStart="15dp"
-                            android:background="@null"
+                            android:background="@android:color/transparent"
                             android:hint="DYmirea"
                             android:paddingStart="10dp"
                             android:textSize="15dp"

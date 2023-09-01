@@ -12,7 +12,7 @@ import com.example.ugotprototype.R
 import com.example.ugotprototype.data.oauth.RequestLoginNaver
 import com.example.ugotprototype.databinding.ActivityLoginBinding
 import com.example.ugotprototype.ui.login.viewmodel.LoginViewModel
-import com.example.ugotprototype.ui.sign.util.SharedPreference
+import com.example.ugotprototype.SharedPreference
 import com.example.ugotprototype.ui.sign.view.SignActivity
 import com.example.ugotprototype.ui.sign.view.SignNoEmailActivity
 import com.kakao.sdk.auth.model.OAuthToken

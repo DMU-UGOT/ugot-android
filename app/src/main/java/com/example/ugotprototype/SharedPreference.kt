@@ -1,7 +1,9 @@
-package com.example.ugotprototype.ui.sign.util
+package com.example.ugotprototype
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.ugotprototype.MainActivity.Companion.MY_MEMBER_ID_DATA
+import com.example.ugotprototype.MainActivity.Companion.MY_MEMBER_ID_KEY
 import com.example.ugotprototype.ui.sign.viewmodel.SignViewModel.Companion.AUTO_LOGIN_DATA
 import com.example.ugotprototype.ui.sign.viewmodel.SignViewModel.Companion.AUTO_LOGIN_TITLE
 import com.example.ugotprototype.ui.sign.viewmodel.SignViewModel.Companion.MY_TOKEN_DATA
@@ -34,6 +36,19 @@ class SharedPreference @Inject constructor(@ApplicationContext private val conte
 
     private fun getSharedPreferencesBoolean(): SharedPreferences {
         return context.getSharedPreferences(AUTO_LOGIN_DATA, Context.MODE_PRIVATE)
+    }
+
+    fun saveMemberId(memberId: Int) {
+        val sharedPreferences = getSharedPreferencesMemberId().edit()
+        sharedPreferences.putInt(MY_MEMBER_ID_KEY, memberId).apply()
+    }
+
+    fun getMemberId(): Int {
+        return getSharedPreferencesMemberId().getInt(MY_MEMBER_ID_KEY, 0)
+    }
+
+    private fun getSharedPreferencesMemberId(): SharedPreferences {
+        return context.getSharedPreferences(MY_MEMBER_ID_DATA, Context.MODE_PRIVATE)
     }
 }
 

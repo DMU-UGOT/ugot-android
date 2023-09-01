@@ -9,7 +9,7 @@ import com.example.ugotprototype.data.api.ApiService
 import com.example.ugotprototype.data.api.SignService
 import com.example.ugotprototype.data.sign.SignAccountData
 import com.example.ugotprototype.data.sign.SignData
-import com.example.ugotprototype.ui.sign.util.SharedPreference
+import com.example.ugotprototype.SharedPreference
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -63,11 +63,11 @@ class SignViewModel @Inject constructor(
     }
 
     companion object {
-        private const val NICKNAME_REGEX_PATTERN = "^[A-Za-z0-9]{3,10}$"
-        private const val GRADE_REGEX_PATTERN = "^[1234]$"
-        private val CLASS_REGEX_PATTERN = "^(YA|YB|YC|YD|YJ|YK)$".toRegex(RegexOption.IGNORE_CASE)
-        private const val KOREAN_NAME_PATTERN = "^[가-힣]+$"
-        private const val EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}\$"
+        const val NICKNAME_REGEX_PATTERN = "^[A-Za-z0-9]{3,10}$"
+        const val GRADE_REGEX_PATTERN = "^[1234]$"
+        val CLASS_REGEX_PATTERN = "^(YA|YB|YC|YD|YJ|YK)$".toRegex(RegexOption.IGNORE_CASE)
+        const val KOREAN_NAME_PATTERN = "^[가-힣]+$"
+        const val EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}\$"
         const val MY_TOKEN_TITLE = "myTokenData"
         const val MY_TOKEN_DATA = "accessToken"
         const val AUTO_LOGIN_TITLE = "myAutoLogin"

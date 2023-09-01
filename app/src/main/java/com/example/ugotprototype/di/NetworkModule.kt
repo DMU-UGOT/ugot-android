@@ -1,6 +1,5 @@
 package com.example.ugotprototype.di
 
-import android.util.Log
 import com.example.ugotprototype.BuildConfig
 import com.example.ugotprototype.MainActivity
 import com.example.ugotprototype.data.api.ApiService
@@ -8,7 +7,8 @@ import com.example.ugotprototype.data.api.MessageService
 import com.example.ugotprototype.data.api.OAuthService
 import com.example.ugotprototype.data.api.SignService
 import com.example.ugotprototype.data.api.TeamBuildingService
-import com.example.ugotprototype.ui.sign.util.SharedPreference
+import com.example.ugotprototype.SharedPreference
+import com.example.ugotprototype.data.api.ProfileService
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TOKEN_DATA
 import dagger.Module
 import dagger.Provides
@@ -77,6 +77,12 @@ object NetworkModule {
     @Singleton
     fun provideOAuthService(retrofit: Retrofit): OAuthService {
         return retrofit.create(OAuthService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideProfileService(retrofit: Retrofit): ProfileService {
+        return retrofit.create(ProfileService::class.java)
     }
 
     @Provides

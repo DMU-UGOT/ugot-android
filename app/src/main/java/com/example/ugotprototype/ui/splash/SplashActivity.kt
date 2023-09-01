@@ -11,7 +11,7 @@ import com.example.ugotprototype.MainActivity
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.ActivitySplashBinding
 import com.example.ugotprototype.ui.login.view.LoginActivity
-import com.example.ugotprototype.ui.sign.util.SharedPreference
+import com.example.ugotprototype.SharedPreference
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {

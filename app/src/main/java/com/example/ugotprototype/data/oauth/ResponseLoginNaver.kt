@@ -1,13 +1,14 @@
 package com.example.ugotprototype.data.oauth
 
 data class ResponseLoginNaver(
-    val data: Data
+    val data: Data,
 ) {
     data class Data(
-        val tokenInfo: TokenInfo?
+        val tokenInfo: TokenInfo?,
     ) {
         data class TokenInfo(
-            val accessToken: String
+            val accessToken: String,
+            val memberId: Int
         )
     }
 }
