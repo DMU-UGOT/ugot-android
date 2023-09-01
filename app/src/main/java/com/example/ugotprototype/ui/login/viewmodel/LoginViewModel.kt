@@ -26,7 +26,7 @@ class LoginViewModel @Inject constructor(
             kotlin.runCatching {
                 oauthLogin.loginNaver(accessToken)
             }.onSuccess {
-                sharedPreference.saveMemberId(it.data.tokenInfo?.memberId!!)
+                sharedPreference.saveMemberId(it.data.tokenInfo?.memberId ?: 0)
                 _userAccessToken.value = it.data.tokenInfo?.accessToken?:""
             }.onFailure {
                 Log.e("loginError", it.toString())
