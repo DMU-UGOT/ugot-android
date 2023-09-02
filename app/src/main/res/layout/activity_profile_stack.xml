@@ -30,9 +30,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="스택 관리"
+                android:textColor="#0D0D0D"
                 android:textSize="16dp"
                 android:textStyle="bold"
-                android:textColor="#0D0D0D"
                 app:layout_constraintBottom_toBottomOf="@+id/bt_stack_back_to_main"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -65,241 +65,173 @@
             app:layout_constraintTop_toBottomOf="@id/layout_stack_top_view">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_stack_top"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layout_stack_top"
+                    android:id="@+id/layout_stack_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="15dp"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/layout_stack_main"
+                    <ImageView
+                        android:id="@+id/iv_stack_image"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/profile_stack"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_stack_main"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="사용 기술"
+                        android:textColor="@color/black"
+                        android:textSize="15dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/iv_stack_image"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/et_stack_1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingHorizontal="20dp"
-                        android:paddingVertical="15dp"
+                        android:layout_marginStart="100dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@android:color/transparent"
+                        android:ellipsize="end"
+                        android:hint="Database"
+                        android:maxLines="1"
+                        android:textSize="15dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tv_stack_main"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:id="@+id/st_stack_v1"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/color_F0F1F3"
+                    app:layout_constraintTop_toBottomOf="@id/layout_stack_1" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_stack_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="15dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layout_stack_1">
+
+                    <ImageView
+                        android:id="@+id/iv_stack_image_sub1"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/profile_stack"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <ImageView
-                            android:id="@+id/iv_stack_image"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/profile_stack"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                    <TextView
+                        android:id="@+id/tv_stack_sub1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="사용 기술"
+                        android:textColor="@color/black"
+                        android:textSize="15dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/iv_stack_image_sub1"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <TextView
-                            android:id="@+id/tv_stack_main"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:text="주요 기술"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/iv_stack_image"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <EditText
-                            android:id="@+id/et_stack_main_input"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="100dp"
-                            android:layout_marginEnd="20dp"
-                            android:background="@android:color/transparent"
-                            android:ellipsize="end"
-                            android:hint="Database"
-                            android:maxLines="1"
-                            android:textSize="15dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/tv_stack_main"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <View
-                        android:id="@+id/st_stack_v1"
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:background="@color/color_F0F1F3"
-                        app:layout_constraintTop_toBottomOf="@id/layout_stack_main" />
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/layout_stack_sub1"
+                    <EditText
+                        android:id="@+id/et_stack_2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingVertical="15dp"
-                        android:paddingHorizontal="20dp"
+                        android:layout_marginStart="100dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@android:color/transparent"
+                        android:ellipsize="end"
+                        android:hint="Android"
+                        android:maxLines="1"
+                        android:textSize="15dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tv_stack_sub1"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:id="@+id/st_stack_v2"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/color_F0F1F3"
+                    app:layout_constraintTop_toBottomOf="@id/layout_stack_2" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_stack_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="15dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/st_stack_v2">
+
+                    <ImageView
+                        android:id="@+id/iv_stack_image_sub2"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/profile_stack"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/layout_stack_main">
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <ImageView
-                            android:id="@+id/iv_stack_image_sub1"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/profile_stack_empty"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                    <TextView
+                        android:id="@+id/tv_stack_sub2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="사용기술"
+                        android:textColor="@color/black"
+                        android:textSize="15dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/iv_stack_image_sub2"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <TextView
-                            android:id="@+id/tv_stack_sub1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:text="서브기술1"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/iv_stack_image_sub1"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <EditText
-                            android:id="@+id/et_stack_sub1_input"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="100dp"
-                            android:layout_marginEnd="20dp"
-                            android:background="@android:color/transparent"
-                            android:ellipsize="end"
-                            android:hint="Android"
-                            android:maxLines="1"
-                            android:textSize="15dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/tv_stack_sub1"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <View
-                        android:id="@+id/st_stack_v2"
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:background="@color/color_F0F1F3"
-                        app:layout_constraintTop_toBottomOf="@id/layout_stack_sub1" />
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/layout_stack_sub2"
+                    <EditText
+                        android:id="@+id/et_stack_3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingHorizontal="20dp"
-                        android:paddingVertical="15dp"
+                        android:layout_marginStart="100dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@android:color/transparent"
+                        android:ellipsize="end"
+                        android:hint="Java"
+                        android:maxLines="1"
+                        android:textSize="15dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/st_stack_v2">
+                        app:layout_constraintStart_toEndOf="@id/tv_stack_sub2"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <ImageView
-                            android:id="@+id/iv_stack_image_sub2"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/profile_stack_empty"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/tv_stack_sub2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:text="서브기술2"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/iv_stack_image_sub2"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <EditText
-                            android:id="@+id/et_stack_sub2_input"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="100dp"
-                            android:layout_marginEnd="20dp"
-                            android:background="@android:color/transparent"
-                            android:ellipsize="end"
-                            android:hint="Java"
-                            android:maxLines="1"
-                            android:textSize="15dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/tv_stack_sub2"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <View
-                        android:id="@+id/st_stack_v3"
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:background="@color/color_F0F1F3"
-                        app:layout_constraintTop_toBottomOf="@+id/layout_stack_sub2" />
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/layout_stack_sub3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingVertical="15dp"
-                        android:paddingHorizontal="20dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/layout_stack_sub2">
-
-                        <ImageView
-                            android:id="@+id/iv_stack_image_sub3"
-                            android:layout_width="22dp"
-                            android:layout_height="22dp"
-                            android:src="@drawable/profile_stack_empty"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/tv_stack_sub3"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/tv_stack_sub3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:text="서브기술3"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/iv_stack_image_sub3"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <EditText
-                            android:id="@+id/et_stack_sub3_input"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="100dp"
-                            android:layout_marginEnd="20dp"
-                            android:background="@android:color/transparent"
-                            android:ellipsize="end"
-                            android:hint="Linux"
-                            android:maxLines="1"
-                            android:textSize="15dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/tv_stack_sub3"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <View
-                        android:id="@+id/st_stack_v4"
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:background="@color/color_F0F1F3"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/layout_stack_sub3" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

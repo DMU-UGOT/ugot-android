@@ -41,7 +41,7 @@ class SchoolActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(
                     applicationContext,
-                    "입력된 데이터의 형식이 올바르지 않거나 깃허브 계정이 존재하지 않습니다ㅁㄴ.",
+                    "입력된 데이터의 형식이 올바르지 않거나 깃허브 계정이 존재하지 않습니다.",
                     Toast.LENGTH_SHORT
                 ).show()
             }
