@@ -11,9 +11,11 @@ import androidx.navigation.fragment.NavHostFragment
 import com.example.ugotprototype.MainActivity
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.ActivitySignBinding
+import com.example.ugotprototype.ui.login.view.LoginActivity
 import com.example.ugotprototype.ui.login.view.LoginActivity.Companion.LOGIN_EMAIL
 import com.example.ugotprototype.ui.login.view.LoginActivity.Companion.LOGIN_REAL_NAME
 import com.example.ugotprototype.ui.sign.viewmodel.SignViewModel
+import com.example.ugotprototype.ui.sign.viewmodel.SignViewModel.Companion.LOGIN_TYPE
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,11 +23,14 @@ class SignActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignBinding
     private val signViewModel: SignViewModel by viewModels()
     private lateinit var navController: NavController
+    private lateinit var loginType: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sign)
+
+        loginType = intent.getStringExtra(LOGIN_TYPE).toString()
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.navHostSign) as? NavHostFragment
@@ -50,7 +55,11 @@ class SignActivity : AppCompatActivity() {
 
         signViewModel.onSignUpCompleted.observe(this) {
             if (it) {
-                signViewModel.attemptLogin(this)
+                if (loginType == "카카오") {
+                    signViewModel.attemptLogin()
+                } else if (loginType == "네이버") {
+                    startActivity(Intent(this, LoginActivity::class.java))
+                }
             }
         }
 

@@ -72,6 +72,7 @@ class SignViewModel @Inject constructor(
         const val MY_TOKEN_DATA = "accessToken"
         const val AUTO_LOGIN_TITLE = "myAutoLogin"
         const val AUTO_LOGIN_DATA = "isAutoLogin"
+        const val LOGIN_TYPE = "loginType"
     }
 
     fun setCurrentFragmentIndex(index: Int) {
@@ -190,7 +191,7 @@ class SignViewModel @Inject constructor(
         }
     }
 
-    fun attemptLogin(context: Context) {
+    fun attemptLogin() {
         viewModelScope.launch {
             kotlin.runCatching {
                 signService.signIn(

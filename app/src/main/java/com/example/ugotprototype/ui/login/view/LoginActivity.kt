@@ -16,6 +16,7 @@ import com.example.ugotprototype.ui.login.viewmodel.LoginViewModel
 import com.example.ugotprototype.SharedPreference
 import com.example.ugotprototype.ui.sign.view.SignActivity
 import com.example.ugotprototype.ui.sign.view.SignNoEmailActivity
+import com.example.ugotprototype.ui.sign.viewmodel.SignViewModel.Companion.LOGIN_TYPE
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.model.ClientError
@@ -112,6 +113,7 @@ class LoginActivity : AppCompatActivity() {
                     Intent(this, SignActivity::class.java).apply {
                         putExtra(LOGIN_EMAIL, it.kakaoAccount?.email)
                         putExtra(LOGIN_REAL_NAME, it.properties?.get("nickname"))
+                        putExtra(LOGIN_TYPE, "카카오")
                         startActivity(this)
                     }
                 } else {
@@ -159,6 +161,7 @@ class LoginActivity : AppCompatActivity() {
                 Intent(this@LoginActivity, SignActivity::class.java).apply {
                     putExtra(LOGIN_EMAIL, result.profile?.email)
                     putExtra(LOGIN_REAL_NAME, result.profile?.name)
+                    putExtra(LOGIN_TYPE, "네이버")
                     startActivity(this)
                 }
             }
