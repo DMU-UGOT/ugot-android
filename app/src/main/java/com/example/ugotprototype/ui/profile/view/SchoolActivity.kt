@@ -1,19 +1,14 @@
 package com.example.ugotprototype.ui.profile.view
 
-import android.app.Activity
-import android.app.AlertDialog
-import android.content.DialogInterface
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.R
 import com.example.ugotprototype.data.profile.ProfileMemberData
-import com.example.ugotprototype.databinding.ActivityDialogMessageBinding
 import com.example.ugotprototype.databinding.ActivityProfileSchoolBinding
 import com.example.ugotprototype.ui.profile.viewmodel.SchoolActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,6 +19,7 @@ class SchoolActivity : AppCompatActivity() {
     private val schoolActivityViewModel: SchoolActivityViewModel by viewModels()
     private lateinit var gradeSpinnerItems: List<String>
     private lateinit var classSpinnerItems: List<String>
+    private lateinit var memberData: ProfileMemberData
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,8 +35,20 @@ class SchoolActivity : AppCompatActivity() {
             initData(it)
         }
 
+        schoolActivityViewModel.userInfoValid.observe(this) {
+            if (it) {
+                schoolActivityViewModel.patchMemberData(memberData)
+            } else {
+                Toast.makeText(
+                    applicationContext,
+                    "입력된 데이터의 형식이 올바르지 않거나 깃허브 계정이 존재하지 않습니다ㅁㄴ.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
         schoolActivityViewModel.isMemberDataPatch.observe(this) {
-            if(it) {
+            if (it) {
                 finish()
             }
         }
@@ -87,18 +95,18 @@ class SchoolActivity : AppCompatActivity() {
     }
 
     private fun setMemberData() {
-        schoolActivityViewModel.patchMemberData(
-            ProfileMemberData(
-                name = binding.etNameInput.text.toString(),
-                nickname = binding.etNicknameInput.text.toString(),
-                email = binding.etEmailInput.text.toString(),
-                grade = binding.spGrade.selectedItem.toString().toInt(),
-                _class = binding.spClass.selectedItem.toString(),
-                gitHubLink = "https://github.com/" + binding.etGitInput.text.toString(),
-                personalBlogLink = schoolActivityViewModel.memberData.value!!.personalBlogLink,
-                skill = schoolActivityViewModel.memberData.value!!.skill,
-                major = schoolActivityViewModel.memberData.value!!.major
-            )
+        memberData = ProfileMemberData(
+            name = binding.etNameInput.text.toString(),
+            nickname = binding.etNicknameInput.text.toString(),
+            email = binding.etEmailInput.text.toString(),
+            grade = binding.spGrade.selectedItem.toString().toInt(),
+            _class = binding.spClass.selectedItem.toString(),
+            gitHubLink = binding.etGitInput.text.toString(),
+            personalBlogLink = schoolActivityViewModel.memberData.value!!.personalBlogLink,
+            skill = schoolActivityViewModel.memberData.value!!.skill,
+            major = schoolActivityViewModel.memberData.value!!.major
         )
+
+        schoolActivityViewModel.isValidateCheck(memberData)
     }
 }
