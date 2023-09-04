@@ -10,35 +10,41 @@ import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.R
 import com.example.ugotprototype.data.community.CommunityGeneralPostViewData
-import com.example.ugotprototype.databinding.ActivityCommunityGeneralNewGroupBinding
+import com.example.ugotprototype.databinding.ActivityCommunityGeneralUpdateGroupBinding
 import com.example.ugotprototype.databinding.ActivityDialogMessageBinding
-import com.example.ugotprototype.ui.community.viewmodel.CommunityGeneralNewGroupViewModel
+import com.example.ugotprototype.ui.community.viewmodel.CommunityGeneralUpdateViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CommunityGeneralNewGroupActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityCommunityGeneralNewGroupBinding
-    private val communityGeneralNewGroupViewModel: CommunityGeneralNewGroupViewModel by viewModels()
+class CommunityGeneralUpdateGroupActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityCommunityGeneralUpdateGroupBinding
+    private val communityGeneralUpdateViewModel: CommunityGeneralUpdateViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_community_general_new_group)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_community_general_new_group)
-        binding.vm = communityGeneralNewGroupViewModel
+        setContentView(R.layout.activity_community_general_update_group)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_community_general_update_group)
+        binding.vm = communityGeneralUpdateViewModel
 
-        communityGeneralNewGroupViewModel.isCommunityGeneralPostRegisterBtnEnabled.observe(this) { enabled ->
-            binding.btGeneralNewPostRegister.isEnabled = enabled
+        val title = intent.getStringExtra("title")
+        val content = intent.getStringExtra("content")
+
+        binding.etGeneralNewTitleName2.setText(title)
+        binding.etGeneralTextDetail2.setText(content)
+
+        communityGeneralUpdateViewModel.isCommunityGeneralPostRegisterBtnEnabled.observe(this) { enabled ->
+            binding.btGeneralNewPostRegister2.isEnabled = enabled
         }
 
-        communityGeneralNewGroupViewModel.etText.observe(this) {
+        communityGeneralUpdateViewModel.etText.observe(this) {
             checkAllFields()
         }
 
-        communityGeneralNewGroupViewModel.communityCreateData.observe(this) {
-            communityGeneralNewGroupViewModel.sendCommunityGeneralData(it)
+        communityGeneralUpdateViewModel.communityUpdateData.observe(this) {
+            communityGeneralUpdateViewModel.sendCommunityGeneralUpdateData(it)
         }
 
-        communityGeneralNewGroupViewModel.isCommunityGeneralExists.observe(this) {
+        communityGeneralUpdateViewModel.isCommunityGeneralExists.observe(this) {
             checkGeneralOrganizationExistence(it)
         }
 
@@ -46,15 +52,15 @@ class CommunityGeneralNewGroupActivity : AppCompatActivity() {
     }
 
     private fun backNewToMainActivity() {
-        binding.btGeneralNewPostRegister.setOnClickListener {
-            val generalNewTitleName = binding.etGeneralNewTitleName.text.toString()
-            val generalNewTextDetail = binding.etGeneralTextDetail.text.toString()
+        binding.btGeneralNewPostRegister2.setOnClickListener {
+            val generalNewTitleName2 = binding.etGeneralNewTitleName2.text.toString()
+            val generalNewTextDetail2 = binding.etGeneralTextDetail2.text.toString()
 
-            if (generalNewTitleName.isEmpty()) {
+            if (generalNewTitleName2.isEmpty()) {
                 Toast.makeText(applicationContext, "제목을 입력해주세요", Toast.LENGTH_SHORT).show()
-            } else if (generalNewTextDetail.isEmpty()) {
+            } else if (generalNewTextDetail2.isEmpty()) {
                 Toast.makeText(applicationContext, "내용을 입력해주세요", Toast.LENGTH_SHORT).show()
-            } else if (!generalNewTextDetail.isEmpty() && !generalNewTitleName.isEmpty()) {
+            } else if (!generalNewTextDetail2.isEmpty() && !generalNewTitleName2.isEmpty()) {
                 Toast.makeText(applicationContext, "저장되었습니다", Toast.LENGTH_SHORT).show()
                 Intent().putExtra("resultText", "text")
                 setResult(Activity.RESULT_OK, Intent())
@@ -62,7 +68,7 @@ class CommunityGeneralNewGroupActivity : AppCompatActivity() {
             }
         }
 
-        binding.btGeneralNewBackToMain.setOnClickListener {
+        binding.btGeneralNewBackToMain2.setOnClickListener {
             showConfirmationDialog()
         }
     }
@@ -71,24 +77,24 @@ class CommunityGeneralNewGroupActivity : AppCompatActivity() {
         if (isOrgCheck) {
             val communityGeneralViewData = CommunityGeneralPostViewData(
                 id = "",
-                title = binding.etGeneralNewTitleName.text.toString(),
-                content = binding.etGeneralTextDetail.text.toString(),
+                title = binding.etGeneralNewTitleName2.text.toString(),
+                content = binding.etGeneralTextDetail2.text.toString(),
                 viewCount = 0,
                 voteCount = 0,
                 created_at = "yyyy-MM-dd'T'HH:mm:ss",
                 member_id = ""
             )
-            communityGeneralNewGroupViewModel.setCommunityPostData(communityGeneralViewData)
+            communityGeneralUpdateViewModel.setCommunityPostData(communityGeneralViewData)
             setResult(Activity.RESULT_OK, Intent())
             finish()
         }
     }
 
     private fun checkAllFields() {
-        if (binding.etGeneralNewTitleName.length() != 0 && binding.etGeneralTextDetail.length() != 0) {
-            communityGeneralNewGroupViewModel.isCommunityGeneralPostRegisterButtonState(true)
+        if (binding.etGeneralNewTitleName2.length() != 0 && binding.etGeneralTextDetail2.length() != 0) {
+            communityGeneralUpdateViewModel.isCommunityGeneralPostRegisterButtonState(true)
         } else {
-            communityGeneralNewGroupViewModel.isCommunityGeneralPostRegisterButtonState(false)
+            communityGeneralUpdateViewModel.isCommunityGeneralPostRegisterButtonState(false)
         }
     }
 

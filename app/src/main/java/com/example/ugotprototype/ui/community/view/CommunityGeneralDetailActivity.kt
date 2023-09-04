@@ -15,9 +15,11 @@ import com.example.ugotprototype.data.community.CommunityGeneralChatViewData
 import com.example.ugotprototype.databinding.FragmentCommunityGeneralDetailBinding
 import com.example.ugotprototype.ui.community.adapter.CommunityGeneralChatRecyclerViewAdapter
 import com.example.ugotprototype.ui.community.viewmodel.CommunityGeneralChatViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
+@AndroidEntryPoint
 class CommunityGeneralDetailActivity : AppCompatActivity() {
     private lateinit var binding: FragmentCommunityGeneralDetailBinding
     private val communityGeneralChatViewModel: CommunityGeneralChatViewModel by viewModels()
@@ -46,10 +48,59 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
             communityGeneralChatRecyclerViewAdapter.setData(it)
         }
 
+        updateCommunityGeneralActivity()
         dataGeneralSet()
         chatInputBtn()
         backCommunityGeneralToMainActivity()
         changeMyGeneralChatCount()
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun dataGeneralSet() {
+        with(binding) {
+            tvCommunityGeneralName.text = intent.getStringExtra(CommunityGeneralFragment.GENERAL_TITLE)
+            tvCommunityGeneralNickname.text = intent.getStringExtra(CommunityGeneralFragment.GENERAL_MEMBER_ID)
+            tvCommunityGeneralText.text = intent.getStringExtra(CommunityGeneralFragment.GENERAL_CONTENT)
+            tvCommunityGeneralTime.text = LocalDateTime.parse(intent.getStringExtra((CommunityGeneralFragment.GENERAL_CREATE_AT)))?.format(
+                DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm"))?: ""
+            tvCommunityGeneralCnt.text = intent.getStringExtra(CommunityGeneralFragment.GENERAL_VOTE_COUNT)
+            tvCommunityInquireInput.text = intent.getStringExtra(CommunityGeneralFragment.GENERAL_VIEW_COUNT)
+        }
+    }
+
+    private fun backCommunityGeneralToMainActivity() {
+        binding.ivCommunityGeneralBack.setOnClickListener {
+            Intent().putExtra("resultText", "text")
+            setResult(Activity.RESULT_OK, Intent())
+            finish()
+        }
+    }
+
+    private fun updateCommunityGeneralActivity() {
+        binding.tvCmuGeneUpdate.setOnClickListener {
+            val intent = Intent(this, CommunityGeneralUpdateGroupActivity::class.java)
+            intent.putExtra("title", intent.getStringExtra(CommunityGeneralFragment.GENERAL_TITLE))
+            intent.putExtra("content", intent.getStringExtra(CommunityGeneralFragment.GENERAL_CONTENT))
+            startActivity(intent)
+        }
+    }
+
+    private fun changeMyGeneralChatCount() {
+        communityGeneralChatViewModel.itemCount.observe(this) { count ->
+            binding.tvCommunityGeneralCnt.text = count.toString()
+        }
+    }
+
+    private fun chatInputBtn(){
+        binding.btGeneralDetailChatInput.setOnClickListener {
+            binding.generalChatInput.text.clear()
+            hideKeyboard()
+        }
+    }
+
+    private fun hideKeyboard() {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(binding.generalChatInput.windowToken, 0)
     }
 
     private fun testCommunityGeneralChatData() {
@@ -95,44 +146,5 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
                 "2023.05.30 14:33"
             )
         )
-    }
-
-    @SuppressLint("SetTextI18n")
-    private fun dataGeneralSet() {
-        with(binding) {
-            tvCommunityGeneralName.text = intent.getStringExtra(CommunityGeneralFragment.GENERAL_TITLE)
-            tvCommunityGeneralNickname.text = intent.getStringExtra(CommunityGeneralFragment.GENERAL_MEMBER_ID)
-            tvCommunityGeneralText.text = intent.getStringExtra(CommunityGeneralFragment.GENERAL_CONTENT)
-            tvCommunityGeneralTime.text = LocalDateTime.parse(intent.getStringExtra((CommunityGeneralFragment.GENERAL_CREATE_AT)))?.format(
-                DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm"))?: ""
-            tvCommunityGeneralCnt.text = intent.getStringExtra(CommunityGeneralFragment.GENERAL_VOTE_COUNT)
-            tvCommunityInquireInput.text = intent.getStringExtra(CommunityGeneralFragment.GENERAL_VIEW_COUNT)
-        }
-    }
-
-    private fun backCommunityGeneralToMainActivity() {
-        binding.ivCommunityGeneralBack.setOnClickListener {
-            Intent().putExtra("resultText", "text")
-            setResult(Activity.RESULT_OK, Intent())
-            finish()
-        }
-    }
-
-    private fun chatInputBtn(){
-        binding.btGeneralDetailChatInput.setOnClickListener {
-            binding.generalChatInput.text.clear()
-            hideKeyboard()
-        }
-    }
-
-    private fun hideKeyboard() {
-        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(binding.generalChatInput.windowToken, 0)
-    }
-
-    private fun changeMyGeneralChatCount() {
-        communityGeneralChatViewModel.itemCount.observe(this) { count ->
-            binding.tvCommunityGeneralCnt.text = count.toString()
-        }
     }
 }

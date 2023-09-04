@@ -4,7 +4,7 @@ data class CommunityGeneralPostResponse (
     val id : String,
     val title : String,
     val content : String,
-    val viewCount : Int?,
+    var viewCount : Int?,
     val voteCount : Int?,
     val member_id : String,
     val status : String?,

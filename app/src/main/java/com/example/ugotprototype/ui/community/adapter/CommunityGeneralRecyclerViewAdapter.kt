@@ -45,10 +45,20 @@ class CommunityGeneralRecyclerViewAdapter :
 
         private fun formatDate(dateString: String): String {
             val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS", Locale.getDefault())
-            val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-
+            val currentDate = Calendar.getInstance()
             val date = inputFormat.parse(dateString)
-            return outputFormat.format(date)
+            val cal = Calendar.getInstance().apply { time = date }
+            val dateFormat: SimpleDateFormat
+
+            if (currentDate.get(Calendar.YEAR) == cal.get(Calendar.YEAR) &&
+                currentDate.get(Calendar.DAY_OF_YEAR) == cal.get(Calendar.DAY_OF_YEAR)
+            ) {
+                dateFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+            } else {
+                dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            }
+
+            return dateFormat.format(date)
         }
 
         private fun formatViewCount(viewCount: Int?): String {
@@ -89,6 +99,9 @@ class CommunityGeneralRecyclerViewAdapter :
 
     fun goToCommunityPostDetail(item: CommunityGeneralPostResponse, context: Context) {
         Intent(context, CommunityGeneralDetailActivity::class.java).apply {
+            val updatedViewCount = (item.viewCount ?: 0) + 1
+//            item.setViewCount(updatedViewCount)
+
             putExtra(GENERAL_ID, item.id)
             putExtra(GENERAL_TITLE, item.title)
             putExtra(GENERAL_CONTENT, item.content)
@@ -97,6 +110,7 @@ class CommunityGeneralRecyclerViewAdapter :
             putExtra(GENERAL_CREATE_AT, item.created_at)
             putExtra(GENERAL_MEMBER_ID, item.member_id)
 
+            notifyDataSetChanged()
             context.startActivity(this)
         }
     }
