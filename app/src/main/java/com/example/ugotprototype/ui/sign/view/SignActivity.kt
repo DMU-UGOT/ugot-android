@@ -117,7 +117,7 @@ class SignActivity : AppCompatActivity() {
                     navController.navigate(R.id.action_sign_input_skill_to_sign_input_github)
                     signViewModel.setCurrentFragmentIndex(signViewModel.currentFragmentIndex.value!! + 1)
                 } else {
-                    Toast.makeText(this, "1개 이상의 기술 스택을 선택해야 합니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "2개의 기술 스택을 체크해야합니다.", Toast.LENGTH_SHORT).show()
                 }
             }
 

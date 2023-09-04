@@ -26,7 +26,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun goToMain() {
-        if (sharedPreference.getAutoLogin()) {
+       if (sharedPreference.getAutoLogin()) {
             Handler(Looper.getMainLooper()).postDelayed({
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
@@ -36,6 +36,6 @@ class SplashActivity : AppCompatActivity() {
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             }, 1000)
-        }
+       }
     }
 }

@@ -1,6 +1,5 @@
 package com.example.ugotprototype.ui.sign.viewmodel
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -99,7 +98,7 @@ class SignViewModel @Inject constructor(
         val updatedChipTexts = _selectedChipTexts.value?.toMutableList() ?: mutableListOf()
 
         if (chip.isChecked) {
-            if (updatedChipTexts.size < 3) {
+            if (updatedChipTexts.size < 2) {
                 updatedChipTexts.add(chip.text.toString())
             } else {
                 chip.isChecked = false
@@ -153,7 +152,7 @@ class SignViewModel @Inject constructor(
     }
 
     fun isSelectedChipTextsValid(): Boolean {
-        return selectedChipTexts.value?.isNotEmpty() == true
+        return selectedChipTexts.value?.size == 2
     }
 
     fun isBlogValid(): Boolean {
