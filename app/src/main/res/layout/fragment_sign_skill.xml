@@ -12,7 +12,7 @@
             style="@style/SignTitleTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="기술스택"
+            android:text="기술스택 (2개)"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,6 +27,7 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/skill_javas"
+                style="@style/ChipWithoutClickEffect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checkable="true"
@@ -34,6 +35,7 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/skill_java"
+                style="@style/ChipWithoutClickEffect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checkable="true"
@@ -41,6 +43,7 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/skill_html5"
+                style="@style/ChipWithoutClickEffect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checkable="true"
@@ -48,6 +51,7 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/skill_css3"
+                style="@style/ChipWithoutClickEffect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checkable="true"
@@ -55,6 +59,7 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/skill_mysql"
+                style="@style/ChipWithoutClickEffect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checkable="true"
@@ -62,6 +67,7 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/skill_python"
+                style="@style/ChipWithoutClickEffect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checkable="true"
@@ -69,6 +75,7 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/skill_react"
+                style="@style/ChipWithoutClickEffect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checkable="true"
@@ -76,6 +83,7 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/skill_spring"
+                style="@style/ChipWithoutClickEffect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checkable="true"
@@ -83,6 +91,7 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/skill_oracle"
+                style="@style/ChipWithoutClickEffect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checkable="true"
@@ -90,6 +99,7 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/skill_springboot"
+                style="@style/ChipWithoutClickEffect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checkable="true"
@@ -97,6 +107,7 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/skill_nodejs"
+                style="@style/ChipWithoutClickEffect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checkable="true"
@@ -104,6 +115,7 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/skill_c"
+                style="@style/ChipWithoutClickEffect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checkable="true"
@@ -111,6 +123,7 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/skill_typescript"
+                style="@style/ChipWithoutClickEffect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checkable="true"
@@ -118,6 +131,7 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/skill_ai"
+                style="@style/ChipWithoutClickEffect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checkable="true"
@@ -125,6 +139,7 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/skill_android"
+                style="@style/ChipWithoutClickEffect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checkable="true"
