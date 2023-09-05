@@ -3,6 +3,7 @@ package com.example.ugotprototype.ui.team.view
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.ugotprototype.BuildConfig
+import com.example.ugotprototype.FragmentLoadingLayout
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.FragmentTeamBinding
 import com.example.ugotprototype.ui.login.view.LoginActivity
@@ -24,6 +26,7 @@ class TeamFragment : Fragment() {
     private lateinit var binding: FragmentTeamBinding
     private val teamViewModel: TeamViewModel by viewModels()
     private lateinit var teamRecyclerViewAdapter: TeamRecyclerViewAdapter
+    private val loadingDialog = FragmentLoadingLayout()
 
     companion object {
         const val TOKEN_DATA = BuildConfig.GITHUB_KEY
@@ -51,6 +54,7 @@ class TeamFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewLoadingLayout()
 
         teamViewModel.setCurrentPage(1)
         teamViewModel.setTotalPage(1)
@@ -105,6 +109,7 @@ class TeamFragment : Fragment() {
         val goToPostWriteResultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
+                    loadingDialog.show(requireActivity().supportFragmentManager, "loadingDialog")
                     teamViewModel.getTeamList()
                 }
             }
@@ -115,6 +120,14 @@ class TeamFragment : Fragment() {
                     requireContext(), TeamPostWriteDetailActivity::class.java
                 )
             )
+        }
+    }
+
+    private fun viewLoadingLayout() {
+        loadingDialog.show(requireActivity().supportFragmentManager, "loadingDialog")
+
+        teamViewModel.isLoadingPage.observe(viewLifecycleOwner) {
+            loadingDialog.dismiss()
         }
     }
 }

@@ -28,6 +28,9 @@ class TeamViewModel @Inject constructor(
     private val _isTokenExpired = MutableLiveData<Boolean>()
     val isTokenExpired: LiveData<Boolean> = _isTokenExpired
 
+    private val _isLoadingPage = MutableLiveData<Boolean>()
+    val isLoadingPage: LiveData<Boolean> = _isLoadingPage
+
     val onPrevButtonClickListener = View.OnClickListener {
         if (_currentPage.value!! > 1) {
             _currentPage.value = _currentPage.value!! - 1
@@ -65,6 +68,8 @@ class TeamViewModel @Inject constructor(
 
                 _teamItemList.value = teamsResponse
                 _totalPage.value = pageResponse.pageInfo.totalPages
+            }.onSuccess {
+                _isLoadingPage.value = true
             }.onFailure {
                 _isTokenExpired.value = true
             }

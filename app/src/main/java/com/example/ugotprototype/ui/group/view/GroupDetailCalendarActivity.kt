@@ -14,10 +14,12 @@ import com.example.ugotprototype.ui.group.viewmodel.GroupViewModel
 import com.kizitonwose.calendar.core.CalendarDay
 import com.kizitonwose.calendar.core.daysOfWeek
 import com.kizitonwose.calendar.view.MonthDayBinder
+import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 
+@AndroidEntryPoint
 class GroupDetailCalendarActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityGroupDetailCalendarBinding

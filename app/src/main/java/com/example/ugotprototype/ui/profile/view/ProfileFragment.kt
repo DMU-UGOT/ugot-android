@@ -7,11 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.FragmentProfileBinding
+import com.example.ugotprototype.ui.login.view.LoginActivity
+import com.example.ugotprototype.ui.profile.viewmodel.ProfileFragmentViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
+    private val viewModel: ProfileFragmentViewModel by viewModels()
 
     // 초기화
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -26,9 +32,16 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.isDeleteAccount.observe(viewLifecycleOwner) {
+            if(it) {
+                startActivity(Intent(requireContext(), LoginActivity::class.java))
+            }
+        }
+
         goToSchool()
         goToStack()
         goToMessage()
+        deleteUser()
     }
 
     // 개인 정보 페이지 이동
@@ -49,6 +62,12 @@ class ProfileFragment : Fragment() {
     private fun goToMessage() {
         binding.layoutProfileMessage.setOnClickListener {
             startActivity(Intent(requireActivity(), MessageActivity::class.java))
+        }
+    }
+
+    private fun deleteUser() {
+        binding.layoutProfileCheckout.setOnClickListener{
+            viewModel.deleteUser()
         }
     }
 }

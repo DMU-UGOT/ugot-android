@@ -74,7 +74,8 @@ class LoginActivity : AppCompatActivity() {
 
         binding.imgKakaoLogin.setOnClickListener {
             //kakaoLogin()
-            startActivity(Intent(this, MainActivity::class.java))
+            //startActivity(Intent(this, MainActivity::class.java))
+            Toast.makeText(this, "준비 중 입니다.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -139,7 +140,7 @@ class LoginActivity : AppCompatActivity() {
         val oauthLoginCallback = object : OAuthLoginCallback {
             override fun onSuccess() {
                 // 네이버 로그인 인증이 성공했을 때 수행할 코드 추가
-                //Log.e("태그", NaverIdLoginSDK.getAccessToken().toString())
+                Log.e("태그", NaverIdLoginSDK.getAccessToken().toString())
                 viewModel.loginNaver(RequestLoginNaver(NaverIdLoginSDK.getAccessToken().toString()))
             }
 

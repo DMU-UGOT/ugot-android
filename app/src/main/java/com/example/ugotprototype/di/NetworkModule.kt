@@ -1,5 +1,6 @@
 package com.example.ugotprototype.di
 
+import android.util.Log
 import com.example.ugotprototype.BuildConfig
 import com.example.ugotprototype.MainActivity
 import com.example.ugotprototype.data.api.ApiService
@@ -92,16 +93,17 @@ object NetworkModule {
             val originalRequest: Request = chain.request()
             val modifiedRequest: Request
 
+            // 깃허브 관련 API는 모두 요청할 때 토큰값을 같이보냄
             if (originalRequest.url.toString().startsWith(MainActivity.GITHUB_URL)) {
-                modifiedRequest = originalRequest.newBuilder()
-                    .header("Authorization", "Bearer $TOKEN_DATA") // GitHub 토큰
-                    .build()
+                modifiedRequest =
+                    originalRequest.newBuilder().header("Authorization", "Bearer $TOKEN_DATA")
+                        .build()
+                // 백엔드 관련 API일때 토큰값을 보내는경우는 아래조건과 같음
             } else if (originalRequest.url.toString()
-                    .startsWith(BuildConfig.BASE_URL) && !(originalRequest.url.toString()
-                    .contains("members")) && !(originalRequest.url.toString()
-                    .contains("auth/naver"))
+                    .startsWith(BuildConfig.BASE_URL) && (!(originalRequest.url.toString()
+                    .contains("auth/naver")) && (originalRequest.url.toString()
+                    .contains("members") && originalRequest.method == ("DELETE")))
             ) {
-
                 modifiedRequest = originalRequest.newBuilder()
                     .header("Authorization", "Bearer ${sharedPreference.getToken()}").build()
             } else {

@@ -63,4 +63,8 @@
         <item name="android:textColor">#80808080</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="CustomProgressBar" parent="@android:style/Widget.ProgressBar.Small">
+        <item name="android:indeterminateDrawable">@drawable/custom_progress_bar</item>
+    </style>
 </resources>
