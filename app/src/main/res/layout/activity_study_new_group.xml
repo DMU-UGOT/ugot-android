@@ -4,6 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.example.ugotprototype.ui.study.viewmodel.StudyPostWriteViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -81,6 +88,7 @@
                     android:inputType="text"
                     android:textColorHint="@color/color_80636363"
                     android:textSize="15sp"
+                    app:addTextChangedListener="@{vm.textWatcher}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -106,6 +114,7 @@
                     android:textColor="@color/black"
                     android:textColorHint="@color/color_80636363"
                     android:textSize="15sp"
+                    app:addTextChangedListener="@{vm.textWatcher}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/st_new_v1" />
@@ -137,7 +146,8 @@
                     android:layout_marginTop="20dp"
                     android:textSize="17sp"
                     app:layout_constraintStart_toStartOf="@id/tv_st_meet_choice"
-                    app:layout_constraintTop_toBottomOf="@id/tv_st_meet_choice" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_st_meet_choice"
+                    app:onItemSelectedListener="@{vm.onItemSelectedListener}" />
 
                 <View
                     android:id="@+id/st_new_v3"
@@ -182,7 +192,8 @@
                     android:progress="1"
                     app:layout_constraintEnd_toEndOf="@id/tv_st_new_max_number"
                     app:layout_constraintStart_toStartOf="@id/tv_st_new_min_number"
-                    app:layout_constraintTop_toBottomOf="@id/tv_max_member" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_max_member"
+                    app:onSeekBarChangeListener="@{vm.onSeekBarChangeListener}" />
 
                 <TextView
                     android:id="@+id/tv_st_new_max_number"
@@ -228,6 +239,7 @@
                     android:padding="15dp"
                     android:textColorHint="@color/color_80636363"
                     android:textSize="15sp"
+                    app:addTextChangedListener="@{vm.textWatcher}"
                     app:layout_constraintBottom_toTopOf="@id/st_new_v5"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

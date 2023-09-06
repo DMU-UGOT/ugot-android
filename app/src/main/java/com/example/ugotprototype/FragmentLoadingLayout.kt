@@ -9,7 +9,6 @@ class FragmentLoadingLayout : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = Dialog(requireContext())
         dialog.setContentView(R.layout.fragment_loading_layout)
-        dialog.setCancelable(false)
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         return dialog
     }

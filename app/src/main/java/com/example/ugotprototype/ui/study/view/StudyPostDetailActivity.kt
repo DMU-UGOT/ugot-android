@@ -6,6 +6,17 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.ActivityStudyPostDetailBinding
+import com.example.ugotprototype.ui.study.view.StudyFragment.Companion.STUDY_CREATE_TIME
+import com.example.ugotprototype.ui.study.view.StudyFragment.Companion.STUDY_DETAIL
+import com.example.ugotprototype.ui.study.view.StudyFragment.Companion.STUDY_GITHUB_LINK
+import com.example.ugotprototype.ui.study.view.StudyFragment.Companion.STUDY_KAKAO_LINK
+import com.example.ugotprototype.ui.study.view.StudyFragment.Companion.STUDY_STATUS
+import com.example.ugotprototype.ui.study.view.StudyFragment.Companion.STUDY_STATUS_CNT
+import com.example.ugotprototype.ui.study.view.StudyFragment.Companion.STUDY_STATUS_CNT_END
+import com.example.ugotprototype.ui.study.view.StudyFragment.Companion.STUDY_TITLE
+import com.example.ugotprototype.ui.team.view.TeamFragment
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class StudyPostDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStudyPostDetailBinding
@@ -24,13 +35,18 @@ class StudyPostDetailActivity : AppCompatActivity() {
 
     private fun dataSet() {
 
-        this.studyStatusCnt = intent.getStringExtra("studyStatusCnt").toString()
-
-        binding.tvPostTitle.text = intent.getStringExtra("studyTitle")
-        binding.tvTeamPostDetail.text = intent.getStringExtra("studyDetail")
-        binding.tvTotalPersonCntFirst.text = studyStatusCnt
-        binding.tvTotalPersonCntEnd.text = intent.getStringExtra("studyStatusCntEnd")
-        binding.tvPersonCntCheck.text = intent.getStringExtra("studyCurrent")
+        with(binding) {
+            tvTime.text = LocalDateTime.parse(intent.getStringExtra((STUDY_CREATE_TIME)))?.format(
+                DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm")
+            ) ?: ""
+            tvPostTitle.text = intent.getStringExtra(STUDY_TITLE)
+            tvTeamPostDetail.text = intent.getStringExtra(STUDY_DETAIL)
+            tvTotalPersonCntFirst.text = intent.getIntExtra(STUDY_STATUS_CNT, 0).toString()
+            tvTotalPersonCntEnd.text = intent.getIntExtra(STUDY_STATUS_CNT_END, 0).toString()
+            tvGithubLink.text = intent.getStringExtra(STUDY_GITHUB_LINK)
+            tvKakaoLink.text = intent.getStringExtra(STUDY_KAKAO_LINK)
+            tvPersonCntCheck.text = intent.getStringExtra(STUDY_STATUS)
+        }
 
     }
 

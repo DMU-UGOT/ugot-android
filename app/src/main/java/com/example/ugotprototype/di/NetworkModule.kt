@@ -10,6 +10,7 @@ import com.example.ugotprototype.data.api.SignService
 import com.example.ugotprototype.data.api.TeamBuildingService
 import com.example.ugotprototype.SharedPreference
 import com.example.ugotprototype.data.api.ProfileService
+import com.example.ugotprototype.data.api.StudyService
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TOKEN_DATA
 import dagger.Module
 import dagger.Provides
@@ -84,6 +85,12 @@ object NetworkModule {
     @Singleton
     fun provideProfileService(retrofit: Retrofit): ProfileService {
         return retrofit.create(ProfileService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideStudyService(retrofit: Retrofit): StudyService {
+        return retrofit.create(StudyService::class.java)
     }
 
     @Provides

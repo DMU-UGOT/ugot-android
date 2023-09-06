@@ -3,13 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="studyItem"
-            type="com.example.ugotprototype.data.study.StudyData" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
@@ -47,7 +40,6 @@
                         android:id="@+id/iv_st_image"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@drawable/img_sample"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +54,6 @@
                     android:layout_marginEnd="10dp"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="@{studyItem.Title}"
                     android:textColor="@color/black"
                     android:textSize="15dp"
                     android:textStyle="bold"
@@ -91,7 +82,6 @@
                     android:layout_marginEnd="10dp"
                     android:ellipsize="end"
                     android:maxLines="3"
-                    android:text="@{studyItem.Text}"
                     android:textSize="13dp"
                     app:layout_constraintEnd_toStartOf="@id/iv_st_bookmark"
                     app:layout_constraintStart_toEndOf="@id/layout_st_image"
@@ -103,7 +93,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
-                    android:text="@{studyItem.meet}"
                     android:textSize="12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@id/tv_st_title"
@@ -115,18 +104,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="95dp"
                     android:layout_marginBottom="5dp"
-                    android:text="인원 : "
                     android:textSize="12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/tv_st_title"
-                    tools:text="인원 : " />
+                    android:text="인원 : " />
 
                 <TextView
                     android:id="@+id/tv_cnt_first"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:gravity="center_vertical"
-                    android:text="@{studyItem.statusCntFirst}"
                     android:textSize="12dp"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_status_cnt"
                     app:layout_constraintStart_toEndOf="@+id/tv_status_cnt"
@@ -147,24 +134,32 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:gravity="center_vertical"
-                    android:text="@{studyItem.statusCntEnd}"
                     android:textSize="12dp"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_status_cnt"
                     app:layout_constraintStart_toEndOf="@+id/slash"
                     tools:text="6" />
 
                 <TextView
-                    android:id="@+id/tv_st_inquire"
+                    android:id="@+id/tv_view_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="180dp"
-                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
-                    android:text="@{studyItem.inquire}"
+                    android:text= "조회수 : "
                     android:textSize="12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/tv_st_title"
-                    tools:text="조회 수 : 1" />
+                    app:layout_constraintStart_toStartOf="@+id/tv_st_title"
+                    tools:text="조회수 :" />
+
+                <TextView
+                    android:id="@+id/tv_view_count_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_view_count"
+                    app:layout_constraintStart_toEndOf="@+id/tv_view_count"
+                    tools:text="5" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>

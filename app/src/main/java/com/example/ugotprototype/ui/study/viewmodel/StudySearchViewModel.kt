@@ -1,45 +1,45 @@
-package com.example.ugotprototype.ui.team.viewmodel
+package com.example.ugotprototype.ui.study.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ugotprototype.data.api.ApiService
-import com.example.ugotprototype.data.api.TeamBuildingService
-import com.example.ugotprototype.data.response.Team
+import com.example.ugotprototype.data.api.StudyService
+import com.example.ugotprototype.data.study.StudyGetPost
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class TeamSearchViewModel @Inject constructor(
-    private val apiService: ApiService, private val teamBuildingService: TeamBuildingService
+class StudySearchViewModel @Inject constructor(
+    private val apiService: ApiService, private val studyService: StudyService
 ) : ViewModel() {
 
-    private val _teams = MutableLiveData<List<Team>>()
-    val teams: LiveData<List<Team>> = _teams
+    private val _studies = MutableLiveData<List<StudyGetPost>>()
+    val studies: LiveData<List<StudyGetPost>> = _studies
 
     private val _isLoadingPage = MutableLiveData<Boolean>()
     val isLoadingPage: LiveData<Boolean> = _isLoadingPage
 
-    fun searchTeams(query: String) {
+    fun searchStudies(query: String) {
         _isLoadingPage.value = false
         viewModelScope.launch {
             kotlin.runCatching {
-                val allMatchingTeams = mutableListOf<Team>()
+                val allMatchingTeams = mutableListOf<StudyGetPost>()
                 var currentPage = 0
 
                 while (true) {
-                    val response = teamBuildingService.searchTeams(currentPage, query)
-                    val teams = response.body()?.content ?: emptyList()
+                    val response = studyService.searchStudies(currentPage, query)
+                    val studies = response.body()?.content ?: emptyList()
 
-                    for (team in teams) {
-                        if (team.title.contains(query)) {
+                    for (study in studies) {
+                        if (study.title.contains(query)) {
                             val avatarUrl = apiService.getOrganization(
-                                team.gitHubLink
+                                study.gitHubLink
                             )?.avatarUrl
-                            team.avatarUrl = avatarUrl ?: ""
-                            allMatchingTeams.add(team)
+                            study.avatarUrl = avatarUrl ?: ""
+                            allMatchingTeams.add(study)
                         }
                     }
                     if (currentPage >= (response.body()?.totalPages!! - 1)) {
@@ -47,7 +47,7 @@ class TeamSearchViewModel @Inject constructor(
                     }
                     currentPage++
                 }
-                _teams.value = allMatchingTeams
+                _studies.value = allMatchingTeams
             }.onSuccess {
                 _isLoadingPage.value = true
             }

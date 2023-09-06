@@ -1,38 +1,68 @@
 package com.example.ugotprototype.ui.study.view
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.SeekBar
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.R
+import com.example.ugotprototype.data.study.StudySetPost
 import com.example.ugotprototype.databinding.ActivityStudyNewGroupBinding
-import com.example.ugotprototype.ui.study.viewmodel.StudyViewModel
+import com.example.ugotprototype.ui.study.viewmodel.StudyPostWriteViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class StudyNewGroupActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStudyNewGroupBinding
-    private val studyViewModel: StudyViewModel by viewModels()
+    private val studyViewModel: StudyPostWriteViewModel by viewModels()
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_study_new_group)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_study_new_group)
         binding.lifecycleOwner = this
+        binding.vm = studyViewModel
 
-        studyViewModel.studyMaxPersonnel.observe(this) { maxPersonnel ->
-            binding.tvStNewMaxNumber.text = maxPersonnel.toString() + "명"
+        studyViewModel.isStudyPostRegisterBtnEnabled.observe(this) { enabled ->
+            binding.btStNewPostRegister.isEnabled = enabled
         }
 
-        setupEditTextHeightListener()
+        studyViewModel.etText.observe(this) {
+            checkAllFields()
+        }
+
+        studyViewModel.seekBar.observe(this) {
+            checkAllFields()
+            binding.tvStNewMaxNumber.text = it.toString() + "명"
+        }
+
+        studyViewModel.selectSpinner.observe(this) {
+            checkAllFields()
+        }
+
+        studyViewModel.isTeamExists.observe(this) {
+            checkOrganizationExistence(it)
+        }
+
+        studyViewModel.studyCreateData.observe(this) {
+            studyViewModel.sendStudyData(it)
+        }
+
+        studyViewModel.createFinish.observe(this) {
+            if (it) {
+                setResult(Activity.RESULT_OK, Intent())
+                finish()
+            }
+        }
+
+
         spinnerMeetChoice()
-        studyMaxPersonnel()
         backStudyNewToMainActivity()
     }
 
@@ -44,43 +74,37 @@ class StudyNewGroupActivity : AppCompatActivity() {
         binding.spStMeet.adapter = adapter
     }
 
-    private fun studyMaxPersonnel() {
-        binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                studyViewModel.studyMaxPersonnel(progress)
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar) {
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar) {
-            }
-        })
-    }
-
     private fun backStudyNewToMainActivity() {
-
         binding.btStNewPostRegister.setOnClickListener {
-            Intent().putExtra("resultText", "text")
-            setResult(Activity.RESULT_OK, Intent())
-            finish()
+            studyViewModel.isTeamExists(binding.etStNewGitLink.text.toString())
         }
 
         binding.btStNewBackToMain.setOnClickListener {
-            Intent().putExtra("resultText", "text")
             setResult(Activity.RESULT_OK, Intent())
             finish()
         }
     }
 
-    private fun setupEditTextHeightListener() {
-        binding.etTitleDetail.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+    private fun checkAllFields() {
+        if (binding.etStNewTitleName.length() != 0 && binding.etTitleDetail.length() != 0 && binding.tvStNewGithubTitle.length() != 0) {
+            studyViewModel.isStudyPostRegisterButtonState(true)
+        } else {
+            studyViewModel.isStudyPostRegisterButtonState(false)
+        }
+    }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {
-            }
-        })
+    private fun checkOrganizationExistence(isOrgCheck: Boolean) {
+        if (isOrgCheck) {
+            val studyData = StudySetPost(
+                title = binding.etStNewTitleName.text.toString(),
+                content = binding.etTitleDetail.text.toString(),
+                isContact = binding.spStMeet.selectedItem.toString(),
+                allPersonnel = binding.seekBar.progress,
+                gitHubLink = binding.etStNewGitLink.text.toString(),
+            )
+            studyViewModel.setStudyPostData(studyData)
+        } else {
+            Toast.makeText(this, "해당 깃허브 조직은 존재하지 않습니다", Toast.LENGTH_SHORT).show()
+        }
     }
 }

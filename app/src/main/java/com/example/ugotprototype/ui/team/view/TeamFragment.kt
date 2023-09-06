@@ -109,7 +109,7 @@ class TeamFragment : Fragment() {
         val goToPostWriteResultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
-                    loadingDialog.show(requireActivity().supportFragmentManager, "loadingDialog")
+                    teamViewModel.setIsLoadingPage(false)
                     teamViewModel.getTeamList()
                 }
             }
@@ -124,10 +124,15 @@ class TeamFragment : Fragment() {
     }
 
     private fun viewLoadingLayout() {
+        loadingDialog.isCancelable = false
         loadingDialog.show(requireActivity().supportFragmentManager, "loadingDialog")
 
         teamViewModel.isLoadingPage.observe(viewLifecycleOwner) {
-            loadingDialog.dismiss()
+            if (it) {
+                loadingDialog.dismiss()
+            } else {
+                loadingDialog.show(requireActivity().supportFragmentManager, "loadingDialog")
+            }
         }
     }
 }

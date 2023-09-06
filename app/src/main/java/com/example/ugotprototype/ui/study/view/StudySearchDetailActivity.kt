@@ -1,4 +1,4 @@
-package com.example.ugotprototype.ui.team.view
+package com.example.ugotprototype.ui.study.view
 
 import android.app.Activity
 import android.content.Intent
@@ -10,29 +10,30 @@ import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.FragmentLoadingLayout
 import com.example.ugotprototype.R
-import com.example.ugotprototype.databinding.ActivityTeamSearchDetailBinding
-import com.example.ugotprototype.ui.team.adapter.TeamSearchRecyclerViewAdapter
-import com.example.ugotprototype.ui.team.viewmodel.TeamSearchViewModel
+import com.example.ugotprototype.databinding.ActivityStudySearchDetailBinding
+import com.example.ugotprototype.ui.study.adapter.StudySearchRecyclerViewAdapter
+import com.example.ugotprototype.ui.study.viewmodel.StudySearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class TeamSearchDetailActivity : AppCompatActivity() {
+class StudySearchDetailActivity : AppCompatActivity() {
 
-    private val teamSearchViewModel: TeamSearchViewModel by viewModels()
-    private lateinit var binding: ActivityTeamSearchDetailBinding
-    private lateinit var teamSearchRecyclerViewAdapter: TeamSearchRecyclerViewAdapter
+    private val studySearchViewModel: StudySearchViewModel by viewModels()
+    private lateinit var binding: ActivityStudySearchDetailBinding
+    private lateinit var studySearchRecyclerViewAdapter: StudySearchRecyclerViewAdapter
     private val loadingDialog = FragmentLoadingLayout()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_team_search_detail)
         viewLoadingLayout()
 
-        teamSearchRecyclerViewAdapter = TeamSearchRecyclerViewAdapter()
-        binding.rvTeam.adapter = teamSearchRecyclerViewAdapter
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_study_search_detail)
 
-        teamSearchViewModel.teams.observe(this) {
-            teamSearchRecyclerViewAdapter.setData(it)
+        studySearchRecyclerViewAdapter = StudySearchRecyclerViewAdapter()
+        binding.rvStudy.adapter = studySearchRecyclerViewAdapter
+
+        studySearchViewModel.studies.observe(this) {
+            studySearchRecyclerViewAdapter.setData(it)
             binding.chipLayout.isVisible = false
         }
 
@@ -51,7 +52,7 @@ class TeamSearchDetailActivity : AppCompatActivity() {
     private fun listenerSetting() {
         val queryTextListener = object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                teamSearchViewModel.searchTeams(query.toString())
+                studySearchViewModel.searchStudies(query.toString())
                 return true
             }
 
@@ -66,7 +67,7 @@ class TeamSearchDetailActivity : AppCompatActivity() {
     private fun viewLoadingLayout() {
         loadingDialog.isCancelable = false
 
-        teamSearchViewModel.isLoadingPage.observe(this) {
+        studySearchViewModel.isLoadingPage.observe(this) {
             if (it) {
                 loadingDialog.dismiss()
             } else {
