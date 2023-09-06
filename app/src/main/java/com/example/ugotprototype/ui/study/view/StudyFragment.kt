@@ -52,7 +52,6 @@ class StudyFragment : Fragment() {
 
         studyViewModel.setCurrentPage(1)
         studyViewModel.setTotalPage(1)
-        studyViewModel.getStudyList()
 
         studyRecyclerViewAdapter = StudyRecyclerViewAdapter()
         binding.rvStudy.adapter = studyRecyclerViewAdapter
@@ -79,10 +78,7 @@ class StudyFragment : Fragment() {
         val goToStudySearchResultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
-                    val data: Intent? = result.data
-                    if (result.resultCode == Activity.RESULT_OK) {
-                        Log.d("main", "test")
-                    }
+                    if (result.resultCode == Activity.RESULT_OK) { }
                 }
             }
 
@@ -100,9 +96,7 @@ class StudyFragment : Fragment() {
         val goToStudyNewGroupResultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
-                    val data: Intent? = result.data
                     if (result.resultCode == Activity.RESULT_OK) {
-                        studyViewModel.setIsLoadingPage(false)
                         studyViewModel.getStudyList()
                     }
                 }
@@ -119,7 +113,6 @@ class StudyFragment : Fragment() {
 
     private fun viewLoadingLayout() {
         loadingDialog.isCancelable = false
-        loadingDialog.show(requireActivity().supportFragmentManager, "loadingDialog")
 
         studyViewModel.isLoadingPage.observe(viewLifecycleOwner) {
             if (it) {

@@ -58,7 +58,6 @@ class TeamFragment : Fragment() {
 
         teamViewModel.setCurrentPage(1)
         teamViewModel.setTotalPage(1)
-        teamViewModel.getTeamList()
 
         teamRecyclerViewAdapter = TeamRecyclerViewAdapter()
         binding.rvTeam.adapter = teamRecyclerViewAdapter
@@ -109,23 +108,19 @@ class TeamFragment : Fragment() {
         val goToPostWriteResultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
-                    teamViewModel.setIsLoadingPage(false)
                     teamViewModel.getTeamList()
                 }
             }
 
         binding.fabTeam.setOnClickListener {
             goToPostWriteResultLauncher.launch(
-                Intent(
-                    requireContext(), TeamPostWriteDetailActivity::class.java
-                )
+                Intent(requireContext(), TeamPostWriteDetailActivity::class.java)
             )
         }
     }
 
     private fun viewLoadingLayout() {
         loadingDialog.isCancelable = false
-        loadingDialog.show(requireActivity().supportFragmentManager, "loadingDialog")
 
         teamViewModel.isLoadingPage.observe(viewLifecycleOwner) {
             if (it) {

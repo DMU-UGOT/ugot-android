@@ -54,6 +54,7 @@ class TeamViewModel @Inject constructor(
     }
 
     fun getTeamList() {
+        _isLoadingPage.value = false
         viewModelScope.launch {
             kotlin.runCatching {
                 val pageResponse = teamBuildingService.getTeams(_currentPage.value!!, 5)
@@ -78,7 +79,4 @@ class TeamViewModel @Inject constructor(
         }
     }
 
-    fun setIsLoadingPage(boolean: Boolean) {
-        _isLoadingPage.value = boolean
-    }
 }

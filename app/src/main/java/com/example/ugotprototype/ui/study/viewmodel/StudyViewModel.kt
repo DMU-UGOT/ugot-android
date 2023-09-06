@@ -37,6 +37,7 @@ class StudyViewModel @Inject constructor(private val studyService: StudyService,
 
 
     fun getStudyList() {
+        _isLoadingPage.value = false
         viewModelScope.launch {
             kotlin.runCatching {
                 val pageResponse = studyService.getTeams(_currentPage.value!!, 5)
@@ -81,9 +82,5 @@ class StudyViewModel @Inject constructor(private val studyService: StudyService,
             _currentPage.value = _currentPage.value!! + 1
             _isLoadingPage.value = false
         }
-    }
-
-    fun setIsLoadingPage(boolean: Boolean) {
-        _isLoadingPage.value = boolean
     }
 }
