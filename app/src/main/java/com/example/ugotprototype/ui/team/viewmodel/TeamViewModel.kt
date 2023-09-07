@@ -34,14 +34,12 @@ class TeamViewModel @Inject constructor(
     val onPrevButtonClickListener = View.OnClickListener {
         if (_currentPage.value!! > 1) {
             _currentPage.value = _currentPage.value!! - 1
-            _isLoadingPage.value = false
         }
     }
 
     val onNextButtonClickListener = View.OnClickListener {
         if (_currentPage.value!! < _totalPage.value!!) {
             _currentPage.value = _currentPage.value!! + 1
-            _isLoadingPage.value = false
         }
     }
 
