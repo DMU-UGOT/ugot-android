@@ -108,8 +108,8 @@ object NetworkModule {
                 // 백엔드 관련 API일때 토큰값을 보내는경우는 아래조건과 같음
             } else if (originalRequest.url.toString()
                     .startsWith(BuildConfig.BASE_URL) && (!(originalRequest.url.toString()
-                    .contains("auth/naver")) && (originalRequest.url.toString()
-                    .contains("members") && originalRequest.method == ("DELETE")))
+                    .contains("auth/naver")) && !((originalRequest.url.toString()
+                    .contains("members")) && (originalRequest.method == ("POST"))))
             ) {
                 modifiedRequest = originalRequest.newBuilder()
                     .header("Authorization", "Bearer ${sharedPreference.getToken()}").build()

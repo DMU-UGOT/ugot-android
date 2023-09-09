@@ -54,7 +54,6 @@ class TeamFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewLoadingLayout()
 
         teamViewModel.setCurrentPage(1)
         teamViewModel.setTotalPage(1)
@@ -81,6 +80,7 @@ class TeamFragment : Fragment() {
             }
         }
 
+        viewLoadingLayout()
         goToTeamSearchDetail()
         goToTeamPostWriteDetail()
     }

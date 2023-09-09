@@ -48,7 +48,6 @@ class StudyFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewLoadingLayout()
 
         studyViewModel.setCurrentPage(1)
         studyViewModel.setTotalPage(1)
@@ -69,6 +68,7 @@ class StudyFragment : Fragment() {
             studyViewModel.getStudyList()
         }
 
+        viewLoadingLayout()
         goToStudySearchDetail()
         goToStudyNewGroup()
     }
