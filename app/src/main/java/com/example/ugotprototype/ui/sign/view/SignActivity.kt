@@ -147,4 +147,12 @@ class SignActivity : AppCompatActivity() {
     private fun signUpCheck() {
         signViewModel.signUp()
     }
+
+    override fun onBackPressed() {
+        if (signViewModel.currentFragmentIndex.value!! > 0) {
+            signViewModel.setCurrentFragmentIndex(signViewModel.currentFragmentIndex.value!! - 1)
+            navController.popBackStack()
+            binding.mbNext.text = "다음"
+        }
+    }
 }

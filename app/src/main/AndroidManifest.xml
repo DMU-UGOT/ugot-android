@@ -27,9 +27,6 @@
             android:name=".ui.study.view.StudySearchDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".FragmentLoadingLayout"
-            android:exported="false" />
-        <activity
             android:name=".ui.sign.view.SignNoEmailActivity"
             android:exported="false" />
         <activity
@@ -67,12 +64,6 @@
             android:exported="false" />
         <activity
             android:name=".ui.community.view.CommunityGeneralDetailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.community.view.CommunityChangeFragment"
-            android:exported="false" />
-        <activity
-            android:name=".ui.community.view.CommunityGeneralFragment"
             android:exported="false" />
         <activity
             android:name=".ui.team.view.TeamInformationActivity"

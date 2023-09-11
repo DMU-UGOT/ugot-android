@@ -28,7 +28,9 @@ class SignGradeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.etNowGrade.setText(signViewModel.nowGrade.value?.toString() ?: "")
+        if(signViewModel.nowGrade.value != 0) {
+            binding.etNowGrade.setText(signViewModel.nowGrade.value?.toString() ?: "")
+        }
 
         binding.etNowGrade.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}

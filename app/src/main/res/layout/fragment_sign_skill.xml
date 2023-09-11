@@ -144,6 +144,14 @@
                 android:layout_height="wrap_content"
                 android:checkable="true"
                 android:text="android" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/skill_kotlin"
+                style="@style/ChipWithoutClickEffect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="kotlin" />
         </com.google.android.material.chip.ChipGroup>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
