@@ -50,6 +50,8 @@ class TeamSearchViewModel @Inject constructor(
                 _teams.value = allMatchingTeams
             }.onSuccess {
                 _isLoadingPage.value = true
+            }.onFailure {
+                _isLoadingPage.value = true
             }
         }
     }

@@ -50,6 +50,8 @@ class StudySearchViewModel @Inject constructor(
                 _studies.value = allMatchingTeams
             }.onSuccess {
                 _isLoadingPage.value = true
+            }.onFailure {
+                _isLoadingPage.value = true
             }
         }
     }
