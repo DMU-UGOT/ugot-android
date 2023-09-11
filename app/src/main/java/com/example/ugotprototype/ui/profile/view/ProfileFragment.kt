@@ -41,6 +41,7 @@ class ProfileFragment : Fragment() {
         goToSchool()
         goToStack()
         goToMessage()
+        goToMyPost()
         deleteUser()
     }
 
@@ -68,6 +69,12 @@ class ProfileFragment : Fragment() {
     private fun deleteUser() {
         binding.layoutProfileCheckout.setOnClickListener{
             viewModel.deleteUser()
+        }
+    }
+
+    private fun goToMyPost() {
+        binding.layoutMypost.setOnClickListener {
+            startActivity(Intent(requireActivity(), ProfileMyPostActivity::class.java))
         }
     }
 }
