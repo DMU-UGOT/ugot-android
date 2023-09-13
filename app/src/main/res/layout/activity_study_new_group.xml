@@ -217,6 +217,108 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_st_new_max_number" />
 
                 <TextView
+                    android:id="@+id/tv_target_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="목표"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/st_new_v4" />
+
+                <EditText
+                    android:id="@+id/et_target"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@android:color/transparent"
+                    android:hint="목표를 입력하세요."
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:textColorHint="@color/color_80636363"
+                    android:textSize="15sp"
+                    app:addTextChangedListener="@{vm.textWatcher}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_target_title" />
+
+                <View
+                    android:id="@+id/st_new_v7"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/color_F0F1F3"
+                    app:layout_constraintTop_toBottomOf="@+id/et_target" />
+
+                <TextView
+                    android:id="@+id/tv_subject_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="주제"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/st_new_v7" />
+
+                <EditText
+                    android:id="@+id/et_subject"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@android:color/transparent"
+                    android:hint="주제를 입력하세요."
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:textColorHint="@color/color_80636363"
+                    android:textSize="15sp"
+                    app:addTextChangedListener="@{vm.textWatcher}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_subject_title" />
+
+                <View
+                    android:id="@+id/st_new_v8"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/color_F0F1F3"
+                    app:layout_constraintTop_toBottomOf="@+id/et_subject" />
+
+                <TextView
+                    android:id="@+id/tv_field_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="분야"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/st_new_v8" />
+
+                <EditText
+                    android:id="@+id/et_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@android:color/transparent"
+                    android:hint="분야를 입력하세요."
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:textColorHint="@color/color_80636363"
+                    android:textSize="15sp"
+                    app:addTextChangedListener="@{vm.textWatcher}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_field_title" />
+
+                <View
+                    android:id="@+id/st_new_v9"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/color_F0F1F3"
+                    app:layout_constraintTop_toBottomOf="@+id/et_field" />
+
+                <TextView
                     android:id="@+id/tv_st_new_github_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -226,7 +328,7 @@
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@id/et_st_new_git_link"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/st_new_v4" />
+                    app:layout_constraintTop_toBottomOf="@id/st_new_v9" />
 
                 <EditText
                     android:id="@+id/et_st_new_git_link"
@@ -254,6 +356,32 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/et_st_new_git_link" />
+
+                <EditText
+                    android:id="@+id/et_st_new_kakao_link"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/bg_team_post_detail_et"
+                    android:hint="카카오 오픈링크를 입력하세요."
+                    android:padding="15dp"
+                    android:textColorHint="@color/color_80636363"
+                    android:textSize="15sp"
+                    app:addTextChangedListener="@{vm.textWatcher}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/st_new_v5" />
+
+                <View
+                    android:id="@+id/st_new_v6"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/color_F0F1F3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_st_new_kakao_link" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

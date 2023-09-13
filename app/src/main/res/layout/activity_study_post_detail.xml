@@ -255,6 +255,98 @@
                         android:background="@color/color_F0F1F3"
                         app:layout_constraintTop_toBottomOf="@+id/tv_person_cnt" />
 
+                    <TextView
+                        android:id="@+id/tv_target_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="목표"
+                        android:textColor="@color/black"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/tv_post_title"
+                        app:layout_constraintTop_toBottomOf="@+id/line_post_link" />
+
+                    <TextView
+                        android:id="@+id/tv_target"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="대회 출전"
+                        android:textColor="@color/black"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="@+id/tv_target_title"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_target_title" />
+
+                    <View
+                        android:id="@+id/line_target"
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@color/color_F0F1F3"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_target" />
+
+                    <TextView
+                        android:id="@+id/tv_subject_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="주제"
+                        android:textColor="@color/black"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/tv_post_title"
+                        app:layout_constraintTop_toBottomOf="@+id/line_target" />
+
+                    <TextView
+                        android:id="@+id/tv_subject"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="동양미래대학교 IT 플랫폼"
+                        android:textColor="@color/black"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="@+id/tv_target_title"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_subject_title" />
+
+                    <View
+                        android:id="@+id/line_subject"
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@color/color_F0F1F3"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_subject" />
+
+                    <TextView
+                        android:id="@+id/tv_field_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="주제"
+                        android:textColor="@color/black"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/tv_post_title"
+                        app:layout_constraintTop_toBottomOf="@+id/line_subject" />
+
+                    <TextView
+                        android:id="@+id/tv_field"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="안드로이드 애플리케이션"
+                        android:textColor="@color/black"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="@+id/tv_target_title"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_field_title" />
+
+                    <View
+                        android:id="@+id/line_field"
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@color/color_F0F1F3"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_field" />
 
                     <TextView
                         android:id="@+id/tv_team_post_link"
@@ -266,7 +358,7 @@
                         android:textSize="18dp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="@+id/tv_post_title"
-                        app:layout_constraintTop_toBottomOf="@+id/line_post_link" />
+                        app:layout_constraintTop_toBottomOf="@+id/line_field" />
 
                     <ImageView
                         android:id="@+id/git_border"
