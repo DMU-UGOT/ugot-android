@@ -41,7 +41,6 @@ class TeamPostDetailActivity : AppCompatActivity() {
 
         with(binding) {
             teamStatusCnt = intent.getIntExtra(TEAM_STATUS_CNT, 0).toString()
-            tvPostField.text = intent.getStringExtra(TEAM_TOPIC)
             tvPostTitle.text = intent.getStringExtra(TEAM_TITLE)
             tvTeamPostDetail.text = intent.getStringExtra(TEAM_DETAIL)
             tvProjectField.text = intent.getStringExtra(TEAM_TOPIC)

@@ -65,7 +65,7 @@
                         android:background="@drawable/bg_team_post_project_field"
                         android:paddingHorizontal="10dp"
                         android:paddingVertical="2dp"
-                        android:text="Android"
+                        android:text="Kotlin"
                         android:textColor="#90000000"
                         android:textSize="13dp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -313,6 +313,37 @@
                         android:background="@color/color_F0F1F3"
                         app:layout_constraintTop_toBottomOf="@+id/tv_now_class" />
 
+                    <TextView
+                        android:id="@+id/tv_target_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="목표"
+                        android:textColor="@color/black"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/tv_post_title"
+                        app:layout_constraintTop_toBottomOf="@+id/line_now_class" />
+
+                    <TextView
+                        android:id="@+id/tv_target"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="대회 출전"
+                        android:textColor="@color/black"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="@+id/tv_target_title"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_target_title" />
+
+                    <View
+                        android:id="@+id/line_target"
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@color/color_F0F1F3"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_target" />
+
 
                     <TextView
                         android:id="@+id/tv_team_post_link"
@@ -324,7 +355,7 @@
                         android:textSize="18dp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="@+id/tv_post_title"
-                        app:layout_constraintTop_toBottomOf="@+id/line_now_class" />
+                        app:layout_constraintTop_toBottomOf="@+id/line_target" />
 
                     <ImageView
                         android:id="@+id/git_border"
