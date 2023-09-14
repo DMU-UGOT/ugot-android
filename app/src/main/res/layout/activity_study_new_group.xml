@@ -342,20 +342,9 @@
                     android:textColorHint="@color/color_80636363"
                     android:textSize="15sp"
                     app:addTextChangedListener="@{vm.textWatcher}"
-                    app:layout_constraintBottom_toTopOf="@id/st_new_v5"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_st_new_github_title" />
-
-                <View
-                    android:id="@+id/st_new_v5"
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/color_F0F1F3"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/et_st_new_git_link" />
 
                 <EditText
                     android:id="@+id/et_st_new_kakao_link"
@@ -371,7 +360,7 @@
                     app:addTextChangedListener="@{vm.textWatcher}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/st_new_v5" />
+                    app:layout_constraintTop_toBottomOf="@+id/et_st_new_git_link" />
 
                 <View
                     android:id="@+id/st_new_v6"
