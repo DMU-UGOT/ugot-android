@@ -76,7 +76,13 @@ class StudyNewGroupActivity : AppCompatActivity() {
 
     private fun backStudyNewToMainActivity() {
         binding.btStNewPostRegister.setOnClickListener {
-            studyViewModel.isTeamExists(binding.etStNewGitLink.text.toString())
+            studyViewModel.isKakaoOpenChatBaseURL(binding.etStNewKakaoLink.text.toString()) {
+                if(it == "success") {
+                    studyViewModel.isTeamExists(binding.etStNewGitLink.text.toString())
+                } else {
+                    Toast.makeText(this, "해당 카카오 오픈링크는 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
         binding.btStNewBackToMain.setOnClickListener {

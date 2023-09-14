@@ -49,7 +49,7 @@ class TeamPostDetailActivity : AppCompatActivity() {
             tvPersonCntCheck.text = intent.getStringExtra(TEAM_STATUS)
             tvNowClassText.text = intent.getStringExtra(TEAM_LEADER_CLASS)
             tvGithubLink.text = "https://github.com/" + intent.getStringExtra(TEAM_GITHUB_LINK)
-            tvKakaoLink.text = intent.getStringExtra(TEAM_KAKAO_LINK)
+            tvKakaoLink.text = "https://" + intent.getStringExtra(TEAM_KAKAO_LINK)
             tvTime.text = LocalDateTime.parse(intent.getStringExtra((TEAM_CREATE_TIME)))?.format(
                 DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm"))?: ""
         }

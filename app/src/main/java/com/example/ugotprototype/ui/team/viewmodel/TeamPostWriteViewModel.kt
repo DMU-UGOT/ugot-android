@@ -21,6 +21,10 @@ class TeamPostWriteViewModel @Inject constructor(
     private val teamBuildingService: TeamBuildingService, private val apiService: ApiService
 ) : ViewModel() {
 
+    companion object {
+        const val BASE_URL_PATTERN = "open\\.kakao\\.com/[A-Za-z0-9]+"
+    }
+
     private val _isTeamPostRegisterBtnEnabled = MutableLiveData<Boolean>()
     var isTeamPostRegisterBtnEnabled: LiveData<Boolean> = _isTeamPostRegisterBtnEnabled
 
@@ -94,5 +98,13 @@ class TeamPostWriteViewModel @Inject constructor(
         override fun onStartTrackingTouch(seekBar: SeekBar?) {}
 
         override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+    }
+
+    fun isKakaoOpenChatBaseURL(input: String, callback: (String) -> Unit) {
+        if (input.matches(BASE_URL_PATTERN.toRegex())) {
+            callback("success")
+        } else{
+            callback("falied")
+        }
     }
 }

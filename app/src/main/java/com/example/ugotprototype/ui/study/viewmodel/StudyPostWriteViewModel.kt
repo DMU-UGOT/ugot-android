@@ -13,6 +13,7 @@ import com.example.ugotprototype.data.api.ApiService
 import com.example.ugotprototype.data.api.StudyService
 import com.example.ugotprototype.data.study.StudySetPost
 import com.example.ugotprototype.data.team.TeamPostData
+import com.example.ugotprototype.ui.team.viewmodel.TeamPostWriteViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -90,6 +91,14 @@ class StudyPostWriteViewModel @Inject constructor(private val apiService: ApiSer
             kotlin.runCatching {
                 studyService.setStudies(studyPostData)
             }.onSuccess { _createFinish.value = true }
+        }
+    }
+
+    fun isKakaoOpenChatBaseURL(input: String, callback: (String) -> Unit) {
+        if (input.matches(TeamPostWriteViewModel.BASE_URL_PATTERN.toRegex())) {
+            callback("success")
+        } else{
+            callback("falied")
         }
     }
 }

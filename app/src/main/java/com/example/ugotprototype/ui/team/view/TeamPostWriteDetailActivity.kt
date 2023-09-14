@@ -79,7 +79,13 @@ class TeamPostWriteDetailActivity : AppCompatActivity() {
 
     private fun backToMainActivity() {
         binding.btTeamPostRegister.setOnClickListener {
-            teamPostWriteViewModel.isTeamExists(binding.etInputGithubLink.text.toString())
+            teamPostWriteViewModel.isKakaoOpenChatBaseURL(binding.etInputKakaoOpenLink.text.toString()) {
+                if(it == "success") {
+                    teamPostWriteViewModel.isTeamExists(binding.etInputGithubLink.text.toString())
+                } else {
+                    Toast.makeText(this, "해당 카카오 오픈링크는 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
         binding.btBackToMain.setOnClickListener {
