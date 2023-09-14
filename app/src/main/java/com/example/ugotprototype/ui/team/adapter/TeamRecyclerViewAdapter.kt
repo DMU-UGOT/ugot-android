@@ -12,7 +12,10 @@ import com.example.ugotprototype.databinding.ItemTeamListBinding
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_CREATE_TIME
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_DETAIL
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_GITHUB_LINK
+import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_GOAL
+import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_ID
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_KAKAO_LINK
+import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_LANGUAGE
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_LEADER_CLASS
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_STATUS
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_STATUS_CNT
@@ -20,8 +23,10 @@ import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_STATUS
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_TITLE
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_TOPIC
 import com.example.ugotprototype.ui.team.view.TeamPostDetailActivity
+import com.example.ugotprototype.ui.team.viewmodel.TeamViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-class TeamRecyclerViewAdapter : RecyclerView.Adapter<TeamRecyclerViewAdapter.MyViewHolder>() {
+class TeamRecyclerViewAdapter (private val viewModel: TeamViewModel) : RecyclerView.Adapter<TeamRecyclerViewAdapter.MyViewHolder>() {
 
     var teamItemList: List<TeamPostResponse> = emptyList()
 
@@ -35,6 +40,7 @@ class TeamRecyclerViewAdapter : RecyclerView.Adapter<TeamRecyclerViewAdapter.MyV
 
             binding.ivTeamBookmark.setOnClickListener {
                 binding.ivTeamBookmark.isSelected = binding.ivTeamBookmark.isSelected != true
+                viewModel.sendBookmark(item.teamId)
             }
 
             with(binding) {
@@ -75,7 +81,7 @@ class TeamRecyclerViewAdapter : RecyclerView.Adapter<TeamRecyclerViewAdapter.MyV
 
     fun goToTeamPostDetail(item: TeamPostResponse, context: Context) {
         Intent(context, TeamPostDetailActivity::class.java).apply {
-
+            putExtra(TEAM_ID, item.teamId)
             putExtra(TEAM_TITLE, item.title)
             putExtra(TEAM_DETAIL, item.content)
             putExtra(TEAM_TOPIC, item.field)
@@ -85,6 +91,8 @@ class TeamRecyclerViewAdapter : RecyclerView.Adapter<TeamRecyclerViewAdapter.MyV
             putExtra(TEAM_GITHUB_LINK, item.gitHubLink)
             putExtra(TEAM_KAKAO_LINK, item.kakaoOpenLink)
             putExtra(TEAM_CREATE_TIME, item.createdAt)
+            putExtra(TEAM_GOAL, item.goal)
+            putExtra(TEAM_LANGUAGE, item.language)
 
             if (item.nowPersonnel == item.allPersonnel) {
                 putExtra(TEAM_STATUS, "모집 완료")

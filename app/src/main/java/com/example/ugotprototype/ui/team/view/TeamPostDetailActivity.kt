@@ -10,7 +10,9 @@ import com.example.ugotprototype.databinding.ActivityTeamPostDetailBinding
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_CREATE_TIME
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_DETAIL
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_GITHUB_LINK
+import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_GOAL
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_KAKAO_LINK
+import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_LANGUAGE
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_LEADER_CLASS
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_STATUS
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_STATUS_CNT
@@ -52,6 +54,8 @@ class TeamPostDetailActivity : AppCompatActivity() {
             tvKakaoLink.text = "https://" + intent.getStringExtra(TEAM_KAKAO_LINK)
             tvTime.text = LocalDateTime.parse(intent.getStringExtra((TEAM_CREATE_TIME)))?.format(
                 DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm"))?: ""
+            tvPostField.text = intent.getStringExtra(TEAM_LANGUAGE)
+            tvTarget.text = intent.getStringExtra(TEAM_GOAL)
         }
     }
 

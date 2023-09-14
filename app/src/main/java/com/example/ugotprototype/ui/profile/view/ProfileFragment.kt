@@ -42,6 +42,7 @@ class ProfileFragment : Fragment() {
         goToStack()
         goToMessage()
         goToMyPost()
+        goToMyBookMark()
         deleteUser()
     }
 
@@ -75,6 +76,12 @@ class ProfileFragment : Fragment() {
     private fun goToMyPost() {
         binding.layoutMypost.setOnClickListener {
             startActivity(Intent(requireActivity(), ProfileMyPostActivity::class.java))
+        }
+    }
+
+    private fun goToMyBookMark() {
+        binding.layoutMybookmark.setOnClickListener {
+            startActivity(Intent(requireContext(), ProfileMyBookmarkActivity::class.java))
         }
     }
 }

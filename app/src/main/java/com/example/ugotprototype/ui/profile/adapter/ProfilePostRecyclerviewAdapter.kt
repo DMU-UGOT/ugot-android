@@ -1,5 +1,4 @@
-package com.example.ugotprototype.ui.team.adapter
-
+package com.example.ugotprototype.ui.profile.adapter
 
 import android.content.Context
 import android.content.Intent
@@ -7,26 +6,21 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.ugotprototype.data.response.Team
-import com.example.ugotprototype.databinding.ItemTeamSearchListBinding
+import com.example.ugotprototype.data.response.TeamPostResponse
+import com.example.ugotprototype.databinding.ItemMyTeamListBinding
+import com.example.ugotprototype.ui.profile.view.ProfilePostDetailActivity
 import com.example.ugotprototype.ui.team.view.TeamFragment
-import com.example.ugotprototype.ui.team.view.TeamPostDetailActivity
 
-class TeamSearchRecyclerViewAdapter :
-    RecyclerView.Adapter<TeamSearchRecyclerViewAdapter.MyViewHolder>() {
+class ProfilePostRecyclerviewAdapter : RecyclerView.Adapter<ProfilePostRecyclerviewAdapter.MyViewHolder>() {
 
-    var teamItemList: List<Team> = emptyList()
+    var teamItemList: List<TeamPostResponse> = emptyList()
 
     // 생성된 뷰 홀더에 값 지정
-    inner class MyViewHolder(val binding: ItemTeamSearchListBinding) :
+    inner class MyViewHolder(val binding: ItemMyTeamListBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Team) {
+        fun bind(item: TeamPostResponse) {
             binding.root.setOnClickListener {
                 goToTeamPostDetail(item, binding.root.context)
-            }
-
-            binding.ivTeamBookmark.setOnClickListener {
-                binding.ivTeamBookmark.isSelected = binding.ivTeamBookmark.isSelected != true
             }
 
             with(binding) {
@@ -41,41 +35,33 @@ class TeamSearchRecyclerViewAdapter :
         }
     }
 
+    // 어떤 xml 으로 뷰 홀더를 생성할지 지정
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding =
-            ItemTeamSearchListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemMyTeamListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding)
     }
 
+    // 뷰 홀더에 데이터 바인딩
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bind(teamItemList[position])
     }
 
+    // 뷰 홀더의 개수 리턴
     override fun getItemCount() = teamItemList.size
 
     override fun getItemId(position: Int): Long {
         return position.toLong()
     }
 
-    fun setData(data: List<Team>) {
+    fun setData(data: List<TeamPostResponse>) {
         teamItemList = data
         notifyDataSetChanged()
     }
 
-    fun goToTeamPostDetail(item: Team, context: Context) {
-        Intent(context, TeamPostDetailActivity::class.java).apply {
-
-            putExtra(TeamFragment.TEAM_TITLE, item.title)
-            putExtra(TeamFragment.TEAM_DETAIL, item.content)
-            putExtra(TeamFragment.TEAM_TOPIC, item.field)
-            putExtra(TeamFragment.TEAM_STATUS_CNT, item.nowPersonnel)
-            putExtra(TeamFragment.TEAM_STATUS_CNT_END, item.allPersonnel)
-            putExtra(TeamFragment.TEAM_LEADER_CLASS, item._class)
-            putExtra(TeamFragment.TEAM_GITHUB_LINK, item.gitHubLink)
-            putExtra(TeamFragment.TEAM_KAKAO_LINK, item.kakaoOpenLink)
-            putExtra(TeamFragment.TEAM_CREATE_TIME, item.createdAt)
-            putExtra(TeamFragment.TEAM_GOAL, item.goal)
-            putExtra(TeamFragment.TEAM_LANGUAGE, item.language)
+    fun goToTeamPostDetail(item: TeamPostResponse, context: Context) {
+        Intent(context, ProfilePostDetailActivity::class.java).apply {
+            putExtra(TeamFragment.TEAM_ID, item.teamId)
 
             if (item.nowPersonnel == item.allPersonnel) {
                 putExtra(TeamFragment.TEAM_STATUS, "모집 완료")

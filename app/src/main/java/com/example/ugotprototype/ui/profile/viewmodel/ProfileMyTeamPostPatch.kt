@@ -1,8 +1,7 @@
-package com.example.ugotprototype.ui.team.viewmodel
+package com.example.ugotprototype.ui.profile.viewmodel
 
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.SeekBar
@@ -11,15 +10,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ugotprototype.data.api.ApiService
-import com.example.ugotprototype.data.api.TeamBuildingService
+import com.example.ugotprototype.data.api.ProfileService
+import com.example.ugotprototype.data.response.Team
 import com.example.ugotprototype.data.team.TeamPostData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class TeamPostWriteViewModel @Inject constructor(
-    private val teamBuildingService: TeamBuildingService, private val apiService: ApiService
+class ProfileMyTeamPostPatch @Inject constructor(
+    private val apiService: ApiService,
+    private val profileService: ProfileService
 ) : ViewModel() {
 
     companion object {
@@ -47,6 +48,9 @@ class TeamPostWriteViewModel @Inject constructor(
     private val _createFinish = MutableLiveData<Boolean>()
     val createFinish: LiveData<Boolean> = _createFinish
 
+    private val _teamItemList = MutableLiveData<Team>()
+    val teamItemList: LiveData<Team> = _teamItemList
+
 
     fun isTeamPostRegisterButtonState(enabled: Boolean) {
         _isTeamPostRegisterBtnEnabled.value = enabled
@@ -54,23 +58,6 @@ class TeamPostWriteViewModel @Inject constructor(
 
     fun setTeamPostData(teamPostData: TeamPostData) {
         _teamCreateData.value = teamPostData
-    }
-
-    fun isTeamExists(gitHubLink: String) {
-        viewModelScope.launch {
-            kotlin.runCatching {
-                apiService.getOrganization(gitHubLink)
-            }.onSuccess { _isTeamExists.value = true }.onFailure { _isTeamExists.value = false }
-        }
-    }
-
-    fun sendTeamData(teamPostData: TeamPostData) {
-        _createFinish.value = false
-        viewModelScope.launch {
-            kotlin.runCatching {
-                teamBuildingService.createTeam(teamPostData)
-            }.onSuccess { _createFinish.value = true }
-        }
     }
 
     val textWatcher = object : TextWatcher {
@@ -104,8 +91,36 @@ class TeamPostWriteViewModel @Inject constructor(
     fun isKakaoOpenChatBaseURL(input: String, callback: (String) -> Unit) {
         if (input.matches(BASE_URL_PATTERN.toRegex())) {
             callback("success")
-        } else{
+        } else {
             callback("falied")
+        }
+    }
+
+    fun initData(teamId: Int) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                _teamItemList.value = profileService.getTeam(teamId)
+            }
+        }
+    }
+
+    fun isTeamExists(gitHubLink: String) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                apiService.getOrganization(gitHubLink)
+            }.onSuccess { _isTeamExists.value = true }.onFailure { _isTeamExists.value = false }
+        }
+    }
+
+    fun patchPost(teamId: Int, teamPost: TeamPostData) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                profileService.patchTeam(teamId, teamPost)
+            }.onSuccess {
+                _createFinish.value = true
+            }.onFailure {
+                _createFinish.value = false
+            }
         }
     }
 }

@@ -7,6 +7,7 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface TeamBuildingService {
@@ -21,4 +22,7 @@ interface TeamBuildingService {
         @Query("page") page: Int,
         @Query("keyword") keyword: String
     ): Response<TeamSearchResponse>
+
+    @POST("teams/bookmark/{postId}")
+    suspend fun setBookmark(@Path("postId") postId: Int)
 }

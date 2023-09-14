@@ -1,6 +1,7 @@
 package com.example.ugotprototype.data.response
 
 data class TeamPostResponse(
+    val teamId : Int,
     val title: String,
     val content: String,
     val field: String,
@@ -11,5 +12,7 @@ data class TeamPostResponse(
     val kakaoOpenLink: String,
     val gitHubLink: String,
     var avatarUrl: String,
-    val createdAt: String
+    val createdAt: String,
+    val goal: String,
+    val language: String
 )
