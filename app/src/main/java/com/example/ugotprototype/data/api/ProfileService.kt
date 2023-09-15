@@ -3,6 +3,8 @@ package com.example.ugotprototype.data.api
 import com.example.ugotprototype.data.profile.ProfileMemberData
 import com.example.ugotprototype.data.response.Team
 import com.example.ugotprototype.data.response.TeamPostResponse
+import com.example.ugotprototype.data.study.StudyGetPost
+import com.example.ugotprototype.data.study.StudySetPost
 import com.example.ugotprototype.data.team.TeamPostData
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -31,4 +33,16 @@ interface ProfileService {
 
     @GET("teams/bookmark")
     suspend fun getBookmark(): List<TeamPostResponse>
+
+    @GET("studies/myStudies")
+    suspend fun getStudies(): List<StudyGetPost>
+
+    @GET("studies/{studyId}")
+    suspend fun getStudy(@Path("studyId") studyId: Int): StudyGetPost
+
+    @PATCH("studies/{studyId}")
+    suspend fun patchStudy(@Path("studyId") studyId: Int, @Body study: StudySetPost)
+
+    @GET("studies/bookmark")
+    suspend fun getStudyBookmark(): List<StudyGetPost>
 }

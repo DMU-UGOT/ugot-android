@@ -2,6 +2,7 @@ package com.example.ugotprototype.ui.profile.viewmodel
 
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.SeekBar
@@ -11,14 +12,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ugotprototype.data.api.ApiService
 import com.example.ugotprototype.data.api.ProfileService
-import com.example.ugotprototype.data.response.Team
-import com.example.ugotprototype.data.team.TeamPostData
+import com.example.ugotprototype.data.study.StudyGetPost
+import com.example.ugotprototype.data.study.StudySetPost
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ProfileMyTeamPostPatch @Inject constructor(
+class ProfileMyStudyPostPatchViewModel @Inject constructor(
     private val apiService: ApiService,
     private val profileService: ProfileService
 ) : ViewModel() {
@@ -27,11 +28,11 @@ class ProfileMyTeamPostPatch @Inject constructor(
         const val BASE_URL_PATTERN = "open\\.kakao\\.com/[A-Za-z0-9]+"
     }
 
-    private val _isTeamPostRegisterBtnEnabled = MutableLiveData<Boolean>()
-    var isTeamPostRegisterBtnEnabled: LiveData<Boolean> = _isTeamPostRegisterBtnEnabled
+    private val _isStudyPostRegisterBtnEnabled = MutableLiveData<Boolean>()
+    var isStudyPostRegisterBtnEnabled: LiveData<Boolean> = _isStudyPostRegisterBtnEnabled
 
-    private val _teamCreateData = MutableLiveData<TeamPostData>()
-    val teamCreateData: LiveData<TeamPostData> = _teamCreateData
+    private val _studyCreateData = MutableLiveData<StudySetPost>()
+    val studyCreateData: LiveData<StudySetPost> = _studyCreateData
 
     private val _etText = MutableLiveData<String>()
     val etText: LiveData<String> = _etText
@@ -48,12 +49,12 @@ class ProfileMyTeamPostPatch @Inject constructor(
     private val _createFinish = MutableLiveData<Boolean>()
     val createFinish: LiveData<Boolean> = _createFinish
 
-    private val _teamItemList = MutableLiveData<Team>()
-    val teamItemList: LiveData<Team> = _teamItemList
+    private val _studyItemList = MutableLiveData<StudyGetPost>()
+    val studyItemList: LiveData<StudyGetPost> = _studyItemList
 
 
-    fun isTeamPostRegisterButtonState(enabled: Boolean) {
-        _isTeamPostRegisterBtnEnabled.value = enabled
+    fun isStudyPostRegisterButtonState(enabled: Boolean) {
+        _isStudyPostRegisterBtnEnabled.value = enabled
     }
 
     val textWatcher = object : TextWatcher {
@@ -95,12 +96,12 @@ class ProfileMyTeamPostPatch @Inject constructor(
     fun initData(teamId: Int) {
         viewModelScope.launch {
             kotlin.runCatching {
-                _teamItemList.value = profileService.getTeam(teamId)
+                _studyItemList.value = profileService.getStudy(teamId)
             }
         }
     }
 
-    fun isTeamExists(gitHubLink: String) {
+    fun isStudyExists(gitHubLink: String) {
         viewModelScope.launch {
             kotlin.runCatching {
                 apiService.getOrganization(gitHubLink)
@@ -108,10 +109,10 @@ class ProfileMyTeamPostPatch @Inject constructor(
         }
     }
 
-    fun patchPost(teamId: Int, teamPost: TeamPostData) {
+    fun patchPost(teamId: Int, studyPost: StudySetPost) {
         viewModelScope.launch {
             kotlin.runCatching {
-                profileService.patchTeam(teamId, teamPost)
+                profileService.patchStudy(teamId, studyPost)
             }.onSuccess {
                 _createFinish.value = true
             }.onFailure {

@@ -15,7 +15,7 @@ class ProfileMyBookmarkActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_profile_my_bookmark)
 
         binding.layoutMypost.setOnClickListener { startActivity(Intent(this, ProfileTeamBookmarkActivity::class.java)) }
-        binding.layoutMypostStudy.setOnClickListener { }
+        binding.layoutMypostStudy.setOnClickListener { startActivity(Intent(this, ProfileStudyBookmarkActivity::class.java)) }
         binding.layoutMypostCommunity.setOnClickListener { }
         binding.ivGroupCmuBack.setOnClickListener { finish() }
     }

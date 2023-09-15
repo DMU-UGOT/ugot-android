@@ -18,6 +18,18 @@
         tools:replace="android:name"
         tools:targetApi="31">
         <activity
+            android:name=".ui.profile.view.ProfileStudyBookmarkActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.profile.view.ProfileStudyPostPatchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.profile.view.ProfileStudyPostDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.profile.view.ProfileMyPostStudyActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.profile.view.ProfileTeamBookmarkActivity"
             android:exported="false" />
         <activity
@@ -27,7 +39,7 @@
             android:name=".ui.profile.view.ProfilePostDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.profile.view.ProfilePostPatchActivity"
+            android:name=".ui.profile.view.ProfileTeamPostPatchActivity"
             android:exported="false" />
         <activity
             android:name=".ui.profile.view.ProfileMyPostTeamActivity"

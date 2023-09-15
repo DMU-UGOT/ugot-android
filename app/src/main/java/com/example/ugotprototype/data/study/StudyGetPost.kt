@@ -11,5 +11,8 @@ data class StudyGetPost(
     var gitHubLink: String,
     val viewCount: Int,
     val createdAt: String,
-    var avatarUrl: String
+    var avatarUrl: String,
+    var subject: String,
+    var field: String,
+
 )

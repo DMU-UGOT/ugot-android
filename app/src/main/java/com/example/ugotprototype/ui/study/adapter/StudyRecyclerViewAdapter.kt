@@ -18,8 +18,10 @@ import com.example.ugotprototype.ui.study.view.StudyFragment.Companion.STUDY_STA
 import com.example.ugotprototype.ui.study.view.StudyFragment.Companion.STUDY_STATUS_CNT
 import com.example.ugotprototype.ui.study.view.StudyFragment.Companion.STUDY_STATUS_CNT_END
 import com.example.ugotprototype.ui.study.view.StudyFragment.Companion.STUDY_TITLE
+import com.example.ugotprototype.ui.study.viewmodel.StudyViewModel
+import com.example.ugotprototype.ui.team.viewmodel.TeamViewModel
 
-class StudyRecyclerViewAdapter : RecyclerView.Adapter<StudyRecyclerViewAdapter.StudyViewHolder>() {
+class StudyRecyclerViewAdapter (private val viewModel: StudyViewModel): RecyclerView.Adapter<StudyRecyclerViewAdapter.StudyViewHolder>() {
 
     var studyItemList: List<StudyGetPost> = emptyList()
 
@@ -28,13 +30,13 @@ class StudyRecyclerViewAdapter : RecyclerView.Adapter<StudyRecyclerViewAdapter.S
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: StudyGetPost) {
-            Log.d("item", item.toString())
             binding.root.setOnClickListener {
                 goToStudyPostDetail(item, binding.root.context)
             }
 
             binding.ivStBookmark.setOnClickListener {
                 binding.ivStBookmark.isSelected = binding.ivStBookmark.isSelected != true
+                viewModel.sendBookmark(item.studyId)
             }
 
             with(binding) {

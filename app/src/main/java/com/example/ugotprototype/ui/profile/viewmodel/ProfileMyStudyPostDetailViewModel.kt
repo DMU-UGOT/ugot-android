@@ -5,20 +5,20 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ugotprototype.data.api.ProfileService
-import com.example.ugotprototype.data.response.Team
+import com.example.ugotprototype.data.study.StudyGetPost
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ProfilePostActivityViewModel @Inject constructor(private val profileService: ProfileService): ViewModel() {
-    private val _teamItemList = MutableLiveData<Team>()
-    val teamItemList: LiveData<Team> = _teamItemList
+class ProfileMyStudyPostDetailViewModel @Inject constructor(private val profileService: ProfileService): ViewModel() {
+    private val _studyItemList = MutableLiveData<StudyGetPost>()
+    val studyItemList: LiveData<StudyGetPost> = _studyItemList
 
-    fun getMyPost(teamId: Int) {
+    fun getMyPost(studyId: Int) {
         viewModelScope.launch {
             kotlin.runCatching {
-                _teamItemList.value = profileService.getTeam(teamId)
+                _studyItemList.value = profileService.getStudy(studyId)
             }
         }
     }
