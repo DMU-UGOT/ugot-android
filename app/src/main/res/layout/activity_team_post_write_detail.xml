@@ -216,11 +216,11 @@
                     android:max="10"
                     android:min="1"
                     android:progress="1"
-                    app:onSeekBarChangeListener="@{vm.onSeekBarChangeListener}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_number_title" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_number_title"
+                    app:onSeekBarChangeListener="@{vm.onSeekBarChangeListener}" />
 
                 <TextView
                     android:id="@+id/tv_max_number"
@@ -242,6 +242,74 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_max_number" />
 
                 <TextView
+                    android:id="@+id/tv_target_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="목표"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/leader_github_link_line" />
+
+                <EditText
+                    android:id="@+id/et_target"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@android:color/transparent"
+                    android:hint="목표를 입력하세요."
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:textColorHint="@color/color_80636363"
+                    android:textSize="15sp"
+                    app:addTextChangedListener="@{vm.textWatcher}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_target_title" />
+
+                <View
+                    android:id="@+id/target_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/color_F0F1F3"
+                    app:layout_constraintTop_toBottomOf="@+id/et_target" />
+
+                <TextView
+                    android:id="@+id/tv_language_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="언어"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/target_line" />
+
+                <EditText
+                    android:id="@+id/et_language"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@android:color/transparent"
+                    android:hint="언어를 입력하세요."
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:textColorHint="@color/color_80636363"
+                    android:textSize="15sp"
+                    app:addTextChangedListener="@{vm.textWatcher}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_language_title" />
+
+                <View
+                    android:id="@+id/language_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/color_F0F1F3"
+                    app:layout_constraintTop_toBottomOf="@+id/et_language" />
+
+                <TextView
                     android:id="@+id/tv_github_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -250,7 +318,7 @@
                     android:textSize="15dp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/leader_github_link_line" />
+                    app:layout_constraintTop_toBottomOf="@+id/language_line" />
 
                 <EditText
                     android:id="@+id/et_input_github_link"

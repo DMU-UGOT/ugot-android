@@ -1,4 +1,4 @@
-package com.example.ugotprototype.ui.study.viewmodel
+package com.example.ugotprototype.ui.profile.viewmodel
 
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,16 +10,29 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ugotprototype.data.api.ApiService
-import com.example.ugotprototype.data.api.StudyService
-import com.example.ugotprototype.data.study.StudySetPost
+import com.example.ugotprototype.data.api.ProfileService
+import com.example.ugotprototype.data.response.Team
 import com.example.ugotprototype.data.team.TeamPostData
-import com.example.ugotprototype.ui.team.viewmodel.TeamPostWriteViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class StudyPostWriteViewModel @Inject constructor(private val apiService: ApiService, private val studyService: StudyService) : ViewModel() {
+class ProfileMyTeamPostPatch @Inject constructor(
+    private val apiService: ApiService,
+    private val profileService: ProfileService
+) : ViewModel() {
+
+    companion object {
+        const val BASE_URL_PATTERN = "open\\.kakao\\.com/[A-Za-z0-9]+"
+    }
+
+    private val _isTeamPostRegisterBtnEnabled = MutableLiveData<Boolean>()
+    var isTeamPostRegisterBtnEnabled: LiveData<Boolean> = _isTeamPostRegisterBtnEnabled
+
+    private val _teamCreateData = MutableLiveData<TeamPostData>()
+    val teamCreateData: LiveData<TeamPostData> = _teamCreateData
+
     private val _etText = MutableLiveData<String>()
     val etText: LiveData<String> = _etText
 
@@ -29,17 +42,19 @@ class StudyPostWriteViewModel @Inject constructor(private val apiService: ApiSer
     private val _selectSpinner = MutableLiveData<Int>()
     val selectSpinner: LiveData<Int> = _selectSpinner
 
-    private val _isStudyPostRegisterBtnEnabled = MutableLiveData<Boolean>()
-    var isStudyPostRegisterBtnEnabled: LiveData<Boolean> = _isStudyPostRegisterBtnEnabled
-
     private val _isTeamExists = MutableLiveData<Boolean>()
     val isTeamExists: LiveData<Boolean> = _isTeamExists
 
-    private val _studyCreateData = MutableLiveData<StudySetPost>()
-    val studyCreateData: LiveData<StudySetPost> = _studyCreateData
-
     private val _createFinish = MutableLiveData<Boolean>()
     val createFinish: LiveData<Boolean> = _createFinish
+
+    private val _teamItemList = MutableLiveData<Team>()
+    val teamItemList: LiveData<Team> = _teamItemList
+
+
+    fun isTeamPostRegisterButtonState(enabled: Boolean) {
+        _isTeamPostRegisterBtnEnabled.value = enabled
+    }
 
     val textWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -69,8 +84,20 @@ class StudyPostWriteViewModel @Inject constructor(private val apiService: ApiSer
         override fun onStopTrackingTouch(seekBar: SeekBar?) {}
     }
 
-    fun isStudyPostRegisterButtonState(enabled: Boolean) {
-        _isStudyPostRegisterBtnEnabled.value = enabled
+    fun isKakaoOpenChatBaseURL(input: String, callback: (String) -> Unit) {
+        if (input.matches(BASE_URL_PATTERN.toRegex())) {
+            callback("success")
+        } else {
+            callback("falied")
+        }
+    }
+
+    fun initData(teamId: Int) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                _teamItemList.value = profileService.getTeam(teamId)
+            }
+        }
     }
 
     fun isTeamExists(gitHubLink: String) {
@@ -81,24 +108,15 @@ class StudyPostWriteViewModel @Inject constructor(private val apiService: ApiSer
         }
     }
 
-    fun setStudyPostData(studyPostData: StudySetPost) {
-        _studyCreateData.value = studyPostData
-    }
-
-    fun sendStudyData(studyPostData: StudySetPost) {
-        _createFinish.value = false
+    fun patchPost(teamId: Int, teamPost: TeamPostData) {
         viewModelScope.launch {
             kotlin.runCatching {
-                studyService.setStudies(studyPostData)
-            }.onSuccess { _createFinish.value = true }
-        }
-    }
-
-    fun isKakaoOpenChatBaseURL(input: String, callback: (String) -> Unit) {
-        if (input.matches(TeamPostWriteViewModel.BASE_URL_PATTERN.toRegex())) {
-            callback("success")
-        } else{
-            callback("falied")
+                profileService.patchTeam(teamId, teamPost)
+            }.onSuccess {
+                _createFinish.value = true
+            }.onFailure {
+                _createFinish.value = false
+            }
         }
     }
 }

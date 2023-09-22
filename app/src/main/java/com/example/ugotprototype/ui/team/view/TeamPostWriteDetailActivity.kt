@@ -79,7 +79,13 @@ class TeamPostWriteDetailActivity : AppCompatActivity() {
 
     private fun backToMainActivity() {
         binding.btTeamPostRegister.setOnClickListener {
-            teamPostWriteViewModel.isTeamExists(binding.etInputGithubLink.text.toString())
+            teamPostWriteViewModel.isKakaoOpenChatBaseURL(binding.etInputKakaoOpenLink.text.toString()) {
+                if(it == "success") {
+                    teamPostWriteViewModel.isTeamExists(binding.etInputGithubLink.text.toString())
+                } else {
+                    Toast.makeText(this, "해당 카카오 오픈링크는 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
         binding.btBackToMain.setOnClickListener {
@@ -89,7 +95,7 @@ class TeamPostWriteDetailActivity : AppCompatActivity() {
     }
 
     private fun checkAllFields() {
-        if (binding.classSpinner.selectedItemPosition != 0 && binding.fieldSpinner.selectedItemPosition != 0 && binding.etTitleName.length() != 0 && binding.etTitleDetail.length() != 0 && binding.etInputGithubLink.length() != 0 && binding.etInputKakaoOpenLink.length() != 0) {
+        if (binding.etLanguage.length() != 0 && binding.etTarget.length() != 0 && binding.classSpinner.selectedItemPosition != 0 && binding.fieldSpinner.selectedItemPosition != 0 && binding.etTitleName.length() != 0 && binding.etTitleDetail.length() != 0 && binding.etInputGithubLink.length() != 0 && binding.etInputKakaoOpenLink.length() != 0) {
             teamPostWriteViewModel.isTeamPostRegisterButtonState(true)
         } else {
             teamPostWriteViewModel.isTeamPostRegisterButtonState(false)
@@ -105,7 +111,9 @@ class TeamPostWriteDetailActivity : AppCompatActivity() {
                     _class = binding.classSpinner.selectedItem.toString(),
                     allPersonnel = binding.seekBar.progress,
                     gitHubLink = binding.etInputGithubLink.text.toString(),
-                    kakaoOpenLink = binding.etInputKakaoOpenLink.text.toString()
+                    kakaoOpenLink = binding.etInputKakaoOpenLink.text.toString(),
+                    goal = binding.etTarget.text.toString(),
+                    language = binding.etLanguage.text.toString()
             )
             teamPostWriteViewModel.setTeamPostData(teamData)
         } else {

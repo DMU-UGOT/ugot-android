@@ -44,7 +44,7 @@ class StudyPostDetailActivity : AppCompatActivity() {
             tvTotalPersonCntFirst.text = intent.getIntExtra(STUDY_STATUS_CNT, 0).toString()
             tvTotalPersonCntEnd.text = intent.getIntExtra(STUDY_STATUS_CNT_END, 0).toString()
             tvGithubLink.text = intent.getStringExtra(STUDY_GITHUB_LINK)
-            tvKakaoLink.text = intent.getStringExtra(STUDY_KAKAO_LINK)
+            tvKakaoLink.text = "https://" + intent.getStringExtra(STUDY_KAKAO_LINK)
             tvPersonCntCheck.text = intent.getStringExtra(STUDY_STATUS)
         }
 

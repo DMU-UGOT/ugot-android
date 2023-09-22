@@ -1,5 +1,6 @@
 package com.example.ugotprototype.ui.team.viewmodel
 
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -77,4 +78,11 @@ class TeamViewModel @Inject constructor(
         }
     }
 
+    fun sendBookmark(teamId: Int) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                teamBuildingService.setBookmark(teamId)
+            }
+        }
+    }
 }

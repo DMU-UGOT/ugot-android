@@ -52,7 +52,7 @@ class StudyFragment : Fragment() {
         studyViewModel.setCurrentPage(1)
         studyViewModel.setTotalPage(1)
 
-        studyRecyclerViewAdapter = StudyRecyclerViewAdapter()
+        studyRecyclerViewAdapter = StudyRecyclerViewAdapter(studyViewModel)
         binding.rvStudy.adapter = studyRecyclerViewAdapter
 
         studyViewModel.studyItemList.observe(viewLifecycleOwner) {

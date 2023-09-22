@@ -6,21 +6,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.FragmentLoadingLayout
 import com.example.ugotprototype.R
-import com.example.ugotprototype.databinding.ActivityProfileMyPostTeamBinding
-import com.example.ugotprototype.ui.profile.adapter.ProfilePostRecyclerviewAdapter
-import com.example.ugotprototype.ui.profile.viewmodel.ProfileMyTeamPostViewModel
+import com.example.ugotprototype.databinding.ActivityProfileTeamBookmarkBinding
+import com.example.ugotprototype.ui.profile.adapter.ProfilePostStudyRecyclerViewAdapter
+import com.example.ugotprototype.ui.profile.viewmodel.ProfileStudyMyBookmarkViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ProfileMyPostTeamActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityProfileMyPostTeamBinding
-    private val viewModel: ProfileMyTeamPostViewModel by viewModels()
-    private lateinit var profilePostRecyclerviewAdapter: ProfilePostRecyclerviewAdapter
+class ProfileStudyBookmarkActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityProfileTeamBookmarkBinding
+    private val viewModel: ProfileStudyMyBookmarkViewModel by viewModels()
+    private lateinit var profilePostStudyRecyclerviewAdapter: ProfilePostStudyRecyclerViewAdapter
     private val loadingDialog = FragmentLoadingLayout()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_profile_my_post_team)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_profile_team_bookmark)
 
         viewLoadingLayout()
 
@@ -28,11 +28,11 @@ class ProfileMyPostTeamActivity : AppCompatActivity() {
             finish()
         }
 
-        profilePostRecyclerviewAdapter = ProfilePostRecyclerviewAdapter()
-        binding.rvTeam.adapter = profilePostRecyclerviewAdapter
+        profilePostStudyRecyclerviewAdapter = ProfilePostStudyRecyclerViewAdapter()
+        binding.rvTeam.adapter = profilePostStudyRecyclerviewAdapter
 
-        viewModel.teamItemList.observe(this) {
-            profilePostRecyclerviewAdapter.setData(it)
+        viewModel.studyItemList.observe(this) {
+            profilePostStudyRecyclerviewAdapter.setData(it)
         }
     }
 
@@ -50,6 +50,6 @@ class ProfileMyPostTeamActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        viewModel.getMyPost()
+        viewModel.getMyBookmark()
     }
 }

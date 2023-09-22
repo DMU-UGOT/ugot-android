@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_st_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tv_st_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/iv_st_image"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/tv_st_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="30dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/layout_st_image"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Android 스터디 모집" />
+
+                <TextView
+                    android:id="@+id/tv_st_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:ellipsize="end"
+                    android:maxLines="3"
+                    android:textSize="13dp"
+                    app:layout_constraintEnd_toEndOf="@id/tv_st_title"
+                    app:layout_constraintStart_toEndOf="@id/layout_st_image"
+                    app:layout_constraintTop_toBottomOf="@id/tv_st_title"
+                    tools:text="Android 공부를 같이할 분들 구합니다 Discord에서 회의를 통해 진행됩니다. 2학년 이상이면 누구나 환영이고 많은 참여 부탁드립니다." />
+
+                <TextView
+                    android:id="@+id/tv_st_meet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/tv_st_title"
+                    tools:text="비대면" />
+
+                <TextView
+                    android:id="@+id/tv_status_cnt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="95dp"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/tv_st_title"
+                    android:text="인원 : " />
+
+                <TextView
+                    android:id="@+id/tv_cnt_first"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:gravity="center_vertical"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_status_cnt"
+                    app:layout_constraintStart_toEndOf="@+id/tv_status_cnt"
+                    tools:text="3" />
+
+                <TextView
+                    android:id="@+id/slash"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:gravity="center_vertical"
+                    android:text="/"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_status_cnt"
+                    app:layout_constraintStart_toEndOf="@+id/tv_cnt_first" />
+
+                <TextView
+                    android:id="@+id/tv_cnt_end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:gravity="center_vertical"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_status_cnt"
+                    app:layout_constraintStart_toEndOf="@+id/slash"
+                    tools:text="6" />
+
+                <TextView
+                    android:id="@+id/tv_view_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="180dp"
+                    android:layout_marginBottom="5dp"
+                    android:text= "조회수 : "
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/tv_st_title"
+                    tools:text="조회수 :" />
+
+                <TextView
+                    android:id="@+id/tv_view_count_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_view_count"
+                    app:layout_constraintStart_toEndOf="@+id/tv_view_count"
+                    tools:text="5" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

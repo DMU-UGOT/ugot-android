@@ -18,20 +18,33 @@
                 android:layout_width="wrap_content"
                 android:layout_height="42dp"
                 android:padding="5dp"
-                android:src="@drawable/ic_group_title_prev"
+                android:src="@drawable/ic_study_title_prev"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="게시글 상세"
+                android:text="스터디 상세"
                 android:textColor="#0D0D0D"
                 android:textSize="16dp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_patch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:text="수정"
+                android:textColor="#0D0D0D"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <View
@@ -57,19 +70,6 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <TextView
-                        android:id="@+id/tv_post_field"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="15dp"
-                        android:background="@drawable/bg_team_post_project_field"
-                        android:paddingHorizontal="10dp"
-                        android:paddingVertical="2dp"
-                        android:text="Kotlin"
-                        android:textColor="#90000000"
-                        android:textSize="13dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/tv_post_title"
@@ -83,8 +83,8 @@
                         android:textSize="18dp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/tv_post_field"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_post_field" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/tv_team_nick_name"
@@ -132,11 +132,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:text="프로젝트 분야"
+                        android:text="대면 여부"
                         android:textColor="@color/black"
                         android:textSize="18dp"
                         android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="@+id/tv_post_field"
+                        app:layout_constraintStart_toStartOf="@+id/tv_team_nick_name"
                         app:layout_constraintTop_toBottomOf="@+id/line_project_field" />
 
                     <TextView
@@ -144,7 +144,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="분야"
+                        android:text="여부"
                         android:textColor="@color/black"
                         android:textSize="14dp"
                         app:layout_constraintStart_toStartOf="@+id/tv_project_field_title"
@@ -155,10 +155,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="15dp"
-                        android:background="@drawable/bg_team_post_border"
+                        android:background="@drawable/bg_study_post_other_border"
                         android:paddingHorizontal="15dp"
                         android:paddingVertical="8dp"
-                        android:text="Android"
+                        android:text="대면"
                         android:textColor="@color/black"
                         app:layout_constraintBottom_toBottomOf="@+id/tv_field_detail"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -189,7 +189,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
-                        android:src="@drawable/ic_team_post_persron_cnt"
+                        android:src="@drawable/ic_study_post_person_cnt"
                         app:layout_constraintBottom_toBottomOf="@+id/tv_person_cnt_title"
                         app:layout_constraintStart_toEndOf="@+id/tv_person_cnt_title"
                         app:layout_constraintTop_toTopOf="@+id/tv_person_cnt_title" />
@@ -210,7 +210,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="15dp"
-                        android:background="@drawable/bg_team_post_border"
+                        android:background="@drawable/bg_study_post_other_border"
                         android:paddingHorizontal="15dp"
                         android:paddingVertical="8dp"
                         android:textColor="@color/black"
@@ -261,89 +261,74 @@
                         app:layout_constraintTop_toTopOf="@+id/tv_person_cnt_check" />
 
                     <View
-                        android:id="@+id/line_post_link"
-                        android:layout_width="match_parent"
-                        android:layout_height="6dp"
-                        android:layout_marginTop="20dp"
-                        android:background="@color/color_F0F1F3"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_person_cnt" />
-
-                    <TextView
-                        android:id="@+id/tv_leader_class_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:text="현재 반"
-                        android:textColor="@color/black"
-                        android:textSize="18dp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="@+id/tv_post_title"
-                        app:layout_constraintTop_toBottomOf="@+id/line_post_link" />
-
-                    <TextView
-                        android:id="@+id/tv_now_class"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="반"
-                        android:textColor="@color/black"
-                        android:textSize="14dp"
-                        app:layout_constraintStart_toStartOf="@+id/tv_leader_class_title"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_leader_class_title" />
-
-                    <TextView
-                        android:id="@+id/tv_now_class_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="15dp"
-                        android:background="@drawable/bg_team_post_border"
-                        android:paddingHorizontal="15dp"
-                        android:paddingVertical="8dp"
-                        android:textColor="@color/black"
-                        app:layout_constraintBottom_toBottomOf="@+id/tv_now_class"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/tv_now_class"
-                        tools:text="YJ" />
-
-                    <View
-                        android:id="@+id/line_now_class"
-                        android:layout_width="match_parent"
-                        android:layout_height="6dp"
-                        android:layout_marginTop="20dp"
-                        android:background="@color/color_F0F1F3"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_now_class" />
-
-                    <TextView
-                        android:id="@+id/tv_target_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:text="목표"
-                        android:textColor="@color/black"
-                        android:textSize="18dp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="@+id/tv_post_title"
-                        app:layout_constraintTop_toBottomOf="@+id/line_now_class" />
-
-                    <TextView
-                        android:id="@+id/tv_target"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="대회 출전"
-                        android:textColor="@color/black"
-                        android:textSize="14dp"
-                        app:layout_constraintStart_toStartOf="@+id/tv_target_title"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_target_title" />
-
-                    <View
                         android:id="@+id/line_target"
                         android:layout_width="match_parent"
                         android:layout_height="6dp"
                         android:layout_marginTop="20dp"
                         android:background="@color/color_F0F1F3"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_target" />
+                        app:layout_constraintTop_toBottomOf="@+id/tv_total_person_cnt_first" />
 
+                    <TextView
+                        android:id="@+id/tv_subject_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="주제"
+                        android:textColor="@color/black"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/tv_post_title"
+                        app:layout_constraintTop_toBottomOf="@+id/line_target" />
+
+                    <TextView
+                        android:id="@+id/tv_subject"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="동양미래대학교 IT 플랫폼"
+                        android:textColor="@color/black"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="@+id/tv_post_title"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_subject_title" />
+
+                    <View
+                        android:id="@+id/line_subject"
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@color/color_F0F1F3"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_subject" />
+
+                    <TextView
+                        android:id="@+id/tv_field_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="분야"
+                        android:textColor="@color/black"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/tv_post_title"
+                        app:layout_constraintTop_toBottomOf="@+id/line_subject" />
+
+                    <TextView
+                        android:id="@+id/tv_field"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="안드로이드 애플리케이션"
+                        android:textColor="@color/black"
+                        android:textSize="14dp"
+                        app:layout_constraintStart_toStartOf="@+id/tv_post_title"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_field_title" />
+
+                    <View
+                        android:id="@+id/line_field"
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@color/color_F0F1F3"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_field" />
 
                     <TextView
                         android:id="@+id/tv_team_post_link"
@@ -355,14 +340,14 @@
                         android:textSize="18dp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="@+id/tv_post_title"
-                        app:layout_constraintTop_toBottomOf="@+id/line_target" />
+                        app:layout_constraintTop_toBottomOf="@+id/line_field" />
 
                     <ImageView
                         android:id="@+id/git_border"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginTop="10dp"
-                        android:background="@drawable/bg_team_post_link_border"
+                        android:background="@drawable/bg_study_post_link_border"
                         app:layout_constraintStart_toStartOf="@+id/tv_team_post_link"
                         app:layout_constraintTop_toBottomOf="@+id/tv_team_post_link" />
 
@@ -383,7 +368,7 @@
                         android:layout_height="0dp"
                         android:layout_marginHorizontal="15dp"
                         android:autoLink="web"
-                        android:background="@drawable/bg_team_post_border"
+                        android:background="@drawable/bg_study_post_other_border"
                         android:gravity="center_vertical"
                         android:linksClickable="true"
                         android:paddingStart="10dp"
@@ -401,7 +386,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginTop="10dp"
-                        android:background="@drawable/bg_team_post_link_border"
+                        android:background="@drawable/bg_study_post_link_border"
                         app:layout_constraintStart_toStartOf="@+id/tv_team_post_link"
                         app:layout_constraintTop_toBottomOf="@+id/git_border" />
 
@@ -422,7 +407,7 @@
                         android:layout_height="0dp"
                         android:layout_marginHorizontal="15dp"
                         android:autoLink="web"
-                        android:background="@drawable/bg_team_post_border"
+                        android:background="@drawable/bg_study_post_other_border"
                         android:gravity="center_vertical"
                         android:linksClickable="true"
                         android:paddingStart="10dp"

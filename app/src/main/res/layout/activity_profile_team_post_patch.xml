@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -8,16 +7,15 @@
 
         <variable
             name="vm"
-            type="com.example.ugotprototype.ui.study.viewmodel.StudyPostWriteViewModel" />
+            type="com.example.ugotprototype.ui.profile.viewmodel.ProfileMyTeamPostPatch" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.study.view.StudyNewGroupActivity">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_st_new_top_view"
+            android:id="@+id/top_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -25,7 +23,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageButton
-                android:id="@+id/bt_st_new_back_to_main"
+                android:id="@+id/bt_back_to_main"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
@@ -37,18 +35,18 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="스터디 생성하기"
+                android:text="글수정"
                 android:textColor="#0D0D0D"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/bt_st_new_back_to_main"
+                app:layout_constraintBottom_toBottomOf="@+id/bt_back_to_main"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/bt_st_new_back_to_main"
-                tools:text="스터디 생성하기" />
+                app:layout_constraintTop_toTopOf="@+id/bt_back_to_main"
+                tools:text="글쓰기" />
 
             <ImageButton
-                android:id="@+id/bt_st_new_post_register"
+                android:id="@+id/bt_team_post_register"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
@@ -62,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="#E0E0E0"
-                app:layout_constraintTop_toBottomOf="@+id/bt_st_new_back_to_main" />
+                app:layout_constraintTop_toBottomOf="@+id/bt_back_to_main" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ScrollView
@@ -71,14 +69,14 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_st_new_top_view">
+            app:layout_constraintTop_toBottomOf="@+id/top_view">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/et_st_new_title_name"
+                    android:id="@+id/et_title_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -87,18 +85,18 @@
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:textColorHint="@color/color_80636363"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     app:addTextChangedListener="@{vm.textWatcher}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <View
-                    android:id="@+id/st_new_v1"
+                    android:id="@+id/title_line"
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:layout_marginTop="10dp"
                     android:background="@color/color_F0F1F3"
-                    app:layout_constraintTop_toBottomOf="@+id/et_st_new_title_name" />
+                    app:layout_constraintTop_toBottomOf="@+id/et_title_name" />
 
                 <EditText
                     android:id="@+id/et_title_detail"
@@ -111,16 +109,15 @@
                     android:imeOptions="actionNext"
                     android:inputType="textMultiLine"
                     android:maxLines="30"
-                    android:textColor="@color/black"
                     android:textColorHint="@color/color_80636363"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     app:addTextChangedListener="@{vm.textWatcher}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/st_new_v1" />
+                    app:layout_constraintTop_toBottomOf="@+id/title_line" />
 
                 <View
-                    android:id="@+id/st_new_v2"
+                    android:id="@+id/title_detail_line"
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:layout_marginTop="10dp"
@@ -128,51 +125,80 @@
                     app:layout_constraintTop_toBottomOf="@id/et_title_detail" />
 
                 <TextView
-                    android:id="@+id/tv_st_meet_choice"
+                    android:id="@+id/tv_field_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:text="대면 여부"
-                    android:textSize="15sp"
+                    android:text="프로젝트 분야"
+                    android:textSize="15dp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@id/sp_st_meet"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/st_new_v2" />
+                    app:layout_constraintTop_toBottomOf="@+id/title_detail_line"
+                    tools:text="프로젝트 분야" />
 
                 <Spinner
-                    android:id="@+id/sp_st_meet"
+                    android:id="@+id/field_spinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:textSize="17sp"
-                    app:layout_constraintStart_toStartOf="@id/tv_st_meet_choice"
-                    app:layout_constraintTop_toBottomOf="@id/tv_st_meet_choice"
+                    android:textSize="17dp"
+                    app:layout_constraintStart_toStartOf="@+id/tv_field_title"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_field_title"
                     app:onItemSelectedListener="@{vm.onItemSelectedListener}" />
 
                 <View
-                    android:id="@+id/st_new_v3"
+                    android:id="@+id/field_title_line"
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:layout_marginTop="10dp"
                     android:background="@color/color_F0F1F3"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/sp_st_meet" />
+                    app:layout_constraintTop_toBottomOf="@+id/field_spinner" />
 
                 <TextView
-                    android:id="@+id/tv_max_member"
+                    android:id="@+id/tv_class_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:text="모집 인원"
-                    android:textSize="15sp"
+                    android:layout_margin="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="학년 반"
+                    android:textSize="15dp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/st_new_v3" />
+                    app:layout_constraintTop_toBottomOf="@+id/field_title_line"
+                    tools:text="학년 반" />
+
+                <Spinner
+                    android:id="@+id/class_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintStart_toStartOf="@+id/tv_class_title"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_class_title"
+                    app:onItemSelectedListener="@{vm.onItemSelectedListener}" />
+
+                <View
+                    android:id="@+id/number_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/color_F0F1F3"
+                    app:layout_constraintTop_toBottomOf="@+id/class_spinner" />
 
                 <TextView
-                    android:id="@+id/tv_st_new_min_number"
+                    android:id="@+id/tv_number_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="모집 인원"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/number_line"
+                    tools:text="모집 인원" />
+
+                <TextView
+                    android:id="@+id/tv_min_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1명"
@@ -187,16 +213,17 @@
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:max="15"
+                    android:max="10"
                     android:min="1"
                     android:progress="1"
-                    app:layout_constraintEnd_toEndOf="@id/tv_st_new_max_number"
-                    app:layout_constraintStart_toStartOf="@id/tv_st_new_min_number"
-                    app:layout_constraintTop_toBottomOf="@id/tv_max_member"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_number_title"
                     app:onSeekBarChangeListener="@{vm.onSeekBarChangeListener}" />
 
                 <TextView
-                    android:id="@+id/tv_st_new_max_number"
+                    android:id="@+id/tv_max_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1명"
@@ -207,95 +234,94 @@
                     tools:text="1명" />
 
                 <View
-                    android:id="@+id/st_new_v7"
+                    android:id="@+id/leader_github_link_line"
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:layout_marginTop="10dp"
                     android:background="@color/color_F0F1F3"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_st_new_max_number" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_max_number" />
 
                 <TextView
-                    android:id="@+id/tv_subject_title"
+                    android:id="@+id/tv_target_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:text="주제"
+                    android:text="목표"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/st_new_v7" />
+                    app:layout_constraintTop_toBottomOf="@id/leader_github_link_line" />
 
                 <EditText
-                    android:id="@+id/et_subject"
+                    android:id="@+id/et_target"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:background="@android:color/transparent"
-                    android:hint="주제를 입력하세요."
+                    android:hint="목표를 입력하세요."
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:textColorHint="@color/color_80636363"
                     android:textSize="15sp"
                     app:addTextChangedListener="@{vm.textWatcher}"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_subject_title" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_target_title" />
 
                 <View
-                    android:id="@+id/st_new_v8"
+                    android:id="@+id/target_line"
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:layout_marginTop="10dp"
                     android:background="@color/color_F0F1F3"
-                    app:layout_constraintTop_toBottomOf="@+id/et_subject" />
+                    app:layout_constraintTop_toBottomOf="@+id/et_target" />
 
                 <TextView
-                    android:id="@+id/tv_field_title"
+                    android:id="@+id/tv_language_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:text="분야"
+                    android:text="언어"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/st_new_v8" />
+                    app:layout_constraintTop_toBottomOf="@id/target_line" />
 
                 <EditText
-                    android:id="@+id/et_field"
+                    android:id="@+id/et_language"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:background="@android:color/transparent"
-                    android:hint="분야를 입력하세요."
+                    android:hint="언어를 입력하세요."
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:textColorHint="@color/color_80636363"
                     android:textSize="15sp"
                     app:addTextChangedListener="@{vm.textWatcher}"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_field_title" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_language_title" />
 
                 <View
-                    android:id="@+id/st_new_v9"
+                    android:id="@+id/language_line"
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:layout_marginTop="10dp"
                     android:background="@color/color_F0F1F3"
-                    app:layout_constraintTop_toBottomOf="@+id/et_field" />
+                    app:layout_constraintTop_toBottomOf="@+id/et_language" />
 
                 <TextView
-                    android:id="@+id/tv_st_new_github_title"
+                    android:id="@+id/tv_github_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:text="공유 링크"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@id/et_st_new_git_link"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/st_new_v9" />
+                    app:layout_constraintTop_toBottomOf="@+id/language_line" />
 
                 <EditText
-                    android:id="@+id/et_st_new_git_link"
+                    android:id="@+id/et_input_github_link"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
@@ -304,37 +330,34 @@
                     android:hint="깃헙 닉네임을 입력하세요"
                     android:padding="15dp"
                     android:textColorHint="@color/color_80636363"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     app:addTextChangedListener="@{vm.textWatcher}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_st_new_github_title" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_github_title" />
 
                 <EditText
-                    android:id="@+id/et_st_new_kakao_link"
+                    android:id="@+id/et_input_kakao_open_link"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_marginHorizontal="10dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/bg_team_post_detail_et"
-                    android:hint="카카오 오픈링크를 입력하세요."
+                    android:hint="카카오 오픈링크를 입력하세요"
                     android:padding="15dp"
                     android:textColorHint="@color/color_80636363"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     app:addTextChangedListener="@{vm.textWatcher}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/et_st_new_git_link" />
+                    app:layout_constraintTop_toBottomOf="@+id/et_input_github_link" />
 
                 <View
-                    android:id="@+id/st_new_v6"
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:layout_marginTop="10dp"
                     android:background="@color/color_F0F1F3"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/et_st_new_kakao_link" />
+                    app:layout_constraintTop_toBottomOf="@+id/et_input_kakao_open_link" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

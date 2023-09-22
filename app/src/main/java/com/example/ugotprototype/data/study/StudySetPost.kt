@@ -5,5 +5,8 @@ data class StudySetPost (
     var content: String,
     var isContact: String,
     var allPersonnel: Int,
-    var gitHubLink: String
+    var gitHubLink: String,
+    var kakaoOpenLink: String,
+    var subject: String,
+    var field: String,
 )

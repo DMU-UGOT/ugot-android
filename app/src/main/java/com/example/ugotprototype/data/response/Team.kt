@@ -13,5 +13,7 @@ data class Team(
     val kakaoOpenLink: String,
     val gitHubLink: String,
     var avatarUrl: String,
-    val createdAt: String
+    val createdAt: String,
+    val goal: String,
+    val language: String
 )

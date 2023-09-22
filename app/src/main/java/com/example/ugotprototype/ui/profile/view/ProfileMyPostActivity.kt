@@ -13,8 +13,9 @@ class ProfileMyPostActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_profile_my_post)
 
-        binding.layoutMypost.setOnClickListener {  }
-        binding.layoutMypostStudy.setOnClickListener { }
+        binding.layoutMypost.setOnClickListener { startActivity(Intent(this, ProfileMyPostTeamActivity::class.java)) }
+        binding.layoutMypostStudy.setOnClickListener { startActivity(Intent(this, ProfileMyPostStudyActivity::class.java))}
+        binding.layoutMypostCommunity.setOnClickListener { }
         binding.ivGroupCmuBack.setOnClickListener { finish() }
     }
 }

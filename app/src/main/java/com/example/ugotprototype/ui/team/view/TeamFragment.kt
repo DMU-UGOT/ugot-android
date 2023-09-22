@@ -29,6 +29,7 @@ class TeamFragment : Fragment() {
     private val loadingDialog = FragmentLoadingLayout()
 
     companion object {
+        const val TEAM_ID = "teamId"
         const val TOKEN_DATA = BuildConfig.GITHUB_KEY
         const val TEAM_TITLE = "teamTitle"
         const val TEAM_DETAIL = "teamDetail"
@@ -40,6 +41,8 @@ class TeamFragment : Fragment() {
         const val TEAM_KAKAO_LINK = "teamKakaoLink"
         const val TEAM_CREATE_TIME = "teamCreateTime"
         const val TEAM_STATUS = "teamStatus"
+        const val TEAM_GOAL = "teamGoal"
+        const val TEAM_LANGUAGE = "teamLanguage"
     }
 
     override fun onCreateView(
@@ -58,7 +61,7 @@ class TeamFragment : Fragment() {
         teamViewModel.setCurrentPage(1)
         teamViewModel.setTotalPage(1)
 
-        teamRecyclerViewAdapter = TeamRecyclerViewAdapter()
+        teamRecyclerViewAdapter = TeamRecyclerViewAdapter(teamViewModel)
         binding.rvTeam.adapter = teamRecyclerViewAdapter
 
         teamViewModel.teamItemList.observe(viewLifecycleOwner) {
