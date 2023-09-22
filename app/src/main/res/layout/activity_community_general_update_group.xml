@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="com.example.ugotprototype.ui.community.viewmodel.CommunityGeneralNewGroupViewModel" />
+            type="com.example.ugotprototype.ui.community.viewmodel.CommunityGeneralUpdateViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,7 +15,7 @@
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_general_new_top_view"
+            android:id="@+id/layout_general_new_top_view2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -23,7 +23,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageButton
-                android:id="@+id/bt_general_new_back_to_main"
+                android:id="@+id/bt_general_new_back_to_main2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
@@ -35,18 +35,18 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="일반 글 생성"
+                android:text="게시글 수정"
                 android:textColor="#0D0D0D"
                 android:textSize="16dp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/bt_general_new_back_to_main"
+                app:layout_constraintBottom_toBottomOf="@+id/bt_general_new_back_to_main2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/bt_general_new_back_to_main"
-                tools:text="일반 글 생성" />
+                app:layout_constraintTop_toTopOf="@+id/bt_general_new_back_to_main2"
+                tools:text="게시글 수정" />
 
             <ImageButton
-                android:id="@+id/bt_general_new_post_register"
+                android:id="@+id/bt_general_new_post_register2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
@@ -56,21 +56,21 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <View
-                android:id="@+id/post_register_top_line"
+                android:id="@+id/post_register_top_line2"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="#E0E0E0"
-                app:layout_constraintTop_toBottomOf="@+id/bt_general_new_back_to_main" />
+                app:layout_constraintTop_toBottomOf="@+id/bt_general_new_back_to_main2" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layout_general_new_top_view">
+            app:layout_constraintTop_toBottomOf="@id/layout_general_new_top_view2">
 
             <EditText
-                android:id="@+id/et_general_new_title_name"
+                android:id="@+id/et_general_new_title_name2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -85,15 +85,15 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <View
-                android:id="@+id/general_new_v1"
+                android:id="@+id/general_new_v3"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_marginTop="10dp"
                 android:background="@color/color_F0F1F3"
-                app:layout_constraintTop_toBottomOf="@+id/et_general_new_title_name" />
+                app:layout_constraintTop_toBottomOf="@+id/et_general_new_title_name2" />
 
             <EditText
-                android:id="@+id/et_general_text_detail"
+                android:id="@+id/et_general_text_detail2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -107,15 +107,15 @@
                 app:addTextChangedListener="@{vm.textWatcher}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/general_new_v1" />
+                app:layout_constraintTop_toBottomOf="@+id/general_new_v3" />
 
             <View
-                android:id="@+id/general_new_v2"
+                android:id="@+id/general_new_v4"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_marginTop="10dp"
                 android:background="@color/color_F0F1F3"
-                app:layout_constraintTop_toBottomOf="@+id/et_general_text_detail" />
+                app:layout_constraintTop_toBottomOf="@+id/et_general_text_detail2" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
