@@ -51,6 +51,9 @@
             android:name=".ui.study.view.StudySearchDetailActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.community.view.CommunityGeneralUpdateGroupActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.sign.view.SignNoEmailActivity"
             android:exported="false" />
         <activity

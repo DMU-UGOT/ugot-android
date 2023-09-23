@@ -1,49 +1,86 @@
 package com.example.ugotprototype.ui.community.view
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.R
+import com.example.ugotprototype.data.community.CommunityGeneralNewPostData
 import com.example.ugotprototype.databinding.ActivityCommunityGeneralNewGroupBinding
 import com.example.ugotprototype.databinding.ActivityDialogMessageBinding
+import com.example.ugotprototype.ui.community.viewmodel.CommunityGeneralNewGroupViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-class CommunityGeneralNewGroupActivity : AppCompatActivity() {
+@AndroidEntryPoint
+class
+CommunityGeneralNewGroupActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCommunityGeneralNewGroupBinding
+    private val communityGeneralNewGroupViewModel: CommunityGeneralNewGroupViewModel by viewModels()
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_community_general_new_group)
-
         binding =
             DataBindingUtil.setContentView(this, R.layout.activity_community_general_new_group)
+        binding.vm = communityGeneralNewGroupViewModel
 
-        backCommunityGeneralNewToMainActivity()
-    }
+        communityGeneralNewGroupViewModel.isCommunityGeneralPostRegisterBtnEnabled.observe(this) { enabled ->
+            binding.btGeneralNewPostRegister.isEnabled = enabled
+        }
 
-    private fun backCommunityGeneralNewToMainActivity() {
-        binding.btGeneralNewPostRegister.setOnClickListener {
-            val generalNewTitleName = binding.etGeneralNewTitleName.text.toString()
-            val generalNewTextDetail = binding.etGeneralTextDetail.text.toString()
+        communityGeneralNewGroupViewModel.communityCreateData.observe(this) {
+            communityGeneralNewGroupViewModel.sendCommunityGeneralData(it)
+        }
 
-            if (generalNewTitleName.isEmpty()) {
-                Toast.makeText(applicationContext, "제목을 입력해주세요", Toast.LENGTH_SHORT).show()
-            } else if (generalNewTextDetail.isEmpty()) {
-                Toast.makeText(applicationContext, "내용을 입력해주세요", Toast.LENGTH_SHORT).show()
-            } else if (!generalNewTextDetail.isEmpty() && !generalNewTitleName.isEmpty()) {
-                Toast.makeText(applicationContext, "저장되었습니다", Toast.LENGTH_SHORT).show()
-                Intent().putExtra("resultText", "text")
+        communityGeneralNewGroupViewModel.etTitle.observe(this) {
+            checkAllFields()
+        }
+
+        communityGeneralNewGroupViewModel.etText.observe(this) {
+            checkAllFields()
+        }
+
+        communityGeneralNewGroupViewModel.createFinish.observe(this) {
+            if (it) {
                 setResult(Activity.RESULT_OK, Intent())
                 finish()
             }
         }
 
+        backNewToMainActivity()
+    }
+
+    private fun backNewToMainActivity() {
+        binding.btGeneralNewPostRegister.setOnClickListener {
+            checkGeneralOrganizationExistence()
+            setResult(Activity.RESULT_OK, Intent())
+            finish()
+        }
+
         binding.btGeneralNewBackToMain.setOnClickListener {
             showConfirmationDialog()
         }
+    }
+
+    private fun checkAllFields() {
+        if (binding.etGeneralNewTitleName.length() != 0 && binding.etGeneralTextDetail.length() != 0) {
+            communityGeneralNewGroupViewModel.isCommunityGeneralPostRegisterButtonState(true)
+        } else {
+            communityGeneralNewGroupViewModel.isCommunityGeneralPostRegisterButtonState(false)
+        }
+    }
+
+    private fun checkGeneralOrganizationExistence() {
+        communityGeneralNewGroupViewModel.sendCommunityGeneralData(
+            CommunityGeneralNewPostData(
+                title = binding.etGeneralNewTitleName.text.toString(),
+                content = binding.etGeneralTextDetail.text.toString()
+            )
+        )
     }
 
     private fun showConfirmationDialog() {
@@ -59,14 +96,12 @@ class CommunityGeneralNewGroupActivity : AppCompatActivity() {
         val alertDialog = builder.create()
 
         dialogBinding.btDialogYes.setOnClickListener {
-            // 예 버튼 클릭 시 동작
             setResult(Activity.RESULT_OK, Intent())
             finish()
             alertDialog.dismiss()
         }
 
         dialogBinding.btDialogNo.setOnClickListener {
-            // 아니오 버튼 클릭 시 동작
             alertDialog.dismiss()
         }
         alertDialog.show()
