@@ -1,5 +1,6 @@
 package com.example.ugotprototype.ui.community.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -22,6 +23,19 @@ class CommunityGeneralDetailViewModel @Inject constructor(
             kotlin.runCatching {
                 val data = communityService.getCommunityDetailGeneral(postId)
                 _communityDetailData.value = data
+            }
+        }
+    }
+
+    fun deleteDetailText(postId: Int) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                communityService.deleteCommunity(postId)
+            }.onSuccess {
+                Log.d("delete", "삭제완료")
+            }.onFailure {
+                Log.d("삭제 실패", it.toString())
+                Log.d("deleteX", it.toString())
             }
         }
     }

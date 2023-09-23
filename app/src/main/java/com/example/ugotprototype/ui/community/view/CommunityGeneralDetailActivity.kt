@@ -2,6 +2,7 @@ package com.example.ugotprototype.ui.community.view
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -13,6 +14,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ugotprototype.R
 import com.example.ugotprototype.data.community.CommunityGeneralChatViewData
+import com.example.ugotprototype.databinding.ActivityDialogDeleteMessageBinding
 import com.example.ugotprototype.databinding.FragmentCommunityGeneralDetailBinding
 import com.example.ugotprototype.ui.community.adapter.CommunityGeneralChatRecyclerViewAdapter
 import com.example.ugotprototype.ui.community.view.CommunityGeneralFragment.Companion.GENERAL_ID
@@ -57,6 +59,11 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
             binding.tvCommunityGeneralName.text = it.title
             binding.tvCommunityGeneralText.text = it.content
         }
+
+        binding.tvCmuGeneralDelete.setOnClickListener {
+            showDeleteCheckDialog()
+        }
+
 
         communityGeneralUpdateViewModel.dataUpdate.observe(this) { isDataUpdate ->
             if (isDataUpdate) {
@@ -115,6 +122,29 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
             tvCommunityInquireInput.text =
                 intent.getStringExtra(CommunityGeneralFragment.GENERAL_VIEW_COUNT)
         }
+    }
+
+    private fun showDeleteCheckDialog() {
+        val dialogBinding = ActivityDialogDeleteMessageBinding.inflate(layoutInflater)
+        val dialogView = dialogBinding.root
+        val builder = AlertDialog.Builder(this)
+
+        builder.setView(dialogView)
+        val alertDialog = builder.create()
+
+        dialogBinding.btDialogDeleteYes.setOnClickListener {
+            alertDialog.dismiss()
+            deleteCommunity()
+        }
+
+        dialogBinding.btDialogDeleteNo.setOnClickListener {
+            alertDialog.dismiss()
+        }
+        alertDialog.show()
+    }
+
+    private fun deleteCommunity() {
+        communityGeneralDetailViewModel.deleteDetailText(intent.getIntExtra(GENERAL_ID,0))
     }
 
     private fun changeMyGeneralChatCount() {
