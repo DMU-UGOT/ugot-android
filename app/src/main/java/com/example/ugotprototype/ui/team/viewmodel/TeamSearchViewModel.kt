@@ -1,5 +1,6 @@
 package com.example.ugotprototype.ui.team.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -33,7 +34,11 @@ class TeamSearchViewModel @Inject constructor(
                     val response = teamBuildingService.searchTeams(currentPage, query)
                     val teams = response.body()?.content ?: emptyList()
 
+                    val bookmark = teamBuildingService.getBookmark()
+                    val teamId = bookmark.map { it.teamId }
+
                     for (team in teams) {
+                        team.bookmark = team.teamId in teamId
                         if (team.title.contains(query)) {
                             val avatarUrl = apiService.getOrganization(
                                 team.gitHubLink
@@ -52,6 +57,13 @@ class TeamSearchViewModel @Inject constructor(
                 _isLoadingPage.value = true
             }.onFailure {
                 _isLoadingPage.value = true
+            }
+        }
+    }
+    fun sendBookmark(teamId: Int) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                teamBuildingService.setBookmark(teamId)
             }
         }
     }

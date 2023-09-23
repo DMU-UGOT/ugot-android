@@ -1,6 +1,8 @@
 package com.example.ugotprototype.ui.profile.view
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -28,11 +30,25 @@ class ProfileMyPostStudyActivity : AppCompatActivity() {
             finish()
         }
 
-        profilePostStudyRecyclerviewAdapter = ProfilePostStudyRecyclerViewAdapter()
+        profilePostStudyRecyclerviewAdapter = ProfilePostStudyRecyclerViewAdapter(viewModel)
         binding.rvTeam.adapter = profilePostStudyRecyclerviewAdapter
 
         viewModel.studyItemList.observe(this) {
             profilePostStudyRecyclerviewAdapter.setData(it)
+        }
+
+        binding.tvGroupDelete.setOnClickListener {
+            viewModel.toggleDeleteVisibility()
+        }
+
+        viewModel.isDeleteVisible.observe(this) {
+            profilePostStudyRecyclerviewAdapter.updateAllItemsVisibility(it)
+        }
+
+        viewModel.isDeletePost.observe(this) {
+            if (it) {
+                onStart()
+            }
         }
     }
 
@@ -51,5 +67,6 @@ class ProfileMyPostStudyActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         viewModel.getMyPost()
+        viewModel.setDeleteVisibility()
     }
 }

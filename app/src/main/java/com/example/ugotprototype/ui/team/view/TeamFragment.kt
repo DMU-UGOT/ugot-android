@@ -93,7 +93,7 @@ class TeamFragment : Fragment() {
         val goToSearchResultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
-
+                    teamViewModel.getTeamList()
                 }
             }
 

@@ -12,8 +12,9 @@ import com.example.ugotprototype.databinding.ItemStudyListBinding
 import com.example.ugotprototype.ui.study.view.StudyFragment
 import com.example.ugotprototype.ui.study.view.StudyFragment.Companion.STUDY_TITLE
 import com.example.ugotprototype.ui.study.view.StudyPostDetailActivity
+import com.example.ugotprototype.ui.study.viewmodel.StudySearchViewModel
 
-class StudySearchRecyclerViewAdapter :
+class StudySearchRecyclerViewAdapter(private val viewModel: StudySearchViewModel) :
     RecyclerView.Adapter<StudySearchRecyclerViewAdapter.MyViewHolder>() {
 
     var studyItemList: List<StudyGetPost> = emptyList()
@@ -24,10 +25,12 @@ class StudySearchRecyclerViewAdapter :
         fun bind(item: StudyGetPost) {
             binding.root.setOnClickListener {
                 goToTeamPostDetail(item, binding.root.context)
+                viewModel.sendBookmark(item.studyId)
             }
 
             binding.ivStBookmark.setOnClickListener {
                 binding.ivStBookmark.isSelected = binding.ivStBookmark.isSelected != true
+                viewModel.sendBookmark(item.studyId)
             }
 
             with(binding) {
@@ -39,6 +42,8 @@ class StudySearchRecyclerViewAdapter :
                 tvStMeet.text = item.isContact
                 Glide.with(root.context).load(item.avatarUrl).into(ivStImage)
             }
+
+            binding.ivStBookmark.isSelected = item.bookmark
         }
     }
 

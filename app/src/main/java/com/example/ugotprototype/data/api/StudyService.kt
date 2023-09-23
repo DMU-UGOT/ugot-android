@@ -1,5 +1,6 @@
 package com.example.ugotprototype.data.api
 
+import com.example.ugotprototype.data.study.StudyBookmarkData
 import com.example.ugotprototype.data.study.StudyDataResponse
 import com.example.ugotprototype.data.study.StudySearchData
 import com.example.ugotprototype.data.study.StudySetPost
@@ -23,4 +24,7 @@ interface StudyService {
 
     @POST("studies/bookmark/{postId}")
     suspend fun setBookmark(@Path("postId") postId: Int)
+
+    @GET("studies/bookmark")
+    suspend fun getBookmark(): List<StudyBookmarkData>
 }

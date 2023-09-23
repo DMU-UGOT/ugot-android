@@ -52,6 +52,8 @@ class TeamRecyclerViewAdapter (private val viewModel: TeamViewModel) : RecyclerV
                 tvCntFirst.text = item.nowPersonnel.toString()
                 Glide.with(root.context).load(item.avatarUrl).into(ivTeamLogo)
             }
+
+            binding.ivTeamBookmark.isSelected = item.bookmark
         }
     }
 

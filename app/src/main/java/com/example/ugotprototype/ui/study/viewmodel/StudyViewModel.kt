@@ -1,5 +1,6 @@
 package com.example.ugotprototype.ui.study.viewmodel
 
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,7 +14,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class StudyViewModel @Inject constructor(private val studyService: StudyService, private val apiService: ApiService): ViewModel() {
+class StudyViewModel @Inject constructor(
+    private val studyService: StudyService,
+    private val apiService: ApiService
+) : ViewModel() {
     private val _studyItemList = MutableLiveData<List<StudyGetPost>>() // 뷰 모델에서 데이터 처리를 하는 변수
     val studyItemList: LiveData<List<StudyGetPost>> = _studyItemList
 
@@ -40,7 +44,11 @@ class StudyViewModel @Inject constructor(private val studyService: StudyService,
                 val pageResponse = studyService.getTeams(_currentPage.value!!, 5)
                 val studiesResponse = pageResponse.data
 
+                val bookmark = studyService.getBookmark()
+                val studiesId = bookmark.map { it.studyId }
+
                 studiesResponse.forEach { studies ->
+                    studies.bookmark = studies.studyId in studiesId
                     kotlin.runCatching {
                         val avatarUrl = apiService.getOrganization(
                             studies.gitHubLink
@@ -83,6 +91,10 @@ class StudyViewModel @Inject constructor(private val studyService: StudyService,
         viewModelScope.launch {
             kotlin.runCatching {
                 studyService.setBookmark(teamId)
+            }.onSuccess {
+                Log.d("스터디", "성공")
+            }.onFailure {
+                Log.d("스터디", it.toString())
             }
         }
     }

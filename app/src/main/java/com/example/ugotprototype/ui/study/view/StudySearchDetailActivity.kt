@@ -29,7 +29,7 @@ class StudySearchDetailActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_study_search_detail)
 
-        studySearchRecyclerViewAdapter = StudySearchRecyclerViewAdapter()
+        studySearchRecyclerViewAdapter = StudySearchRecyclerViewAdapter(studySearchViewModel)
         binding.rvStudy.adapter = studySearchRecyclerViewAdapter
 
         studySearchViewModel.studies.observe(this) {

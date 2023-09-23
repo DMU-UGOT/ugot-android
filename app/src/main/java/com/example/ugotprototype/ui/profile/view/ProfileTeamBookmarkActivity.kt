@@ -8,13 +8,13 @@ import com.example.ugotprototype.FragmentLoadingLayout
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.ActivityProfileTeamBookmarkBinding
 import com.example.ugotprototype.ui.profile.adapter.ProfilePostRecyclerviewAdapter
-import com.example.ugotprototype.ui.profile.viewmodel.ProfileMyBookMarkViewModel
+import com.example.ugotprototype.ui.profile.viewmodel.ProfileMyTeamPostViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ProfileTeamBookmarkActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileTeamBookmarkBinding
-    private val viewModel: ProfileMyBookMarkViewModel by viewModels()
+    private val viewModel: ProfileMyTeamPostViewModel by viewModels()
     private lateinit var profilePostRecyclerviewAdapter: ProfilePostRecyclerviewAdapter
     private val loadingDialog = FragmentLoadingLayout()
 
@@ -28,7 +28,7 @@ class ProfileTeamBookmarkActivity : AppCompatActivity() {
             finish()
         }
 
-        profilePostRecyclerviewAdapter = ProfilePostRecyclerviewAdapter()
+        profilePostRecyclerviewAdapter = ProfilePostRecyclerviewAdapter(viewModel)
         binding.rvTeam.adapter = profilePostRecyclerviewAdapter
 
         viewModel.teamItemList.observe(this) {

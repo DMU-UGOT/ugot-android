@@ -59,7 +59,12 @@ class TeamViewModel @Inject constructor(
                 val pageResponse = teamBuildingService.getTeams(_currentPage.value!!, 5)
                 val teamsResponse = pageResponse.data
 
+                val bookmark = teamBuildingService.getBookmark()
+                val teamId = bookmark.map { it.teamId }
+
+
                 teamsResponse.forEach { team ->
+                    team.bookmark = team.teamId in teamId
                     kotlin.runCatching {
                         val avatarUrl = apiService.getOrganization(
                             team.gitHubLink

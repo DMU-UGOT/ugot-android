@@ -78,7 +78,9 @@ class StudyFragment : Fragment() {
         val goToStudySearchResultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
-                    if (result.resultCode == Activity.RESULT_OK) { }
+                    if (result.resultCode == Activity.RESULT_OK) {
+                        studyViewModel.getStudyList()
+                    }
                 }
             }
 

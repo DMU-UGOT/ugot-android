@@ -29,11 +29,15 @@ class StudySearchViewModel @Inject constructor(
                 val allMatchingTeams = mutableListOf<StudyGetPost>()
                 var currentPage = 0
 
+                val bookmark = studyService.getBookmark()
+                val studyId = bookmark.map { it.studyId }
+
                 while (true) {
                     val response = studyService.searchStudies(currentPage, query)
                     val studies = response.body()?.content ?: emptyList()
 
                     for (study in studies) {
+                        study.bookmark = study.studyId in studyId
                         if (study.title.contains(query)) {
                             val avatarUrl = apiService.getOrganization(
                                 study.gitHubLink
@@ -52,6 +56,14 @@ class StudySearchViewModel @Inject constructor(
                 _isLoadingPage.value = true
             }.onFailure {
                 _isLoadingPage.value = true
+            }
+        }
+    }
+
+    fun sendBookmark(teamId: Int) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                studyService.setBookmark(teamId)
             }
         }
     }

@@ -21,7 +21,8 @@ import com.example.ugotprototype.ui.study.view.StudyFragment.Companion.STUDY_TIT
 import com.example.ugotprototype.ui.study.viewmodel.StudyViewModel
 import com.example.ugotprototype.ui.team.viewmodel.TeamViewModel
 
-class StudyRecyclerViewAdapter (private val viewModel: StudyViewModel): RecyclerView.Adapter<StudyRecyclerViewAdapter.StudyViewHolder>() {
+class StudyRecyclerViewAdapter(private val viewModel: StudyViewModel) :
+    RecyclerView.Adapter<StudyRecyclerViewAdapter.StudyViewHolder>() {
 
     var studyItemList: List<StudyGetPost> = emptyList()
 
@@ -48,6 +49,8 @@ class StudyRecyclerViewAdapter (private val viewModel: StudyViewModel): Recycler
                 tvStMeet.text = item.isContact
                 Glide.with(root.context).load(item.avatarUrl).into(ivStImage)
             }
+
+            binding.ivStBookmark.isSelected = item.bookmark
         }
     }
 

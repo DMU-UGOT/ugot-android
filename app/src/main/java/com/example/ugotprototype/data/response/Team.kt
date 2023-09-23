@@ -15,5 +15,6 @@ data class Team(
     var avatarUrl: String,
     val createdAt: String,
     val goal: String,
-    val language: String
+    val language: String,
+    var bookmark: Boolean
 )

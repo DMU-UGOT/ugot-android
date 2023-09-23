@@ -14,5 +14,7 @@ data class TeamPostResponse(
     var avatarUrl: String,
     val createdAt: String,
     val goal: String,
-    val language: String
+    val language: String,
+    var isDelete: Int,
+    var bookmark: Boolean
 )

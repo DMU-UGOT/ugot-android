@@ -2,6 +2,7 @@ package com.example.ugotprototype.data.api
 
 import com.example.ugotprototype.data.response.TeamDataResponse
 import com.example.ugotprototype.data.response.TeamSearchResponse
+import com.example.ugotprototype.data.team.TeamBookmarkData
 import com.example.ugotprototype.data.team.TeamPostData
 import retrofit2.Response
 import retrofit2.http.Body
@@ -25,4 +26,7 @@ interface TeamBuildingService {
 
     @POST("teams/bookmark/{postId}")
     suspend fun setBookmark(@Path("postId") postId: Int)
+
+    @GET("teams/bookmark")
+    suspend fun getBookmark(): List<TeamBookmarkData>
 }

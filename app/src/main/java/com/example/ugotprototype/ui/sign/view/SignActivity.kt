@@ -80,6 +80,14 @@ class SignActivity : AppCompatActivity() {
                 if (signViewModel.isNickNameValid()) {
                     navController.navigate(R.id.action_sign_input_name_to_sign_input_major)
                     signViewModel.setCurrentFragmentIndex(signViewModel.currentFragmentIndex.value!! + 1)
+                    /*signViewModel.isNicknameDuplicate {
+                        if(it) {
+                            navController.navigate(R.id.action_sign_input_name_to_sign_input_major)
+                            signViewModel.setCurrentFragmentIndex(signViewModel.currentFragmentIndex.value!! + 1)
+                        } else {
+                            Toast.makeText(this, "중복된 닉네임 입니다.", Toast.LENGTH_SHORT).show()
+                        }
+                    }*/
                 } else {
                     Toast.makeText(this, "입력된 데이터의 형식이 올바르지 않습니다.", Toast.LENGTH_SHORT).show()
                 }

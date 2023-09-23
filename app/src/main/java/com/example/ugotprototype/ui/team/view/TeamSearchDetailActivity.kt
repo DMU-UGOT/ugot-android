@@ -28,7 +28,7 @@ class TeamSearchDetailActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_team_search_detail)
         viewLoadingLayout()
 
-        teamSearchRecyclerViewAdapter = TeamSearchRecyclerViewAdapter()
+        teamSearchRecyclerViewAdapter = TeamSearchRecyclerViewAdapter(teamSearchViewModel)
         binding.rvTeam.adapter = teamSearchRecyclerViewAdapter
 
         teamSearchViewModel.teams.observe(this) {

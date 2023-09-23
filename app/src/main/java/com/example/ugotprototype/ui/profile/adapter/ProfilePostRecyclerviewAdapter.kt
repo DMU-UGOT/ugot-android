@@ -9,9 +9,11 @@ import com.bumptech.glide.Glide
 import com.example.ugotprototype.data.response.TeamPostResponse
 import com.example.ugotprototype.databinding.ItemMyTeamListBinding
 import com.example.ugotprototype.ui.profile.view.ProfilePostDetailActivity
+import com.example.ugotprototype.ui.profile.viewmodel.ProfileMyTeamPostViewModel
 import com.example.ugotprototype.ui.team.view.TeamFragment
 
-class ProfilePostRecyclerviewAdapter : RecyclerView.Adapter<ProfilePostRecyclerviewAdapter.MyViewHolder>() {
+class ProfilePostRecyclerviewAdapter(private val viewModel: ProfileMyTeamPostViewModel) :
+    RecyclerView.Adapter<ProfilePostRecyclerviewAdapter.MyViewHolder>() {
 
     var teamItemList: List<TeamPostResponse> = emptyList()
 
@@ -19,6 +21,11 @@ class ProfilePostRecyclerviewAdapter : RecyclerView.Adapter<ProfilePostRecyclerv
     inner class MyViewHolder(val binding: ItemMyTeamListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: TeamPostResponse) {
+
+            binding.ivDelete.setOnClickListener {
+                viewModel.deletePost(item.teamId)
+            }
+
             binding.root.setOnClickListener {
                 goToTeamPostDetail(item, binding.root.context)
             }
@@ -30,6 +37,7 @@ class ProfilePostRecyclerviewAdapter : RecyclerView.Adapter<ProfilePostRecyclerv
                 tvCntEnd.text = item.allPersonnel.toString()
                 tvViewCountNum.text = item.viewCount.toString()
                 tvCntFirst.text = item.nowPersonnel.toString()
+                ivDelete.visibility = item.isDelete
                 Glide.with(root.context).load(item.avatarUrl).into(ivTeamLogo)
             }
         }
@@ -56,6 +64,13 @@ class ProfilePostRecyclerviewAdapter : RecyclerView.Adapter<ProfilePostRecyclerv
 
     fun setData(data: List<TeamPostResponse>) {
         teamItemList = data
+        notifyDataSetChanged()
+    }
+
+    fun updateAllItemsVisibility(visible: Int) {
+        teamItemList.forEach { item ->
+            item.isDelete = visible
+        }
         notifyDataSetChanged()
     }
 

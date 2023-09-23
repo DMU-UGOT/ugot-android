@@ -2,7 +2,6 @@ package com.example.ugotprototype.ui.profile.adapter
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -10,9 +9,11 @@ import com.bumptech.glide.Glide
 import com.example.ugotprototype.data.study.StudyGetPost
 import com.example.ugotprototype.databinding.ItemProfileStudyListBinding
 import com.example.ugotprototype.ui.profile.view.ProfileStudyPostDetailActivity
+import com.example.ugotprototype.ui.profile.viewmodel.ProfileMyStudyPostViewModel
 import com.example.ugotprototype.ui.team.view.TeamFragment
 
-class ProfilePostStudyRecyclerViewAdapter : RecyclerView.Adapter<ProfilePostStudyRecyclerViewAdapter.StudyViewHolder>() {
+class ProfilePostStudyRecyclerViewAdapter(private val viewModel: ProfileMyStudyPostViewModel) :
+    RecyclerView.Adapter<ProfilePostStudyRecyclerViewAdapter.StudyViewHolder>() {
 
     var studyItemList: List<StudyGetPost> = emptyList()
 
@@ -21,7 +22,11 @@ class ProfilePostStudyRecyclerViewAdapter : RecyclerView.Adapter<ProfilePostStud
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: StudyGetPost) {
-            Log.d("item", item.toString())
+
+            binding.ivDelete.setOnClickListener {
+                viewModel.deletePost(item.studyId)
+            }
+
             binding.root.setOnClickListener {
                 goToStudyPostDetail(item, binding.root.context)
             }
@@ -33,6 +38,7 @@ class ProfilePostStudyRecyclerViewAdapter : RecyclerView.Adapter<ProfilePostStud
                 tvViewCountNum.text = item.viewCount.toString()
                 tvCntFirst.text = item.nowPersonnel.toString()
                 tvStMeet.text = item.isContact
+                ivDelete.visibility = item.isDelete
                 Glide.with(root.context).load(item.avatarUrl).into(ivStImage)
             }
         }
@@ -60,6 +66,13 @@ class ProfilePostStudyRecyclerViewAdapter : RecyclerView.Adapter<ProfilePostStud
     fun setData(data: List<StudyGetPost>) {
         studyItemList = data
         notifyDataSetChanged()  // 데이터 갱신
+    }
+
+    fun updateAllItemsVisibility(visible: Int) {
+        studyItemList.forEach { item ->
+            item.isDelete = visible
+        }
+        notifyDataSetChanged()
     }
 
     fun goToStudyPostDetail(item: StudyGetPost, context: Context) {

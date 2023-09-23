@@ -45,4 +45,10 @@ interface ProfileService {
 
     @GET("studies/bookmark")
     suspend fun getStudyBookmark(): List<StudyGetPost>
+
+    @DELETE("studies/{postId}")
+    suspend fun deleteStudyPost(@Path("postId") postId: Int)
+
+    @DELETE("teams/{postId}")
+    suspend fun deleteTeamPost(@Path("postId") postId: Int)
 }

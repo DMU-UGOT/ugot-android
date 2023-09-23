@@ -11,8 +11,9 @@ import com.example.ugotprototype.data.response.Team
 import com.example.ugotprototype.databinding.ItemTeamSearchListBinding
 import com.example.ugotprototype.ui.team.view.TeamFragment
 import com.example.ugotprototype.ui.team.view.TeamPostDetailActivity
+import com.example.ugotprototype.ui.team.viewmodel.TeamSearchViewModel
 
-class TeamSearchRecyclerViewAdapter :
+class TeamSearchRecyclerViewAdapter(private val viewModel: TeamSearchViewModel) :
     RecyclerView.Adapter<TeamSearchRecyclerViewAdapter.MyViewHolder>() {
 
     var teamItemList: List<Team> = emptyList()
@@ -27,6 +28,7 @@ class TeamSearchRecyclerViewAdapter :
 
             binding.ivTeamBookmark.setOnClickListener {
                 binding.ivTeamBookmark.isSelected = binding.ivTeamBookmark.isSelected != true
+                viewModel.sendBookmark(item.teamId)
             }
 
             with(binding) {
@@ -38,6 +40,8 @@ class TeamSearchRecyclerViewAdapter :
                 tvCntFirst.text = item.nowPersonnel.toString()
                 Glide.with(root.context).load(item.avatarUrl).into(ivTeamLogo)
             }
+
+            binding.ivTeamBookmark.isSelected = item.bookmark
         }
     }
 

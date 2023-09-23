@@ -28,11 +28,25 @@ class ProfileMyPostTeamActivity : AppCompatActivity() {
             finish()
         }
 
-        profilePostRecyclerviewAdapter = ProfilePostRecyclerviewAdapter()
+        profilePostRecyclerviewAdapter = ProfilePostRecyclerviewAdapter(viewModel)
         binding.rvTeam.adapter = profilePostRecyclerviewAdapter
 
         viewModel.teamItemList.observe(this) {
             profilePostRecyclerviewAdapter.setData(it)
+        }
+
+        binding.tvGroupDelete.setOnClickListener {
+            viewModel.toggleDeleteVisibility()
+        }
+
+        viewModel.isDeleteVisible.observe(this) {
+            profilePostRecyclerviewAdapter.updateAllItemsVisibility(it)
+        }
+
+        viewModel.isDeletePost.observe(this) {
+            if (it) {
+                onStart()
+            }
         }
     }
 
@@ -51,5 +65,6 @@ class ProfileMyPostTeamActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         viewModel.getMyPost()
+        viewModel.setDeleteVisibility()
     }
 }

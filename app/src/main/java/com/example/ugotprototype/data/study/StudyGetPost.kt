@@ -14,5 +14,6 @@ data class StudyGetPost(
     var avatarUrl: String,
     var subject: String,
     var field: String,
-
+    var isDelete: Int,
+    var bookmark: Boolean
 )
