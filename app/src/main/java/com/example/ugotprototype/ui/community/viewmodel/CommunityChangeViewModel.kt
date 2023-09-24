@@ -73,12 +73,11 @@ class CommunityChangeViewModel @Inject constructor(private val messageService: M
                 cal1.get(Calendar.DAY_OF_MONTH) == cal2.get(Calendar.DAY_OF_MONTH)
     }
 
-    fun sendMessage(title: String, content: String) {
+    fun sendMessage(content: String) {
         viewModelScope.launch {
             kotlin.runCatching {
                 messageService.sendMessage(
                     CommunityMessageData(
-                        title = title,
                         content = content,
                         receiverName = "미래김"
                     )

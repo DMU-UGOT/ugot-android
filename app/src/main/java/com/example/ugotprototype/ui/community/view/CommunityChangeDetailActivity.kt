@@ -137,11 +137,10 @@ class CommunityChangeDetailActivity : AppCompatActivity() {
         val alertDialog = builder.create()
 
         dialogBinding.btChangeSendMessage.setOnClickListener {
-            val title = dialogBinding.etChangeSendTitle.text.toString()
             val text = dialogBinding.etChangeSendText.text.toString()
 
             // 입력된 이름과 내용을 사용하여 보내기 동작 수행
-            send(title, text)
+            send(text)
             alertDialog.dismiss()
         }
 
@@ -152,11 +151,11 @@ class CommunityChangeDetailActivity : AppCompatActivity() {
         alertDialog.show()
     }
 
-    private fun send(title: String, text: String) {
+    private fun send(text: String) {
         // 여기에 실제로 보내기 동작을 구현
         // 예를 들어, 서버 API 호출이나 데이터 처리 등 구현
         // 예시로 Log 출력
-        viewModel.sendMessage(title, text)
-        Log.d("Send", "제목: $title, 내용: $text")
+        viewModel.sendMessage(text)
+        Log.d("Send", "내용: $text")
     }
 }

@@ -37,11 +37,6 @@ class StudyNewGroupActivity : AppCompatActivity() {
             checkAllFields()
         }
 
-        studyViewModel.seekBar.observe(this) {
-            checkAllFields()
-            binding.tvStNewMaxNumber.text = it.toString() + "명"
-        }
-
         studyViewModel.selectSpinner.observe(this) {
             checkAllFields()
         }
@@ -105,7 +100,7 @@ class StudyNewGroupActivity : AppCompatActivity() {
                 title = binding.etStNewTitleName.text.toString(),
                 content = binding.etTitleDetail.text.toString(),
                 isContact = binding.spStMeet.selectedItem.toString(),
-                allPersonnel = binding.seekBar.progress,
+                allPersonnel = 0,
                 gitHubLink = binding.etStNewGitLink.text.toString(),
                 kakaoOpenLink = binding.etStNewKakaoLink.text.toString(),
                 subject = binding.etSubject.text.toString(),

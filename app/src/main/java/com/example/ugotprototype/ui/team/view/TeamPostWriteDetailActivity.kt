@@ -38,11 +38,6 @@ class TeamPostWriteDetailActivity : AppCompatActivity() {
             checkAllFields()
         }
 
-        teamPostWriteViewModel.seekBar.observe(this) {
-            checkAllFields()
-            binding.tvMaxNumber.text = it.toString() + "명"
-        }
-
         teamPostWriteViewModel.selectSpinner.observe(this) {
             checkAllFields()
         }
@@ -109,7 +104,8 @@ class TeamPostWriteDetailActivity : AppCompatActivity() {
                     content = binding.etTitleDetail.text.toString(),
                     field = binding.fieldSpinner.selectedItem.toString(),
                     _class = binding.classSpinner.selectedItem.toString(),
-                    allPersonnel = binding.seekBar.progress,
+                    // 추후 인원 바뀔때 그거로 바꿔주세요
+                    allPersonnel = 0,
                     gitHubLink = binding.etInputGithubLink.text.toString(),
                     kakaoOpenLink = binding.etInputKakaoOpenLink.text.toString(),
                     goal = binding.etTarget.text.toString(),

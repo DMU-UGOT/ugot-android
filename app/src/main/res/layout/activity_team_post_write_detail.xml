@@ -185,63 +185,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/class_spinner" />
 
                 <TextView
-                    android:id="@+id/tv_number_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:text="모집 인원"
-                    android:textSize="15dp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/number_line"
-                    tools:text="모집 인원" />
-
-                <TextView
-                    android:id="@+id/tv_min_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1명"
-                    app:layout_constraintBottom_toBottomOf="@+id/seekBar"
-                    app:layout_constraintEnd_toStartOf="@+id/seekBar"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/seekBar"
-                    tools:text="1명" />
-
-                <SeekBar
-                    android:id="@+id/seekBar"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:max="10"
-                    android:min="1"
-                    android:progress="1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_number_title"
-                    app:onSeekBarChangeListener="@{vm.onSeekBarChangeListener}" />
-
-                <TextView
-                    android:id="@+id/tv_max_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1명"
-                    app:layout_constraintBottom_toBottomOf="@+id/seekBar"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/seekBar"
-                    app:layout_constraintTop_toTopOf="@+id/seekBar"
-                    tools:text="1명" />
-
-                <View
-                    android:id="@+id/leader_github_link_line"
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/color_F0F1F3"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_max_number" />
-
-                <TextView
                     android:id="@+id/tv_target_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -250,7 +193,7 @@
                     android:textSize="15sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/leader_github_link_line" />
+                    app:layout_constraintTop_toBottomOf="@id/number_line" />
 
                 <EditText
                     android:id="@+id/et_target"
