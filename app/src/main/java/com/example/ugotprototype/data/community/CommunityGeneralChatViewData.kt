@@ -1,7 +1,7 @@
 package com.example.ugotprototype.data.community
 
 data class CommunityGeneralChatViewData (
-    val ComGeneralChatNickName:String,
-    val ComGeneralChatText:String,
-    val ComGeneralChatTime:String
+    val nickname:String,
+    val content:String,
+    val createdAt:String
 )

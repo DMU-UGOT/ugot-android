@@ -119,4 +119,10 @@ object NetworkModule {
     fun provideCommunityService(retrofit: Retrofit): CommunityService {
         return retrofit.create(CommunityService::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideCommunityCommentService(retrofit: Retrofit): CommentService {
+        return retrofit.create(CommentService::class.java)
+    }
 }

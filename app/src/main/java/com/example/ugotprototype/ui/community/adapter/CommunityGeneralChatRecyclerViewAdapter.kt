@@ -15,7 +15,9 @@ class CommunityGeneralChatRecyclerViewAdapter : RecyclerView.Adapter<CommunityGe
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(currentCommunityGeneralChatViewData: CommunityGeneralChatViewData) {
-            binding.communityGeneralChatItem = currentCommunityGeneralChatViewData
+            binding.tvCommunityGeneralItemNickName.text = currentCommunityGeneralChatViewData.nickname
+            binding.tvCommunityGeneralItemTime.text = currentCommunityGeneralChatViewData.createdAt
+            binding.tvCommunityGeneralItemText.text = currentCommunityGeneralChatViewData.content
         }
     }
 
