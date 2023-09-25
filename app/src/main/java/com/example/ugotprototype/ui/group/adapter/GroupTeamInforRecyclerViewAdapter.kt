@@ -4,21 +4,32 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.ugotprototype.data.group.GroupDetailTeamInforData
 import com.example.ugotprototype.databinding.ItemGroupTeamInformationBinding
 
 class GroupTeamInforRecyclerViewAdapter :
     RecyclerView.Adapter<GroupTeamInforRecyclerViewAdapter.MyViewHolder>() {
 
-    var groupTeamItemList = arrayListOf<Int>()
+    var groupItemList: List<GroupDetailTeamInforData> = emptyList()
 
     // 생성된 뷰 홀더에 값 지정
     inner class MyViewHolder(val binding: ItemGroupTeamInformationBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind() {
+        fun bind(item: GroupDetailTeamInforData) {
             if (bindingAdapterPosition == 0) {
                 binding.ivTeamLeader.visibility = View.VISIBLE
             } else {
                 binding.ivTeamLeader.visibility = View.INVISIBLE
+            }
+
+            with(binding) {
+                tvTeamInforName.text = item.nickname
+                tvInforField.text = item.interests
+                tvInforTeamName.text = item.groupName
+                tvGitLink.text = item.gitHubLink
+                tvBlogLink.text = item.personalBlogLink
+                Glide.with(root.context).load(item.avatarUrl).into(ivProfileImage)
             }
         }
     }
@@ -33,22 +44,18 @@ class GroupTeamInforRecyclerViewAdapter :
 
     // 뷰 홀더에 데이터 바인딩
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind()
+        holder.bind(groupItemList[position])
     }
 
     // 뷰 홀더의 개수 리턴
-    override fun getItemCount() = groupTeamItemList.size
+    override fun getItemCount() = groupItemList.size
 
     override fun getItemId(position: Int): Long {
         return position.toLong()
     }
 
-    fun setData(nowPersonCnt: Int) {
-
-        // 현재 모집한 인원수만큼 리사이클러뷰 더미 아이템 추가
-        for (i in 0 until nowPersonCnt) {
-            groupTeamItemList.add(i)
-        }
+    fun setData(item: List<GroupDetailTeamInforData>) {
+        groupItemList = item
         notifyDataSetChanged()
     }
 }

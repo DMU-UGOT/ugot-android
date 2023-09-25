@@ -3,43 +3,40 @@ package com.example.ugotprototype.ui.group.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.ugotprototype.R
 import com.example.ugotprototype.data.group.GroupMiddleViewData
 import com.example.ugotprototype.databinding.ItemGroupMiddleListBinding
 import com.example.ugotprototype.ui.group.view.GroupDetailActivity
+import com.example.ugotprototype.ui.group.view.GroupFragment.Companion.GROUP_ID
+import com.example.ugotprototype.ui.group.viewmodel.GroupViewModel
 
-class GroupMiddleViewRecyclerViewAdapter() :
+class GroupMiddleViewRecyclerViewAdapter(private val viewModel: GroupViewModel) :
     RecyclerView.Adapter<GroupMiddleViewRecyclerViewAdapter.MyViewHolder>() {
 
-    private var groupMiddleItemList = arrayListOf<GroupMiddleViewData>()
+    var groupItemList: List<GroupMiddleViewData> = emptyList()
 
-    // 생성된 뷰 홀더에 값 지정
     inner class MyViewHolder(val binding: ItemGroupMiddleListBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(currentGroupData: GroupMiddleViewData) {
-            binding.vm = currentGroupData
+        fun bind(item: GroupMiddleViewData) {
             binding.root.setOnClickListener {
-                goToPostDetail(currentGroupData, binding.root.context)
+                goToPostDetail(item, binding.root.context)
             }
 
-            if (currentGroupData.groupImageUrl != null) {
-                Glide.with(binding.root.context)
-                    .load(currentGroupData.groupImageUrl)
-                    .into(binding.ivFavoritesMiddleImg)
-            } else {
-                binding.ivFavoritesMiddleImg.setImageResource(R.drawable.img_sample)
+            binding.ivBookmark.setOnClickListener {
+                binding.ivBookmark.isSelected = binding.ivBookmark.isSelected != true
+                viewModel.setGroupFavorites(item.groupId)
             }
 
-            if (bindingAdapterPosition < 4) {
-                binding.ibBookmark.isSelected = true
-            }
-
-            binding.ibBookmark.setOnClickListener {
-                binding.ibBookmark.isSelected = binding.ibBookmark.isSelected != true
+            with(binding) {
+                tvGroupMiddleGroupName.text = item.groupName
+                tvGroupMiddleDetail.text = item.content
+                ivGroupPersonCnt.text = item.nowPersonnel.toString()
+                Glide.with(root.context).load(item.avatarUrl).into(ivFavoritesMiddleImg)
+                ivBookmark.isSelected = item.isFavorites
             }
         }
     }
@@ -53,28 +50,27 @@ class GroupMiddleViewRecyclerViewAdapter() :
 
     // 뷰 홀더에 데이터 바인딩
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(groupMiddleItemList[position])
+        holder.bind(groupItemList[position])
 
     }
 
     // 뷰 홀더의 개수 리턴
-    override fun getItemCount() = groupMiddleItemList.size
+    override fun getItemCount() = groupItemList.size
 
     override fun getItemId(position: Int): Long {
         return position.toLong()
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setData(data: ArrayList<GroupMiddleViewData>) {
-        groupMiddleItemList = data
+    fun setData(data: List<GroupMiddleViewData>) {
+        Log.d("test", data.toString())
+        groupItemList = data
         notifyDataSetChanged()
     }
 
     fun goToPostDetail(item: GroupMiddleViewData, context: Context) {
         Intent(context, GroupDetailActivity::class.java).apply {
-            putExtra("groupName", item.groupName)
-            putExtra("groupDetail", item.groupDetail)
-            putExtra("groupPersonCnt", item.groupPersonCnt)
+            putExtra(GROUP_ID, item.groupId)
             context.startActivity(this)
         }
     }

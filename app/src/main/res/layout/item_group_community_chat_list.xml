@@ -3,12 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="groupCmuChatItem"
-            type="com.example.ugotprototype.data.group.GroupCommunityChatViewData" />
-    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -33,7 +27,6 @@
                 android:ellipsize="end"
                 android:ems="15"
                 android:maxLines="1"
-                android:text="@{groupCmuChatItem.groupCmuNickName}"
                 android:textColor="@color/black"
                 android:textSize="13dp"
                 android:textStyle="bold"
@@ -52,7 +45,6 @@
                 android:paddingTop="10dp"
                 android:paddingEnd="15dp"
                 android:textColor="@color/black"
-                android:text="@{groupCmuChatItem.groupCmuChatText}"
                 android:paddingBottom="10dp"
                 android:textSize="13dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -66,7 +58,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/black"
-                android:text="@{groupCmuChatItem.groupCmuChatTime}"
                 android:textSize="13dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

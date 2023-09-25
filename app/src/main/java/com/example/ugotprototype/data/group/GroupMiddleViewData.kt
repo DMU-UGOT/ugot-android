@@ -1,8 +1,11 @@
 package com.example.ugotprototype.data.group
 
 data class GroupMiddleViewData(
+    val groupId: Int,
     val groupName: String,
-    val groupDetail: String,
-    val groupPersonCnt: String,
-    val groupImageUrl: String? = null
+    val content: String,
+    val nowPersonnel: Int,
+    val githubUrl: String,
+    var avatarUrl: String,
+    var isFavorites: Boolean
 )

@@ -93,20 +93,6 @@
                     app:layout_constraintTop_toTopOf="@+id/tv_group_middle_title"
                     tools:text="5" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:text="정렬"
-                    android:textColor="#80636363"
-                    android:textSize="15dp"
-                    app:icon="@drawable/ic_group_filter"
-                    app:iconPadding="0dp"
-                    app:iconTint="#636363"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_group_middle_title"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/tv_group_middle_title" />
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_group_middle_list"
                     android:layout_width="match_parent"

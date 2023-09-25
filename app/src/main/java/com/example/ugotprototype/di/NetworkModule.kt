@@ -110,6 +110,8 @@ object NetworkModule {
                 modifiedRequest = originalRequest
             }
 
+
+            Log.d("test", modifiedRequest.toString())
             chain.proceed(modifiedRequest)
         }
     }
@@ -124,5 +126,11 @@ object NetworkModule {
     @Singleton
     fun provideCommunityCommentService(retrofit: Retrofit): CommentService {
         return retrofit.create(CommentService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGroupService(retrofit: Retrofit): GroupService {
+        return retrofit.create(GroupService::class.java)
     }
 }

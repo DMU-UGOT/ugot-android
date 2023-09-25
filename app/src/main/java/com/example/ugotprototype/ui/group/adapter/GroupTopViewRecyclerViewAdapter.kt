@@ -1,28 +1,33 @@
 package com.example.ugotprototype.ui.group.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ugotprototype.data.group.GroupMiddleViewData
-import com.example.ugotprototype.data.group.GroupTopViewData
+import com.bumptech.glide.Glide
+import com.example.ugotprototype.data.group.GroupGetFavoritesList
 import com.example.ugotprototype.databinding.ItemGroupTopListBinding
 import com.example.ugotprototype.ui.group.view.GroupDetailActivity
+import com.example.ugotprototype.ui.group.view.GroupFragment.Companion.GROUP_ID
 
-class GroupTopViewRecyclerViewAdapter :
+class GroupTopViewRecyclerViewAdapter() :
     RecyclerView.Adapter<GroupTopViewRecyclerViewAdapter.MyViewHolder>() {
 
-    var groupTopItemList = arrayListOf<GroupTopViewData>()
+    var groupItemList: List<GroupGetFavoritesList> = emptyList()
 
-    // 생성된 뷰 홀더에 값 지정
     inner class MyViewHolder(val binding: ItemGroupTopListBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(currentGroupData: GroupTopViewData) {
-            binding.vm = currentGroupData
-
+        fun bind(item: GroupGetFavoritesList) {
             binding.root.setOnClickListener {
-                goToPostDetail(currentGroupData, binding.root.context)
+                goToPostDetail(item, binding.root.context)
+            }
+
+            with(binding) {
+                Glide.with(root.context).load(item.avatarUrl).into(ivFavoritesMiddleImg)
+                tvGroupTitle.text = item.groupName
             }
         }
     }
@@ -36,26 +41,27 @@ class GroupTopViewRecyclerViewAdapter :
 
     // 뷰 홀더에 데이터 바인딩
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(groupTopItemList[position])
+        holder.bind(groupItemList[position])
+
     }
 
     // 뷰 홀더의 개수 리턴
-    override fun getItemCount() = groupTopItemList.size
+    override fun getItemCount() = groupItemList.size
 
     override fun getItemId(position: Int): Long {
         return position.toLong()
     }
 
-    fun setData(data: ArrayList<GroupTopViewData>) {
-        groupTopItemList = data
+    @SuppressLint("NotifyDataSetChanged")
+    fun setData(data: List<GroupGetFavoritesList>) {
+        Log.d("test", data.toString())
+        groupItemList = data
         notifyDataSetChanged()
     }
 
-    fun goToPostDetail(item: GroupTopViewData, context: Context) {
+    fun goToPostDetail(item: GroupGetFavoritesList, context: Context) {
         Intent(context, GroupDetailActivity::class.java).apply {
-            putExtra("groupName", item.groupName)
-            putExtra("groupDetail", item.groupDetail)
-            putExtra("groupPersonCnt", item.groupPersonCnt)
+            putExtra(GROUP_ID, item.groupId)
             context.startActivity(this)
         }
     }

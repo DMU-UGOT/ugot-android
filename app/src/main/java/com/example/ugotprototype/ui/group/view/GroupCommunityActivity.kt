@@ -3,48 +3,53 @@ package com.example.ugotprototype.ui.group.view
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ugotprototype.R
-import com.example.ugotprototype.data.group.GroupCommunityChatViewData
 import com.example.ugotprototype.databinding.ActivityGroupCommunityBinding
 import com.example.ugotprototype.ui.group.adapter.GroupCommunityRecyclerViewAdapter
+import com.example.ugotprototype.ui.group.view.GroupFragment.Companion.GROUP_ID
 import com.example.ugotprototype.ui.group.viewmodel.GroupCmuChatViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class GroupCommunityActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGroupCommunityBinding
     private val groupCmuChatViewModel: GroupCmuChatViewModel by viewModels()
 
     private lateinit var groupCommunityRecyclerViewAdapter: GroupCommunityRecyclerViewAdapter
-    private var groupCmuChatItems = ArrayList<GroupCommunityChatViewData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_group_community)
-        binding.vm = groupCmuChatViewModel
+
+        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        layoutManager.stackFromEnd = true // 아이템을 스크롤의 끝으로 정렬
+        binding.rvGroupCmuChat.layoutManager = layoutManager
+        binding.rvGroupCmuChat.isNestedScrollingEnabled = false
 
         testGroupCmuChatData()
-        groupCmuChatViewModel.setGroupCmuChatData(groupCmuChatItems)
 
         groupCommunityRecyclerViewAdapter = GroupCommunityRecyclerViewAdapter()
         binding.rvGroupCmuChat.adapter = groupCommunityRecyclerViewAdapter
 
-        // RecyclerView의 레이아웃 매니저를 LinearLayoutManager로 설정
-        val layoutManager = LinearLayoutManager(this)
-        binding.rvGroupCmuChat.layoutManager = layoutManager
 
-        groupCmuChatViewModel.setGroupCmuChatData(groupCmuChatItems)
-
-        groupCmuChatViewModel.groupCmuChatItemList.observe(this) {
+        groupCmuChatViewModel.messageList.observe(this) {
             groupCommunityRecyclerViewAdapter.setData(it)
+            binding.nsvGroupCmuDetail.scrollTo(0, binding.nsvGroupCmuDetail.getChildAt(0).height)
         }
 
-        titleTeamName()
+        groupCmuChatViewModel.messageCreated.observe(this) {
+            if (it) {
+                groupCmuChatViewModel.getMessageList(intent.getIntExtra(GROUP_ID, 0))
+            }
+        }
+
         backGroupCommunityToMainActivity()
         chatInputBtn()
     }
@@ -59,6 +64,9 @@ class GroupCommunityActivity : AppCompatActivity() {
 
     private fun chatInputBtn() {
         binding.btGroupCmuChatInput.setOnClickListener {
+            groupCmuChatViewModel.sendMessage(
+                binding.groupCmuChatInput.text.toString(), intent.getIntExtra(GROUP_ID, 0)
+            )
             binding.groupCmuChatInput.text.clear()
             hideKeyboard()
         }
@@ -70,65 +78,6 @@ class GroupCommunityActivity : AppCompatActivity() {
     }
 
     private fun testGroupCmuChatData() {
-        groupCmuChatItems = arrayListOf(
-            GroupCommunityChatViewData(
-                "제리만 하는 사람",
-                "오늘 회의 있나요??",
-                "2023.06.23 16:19"
-            ),
-            GroupCommunityChatViewData(
-                "개미",
-                "있는걸로 알아요",
-                "2023.06.23 16:25"
-            ),
-            GroupCommunityChatViewData(
-                "베짱이",
-                "저는 오늘 참석 못할 것 같습니다",
-                "2023.06.23 16:31"
-            ),
-            GroupCommunityChatViewData(
-                "제리만 하는 사람",
-                "감사합니다",
-                "2023.06.23 16:32"
-            ),
-            GroupCommunityChatViewData(
-                "개미",
-                "다음 회의는 필참이니까 모두 참석 해주시길 바랍니다. 다음 회의는 출석 진행하겠습니다.",
-                "2023.06.23 16:58"
-            ),
-            GroupCommunityChatViewData(
-                "베짱이",
-                "꼭 참여하겠습니다",
-                "2023.06.23 17:19"
-            ),
-            GroupCommunityChatViewData(
-                "개미",
-                "넵",
-                "2023.06.23 17:20"
-            ),
-            GroupCommunityChatViewData(
-                "왕벌의 비행",
-                "네~",
-                "2023.06.23 17:27"
-            )
-        )
-    }
-
-    private fun titleTeamName() {
-        val teamNumber = intent.getIntExtra("TEAM_NUMBER", 1)
-        val teamName = getTeamName(teamNumber)
-        binding.tvGroupCmuTitle.text = teamName
-    }
-
-    private fun getTeamName(teamNumber: Int): String {
-        return when (teamNumber) {
-            1 -> "UGOT"
-            2 -> "2팀"
-            3 -> "삼놈"
-            4 -> "사시미"
-            5 -> "오리무중"
-            6 -> "육교"
-            else -> "Unknown Team"
-        }
+        groupCmuChatViewModel.getMessageList(intent.getIntExtra(GROUP_ID, 0))
     }
 }

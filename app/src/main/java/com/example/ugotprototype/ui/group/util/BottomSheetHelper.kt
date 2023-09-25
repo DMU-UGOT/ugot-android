@@ -2,15 +2,13 @@ import android.app.DatePickerDialog
 import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.lifecycle.LifecycleOwner
 import com.example.ugotprototype.R
-import com.example.ugotprototype.ui.group.viewmodel.GroupViewModel
+import com.example.ugotprototype.data.group.GroupSetNoticeData
+import com.example.ugotprototype.ui.group.viewmodel.GroupDetailViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 import java.util.Calendar
@@ -19,7 +17,7 @@ import java.util.Calendar
 class BottomSheetHelper(
     private val lifecycleOwner: LifecycleOwner,
     private val context: Context,
-    private val groupViewModel: GroupViewModel,
+    private val groupViewModel: GroupDetailViewModel,
 ) {
 
     fun createBottomSheet() {
@@ -37,6 +35,15 @@ class BottomSheetHelper(
             }
 
             mbNoticeFinish.setOnClickListener {
+                val dateParts = tvSelectedDay.text.toString().split("-")
+                groupViewModel.setNoticeData(
+                    GroupSetNoticeData(
+                        year = dateParts[0],
+                        month = dateParts[1],
+                        dateOfMonth = dateParts[2],
+                        content = tvNoticeTitle.text.toString()
+                    )
+                )
                 groupViewModel.isBottomSheetClickCheck(true)
                 bottomSheet.dismiss()
             }

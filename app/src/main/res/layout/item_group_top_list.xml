@@ -3,13 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="vm"
-            type="com.example.ugotprototype.data.group.GroupTopViewData" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,13 +26,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/tv_group_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
-            android:text="@{vm.groupName}"
             android:textColor="@color/black"
             android:textSize="10dp"
             app:layout_constraintEnd_toEndOf="@+id/group_bookmark_item"

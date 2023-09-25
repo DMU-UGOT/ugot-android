@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import com.example.ugotprototype.databinding.GroupCalendarDayBinding
+import com.example.ugotprototype.ui.group.viewmodel.GroupCalendarViewModel
 import com.example.ugotprototype.ui.group.viewmodel.GroupViewModel
 import com.kizitonwose.calendar.core.CalendarDay
 import com.kizitonwose.calendar.core.CalendarMonth
@@ -16,7 +17,7 @@ import java.time.LocalDate
 import java.time.YearMonth
 
 class DayViewContainer(
-    view: View, private val calendarView: CalendarView, private var vm: GroupViewModel
+    view: View, private val calendarView: CalendarView, private val vm: GroupCalendarViewModel
 ) : ViewContainer(view) {
     private val bind = GroupCalendarDayBinding.bind(view)
     private lateinit var day: CalendarDay
@@ -56,7 +57,7 @@ class DayViewContainer(
         tvYearMonthDay: TextView,
         noticeTitle: Map<LocalDate, String>
     ) {
-        Log.d("test", "test2")
+
         this.day = day
         this.tvMiddleText = tvMiddle
         this.currentMonth = currentMonth
