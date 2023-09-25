@@ -21,6 +21,9 @@ class CommunityGeneralChatViewModel @Inject constructor(
     private val _communityGeneralChatItemList = MutableLiveData<ArrayList<CommunityGeneralChatViewData>>() // 뷰 모델에서 데이터 처리를 하는 변수
     val communityGeneralChatItemList: LiveData<ArrayList<CommunityGeneralChatViewData>> = _communityGeneralChatItemList
 
+    private val _communityGeneralChatCreateItemList = MutableLiveData<CommunityGeneralCommentNewPostData>() // 뷰 모델에서 데이터 처리를 하는 변수
+    val communityGeneralChatCreateItemList: LiveData<CommunityGeneralCommentNewPostData> = _communityGeneralChatCreateItemList
+
     private val _itemCount = MutableLiveData<Int>()
     val itemCount: LiveData<Int> = _itemCount
 
@@ -38,12 +41,13 @@ class CommunityGeneralChatViewModel @Inject constructor(
         }
     }
 
-    fun newCommunityCommentData(communityGeneralCommentNewPostData: ArrayList<CommunityGeneralCommentNewPostData>) {
+    fun newCommunityCommentData(postId: Int, communityGeneralCommentNewPostData: CommunityGeneralCommentNewPostData) {
         viewModelScope.launch {
             kotlin.runCatching {
-                commentService.createCommunityComment(communityGeneralCommentNewPostData)
-            }.onSuccess { Log.d("commentSuccess", it.toString()) }
-                .onFailure { Log.d("commentFail", it.toString()) }
+                commentService.createCommunityComment(postId, communityGeneralCommentNewPostData)
+            }.onSuccess { Log.d("commentSuccess", it.toString())
+            getCommunityDetailList(postId)}
+                .onFailure { Log.d("commentFail", it.toString())}
         }
     }
 }

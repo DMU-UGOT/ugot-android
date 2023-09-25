@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.airbnb.lottie.animation.content.Content
 import com.example.ugotprototype.R
 import com.example.ugotprototype.data.community.CommunityGeneralChatViewData
+import com.example.ugotprototype.data.community.CommunityGeneralCommentNewPostData
+import com.example.ugotprototype.data.community.CommunityGeneralNewPostData
 import com.example.ugotprototype.databinding.ActivityDialogDeleteMessageBinding
 import com.example.ugotprototype.databinding.FragmentCommunityGeneralDetailBinding
 import com.example.ugotprototype.ui.community.adapter.CommunityGeneralChatRecyclerViewAdapter
@@ -34,7 +36,6 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
     private val communityGeneralDetailViewModel: CommunityGeneralDetailViewModel by viewModels()
     private val communityGeneralUpdateViewModel: CommunityGeneralUpdateViewModel by viewModels()
     private lateinit var communityGeneralChatRecyclerViewAdapter: CommunityGeneralChatRecyclerViewAdapter
-    private var communityGeneralChatItems = ArrayList<CommunityGeneralChatViewData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,6 +70,10 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
         }
 
         //댓글 추가
+        communityGeneralChatViewModel.communityGeneralChatCreateItemList.observe(this) {
+            communityGeneralChatViewModel.newCommunityCommentData(intent.getIntExtra(GENERAL_ID,0), it)
+        }
+
         communityGeneralChatViewModel.getCommunityDetailList(intent.getIntExtra(GENERAL_ID,0))
 
         goToUpdateResult()
@@ -154,7 +159,9 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
 
     private fun chatInputBtn() {
         binding.btGeneralDetailChatInput.setOnClickListener {
+            checkGeneralOrganizationExistence(intent.getIntExtra(GENERAL_ID, 0))
             binding.generalChatInput.text.clear()
+            setResult(Activity.RESULT_OK, Intent())
             hideKeyboard()
         }
     }
@@ -162,5 +169,14 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
     private fun hideKeyboard() {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(binding.generalChatInput.windowToken, 0)
+    }
+
+    private fun checkGeneralOrganizationExistence(postId : Int) {
+        communityGeneralChatViewModel.newCommunityCommentData(postId,
+            CommunityGeneralCommentNewPostData(
+                content = binding.generalChatInput.text.toString(),
+                status = binding.tvStatus.text.toString(),
+            )
+        )
     }
 }

@@ -10,7 +10,10 @@ import retrofit2.http.Path
 
 interface CommentService {
     @POST("com/{postId}/comment")
-    suspend fun createCommunityComment(@Body communityGeneralCommentNewPostData: ArrayList<CommunityGeneralCommentNewPostData>)
+    suspend fun createCommunityComment(
+        @Path("postId") postId: Int,
+        @Body communityGeneralCommentNewPostData: CommunityGeneralCommentNewPostData
+    )
 
     @GET("com/{postId}/comment")
     suspend fun getCommunityCommentGeneral(@Path("postId") postId: Int): ArrayList<CommunityGeneralChatViewData>
