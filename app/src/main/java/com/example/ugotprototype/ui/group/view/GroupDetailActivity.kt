@@ -3,7 +3,7 @@ package com.example.ugotprototype.ui.group.view
 import BottomSheetHelper
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +13,7 @@ import com.example.ugotprototype.R
 import com.example.ugotprototype.data.group.GroupDetailData
 import com.example.ugotprototype.databinding.ActivityGroupDetailBinding
 import com.example.ugotprototype.ui.group.view.GroupFragment.Companion.GROUP_ID
+import com.example.ugotprototype.ui.group.view.GroupFragment.Companion.TEAM_LEADER_ID
 import com.example.ugotprototype.ui.group.viewmodel.GroupDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,6 +24,7 @@ class GroupDetailActivity : AppCompatActivity() {
     private val viewModel: GroupDetailViewModel by viewModels()
     private val loadingDialog = FragmentLoadingLayout()
     private var groupId: Int = 0
+    private var groupLeaderId: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,22 +32,30 @@ class GroupDetailActivity : AppCompatActivity() {
 
         viewLoadingLayout()
 
-        viewModel.getGroupDetailData(intent.getIntExtra(GROUP_ID, 0))
-
         viewModel.groupDetailData.observe(this) {
             viewSetting(it)
         }
 
         viewModel.isNoticeCreated.observe(this) {
             if (it) {
-                Log.d("test", "제발되어라")
                 viewModel.getNoticeData(groupId)
             }
         }
 
         viewModel.latestNotice.observe(this) {
-            Log.d("test", it.toString())
             binding.mbGroupDetailAnnouncement.text = it
+        }
+
+        viewModel.isDeleteGroup.observe(this) {
+            if (it) {
+                finish()
+            }
+        }
+
+        viewModel.isQuitGroup.observe(this) {
+            if (it) {
+                finish()
+            }
         }
 
         binding.fabGroupNoticeWrite.setOnClickListener {
@@ -56,10 +66,12 @@ class GroupDetailActivity : AppCompatActivity() {
         goToDetailPage()
         goToDetailCommunityPage()
         goToTeamInformationPage()
+        onClickHambugerButton()
     }
 
     private fun viewSetting(data: GroupDetailData) {
         groupId = data.groupId
+        groupLeaderId = data.nickname
 
         with(binding) {
             tvGroupDetailTeamTitle.text = data.groupName
@@ -81,6 +93,7 @@ class GroupDetailActivity : AppCompatActivity() {
         binding.mbGroupDetailCalendar.setOnClickListener {
             Intent(this, GroupDetailCalendarActivity::class.java).apply {
                 putExtra(GROUP_ID, groupId)
+                putExtra(TEAM_LEADER_ID, groupLeaderId)
                 startActivity(this)
             }
         }
@@ -127,5 +140,46 @@ class GroupDetailActivity : AppCompatActivity() {
                 startActivity(this)
             }
         }
+    }
+
+    private fun onClickHambugerButton() {
+
+        binding.ivMenu.setOnClickListener {
+            PopupMenu(this, it).apply {
+                menuInflater.inflate(R.menu.group_menu, menu)
+
+                setOnMenuItemClickListener { item ->
+                    when (item.itemId) {
+                        R.id.menu_item1 -> {
+                            viewModel.quitGroup(groupId)
+                            true
+                        }
+
+                        R.id.menu_item2 -> {
+                            viewModel.deleteGroup(groupId)
+                            true
+                        }
+
+                        R.id.menu_item3 -> {
+                            Intent(
+                                this@GroupDetailActivity,
+                                GroupRequestApplicationActivity::class.java
+                            ).apply {
+                                putExtra(GROUP_ID, groupId)
+                                startActivity(this)
+                            }
+                            true
+                        }
+
+                        else -> false
+                    }
+                }
+            }.show()
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.getGroupDetailData(intent.getIntExtra(GROUP_ID, 0))
     }
 }

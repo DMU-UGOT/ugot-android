@@ -1,6 +1,7 @@
 package com.example.ugotprototype.ui.group.view
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -10,6 +11,7 @@ import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.ActivityGroupDetailCalendarBinding
 import com.example.ugotprototype.ui.group.adapter.GroupCalendarRecyclerViewAdapter
 import com.example.ugotprototype.ui.group.view.GroupFragment.Companion.GROUP_ID
+import com.example.ugotprototype.ui.group.view.GroupFragment.Companion.TEAM_LEADER_ID
 import com.example.ugotprototype.ui.group.viewmodel.GroupCalendarViewModel
 import com.kizitonwose.calendar.core.CalendarDay
 import com.kizitonwose.calendar.core.daysOfWeek
@@ -24,8 +26,7 @@ class GroupDetailCalendarActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGroupDetailCalendarBinding
     private val viewModel: GroupCalendarViewModel by viewModels()
     private var now = LocalDate.now()
-    private var groupCalendarAdapter: GroupCalendarRecyclerViewAdapter =
-        GroupCalendarRecyclerViewAdapter()
+    private lateinit var groupCalendarAdapter: GroupCalendarRecyclerViewAdapter
     private var noticeTitle: Map<LocalDate, String> = mutableMapOf()
 
 
@@ -33,9 +34,13 @@ class GroupDetailCalendarActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_group_detail_calendar)
-        binding.rvNoticeDetail.adapter = groupCalendarAdapter
 
-        viewModel.getNoticeData(intent.getIntExtra(GROUP_ID, 0))
+        groupCalendarAdapter = GroupCalendarRecyclerViewAdapter(
+            viewModel, intent.getStringExtra(
+                TEAM_LEADER_ID
+            )!!, intent.getIntExtra(GROUP_ID, 0)
+        )
+        binding.rvNoticeDetail.adapter = groupCalendarAdapter
 
         viewModel.groupNoticeDetail.observe(this) {
             viewModel.updateNoticeTitle(it)
@@ -52,14 +57,25 @@ class GroupDetailCalendarActivity : AppCompatActivity() {
 
         viewModel.selectedDate.observe(this) {
             viewModel.getClickDateData(it.toString())
+            groupCalendarAdapter.getYearMonthDay(it.toString())
         }
 
         binding.ibCalendarPrev.setOnClickListener {
+            setResult(Activity.RESULT_OK)
             finish()
         }
 
-        spawnCalendarView()
-        DayViewContainer.clearSelection(binding.calendarView)
+        viewModel.isUpdateNotice.observe(this) {
+            if (it) {
+                onStart()
+            }
+        }
+
+        viewModel.isDeleteNotice.observe(this) {
+            if (it) {
+                onStart()
+            }
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -83,7 +99,6 @@ class GroupDetailCalendarActivity : AppCompatActivity() {
         goToNextMonth()
         updateCalendar(currentMonth, noticeTitle)
         observeUpdate()
-
     }
 
     private fun goToPreviousMonth() {
@@ -130,5 +145,12 @@ class GroupDetailCalendarActivity : AppCompatActivity() {
         super.onDestroy()
         DayViewContainer.clearSelection(binding.calendarView)
         viewModel.getClickDateData(now.toString())
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.getNoticeData(intent.getIntExtra(GROUP_ID, 0))
+        spawnCalendarView()
+        DayViewContainer.clearSelection(binding.calendarView)
     }
 }

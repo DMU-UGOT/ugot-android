@@ -29,6 +29,7 @@ class GroupFragment : Fragment() {
 
     companion object {
         const val GROUP_ID = "groupID"
+        const val TEAM_LEADER_ID = "teamLeaderID"
     }
 
     override fun onCreateView(
@@ -103,5 +104,4 @@ class GroupFragment : Fragment() {
         groupViewModel.getGroupList()
         groupViewModel.getFavoritesList()
     }
-
 }

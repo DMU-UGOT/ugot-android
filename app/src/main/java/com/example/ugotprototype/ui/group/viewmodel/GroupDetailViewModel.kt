@@ -1,5 +1,6 @@
 package com.example.ugotprototype.ui.group.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,7 +16,8 @@ import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
-class GroupDetailViewModel @Inject constructor(private val groupService: GroupService): ViewModel() {
+class GroupDetailViewModel @Inject constructor(private val groupService: GroupService) :
+    ViewModel() {
     private val _bottomSheetClickCheck = MutableLiveData<Boolean>()
     val bottomSheetClickCheck: LiveData<Boolean> = _bottomSheetClickCheck
 
@@ -37,6 +39,13 @@ class GroupDetailViewModel @Inject constructor(private val groupService: GroupSe
     private val _isNoticeCreated = MutableLiveData<Boolean>()
     val isNoticeCreated: LiveData<Boolean> = _isNoticeCreated
 
+    private val _isQuitGroup = MutableLiveData<Boolean>()
+    val isQuitGroup: LiveData<Boolean> = _isQuitGroup
+
+    private val _isDeleteGroup = MutableLiveData<Boolean>()
+    val isDeleteGroup: LiveData<Boolean> = _isDeleteGroup
+
+
     fun isBottomSheetClickCheck(enabled: Boolean) {
         _bottomSheetClickCheck.value = enabled
     }
@@ -51,9 +60,11 @@ class GroupDetailViewModel @Inject constructor(private val groupService: GroupSe
             kotlin.runCatching {
                 groupService.getGroupDetailData(groupID)
             }.onSuccess {
+                Log.d("test", it.toString())
                 _isLoadingPage.value = true
                 _groupDetailData.value = it
             }.onFailure {
+                Log.d("test", it.toString())
                 _isLoadingPage.value = true
             }
         }
@@ -98,6 +109,30 @@ class GroupDetailViewModel @Inject constructor(private val groupService: GroupSe
                 }
 
                 _latestNotice.value = latestContent
+            }
+        }
+    }
+
+    fun quitGroup(groupId: Int) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                groupService.quitGroup(groupId)
+            }.onSuccess {
+                _isQuitGroup.value = true
+            }.onFailure {
+                _isQuitGroup.value = false
+            }
+        }
+    }
+
+    fun deleteGroup(groupId: Int) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                groupService.deleteGroup(groupId)
+            }.onSuccess {
+                _isDeleteGroup.value = true
+            }.onFailure {
+                _isDeleteGroup.value = false
             }
         }
     }

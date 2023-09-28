@@ -11,6 +11,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ugotprototype.data.api.ApiService
+import com.example.ugotprototype.data.api.GroupService
 import com.example.ugotprototype.data.api.TeamBuildingService
 import com.example.ugotprototype.data.team.TeamPostData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,7 +20,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TeamPostWriteViewModel @Inject constructor(
-    private val teamBuildingService: TeamBuildingService, private val apiService: ApiService
+    private val teamBuildingService: TeamBuildingService,
+    private val apiService: ApiService,
+    private val groupService: GroupService
 ) : ViewModel() {
 
     companion object {
@@ -47,6 +50,12 @@ class TeamPostWriteViewModel @Inject constructor(
     private val _createFinish = MutableLiveData<Boolean>()
     val createFinish: LiveData<Boolean> = _createFinish
 
+    private val _postTitles = MutableLiveData<List<String>>()
+    val postTitles: LiveData<List<String>> = _postTitles
+
+    private val _postData = MutableLiveData<Map<Int, String>>()
+    val postData: LiveData<Map<Int, String>> = _postData
+
 
     fun isTeamPostRegisterButtonState(enabled: Boolean) {
         _isTeamPostRegisterBtnEnabled.value = enabled
@@ -69,7 +78,10 @@ class TeamPostWriteViewModel @Inject constructor(
         viewModelScope.launch {
             kotlin.runCatching {
                 teamBuildingService.createTeam(teamPostData)
-            }.onSuccess { _createFinish.value = true }
+            }.onSuccess {
+                _createFinish.value = true
+                Log.d("test", teamPostData.toString())
+            }
         }
     }
 
@@ -104,8 +116,26 @@ class TeamPostWriteViewModel @Inject constructor(
     fun isKakaoOpenChatBaseURL(input: String, callback: (String) -> Unit) {
         if (input.matches(BASE_URL_PATTERN.toRegex())) {
             callback("success")
-        } else{
+        } else {
             callback("falied")
+        }
+    }
+
+    fun getGroupSpinnerData() {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                groupService.getTeamPostWriteGroupData()
+            }.onSuccess {
+                val list = mutableListOf<String>()
+                val data = mutableMapOf<Int, String>()
+                it.forEach {
+                    list.add(it.groupName)
+                    data.put(it.groupId, it.groupName)
+                }
+
+                _postData.value = data
+                _postTitles.value = list
+            }
         }
     }
 }

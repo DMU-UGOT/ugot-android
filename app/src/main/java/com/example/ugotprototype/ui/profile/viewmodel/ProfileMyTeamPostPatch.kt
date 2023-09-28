@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ugotprototype.data.api.ApiService
+import com.example.ugotprototype.data.api.GroupService
 import com.example.ugotprototype.data.api.ProfileService
 import com.example.ugotprototype.data.response.Team
 import com.example.ugotprototype.data.team.TeamPostData
@@ -20,7 +21,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileMyTeamPostPatch @Inject constructor(
     private val apiService: ApiService,
-    private val profileService: ProfileService
+    private val profileService: ProfileService,
+    private val groupService: GroupService
 ) : ViewModel() {
 
     companion object {
@@ -50,6 +52,12 @@ class ProfileMyTeamPostPatch @Inject constructor(
 
     private val _teamItemList = MutableLiveData<Team>()
     val teamItemList: LiveData<Team> = _teamItemList
+
+    private val _postTitles = MutableLiveData<List<String>>()
+    val postTitles: LiveData<List<String>> = _postTitles
+
+    private val _postData = MutableLiveData<Map<Int, String>>()
+    val postData: LiveData<Map<Int, String>> = _postData
 
 
     fun isTeamPostRegisterButtonState(enabled: Boolean) {
@@ -116,6 +124,24 @@ class ProfileMyTeamPostPatch @Inject constructor(
                 _createFinish.value = true
             }.onFailure {
                 _createFinish.value = false
+            }
+        }
+    }
+
+    fun getGroupSpinnerData() {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                groupService.getTeamPostWriteGroupData()
+            }.onSuccess {
+                val list = mutableListOf<String>()
+                val data = mutableMapOf<Int, String>()
+                it.forEach {
+                    list.add(it.groupName)
+                    data.put(it.groupId, it.groupName)
+                }
+
+                _postData.value = data
+                _postTitles.value = list
             }
         }
     }

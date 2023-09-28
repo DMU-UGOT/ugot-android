@@ -5,6 +5,7 @@ data class TeamPostResponse(
     val title: String,
     val content: String,
     val field: String,
+    val nickname: String,
     val _class: String,
     var allPersonnel: Int,
     val viewCount: Int,
@@ -16,5 +17,7 @@ data class TeamPostResponse(
     val goal: String,
     val language: String,
     var isDelete: Int,
-    var bookmark: Boolean
+    var bookmark: Boolean,
+    var groupId: Int,
+    var groupName: String
 )

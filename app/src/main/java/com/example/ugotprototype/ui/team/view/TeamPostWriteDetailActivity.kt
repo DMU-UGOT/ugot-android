@@ -26,6 +26,8 @@ class TeamPostWriteDetailActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_team_post_write_detail)
         binding.vm = teamPostWriteViewModel
 
+        teamPostWriteViewModel.getGroupSpinnerData()
+
         teamPostWriteViewModel.isTeamPostRegisterBtnEnabled.observe(this) { enabled ->
             binding.btTeamPostRegister.isEnabled = enabled
         }
@@ -47,10 +49,16 @@ class TeamPostWriteDetailActivity : AppCompatActivity() {
         }
 
         teamPostWriteViewModel.createFinish.observe(this) {
-            if(it) {
+            if (it) {
                 setResult(Activity.RESULT_OK, Intent())
                 finish()
             }
+        }
+
+        teamPostWriteViewModel.postTitles.observe(this) {
+            val adapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, it)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.groupSpinner.adapter = adapter
         }
 
         spinnerSetting()
@@ -60,13 +68,13 @@ class TeamPostWriteDetailActivity : AppCompatActivity() {
     private fun spinnerSetting() {
 
         val fieldAdapter = ArrayAdapter.createFromResource(
-                this, R.array.team_post_field_item, android.R.layout.simple_spinner_item
+            this, R.array.team_post_field_item, android.R.layout.simple_spinner_item
         )
         fieldAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.fieldSpinner.adapter = fieldAdapter
 
         val classAdapter = ArrayAdapter.createFromResource(
-                this, R.array.team_post_class_item, android.R.layout.simple_spinner_item
+            this, R.array.team_post_class_item, android.R.layout.simple_spinner_item
         )
         classAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.classSpinner.adapter = classAdapter
@@ -75,7 +83,7 @@ class TeamPostWriteDetailActivity : AppCompatActivity() {
     private fun backToMainActivity() {
         binding.btTeamPostRegister.setOnClickListener {
             teamPostWriteViewModel.isKakaoOpenChatBaseURL(binding.etInputKakaoOpenLink.text.toString()) {
-                if(it == "success") {
+                if (it == "success") {
                     teamPostWriteViewModel.isTeamExists(binding.etInputGithubLink.text.toString())
                 } else {
                     Toast.makeText(this, "해당 카카오 오픈링크는 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
@@ -100,16 +108,18 @@ class TeamPostWriteDetailActivity : AppCompatActivity() {
     private fun checkOrganizationExistence(isOrgCheck: Boolean) {
         if (isOrgCheck) {
             val teamData = TeamPostData(
-                    title = binding.etTitleName.text.toString(),
-                    content = binding.etTitleDetail.text.toString(),
-                    field = binding.fieldSpinner.selectedItem.toString(),
-                    _class = binding.classSpinner.selectedItem.toString(),
-                    // 추후 인원 바뀔때 그거로 바꿔주세요
-                    allPersonnel = 0,
-                    gitHubLink = binding.etInputGithubLink.text.toString(),
-                    kakaoOpenLink = binding.etInputKakaoOpenLink.text.toString(),
-                    goal = binding.etTarget.text.toString(),
-                    language = binding.etLanguage.text.toString()
+                title = binding.etTitleName.text.toString(),
+                content = binding.etTitleDetail.text.toString(),
+                field = binding.fieldSpinner.selectedItem.toString(),
+                _class = binding.classSpinner.selectedItem.toString(),
+                // 추후 인원 바뀔때 그거로 바꿔주세요
+                allPersonnel = 0,
+                gitHubLink = binding.etInputGithubLink.text.toString(),
+                kakaoOpenLink = binding.etInputKakaoOpenLink.text.toString(),
+                goal = binding.etTarget.text.toString(),
+                language = binding.etLanguage.text.toString(),
+                groupId = teamPostWriteViewModel.postData.value?.keys?.elementAtOrNull(binding.groupSpinner.selectedItemPosition)!!
+                    .toInt()
             )
             teamPostWriteViewModel.setTeamPostData(teamData)
         } else {

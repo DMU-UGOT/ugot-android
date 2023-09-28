@@ -5,9 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.ugotprototype.SharedPreference
 import com.example.ugotprototype.data.api.GroupService
 import com.example.ugotprototype.data.group.GroupGetNotice
+import com.example.ugotprototype.data.group.GroupGetUserInfo
 import com.example.ugotprototype.data.group.GroupOneDayNoticeData
+import com.example.ugotprototype.data.group.GroupSetNoticeData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -15,8 +18,9 @@ import java.time.YearMonth
 import javax.inject.Inject
 
 @HiltViewModel
-class GroupCalendarViewModel @Inject constructor(private val groupService: GroupService) :
-    ViewModel() {
+class GroupCalendarViewModel @Inject constructor(
+    private val groupService: GroupService, private val sharedPreference: SharedPreference
+) : ViewModel() {
     private val _currentMonth = MutableLiveData<YearMonth>()
     val currentMonth: LiveData<YearMonth> = _currentMonth
 
@@ -34,6 +38,15 @@ class GroupCalendarViewModel @Inject constructor(private val groupService: Group
 
     private val _oneDayNoticeData = MutableLiveData<List<GroupOneDayNoticeData>>()
     val oneDayNoticeData: LiveData<List<GroupOneDayNoticeData>> = _oneDayNoticeData
+
+    private val _getUserInfo = MutableLiveData<GroupGetUserInfo>()
+    val getUserInfo: LiveData<GroupGetUserInfo> = _getUserInfo
+
+    private val _isUpdateNotice = MutableLiveData<Boolean>()
+    val isUpdateNotice: LiveData<Boolean> = _isUpdateNotice
+
+    private val _isDeleteNotice = MutableLiveData<Boolean>()
+    val isDeleteNotice: LiveData<Boolean> = _isDeleteNotice
 
     fun setCurrentMonth(month: YearMonth) {
         _currentMonth.value = month
@@ -72,5 +85,52 @@ class GroupCalendarViewModel @Inject constructor(private val groupService: Group
         }
         Log.d("test", newDataList.toString())
         _oneDayNoticeData.value = newDataList
+    }
+
+    fun groupLeaderCheck(groupLeaderId: String, callback: (Boolean) -> Unit) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                groupService.getUserInfo(sharedPreference.getMemberId())
+            }.onSuccess {
+                if (it.nickname == groupLeaderId) {
+                    callback(true)
+                } else {
+                    callback(false)
+                }
+            }.onFailure {
+                callback(false)
+            }
+        }
+    }
+
+    fun updateNotice(
+        text: List<String>, text2: String, groupId: Int, noticeId: Int, callback: (Boolean) -> Unit
+    ) {
+        val data = GroupSetNoticeData(
+            year = text[0], month = text[1], dateOfMonth = text[2], content = text2
+        )
+        viewModelScope.launch {
+            kotlin.runCatching {
+                groupService.updateNotice(groupId, noticeId, data)
+            }.onSuccess {
+                _isUpdateNotice.value = true
+                callback(true)
+            }.onFailure {
+                _isUpdateNotice.value = false
+                callback(false)
+            }
+        }
+    }
+
+    fun deleteNotice(noticeId: Int) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                groupService.deleteNotice(noticeId)
+            }.onSuccess {
+                _isUpdateNotice.value = true
+            }.onFailure {
+                _isUpdateNotice.value = false
+            }
+        }
     }
 }

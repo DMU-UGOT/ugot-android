@@ -1,6 +1,5 @@
 package com.example.ugotprototype.ui.group.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class GroupViewModel @Inject constructor(
     private val apiService: ApiService,
-    private val groupService: GroupService
+    private val groupService: GroupService,
 ) : ViewModel() {
 
     private val _groupMiddleItemList = MutableLiveData<List<GroupMiddleViewData>>()
@@ -79,10 +78,8 @@ class GroupViewModel @Inject constructor(
             kotlin.runCatching {
                 groupService.setGroupFavorites(groupId)
             }.onSuccess {
-                Log.d("test", "성공")
                 _addFavorites.value = true
             }.onFailure {
-                Log.d("test", it.toString())
                 _addFavorites.value = false
             }
         }

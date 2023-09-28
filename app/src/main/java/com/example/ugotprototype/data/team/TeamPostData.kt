@@ -10,5 +10,6 @@ data class TeamPostData(
     val goal: String,
     val language: String,
     val kakaoOpenLink: String,
-    val gitHubLink: String
+    val gitHubLink: String,
+    var groupId: Int
 )

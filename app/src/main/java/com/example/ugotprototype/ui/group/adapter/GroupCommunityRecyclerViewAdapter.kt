@@ -2,13 +2,15 @@ package com.example.ugotprototype.ui.group.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ugotprototype.data.group.GroupMessageList
 import com.example.ugotprototype.databinding.ItemGroupCommunityChatListBinding
+import com.example.ugotprototype.ui.group.viewmodel.GroupCmuChatViewModel
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class GroupCommunityRecyclerViewAdapter :
+class GroupCommunityRecyclerViewAdapter(private val viewModel: GroupCmuChatViewModel) :
     RecyclerView.Adapter<GroupCommunityRecyclerViewAdapter.GroupCmuViewHolder>() {
     var groupItemList: List<GroupMessageList> = emptyList()
 
@@ -21,20 +23,21 @@ class GroupCommunityRecyclerViewAdapter :
                 tvGroupCmuItemText.text = item.content
                 tvItemGroupCmuNickName.text = item.nickname
                 tvItemGroupCmuDay.text = convertDateTimeFormat(item.createdAt)
+                ivDelete.isVisible = item.isDelete
+            }
+
+            binding.ivDelete.setOnClickListener {
+                viewModel.deleteConversation(item.conversationId)
             }
         }
     }
 
     override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
+        parent: ViewGroup, viewType: Int
     ): GroupCmuViewHolder {
-        val binding =
-            ItemGroupCommunityChatListBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
+        val binding = ItemGroupCommunityChatListBinding.inflate(
+            LayoutInflater.from(parent.context), parent, false
+        )
         return GroupCmuViewHolder(binding)
     }
 

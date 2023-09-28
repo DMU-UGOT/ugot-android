@@ -3,7 +3,6 @@ package com.example.ugotprototype.ui.team.view
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +13,7 @@ import androidx.fragment.app.viewModels
 import com.example.ugotprototype.BuildConfig
 import com.example.ugotprototype.FragmentLoadingLayout
 import com.example.ugotprototype.R
+import com.example.ugotprototype.SharedPreference
 import com.example.ugotprototype.databinding.FragmentTeamBinding
 import com.example.ugotprototype.ui.login.view.LoginActivity
 import com.example.ugotprototype.ui.team.adapter.TeamRecyclerViewAdapter
@@ -27,22 +27,12 @@ class TeamFragment : Fragment() {
     private val teamViewModel: TeamViewModel by viewModels()
     private lateinit var teamRecyclerViewAdapter: TeamRecyclerViewAdapter
     private val loadingDialog = FragmentLoadingLayout()
+    private lateinit var sharedPreference: SharedPreference
 
     companion object {
         const val TEAM_ID = "teamId"
         const val TOKEN_DATA = BuildConfig.GITHUB_KEY
-        const val TEAM_TITLE = "teamTitle"
-        const val TEAM_DETAIL = "teamDetail"
-        const val TEAM_TOPIC = "teamTopic"
-        const val TEAM_STATUS_CNT = "teamStatusCnt"
-        const val TEAM_STATUS_CNT_END = "teamStatusCntEnd"
-        const val TEAM_LEADER_CLASS = "teamLeaderClass"
-        const val TEAM_GITHUB_LINK = "teamGitHubLink"
-        const val TEAM_KAKAO_LINK = "teamKakaoLink"
-        const val TEAM_CREATE_TIME = "teamCreateTime"
         const val TEAM_STATUS = "teamStatus"
-        const val TEAM_GOAL = "teamGoal"
-        const val TEAM_LANGUAGE = "teamLanguage"
     }
 
     override fun onCreateView(
@@ -57,6 +47,8 @@ class TeamFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        sharedPreference = SharedPreference(requireContext())
 
         teamViewModel.setCurrentPage(1)
         teamViewModel.setTotalPage(1)

@@ -1,22 +1,51 @@
 package com.example.ugotprototype.ui.group.adapter
 
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ugotprototype.data.group.GroupOneDayNoticeData
 import com.example.ugotprototype.databinding.ItemGroupCalendarNoticeListBinding
-import java.time.LocalDate
+import com.example.ugotprototype.ui.group.viewmodel.GroupCalendarViewModel
 
-class GroupCalendarRecyclerViewAdapter() :
-    RecyclerView.Adapter<GroupCalendarRecyclerViewAdapter.MyViewHolder>() {
+class GroupCalendarRecyclerViewAdapter(
+    private val viewModel: GroupCalendarViewModel,
+    private val groupLeaderId: String,
+    private val groupId: Int
+) : RecyclerView.Adapter<GroupCalendarRecyclerViewAdapter.MyViewHolder>() {
 
     var groupItemList: List<GroupOneDayNoticeData> = emptyList()
+    private var partsDay: List<String> = emptyList()
 
     // 생성된 뷰 홀더에 값 지정
     inner class MyViewHolder(val binding: ItemGroupCalendarNoticeListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: GroupOneDayNoticeData) {
-            binding.tvDetail.text = item.content
+            binding.tvDetail.setText(item.content)
+
+            binding.ivEdit.setOnClickListener {
+                binding.tvDetail.isEnabled = true
+            }
+
+            binding.ivDelete.setOnClickListener {
+                viewModel.deleteNotice(item.noticeId)
+            }
+
+            binding.tvDetail.setOnEditorActionListener { _, actionId, event ->
+                if (actionId == EditorInfo.IME_ACTION_DONE || (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN)) {
+                    viewModel.updateNotice(
+                        partsDay, binding.tvDetail.text.toString(), groupId, item.noticeId
+                    ) {
+                        binding.tvDetail.isEnabled = !it
+                    }
+
+                    return@setOnEditorActionListener true
+                }
+                false
+            }
+
+            teamLeaderCheck(binding)
         }
     }
 
@@ -43,5 +72,20 @@ class GroupCalendarRecyclerViewAdapter() :
     fun setFilterData(data: List<GroupOneDayNoticeData>) {
         groupItemList = data
         notifyDataSetChanged()
+    }
+
+    fun teamLeaderCheck(binding: ItemGroupCalendarNoticeListBinding) {
+        viewModel.groupLeaderCheck(groupLeaderId) {
+            if (it) {
+                with(binding) {
+                    ivEdit.visibility = android.view.View.VISIBLE
+                    ivDelete.visibility = android.view.View.VISIBLE
+                }
+            }
+        }
+    }
+
+    fun getYearMonthDay(text: String) {
+        partsDay = text.split("-")
     }
 }

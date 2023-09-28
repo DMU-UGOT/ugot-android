@@ -2,7 +2,8 @@ package com.example.ugotprototype.data.group
 
 data class GroupMessageList (
     val conversationId: Int,
-    val nickname: String,
+    var nickname: String,
     val content: String,
-    val createdAt: String
+    val createdAt: String,
+    var isDelete: Boolean
 )

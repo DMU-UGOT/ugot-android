@@ -68,18 +68,7 @@ class TeamSearchRecyclerViewAdapter(private val viewModel: TeamSearchViewModel) 
 
     fun goToTeamPostDetail(item: Team, context: Context) {
         Intent(context, TeamPostDetailActivity::class.java).apply {
-
-            putExtra(TeamFragment.TEAM_TITLE, item.title)
-            putExtra(TeamFragment.TEAM_DETAIL, item.content)
-            putExtra(TeamFragment.TEAM_TOPIC, item.field)
-            putExtra(TeamFragment.TEAM_STATUS_CNT, item.nowPersonnel)
-            putExtra(TeamFragment.TEAM_STATUS_CNT_END, item.allPersonnel)
-            putExtra(TeamFragment.TEAM_LEADER_CLASS, item._class)
-            putExtra(TeamFragment.TEAM_GITHUB_LINK, item.gitHubLink)
-            putExtra(TeamFragment.TEAM_KAKAO_LINK, item.kakaoOpenLink)
-            putExtra(TeamFragment.TEAM_CREATE_TIME, item.createdAt)
-            putExtra(TeamFragment.TEAM_GOAL, item.goal)
-            putExtra(TeamFragment.TEAM_LANGUAGE, item.language)
+            putExtra(TeamFragment.TEAM_ID, item.teamId)
 
             if (item.nowPersonnel == item.allPersonnel) {
                 putExtra(TeamFragment.TEAM_STATUS, "모집 완료")

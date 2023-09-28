@@ -185,6 +185,35 @@
                     app:layout_constraintTop_toBottomOf="@+id/class_spinner" />
 
                 <TextView
+                    android:id="@+id/tv_group_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="그룹 이름"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/number_line" />
+
+                <Spinner
+                    android:id="@+id/group_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintStart_toStartOf="@+id/tv_group_title"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_group_title"
+                    app:onItemSelectedListener="@{vm.onItemSelectedListener}" />
+
+                <View
+                    android:id="@+id/group_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/color_F0F1F3"
+                    app:layout_constraintTop_toBottomOf="@+id/group_spinner" />
+
+                <TextView
                     android:id="@+id/tv_target_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -193,7 +222,7 @@
                     android:textSize="15sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/number_line" />
+                    app:layout_constraintTop_toBottomOf="@id/group_line" />
 
                 <EditText
                     android:id="@+id/et_target"

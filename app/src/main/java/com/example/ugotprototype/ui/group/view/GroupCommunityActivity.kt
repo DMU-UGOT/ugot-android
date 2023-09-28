@@ -29,13 +29,11 @@ class GroupCommunityActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_group_community)
 
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        layoutManager.stackFromEnd = true // 아이템을 스크롤의 끝으로 정렬
+        layoutManager.stackFromEnd = true
         binding.rvGroupCmuChat.layoutManager = layoutManager
         binding.rvGroupCmuChat.isNestedScrollingEnabled = false
 
-        testGroupCmuChatData()
-
-        groupCommunityRecyclerViewAdapter = GroupCommunityRecyclerViewAdapter()
+        groupCommunityRecyclerViewAdapter = GroupCommunityRecyclerViewAdapter(groupCmuChatViewModel)
         binding.rvGroupCmuChat.adapter = groupCommunityRecyclerViewAdapter
 
 
@@ -49,6 +47,19 @@ class GroupCommunityActivity : AppCompatActivity() {
                 groupCmuChatViewModel.getMessageList(intent.getIntExtra(GROUP_ID, 0))
             }
         }
+
+        binding.tvGroupChatDelete.setOnClickListener {
+            groupCmuChatViewModel.getNickname(intent.getIntExtra(GROUP_ID, 0))
+        }
+
+        groupCmuChatViewModel.nickname.observe(this) {
+            groupCmuChatViewModel.iconView(intent.getIntExtra(GROUP_ID, 0))
+        }
+
+        groupCmuChatViewModel.isDeleteConversation.observe(this) {
+            onStart()
+        }
+
 
         backGroupCommunityToMainActivity()
         chatInputBtn()
@@ -77,7 +88,8 @@ class GroupCommunityActivity : AppCompatActivity() {
         imm.hideSoftInputFromWindow(binding.groupCmuChatInput.windowToken, 0)
     }
 
-    private fun testGroupCmuChatData() {
+    override fun onStart() {
+        super.onStart()
         groupCmuChatViewModel.getMessageList(intent.getIntExtra(GROUP_ID, 0))
     }
 }
