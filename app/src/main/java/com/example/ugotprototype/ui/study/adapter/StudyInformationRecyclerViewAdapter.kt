@@ -4,21 +4,35 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.ugotprototype.data.group.GroupDetailTeamInforData
 import com.example.ugotprototype.databinding.ItemStudyInformationBinding
 
 class StudyInformationRecyclerViewAdapter :
     RecyclerView.Adapter<StudyInformationRecyclerViewAdapter.MyViewHolder>() {
 
-    var studyItemList = arrayListOf<Int>()
+    var studyItemList: List<GroupDetailTeamInforData> = emptyList()
 
     // 생성된 뷰 홀더에 값 지정
     inner class MyViewHolder(val binding: ItemStudyInformationBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind() {
+        fun bind(item: GroupDetailTeamInforData) {
             if (bindingAdapterPosition == 0) {
-                binding.ivTeamLeader.visibility = View.VISIBLE
+                binding.ivStudyLeader.visibility = View.VISIBLE
             } else {
-                binding.ivTeamLeader.visibility = View.INVISIBLE
+                binding.ivStudyLeader.visibility = View.INVISIBLE
+            }
+
+            with(binding) {
+                tvStudyInforName.text = item.nickname
+                tvInforField.text = item.interests
+                tvBlogLink.text = item.personalBlogLink
+                tvGitLink.text = item.gitHubLink
+                tvInforStudyName.text = item.groupName
+
+                Glide.with(binding.root.context)
+                    .load(item.avatarUrl)
+                    .into(binding.ivProfileImage)
             }
         }
     }
@@ -32,7 +46,7 @@ class StudyInformationRecyclerViewAdapter :
 
     // 뷰 홀더에 데이터 바인딩
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind()
+        holder.bind(studyItemList[position])
     }
 
     // 뷰 홀더의 개수 리턴
@@ -42,12 +56,9 @@ class StudyInformationRecyclerViewAdapter :
         return position.toLong()
     }
 
-    fun setData(nowPersonCnt: Int) {
+    fun setData(data: List<GroupDetailTeamInforData>) {
 
-        // 현재 모집한 인원수만큼 리사이클러뷰 더미 아이템 추가
-        for (i in 0 until nowPersonCnt) {
-            studyItemList.add(i)
-        }
+        studyItemList = data
         notifyDataSetChanged()
     }
 }

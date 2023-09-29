@@ -84,7 +84,7 @@ class ProfileStudyPostPatchActivity : AppCompatActivity() {
     private fun backStudyNewToMainActivity() {
         binding.btStNewPostRegister.setOnClickListener {
             viewModel.isKakaoOpenChatBaseURL(binding.etStNewKakaoLink.text.toString()) {
-                if(it == "success") {
+                if (it == "success") {
                     viewModel.isStudyExists(binding.etStNewGitLink.text.toString())
                 } else {
                     Toast.makeText(this, "해당 카카오 오픈링크는 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
@@ -116,7 +116,8 @@ class ProfileStudyPostPatchActivity : AppCompatActivity() {
                 gitHubLink = binding.etStNewGitLink.text.toString(),
                 kakaoOpenLink = binding.etStNewKakaoLink.text.toString(),
                 subject = binding.etSubject.text.toString(),
-                field = binding.etField.text.toString()
+                field = binding.etField.text.toString(),
+                groupId = 0
             )
             viewModel.patchPost(teamId, studyData)
         } else {

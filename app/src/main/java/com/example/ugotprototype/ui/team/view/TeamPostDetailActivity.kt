@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.R
 import com.example.ugotprototype.data.response.Team
 import com.example.ugotprototype.databinding.ActivityTeamPostDetailBinding
+import com.example.ugotprototype.ui.group.view.GroupFragment.Companion.GROUP_ID
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_ID
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_STATUS
 import com.example.ugotprototype.ui.team.viewmodel.TeamPostDetailViewModel
@@ -43,7 +44,7 @@ class TeamPostDetailActivity : AppCompatActivity() {
         }
 
         binding.tvGroupApplication.setOnClickListener {
-            viewModel.sendApplication(intent.getIntExtra(TEAM_ID, 0))
+            viewModel.sendApplication(intent.getIntExtra(GROUP_ID, 0))
         }
 
         binding.ivTeamPrev.setOnClickListener {
@@ -56,12 +57,14 @@ class TeamPostDetailActivity : AppCompatActivity() {
     private fun goToTeamInformation() {
         binding.ivGoTeamInformation.setOnClickListener {
             Intent(this, TeamInformationActivity::class.java).apply {
+                putExtra(TEAM_ID, intent.getIntExtra(GROUP_ID, 0))
                 startActivity(this)
             }
         }
 
         binding.tvPersonCntTitle.setOnClickListener {
             Intent(this, TeamInformationActivity::class.java).apply {
+                putExtra(TEAM_ID, intent.getIntExtra(GROUP_ID, 0))
                 startActivity(this)
             }
         }

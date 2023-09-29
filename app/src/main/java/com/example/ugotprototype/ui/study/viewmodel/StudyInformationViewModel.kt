@@ -1,4 +1,4 @@
-package com.example.ugotprototype.ui.group.viewmodel
+package com.example.ugotprototype.ui.study.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,31 +12,30 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class GroupTeamInformationViewModel @Inject constructor(
+class StudyInformationViewModel @Inject constructor(
     private val groupService: GroupService,
     private val apiService: ApiService
-) : ViewModel() {
-    private val _teamPersonData = MutableLiveData<List<GroupDetailTeamInforData>>()
-    val teamPersonData: MutableLiveData<List<GroupDetailTeamInforData>> = _teamPersonData
+) :
+    ViewModel() {
+    private val _studyInforList = MutableLiveData<List<GroupDetailTeamInforData>>()
+    var studyInforList: LiveData<List<GroupDetailTeamInforData>> = _studyInforList
 
     private val _isLoadingPage = MutableLiveData<Boolean>()
     val isLoadingPage: LiveData<Boolean> = _isLoadingPage
 
-    fun getTeamInformationData(groupId: Int) {
+    fun getTeamInformationList(groupId: Int) {
         _isLoadingPage.value = false
         viewModelScope.launch {
             kotlin.runCatching {
-                var groupResponse = groupService.getGroupTeamPersonData(groupId)
+                var personData = groupService.getGroupTeamPersonData(groupId)
 
-                groupResponse.forEach {
-                    kotlin.runCatching {
-                        var githubNick =
-                            Regex("github\\.com/([\\w-]+)").find(it.gitHubLink)?.groupValues?.get(1)
-                        it.avatarUrl = apiService.getUser(githubNick.toString())?.avatar_url ?: ""
-                    }
+                personData.forEach {
+                    var githubNick =
+                        Regex("github\\.com/([\\w-]+)").find(it.gitHubLink)?.groupValues?.get(1)
+                    it.avatarUrl = apiService.getUser(githubNick.toString())?.avatar_url ?: ""
                 }
 
-                _teamPersonData.value = groupResponse
+                _studyInforList.value = personData
             }.onSuccess {
                 _isLoadingPage.value = true
             }.onFailure {

@@ -11,15 +11,16 @@ import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.R
 import com.example.ugotprototype.data.study.StudyGetPost
 import com.example.ugotprototype.databinding.ActivityProfileStudyPostDetailBinding
+import com.example.ugotprototype.ui.group.view.GroupFragment.Companion.GROUP_ID
 import com.example.ugotprototype.ui.profile.viewmodel.ProfileMyStudyPostDetailViewModel
+import com.example.ugotprototype.ui.study.view.StudyInformationActivity
 import com.example.ugotprototype.ui.team.view.TeamFragment
-import com.example.ugotprototype.ui.team.view.TeamInformationActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
-class ProfileStudyPostDetailActivity: AppCompatActivity() {
+class ProfileStudyPostDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileStudyPostDetailBinding
     private lateinit var teamStatusCnt: String
     private val viewModel: ProfileMyStudyPostDetailViewModel by viewModels()
@@ -48,13 +49,15 @@ class ProfileStudyPostDetailActivity: AppCompatActivity() {
 
     private fun goToTeamInformation() {
         binding.ivGoTeamInformation.setOnClickListener {
-            Intent(this, TeamInformationActivity::class.java).apply {
+            Intent(this, StudyInformationActivity::class.java).apply {
+                putExtra(GROUP_ID, intent.getIntExtra(GROUP_ID, 0))
                 startActivity(this)
             }
         }
 
         binding.tvPersonCntTitle.setOnClickListener {
-            Intent(this, TeamInformationActivity::class.java).apply {
+            Intent(this, StudyInformationActivity::class.java).apply {
+                putExtra(GROUP_ID, intent.getIntExtra(GROUP_ID, 0))
                 startActivity(this)
             }
         }
@@ -90,7 +93,8 @@ class ProfileStudyPostDetailActivity: AppCompatActivity() {
             tvGithubLink.text = "https://github.com/" + team.gitHubLink
             tvKakaoLink.text = "https://" + team.kakaoOpenLink
             tvTime.text = LocalDateTime.parse(team.createdAt)?.format(
-                DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm"))?: ""
+                DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm")
+            ) ?: ""
             tvSubject.text = team.subject
             tvField.text = team.field
         }

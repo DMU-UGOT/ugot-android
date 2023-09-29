@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ugotprototype.data.study.StudyGetPost
 import com.example.ugotprototype.databinding.ItemProfileStudyListBinding
+import com.example.ugotprototype.ui.group.view.GroupFragment.Companion.GROUP_ID
 import com.example.ugotprototype.ui.profile.view.ProfileStudyPostDetailActivity
 import com.example.ugotprototype.ui.profile.viewmodel.ProfileMyStudyPostViewModel
 import com.example.ugotprototype.ui.team.view.TeamFragment
@@ -78,6 +79,7 @@ class ProfilePostStudyRecyclerViewAdapter(private val viewModel: ProfileMyStudyP
     fun goToStudyPostDetail(item: StudyGetPost, context: Context) {
         Intent(context, ProfileStudyPostDetailActivity::class.java).apply {
             putExtra(TeamFragment.TEAM_ID, item.studyId)
+            putExtra(GROUP_ID, item.groupId)
 
             if (item.nowPersonnel == item.allPersonnel) {
                 putExtra(TeamFragment.TEAM_STATUS, "모집 완료")

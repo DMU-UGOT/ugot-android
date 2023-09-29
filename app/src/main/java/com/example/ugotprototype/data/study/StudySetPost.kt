@@ -9,4 +9,5 @@ data class StudySetPost (
     var kakaoOpenLink: String,
     var subject: String,
     var field: String,
+    var groupId: Int
 )

@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.R
 import com.example.ugotprototype.data.response.Team
 import com.example.ugotprototype.databinding.ActivityProfilePostDetailBinding
+import com.example.ugotprototype.ui.group.view.GroupFragment.Companion.GROUP_ID
 import com.example.ugotprototype.ui.profile.viewmodel.ProfilePostActivityViewModel
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_ID
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_STATUS
@@ -51,12 +52,14 @@ class ProfilePostDetailActivity : AppCompatActivity() {
     private fun goToTeamInformation() {
         binding.ivGoTeamInformation.setOnClickListener {
             Intent(this, TeamInformationActivity::class.java).apply {
+                putExtra(TEAM_ID, intent.getIntExtra(GROUP_ID, 0))
                 startActivity(this)
             }
         }
 
         binding.tvPersonCntTitle.setOnClickListener {
             Intent(this, TeamInformationActivity::class.java).apply {
+                putExtra(TEAM_ID, intent.getIntExtra(GROUP_ID, 0))
                 startActivity(this)
             }
         }
@@ -71,11 +74,12 @@ class ProfilePostDetailActivity : AppCompatActivity() {
             }
 
         binding.tvPatch.setOnClickListener {
-            goToSearchResultLauncher.launch(
-                Intent(this, ProfileTeamPostPatchActivity::class.java).apply {
-                    putExtra(TEAM_ID, intent.getIntExtra(TEAM_ID, 0))
-                }
-            )
+            goToSearchResultLauncher.launch(Intent(
+                this,
+                ProfileTeamPostPatchActivity::class.java
+            ).apply {
+                putExtra(TEAM_ID, intent.getIntExtra(TEAM_ID, 0))
+            })
         }
     }
 
@@ -93,7 +97,8 @@ class ProfilePostDetailActivity : AppCompatActivity() {
             tvGithubLink.text = "https://github.com/" + team.gitHubLink
             tvKakaoLink.text = "https://" + team.kakaoOpenLink
             tvTime.text = LocalDateTime.parse(team.createdAt)?.format(
-                DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm"))?: ""
+                DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm")
+            ) ?: ""
             tvPostField.text = team.language
             tvTarget.text = team.goal
         }

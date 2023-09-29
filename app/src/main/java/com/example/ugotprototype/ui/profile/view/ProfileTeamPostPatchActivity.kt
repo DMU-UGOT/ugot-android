@@ -34,7 +34,6 @@ class ProfileTeamPostPatchActivity : AppCompatActivity() {
         teamId = intent.getIntExtra(TEAM_ID, 0)
 
         viewModel.initData(teamId)
-        viewModel.getGroupSpinnerData()
 
         viewModel.isTeamPostRegisterBtnEnabled.observe(this) { enabled ->
             binding.btTeamPostRegister.isEnabled = enabled
@@ -66,12 +65,6 @@ class ProfileTeamPostPatchActivity : AppCompatActivity() {
 
         viewModel.teamItemList.observe(this) {
             viewSetting(it)
-        }
-
-        viewModel.postTitles.observe(this) {
-            val adapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, it)
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            binding.groupSpinner.adapter = adapter
         }
 
         spinnerSetting()
@@ -130,8 +123,7 @@ class ProfileTeamPostPatchActivity : AppCompatActivity() {
                 kakaoOpenLink = binding.etInputKakaoOpenLink.text.toString(),
                 goal = binding.etTarget.text.toString(),
                 language = binding.etLanguage.text.toString(),
-                groupId = viewModel.postData.value?.keys?.elementAtOrNull(binding.groupSpinner.selectedItemPosition)!!
-                    .toInt()
+                groupId = 0
             )
             viewModel.patchPost(teamId, teamData)
         } else {

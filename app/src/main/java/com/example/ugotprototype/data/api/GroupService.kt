@@ -78,7 +78,7 @@ interface GroupService {
     @DELETE("groups/{postId}/deleteConversation")
     suspend fun deleteConversation(@Path("postId") postId: Int)
 
-    @POST("groups/{groupId}/application")
+    @POST("groups/{groupId}/apply")
     suspend fun sendApplication(@Path("groupId") groupId: Int)
 
     @GET("groups/{groupId}/applications")
@@ -90,9 +90,15 @@ interface GroupService {
         @Path("applicationId") application: Int
     )
 
-    @DELETE("groups/{groupId}/{applicationId}/accept")
+    @DELETE("groups/{groupId}/{applicationId}/turnDown")
     suspend fun rejectApplication(
         @Path("groupId") groupId: Int,
         @Path("applicationId") application: Int
+    )
+
+    @DELETE("groups/{groupId}/{memberId}/expulsion")
+    suspend fun groupForcedExit(
+        @Path("groupId") groupId: Int,
+        @Path("memberId") memberId: Int
     )
 }

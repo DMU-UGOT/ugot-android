@@ -53,13 +53,6 @@ class ProfileMyTeamPostPatch @Inject constructor(
     private val _teamItemList = MutableLiveData<Team>()
     val teamItemList: LiveData<Team> = _teamItemList
 
-    private val _postTitles = MutableLiveData<List<String>>()
-    val postTitles: LiveData<List<String>> = _postTitles
-
-    private val _postData = MutableLiveData<Map<Int, String>>()
-    val postData: LiveData<Map<Int, String>> = _postData
-
-
     fun isTeamPostRegisterButtonState(enabled: Boolean) {
         _isTeamPostRegisterBtnEnabled.value = enabled
     }
@@ -124,24 +117,6 @@ class ProfileMyTeamPostPatch @Inject constructor(
                 _createFinish.value = true
             }.onFailure {
                 _createFinish.value = false
-            }
-        }
-    }
-
-    fun getGroupSpinnerData() {
-        viewModelScope.launch {
-            kotlin.runCatching {
-                groupService.getTeamPostWriteGroupData()
-            }.onSuccess {
-                val list = mutableListOf<String>()
-                val data = mutableMapOf<Int, String>()
-                it.forEach {
-                    list.add(it.groupName)
-                    data.put(it.groupId, it.groupName)
-                }
-
-                _postData.value = data
-                _postTitles.value = list
             }
         }
     }

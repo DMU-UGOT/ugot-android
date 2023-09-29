@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -36,7 +37,7 @@ class GroupDetailActivity : AppCompatActivity() {
             viewSetting(it)
         }
 
-        viewModel.isNoticeCreated.observe(this) {
+        viewModel.isUpdateGroup.observe(this) {
             if (it) {
                 viewModel.getNoticeData(groupId)
             }
@@ -144,11 +145,19 @@ class GroupDetailActivity : AppCompatActivity() {
 
     private fun onClickHambugerButton() {
 
-        binding.ivMenu.setOnClickListener {
-            PopupMenu(this, it).apply {
-                menuInflater.inflate(R.menu.group_menu, menu)
+        binding.ivMenu.setOnClickListener { view ->
+            val popupMenu = PopupMenu(this, view)
 
-                setOnMenuItemClickListener { item ->
+            viewModel.groupLeaderCheck(groupLeaderId) { isGroupLeader ->
+                val menuResId = if (isGroupLeader) {
+                    R.menu.group_leader_menu
+                } else {
+                    R.menu.group_menu
+                }
+
+                popupMenu.menuInflater.inflate(menuResId, popupMenu.menu)
+
+                popupMenu.setOnMenuItemClickListener { item ->
                     when (item.itemId) {
                         R.id.menu_item1 -> {
                             viewModel.quitGroup(groupId)
@@ -171,10 +180,21 @@ class GroupDetailActivity : AppCompatActivity() {
                             true
                         }
 
+                        R.id.menu_item4 -> {
+                            Intent(
+                                this@GroupDetailActivity, GroupForcedExitActivity::class.java
+                            ).apply {
+                                putExtra(GROUP_ID, groupId)
+                                startActivity(this)
+                            }
+                            true
+                        }
+
                         else -> false
                     }
                 }
-            }.show()
+                popupMenu.show()
+            }
         }
     }
 

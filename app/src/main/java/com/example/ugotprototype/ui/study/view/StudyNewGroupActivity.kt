@@ -29,6 +29,14 @@ class StudyNewGroupActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         binding.vm = studyViewModel
 
+        studyViewModel.getGroupSpinnerData()
+
+        studyViewModel.postTitles.observe(this) {
+            val adapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, it)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.groupSpinner.adapter = adapter
+        }
+
         studyViewModel.isStudyPostRegisterBtnEnabled.observe(this) { enabled ->
             binding.btStNewPostRegister.isEnabled = enabled
         }
@@ -72,7 +80,7 @@ class StudyNewGroupActivity : AppCompatActivity() {
     private fun backStudyNewToMainActivity() {
         binding.btStNewPostRegister.setOnClickListener {
             studyViewModel.isKakaoOpenChatBaseURL(binding.etStNewKakaoLink.text.toString()) {
-                if(it == "success") {
+                if (it == "success") {
                     studyViewModel.isTeamExists(binding.etStNewGitLink.text.toString())
                 } else {
                     Toast.makeText(this, "해당 카카오 오픈링크는 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
@@ -104,7 +112,10 @@ class StudyNewGroupActivity : AppCompatActivity() {
                 gitHubLink = binding.etStNewGitLink.text.toString(),
                 kakaoOpenLink = binding.etStNewKakaoLink.text.toString(),
                 subject = binding.etSubject.text.toString(),
-                field = binding.etField.text.toString()
+                field = binding.etField.text.toString(),
+                groupId = studyViewModel.postData.value?.keys?.elementAtOrNull(binding.groupSpinner.selectedItemPosition)!!
+                    .toInt()
+
             )
             studyViewModel.setStudyPostData(studyData)
         } else {

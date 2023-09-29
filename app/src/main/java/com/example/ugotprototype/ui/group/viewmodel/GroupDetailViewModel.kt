@@ -5,7 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.ugotprototype.SharedPreference
 import com.example.ugotprototype.data.api.GroupService
+import com.example.ugotprototype.data.api.ProfileService
 import com.example.ugotprototype.data.group.GroupDetailData
 import com.example.ugotprototype.data.group.GroupSetNoticeData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,8 +18,11 @@ import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
-class GroupDetailViewModel @Inject constructor(private val groupService: GroupService) :
-    ViewModel() {
+class GroupDetailViewModel @Inject constructor(
+    private val groupService: GroupService,
+    private val sharedPreference: SharedPreference,
+    private val profileService: ProfileService
+) : ViewModel() {
     private val _bottomSheetClickCheck = MutableLiveData<Boolean>()
     val bottomSheetClickCheck: LiveData<Boolean> = _bottomSheetClickCheck
 
@@ -45,6 +50,12 @@ class GroupDetailViewModel @Inject constructor(private val groupService: GroupSe
     private val _isDeleteGroup = MutableLiveData<Boolean>()
     val isDeleteGroup: LiveData<Boolean> = _isDeleteGroup
 
+    private val _isGroupLeader = MutableLiveData<Boolean>()
+    val isGroupLeder: LiveData<Boolean> = _isGroupLeader
+
+    private val _isUpdateGroup = MutableLiveData<Boolean>()
+    val isUpdateGroup: LiveData<Boolean> = _isUpdateGroup
+
 
     fun isBottomSheetClickCheck(enabled: Boolean) {
         _bottomSheetClickCheck.value = enabled
@@ -60,11 +71,9 @@ class GroupDetailViewModel @Inject constructor(private val groupService: GroupSe
             kotlin.runCatching {
                 groupService.getGroupDetailData(groupID)
             }.onSuccess {
-                Log.d("test", it.toString())
                 _isLoadingPage.value = true
                 _groupDetailData.value = it
             }.onFailure {
-                Log.d("test", it.toString())
                 _isLoadingPage.value = true
             }
         }
@@ -79,9 +88,9 @@ class GroupDetailViewModel @Inject constructor(private val groupService: GroupSe
             kotlin.runCatching {
                 groupService.setGroupNotice(groupId, _noticeData.value!!)
             }.onSuccess {
-                _isNoticeCreated.value = true
+                _isUpdateGroup.value = true
             }.onFailure {
-                _isNoticeCreated.value = false
+                _isUpdateGroup.value = false
             }
         }
     }
@@ -133,6 +142,20 @@ class GroupDetailViewModel @Inject constructor(private val groupService: GroupSe
                 _isDeleteGroup.value = true
             }.onFailure {
                 _isDeleteGroup.value = false
+            }
+        }
+    }
+
+    fun groupLeaderCheck(groupLeaderId: String, callback: (Boolean) -> Unit) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                profileService.getUserInfo(sharedPreference.getMemberId().toString())
+            }.onSuccess {
+                if (groupLeaderId == it.nickname) {
+                    callback(true)
+                } else {
+                    callback(false)
+                }
             }
         }
     }

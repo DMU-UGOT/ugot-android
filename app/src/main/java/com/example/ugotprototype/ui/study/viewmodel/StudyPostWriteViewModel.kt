@@ -2,6 +2,7 @@ package com.example.ugotprototype.ui.study.viewmodel
 
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.SeekBar
@@ -10,16 +11,20 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ugotprototype.data.api.ApiService
+import com.example.ugotprototype.data.api.GroupService
 import com.example.ugotprototype.data.api.StudyService
 import com.example.ugotprototype.data.study.StudySetPost
-import com.example.ugotprototype.data.team.TeamPostData
 import com.example.ugotprototype.ui.team.viewmodel.TeamPostWriteViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class StudyPostWriteViewModel @Inject constructor(private val apiService: ApiService, private val studyService: StudyService) : ViewModel() {
+class StudyPostWriteViewModel @Inject constructor(
+    private val apiService: ApiService,
+    private val studyService: StudyService,
+    private val groupService: GroupService
+) : ViewModel() {
     private val _etText = MutableLiveData<String>()
     val etText: LiveData<String> = _etText
 
@@ -40,6 +45,12 @@ class StudyPostWriteViewModel @Inject constructor(private val apiService: ApiSer
 
     private val _createFinish = MutableLiveData<Boolean>()
     val createFinish: LiveData<Boolean> = _createFinish
+
+    private val _postTitles = MutableLiveData<List<String>>()
+    val postTitles: LiveData<List<String>> = _postTitles
+
+    private val _postData = MutableLiveData<Map<Int, String>>()
+    val postData: LiveData<Map<Int, String>> = _postData
 
     val textWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -91,14 +102,35 @@ class StudyPostWriteViewModel @Inject constructor(private val apiService: ApiSer
             kotlin.runCatching {
                 studyService.setStudies(studyPostData)
             }.onSuccess { _createFinish.value = true }
+                .onFailure {
+                    Log.d("test", it.toString())
+                }
         }
     }
 
     fun isKakaoOpenChatBaseURL(input: String, callback: (String) -> Unit) {
         if (input.matches(TeamPostWriteViewModel.BASE_URL_PATTERN.toRegex())) {
             callback("success")
-        } else{
+        } else {
             callback("falied")
+        }
+    }
+
+    fun getGroupSpinnerData() {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                groupService.getTeamPostWriteGroupData()
+            }.onSuccess {
+                val list = mutableListOf<String>()
+                val data = mutableMapOf<Int, String>()
+                it.forEach {
+                    list.add(it.groupName)
+                    data.put(it.groupId, it.groupName)
+                }
+
+                _postData.value = data
+                _postTitles.value = list
+            }
         }
     }
 }

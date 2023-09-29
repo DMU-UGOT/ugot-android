@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_item1"
+        android:title="그룹 탈퇴" />
+    <item
+        android:id="@+id/menu_item2"
+        android:title="그룹 삭제" />
+
+    <item
+        android:id="@+id/menu_item3"
+        android:title="그룹 신청서 조회" />
+
+    <item
+        android:id="@+id/menu_item4"
+        android:title="그룹 강제퇴장"/>
+</menu>

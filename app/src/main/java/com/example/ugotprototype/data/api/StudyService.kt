@@ -1,7 +1,9 @@
 package com.example.ugotprototype.data.api
 
 import com.example.ugotprototype.data.study.StudyBookmarkData
+import com.example.ugotprototype.data.study.StudyData
 import com.example.ugotprototype.data.study.StudyDataResponse
+import com.example.ugotprototype.data.study.StudyGetPost
 import com.example.ugotprototype.data.study.StudySearchData
 import com.example.ugotprototype.data.study.StudySetPost
 import retrofit2.Call
@@ -27,4 +29,7 @@ interface StudyService {
 
     @GET("studies/bookmark")
     suspend fun getBookmark(): List<StudyBookmarkData>
+
+    @GET("studies/{studyId}")
+    suspend fun getStudy(@Path("studyId") studyId: Int): StudyGetPost
 }

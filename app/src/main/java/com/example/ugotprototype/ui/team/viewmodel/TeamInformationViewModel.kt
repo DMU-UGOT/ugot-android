@@ -5,22 +5,41 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ugotprototype.data.api.ApiService
-import com.example.ugotprototype.data.response.OrgMemberDataResponse
-import com.example.ugotprototype.ui.team.view.TeamInformationActivity.Companion.DUMMY_DATA
+import com.example.ugotprototype.data.api.GroupService
+import com.example.ugotprototype.data.group.GroupDetailTeamInforData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class TeamInformationViewModel @Inject constructor(private val apiService: ApiService) :
+class TeamInformationViewModel @Inject constructor(
+    private val groupService: GroupService,
+    private val apiService: ApiService
+) :
     ViewModel() {
-    private val _teamInforList = MutableLiveData<List<OrgMemberDataResponse>>()
-    var isTeamInforList: LiveData<List<OrgMemberDataResponse>> = _teamInforList
+    private val _teamInforList = MutableLiveData<List<GroupDetailTeamInforData>>()
+    var teamInforList: LiveData<List<GroupDetailTeamInforData>> = _teamInforList
 
-    fun getTeamInformationList() {
+    private val _isLoadingPage = MutableLiveData<Boolean>()
+    val isLoadingPage: LiveData<Boolean> = _isLoadingPage
+
+    fun getTeamInformationList(groupId: Int) {
+        _isLoadingPage.value = false
         viewModelScope.launch {
             kotlin.runCatching {
-                _teamInforList.value = apiService.getOrganizationMembers(DUMMY_DATA)
+                var personData = groupService.getGroupTeamPersonData(groupId)
+
+                personData.forEach {
+                    var githubNick =
+                        Regex("github\\.com/([\\w-]+)").find(it.gitHubLink)?.groupValues?.get(1)
+                    it.avatarUrl = apiService.getUser(githubNick.toString())?.avatar_url ?: ""
+                }
+
+                _teamInforList.value = personData
+            }.onSuccess {
+                _isLoadingPage.value = true
+            }.onFailure {
+                _isLoadingPage.value = true
             }
         }
     }

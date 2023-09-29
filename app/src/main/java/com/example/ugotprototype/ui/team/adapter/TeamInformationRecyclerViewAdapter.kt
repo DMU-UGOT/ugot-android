@@ -1,23 +1,23 @@
 package com.example.ugotprototype.ui.team.adapter
 
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.ugotprototype.data.response.OrgMemberDataResponse
+import com.example.ugotprototype.data.group.GroupDetailTeamInforData
 import com.example.ugotprototype.databinding.ItemTeamInformationBinding
-import com.example.ugotprototype.ui.team.view.TeamInformationActivity.Companion.DUMMY_DATA
 
 class TeamInformationRecyclerViewAdapter :
     RecyclerView.Adapter<TeamInformationRecyclerViewAdapter.MyViewHolder>() {
 
-    var teamItemList: List<OrgMemberDataResponse> = emptyList()
+    var teamItemList: List<GroupDetailTeamInforData> = emptyList()
 
     inner class MyViewHolder(val binding: ItemTeamInformationBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: OrgMemberDataResponse) {
+        fun bind(item: GroupDetailTeamInforData) {
             if (bindingAdapterPosition == 0) {
                 binding.ivTeamLeader.visibility = View.VISIBLE
             } else {
@@ -25,11 +25,12 @@ class TeamInformationRecyclerViewAdapter :
             }
 
             with(binding) {
-                tvTeamInforName.text = item.login
-                tvGitLink.text = item.htmlUrl
-                tvInforTeamName.text = DUMMY_DATA
+                tvTeamInforName.text = item.nickname
+                tvGitLink.text = item.gitHubLink
+                tvInforTeamName.text = item.groupName
+                tvInforField.text = item.interests
                 Glide.with(binding.root.context)
-                    .load(teamItemList[bindingAdapterPosition].avatarUrl)
+                    .load(item.avatarUrl)
                     .into(binding.ivProfileImage)
             }
         }
@@ -55,7 +56,8 @@ class TeamInformationRecyclerViewAdapter :
         return position.toLong()
     }
 
-    fun setData(data: List<OrgMemberDataResponse>) {
+    fun setData(data: List<GroupDetailTeamInforData>) {
+        Log.d("test", data.toString())
         teamItemList = data
         notifyDataSetChanged()
     }

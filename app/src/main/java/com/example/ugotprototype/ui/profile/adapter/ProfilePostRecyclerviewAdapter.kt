@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ugotprototype.data.response.TeamPostResponse
 import com.example.ugotprototype.databinding.ItemMyTeamListBinding
+import com.example.ugotprototype.ui.group.view.GroupFragment.Companion.GROUP_ID
 import com.example.ugotprototype.ui.profile.view.ProfilePostDetailActivity
 import com.example.ugotprototype.ui.profile.viewmodel.ProfileMyTeamPostViewModel
 import com.example.ugotprototype.ui.team.view.TeamFragment
@@ -77,6 +78,7 @@ class ProfilePostRecyclerviewAdapter(private val viewModel: ProfileMyTeamPostVie
     fun goToTeamPostDetail(item: TeamPostResponse, context: Context) {
         Intent(context, ProfilePostDetailActivity::class.java).apply {
             putExtra(TeamFragment.TEAM_ID, item.teamId)
+            putExtra(GROUP_ID, item.groupId)
 
             if (item.nowPersonnel == item.allPersonnel) {
                 putExtra(TeamFragment.TEAM_STATUS, "모집 완료")

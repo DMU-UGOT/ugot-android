@@ -7,38 +7,38 @@ import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ugotprototype.R
-import com.example.ugotprototype.data.group.GroupGetApplicationList
-import com.example.ugotprototype.databinding.ItemGroupApplicationListBinding
-import com.example.ugotprototype.ui.group.viewmodel.GroupRequestApplicationViewModel
+import com.example.ugotprototype.data.group.GroupDetailTeamInforData
+import com.example.ugotprototype.databinding.ItemGroupPersonListBinding
+import com.example.ugotprototype.ui.group.viewmodel.GroupForcedExitViewModel
 
-class GroupRequestApplicationAdapter(
-    private val viewModel: GroupRequestApplicationViewModel, private val groupId: Int
-) : RecyclerView.Adapter<GroupRequestApplicationAdapter.MyViewHolder>() {
+class GroupForcedExitAdapter(
+    private val viewModel: GroupForcedExitViewModel,
+    private val groupId: Int
+) : RecyclerView.Adapter<GroupForcedExitAdapter.MyViewHolder>() {
 
-    var groupItemList: List<GroupGetApplicationList> = emptyList()
+    var groupItemList: List<GroupDetailTeamInforData> = emptyList()
 
     // 생성된 뷰 홀더에 값 지정
-    inner class MyViewHolder(val binding: ItemGroupApplicationListBinding) :
+    inner class MyViewHolder(val binding: ItemGroupPersonListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun bind(item: GroupGetApplicationList) {
+        fun bind(item: GroupDetailTeamInforData) {
             with(binding) {
                 tvTeamInforName.text = item.nickname
-                tvInforField.text = item.skill.toString()
+                tvInforField.text = item.interests
                 tvGitLink.text = item.gitHubLink
                 tvBlogLink.text = item.personalBlogLink
-                tvInforGrade.text = item.grade.toString() + item._class
             }
 
             binding.ivMenu.setOnClickListener {
-                popUpMenu(it, item.applicationId)
+                popUpMenu(it, item.memberId)
             }
         }
     }
 
     // 어떤 xml 으로 뷰 홀더를 생성할지 지정
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val binding = ItemGroupApplicationListBinding.inflate(
+        val binding = ItemGroupPersonListBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
         return MyViewHolder(binding)
@@ -56,24 +56,19 @@ class GroupRequestApplicationAdapter(
         return position.toLong()
     }
 
-    fun setFilterData(data: List<GroupGetApplicationList>) {
+    fun setFilterData(data: List<GroupDetailTeamInforData>) {
         groupItemList = data
         notifyDataSetChanged()
     }
 
-    fun popUpMenu(view: View, applicationId: Int) {
+    fun popUpMenu(view: View, memberId: Int) {
         PopupMenu(view.context, view).apply {
-            menuInflater.inflate(R.menu.group_accept_menu, menu)
+            menuInflater.inflate(R.menu.group_forced_exit_menu, menu)
 
             setOnMenuItemClickListener { item ->
                 when (item.itemId) {
                     R.id.item1 -> {
-                        viewModel.receiveApplication(groupId, applicationId)
-                        true
-                    }
-
-                    R.id.item2 -> {
-                        viewModel.rejectApplication(groupId, applicationId)
+                        viewModel.groupForcedExit(groupId, memberId)
                         true
                     }
 

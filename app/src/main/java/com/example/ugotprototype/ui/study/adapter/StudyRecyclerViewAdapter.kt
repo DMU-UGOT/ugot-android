@@ -2,24 +2,17 @@ package com.example.ugotprototype.ui.study.adapter
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.ugotprototype.ui.study.view.StudyPostDetailActivity
 import com.example.ugotprototype.data.study.StudyGetPost
 import com.example.ugotprototype.databinding.ItemStudyListBinding
-import com.example.ugotprototype.ui.study.view.StudyFragment.Companion.STUDY_CREATE_TIME
-import com.example.ugotprototype.ui.study.view.StudyFragment.Companion.STUDY_DETAIL
-import com.example.ugotprototype.ui.study.view.StudyFragment.Companion.STUDY_GITHUB_LINK
-import com.example.ugotprototype.ui.study.view.StudyFragment.Companion.STUDY_KAKAO_LINK
+import com.example.ugotprototype.ui.group.view.GroupFragment.Companion.GROUP_ID
+import com.example.ugotprototype.ui.study.view.StudyFragment.Companion.STUDY_ID
 import com.example.ugotprototype.ui.study.view.StudyFragment.Companion.STUDY_STATUS
-import com.example.ugotprototype.ui.study.view.StudyFragment.Companion.STUDY_STATUS_CNT
-import com.example.ugotprototype.ui.study.view.StudyFragment.Companion.STUDY_STATUS_CNT_END
-import com.example.ugotprototype.ui.study.view.StudyFragment.Companion.STUDY_TITLE
+import com.example.ugotprototype.ui.study.view.StudyPostDetailActivity
 import com.example.ugotprototype.ui.study.viewmodel.StudyViewModel
-import com.example.ugotprototype.ui.team.viewmodel.TeamViewModel
 
 class StudyRecyclerViewAdapter(private val viewModel: StudyViewModel) :
     RecyclerView.Adapter<StudyRecyclerViewAdapter.StudyViewHolder>() {
@@ -80,13 +73,8 @@ class StudyRecyclerViewAdapter(private val viewModel: StudyViewModel) :
 
     fun goToStudyPostDetail(item: StudyGetPost, context: Context) {
         Intent(context, StudyPostDetailActivity::class.java).apply {
-            putExtra(STUDY_TITLE, item.title)
-            putExtra(STUDY_DETAIL, item.content)
-            putExtra(STUDY_STATUS_CNT, item.nowPersonnel)
-            putExtra(STUDY_STATUS_CNT_END, item.allPersonnel)
-            putExtra(STUDY_GITHUB_LINK, item.gitHubLink)
-            putExtra(STUDY_KAKAO_LINK, item.kakaoOpenLink)
-            putExtra(STUDY_CREATE_TIME, item.createdAt)
+            putExtra(STUDY_ID, item.studyId)
+            putExtra(GROUP_ID, item.groupId)
 
             //모집중인지 모집완료인지 모집현황 체크
             if (item.nowPersonnel == item.allPersonnel) {

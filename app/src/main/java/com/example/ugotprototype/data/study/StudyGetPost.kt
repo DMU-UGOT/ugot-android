@@ -5,6 +5,7 @@ data class StudyGetPost(
     val title: String,
     val content: String,
     val isContact: String,
+    val nickname: String,
     val allPersonnel: Int,
     val nowPersonnel: Int,
     val kakaoOpenLink: String,
@@ -15,5 +16,7 @@ data class StudyGetPost(
     var subject: String,
     var field: String,
     var isDelete: Int,
-    var bookmark: Boolean
+    var bookmark: Boolean,
+    var groupId: Int,
+    var groupName: String
 )

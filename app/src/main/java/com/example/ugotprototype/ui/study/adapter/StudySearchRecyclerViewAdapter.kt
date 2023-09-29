@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ugotprototype.data.study.StudyGetPost
 import com.example.ugotprototype.databinding.ItemStudyListBinding
+import com.example.ugotprototype.ui.group.view.GroupFragment
 import com.example.ugotprototype.ui.study.view.StudyFragment
-import com.example.ugotprototype.ui.study.view.StudyFragment.Companion.STUDY_TITLE
 import com.example.ugotprototype.ui.study.view.StudyPostDetailActivity
 import com.example.ugotprototype.ui.study.viewmodel.StudySearchViewModel
 
@@ -70,13 +70,8 @@ class StudySearchRecyclerViewAdapter(private val viewModel: StudySearchViewModel
 
     fun goToTeamPostDetail(item: StudyGetPost, context: Context) {
         Intent(context, StudyPostDetailActivity::class.java).apply {
-            putExtra(STUDY_TITLE, item.title)
-            putExtra(StudyFragment.STUDY_DETAIL, item.content)
-            putExtra(StudyFragment.STUDY_STATUS_CNT, item.nowPersonnel)
-            putExtra(StudyFragment.STUDY_STATUS_CNT_END, item.allPersonnel)
-            putExtra(StudyFragment.STUDY_GITHUB_LINK, item.gitHubLink)
-            putExtra(StudyFragment.STUDY_KAKAO_LINK, item.kakaoOpenLink)
-            putExtra(StudyFragment.STUDY_CREATE_TIME, item.createdAt)
+            putExtra(StudyFragment.STUDY_ID, item.studyId)
+            putExtra(GroupFragment.GROUP_ID, item.groupId)
 
             //모집중인지 모집완료인지 모집현황 체크
             if (item.nowPersonnel == item.allPersonnel) {

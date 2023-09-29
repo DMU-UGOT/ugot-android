@@ -3,7 +3,6 @@ package com.example.ugotprototype.ui.study.view
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,13 +25,7 @@ class StudyFragment : Fragment() {
     private val loadingDialog = FragmentLoadingLayout()
 
     companion object {
-        const val STUDY_TITLE = "teamTitle"
-        const val STUDY_DETAIL = "teamDetail"
-        const val STUDY_STATUS_CNT = "teamStatusCnt"
-        const val STUDY_STATUS_CNT_END = "teamStatusCntEnd"
-        const val STUDY_GITHUB_LINK = "teamGitHubLink"
-        const val STUDY_KAKAO_LINK = "teamKakaoLink"
-        const val STUDY_CREATE_TIME = "teamCreateTime"
+        const val STUDY_ID = "studyId"
         const val STUDY_STATUS = "teamStatus"
     }
 
