@@ -7,5 +7,6 @@ data class CommunityGeneralPostViewData(
     val viewCount : Int?,
     val voteCount : Int?,
     val created_at : String,
-    val nickname : String
+    val nickname : String,
+    val memberId : Int
 )

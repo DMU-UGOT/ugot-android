@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.ugotprototype.SharedPreference
 import com.example.ugotprototype.data.community.CommunityGeneralPostViewData
 import com.example.ugotprototype.di.api.CommunityService
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,7 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CommunityGeneralDetailViewModel @Inject constructor(
-    private val communityService: CommunityService
+    private val communityService: CommunityService,
+    private val sharedPreference: SharedPreference
 ) : ViewModel() {
     private val _communityDetailData = MutableLiveData<CommunityGeneralPostViewData>()
     val communityDetailData: LiveData<CommunityGeneralPostViewData> = _communityDetailData
@@ -38,5 +40,10 @@ class CommunityGeneralDetailViewModel @Inject constructor(
                 Log.d("deleteX", it.toString())
             }
         }
+    }
+
+    // 현재 로그인된 사용자의 ID를 가져오는 함수
+    fun getLoggedInUserId(): Int {
+        return sharedPreference.getMemberId()
     }
 }

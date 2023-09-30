@@ -32,6 +32,7 @@ class CommunityGeneralFragment : Fragment() {
         const val GENERAL_VIEW_COUNT = "generalViewCount"
         const val GENERAL_CREATE_AT = "generalCreateAt"
         const val GENERAL_NICKNAME = "generalNickName"
+        const val GENERAL_MEMBER_ID = "generalMemberId"
     }
 
     override fun onCreateView(

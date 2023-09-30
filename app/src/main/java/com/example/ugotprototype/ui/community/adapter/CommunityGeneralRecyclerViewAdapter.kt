@@ -11,6 +11,7 @@ import com.example.ugotprototype.ui.community.view.CommunityGeneralDetailActivit
 import com.example.ugotprototype.ui.community.view.CommunityGeneralFragment.Companion.GENERAL_CONTENT
 import com.example.ugotprototype.ui.community.view.CommunityGeneralFragment.Companion.GENERAL_CREATE_AT
 import com.example.ugotprototype.ui.community.view.CommunityGeneralFragment.Companion.GENERAL_ID
+import com.example.ugotprototype.ui.community.view.CommunityGeneralFragment.Companion.GENERAL_MEMBER_ID
 import com.example.ugotprototype.ui.community.view.CommunityGeneralFragment.Companion.GENERAL_NICKNAME
 import com.example.ugotprototype.ui.community.view.CommunityGeneralFragment.Companion.GENERAL_TITLE
 import com.example.ugotprototype.ui.community.view.CommunityGeneralFragment.Companion.GENERAL_VIEW_COUNT
@@ -39,7 +40,7 @@ class CommunityGeneralRecyclerViewAdapter :
                 tvCommunityViewCount.text = formatViewCount(item.viewCount)
                 tvCommunityVoteCount.text = formatVoteCount(item.voteCount)
                 tvCommunityCreateAt.text = formatDate(item.created_at)
-                tvCommunityMemberId.text = item.nickname
+                tvCommunityMemberNickname.text = item.nickname
             }
         }
 
@@ -106,6 +107,7 @@ class CommunityGeneralRecyclerViewAdapter :
             putExtra(GENERAL_VOTE_COUNT, item.voteCount)
             putExtra(GENERAL_CREATE_AT, item.created_at)
             putExtra(GENERAL_NICKNAME, item.nickname)
+            putExtra(GENERAL_MEMBER_ID, item.memberId)
 
             context.startActivity(this)
         }

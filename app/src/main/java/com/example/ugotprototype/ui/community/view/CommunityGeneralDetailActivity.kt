@@ -6,18 +6,15 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.airbnb.lottie.animation.content.Content
 import com.example.ugotprototype.R
-import com.example.ugotprototype.data.community.CommunityGeneralChatViewData
 import com.example.ugotprototype.data.community.CommunityGeneralCommentNewPostData
-import com.example.ugotprototype.data.community.CommunityGeneralNewPostData
 import com.example.ugotprototype.databinding.ActivityDialogDeleteMessageBinding
 import com.example.ugotprototype.databinding.FragmentCommunityGeneralDetailBinding
 import com.example.ugotprototype.ui.community.adapter.CommunityGeneralChatRecyclerViewAdapter
@@ -78,6 +75,13 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
 
         goToUpdateResult()
         dataGeneralSet()
+
+        if(communityGeneralDetailViewModel.getLoggedInUserId().toString() == binding.tvCommunityGeneralMemberId.text.toString()){
+            binding.tvCmuGeneralDelete.visibility = View.VISIBLE
+        } else {
+            binding.tvCmuGeneralDelete.visibility = View.GONE
+        }
+
         chatInputBtn()
         changeMyGeneralChatCount()
         goBackCommunityGeneralUpdate()
@@ -125,6 +129,8 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
                 intent.getIntExtra(CommunityGeneralFragment.GENERAL_VOTE_COUNT, 0).toString()
             tvCommunityInquireInput.text =
                 intent.getIntExtra(CommunityGeneralFragment.GENERAL_VIEW_COUNT, 0).toString()
+            tvCommunityGeneralMemberId.text =
+                intent.getIntExtra(CommunityGeneralFragment.GENERAL_MEMBER_ID,0).toString()
         }
     }
 
