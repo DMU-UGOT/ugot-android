@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ugotprototype.SharedPreference
 import com.example.ugotprototype.data.community.CommunityGeneralPostViewData
+import com.example.ugotprototype.data.community.CommunityGeneralRefreshData
 import com.example.ugotprototype.di.api.CommunityService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -19,6 +20,9 @@ class CommunityGeneralDetailViewModel @Inject constructor(
 ) : ViewModel() {
     private val _communityDetailData = MutableLiveData<CommunityGeneralPostViewData>()
     val communityDetailData: LiveData<CommunityGeneralPostViewData> = _communityDetailData
+
+    private val _dataRefresh = MutableLiveData<Boolean>()
+    val dataRefresh: LiveData<Boolean> = _dataRefresh
 
     fun getCommunityDetailList(postId:Int){
         viewModelScope.launch {
@@ -45,5 +49,17 @@ class CommunityGeneralDetailViewModel @Inject constructor(
     // 현재 로그인된 사용자의 ID를 가져오는 함수
     fun getLoggedInUserId(): Int {
         return sharedPreference.getMemberId()
+    }
+
+    fun refreshData(postId: Int, communityGeneralRefreshData: CommunityGeneralRefreshData){
+        viewModelScope.launch {
+            kotlin.runCatching {
+                var data = communityService.refreshCommunity(postId, communityGeneralRefreshData)
+            }.onSuccess { result ->
+                _dataRefresh.value = true}
+                .onFailure { exception ->
+                    _dataRefresh.value = false
+                }
+        }
     }
 }

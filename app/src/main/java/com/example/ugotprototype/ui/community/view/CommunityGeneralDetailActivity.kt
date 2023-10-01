@@ -15,9 +15,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ugotprototype.R
 import com.example.ugotprototype.data.community.CommunityGeneralCommentNewPostData
+import com.example.ugotprototype.data.community.CommunityGeneralRefreshData
+import com.example.ugotprototype.data.community.CommunityGeneralUpdateViewData
 import com.example.ugotprototype.databinding.ActivityDialogDeleteMessageBinding
 import com.example.ugotprototype.databinding.FragmentCommunityGeneralDetailBinding
 import com.example.ugotprototype.ui.community.adapter.CommunityGeneralChatRecyclerViewAdapter
+import com.example.ugotprototype.ui.community.view.CommunityGeneralFragment.Companion.GENERAL_CREATE_AT
 import com.example.ugotprototype.ui.community.view.CommunityGeneralFragment.Companion.GENERAL_ID
 import com.example.ugotprototype.ui.community.viewmodel.CommunityGeneralChatViewModel
 import com.example.ugotprototype.ui.community.viewmodel.CommunityGeneralDetailViewModel
@@ -78,10 +81,13 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
 
         if(communityGeneralDetailViewModel.getLoggedInUserId().toString() == binding.tvCommunityGeneralMemberId.text.toString()){
             binding.tvCmuGeneralDelete.visibility = View.VISIBLE
+            binding.ivCmuGeneralResetTime.visibility = View.VISIBLE
         } else {
             binding.tvCmuGeneralDelete.visibility = View.GONE
+            binding.ivCmuGeneralResetTime.visibility = View.GONE
         }
 
+        resetTime(intent.getIntExtra(GENERAL_ID, 0))
         chatInputBtn()
         changeMyGeneralChatCount()
         goBackCommunityGeneralUpdate()
@@ -184,5 +190,20 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
                 status = binding.tvStatus.text.toString(),
             )
         )
+    }
+
+    private fun refreshGeneralOrganizationExistence(postId : Int) {
+        val communityGeneralRefreshData = CommunityGeneralRefreshData(
+            created_at = binding.tvCommunityGeneralTime.text.toString()
+        )
+        communityGeneralDetailViewModel.refreshData(postId, communityGeneralRefreshData)
+    }
+
+    private fun resetTime(postId : Int) {
+        binding.ivCmuGeneralResetTime.setOnClickListener {
+            refreshGeneralOrganizationExistence(postId)
+            setResult(Activity.RESULT_OK, Intent())
+            finish()
+        }
     }
 }

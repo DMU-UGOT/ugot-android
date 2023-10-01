@@ -2,6 +2,7 @@ package com.example.ugotprototype.di.api
 
 import com.example.ugotprototype.data.community.CommunityGeneralNewPostData
 import com.example.ugotprototype.data.community.CommunityGeneralPostViewData
+import com.example.ugotprototype.data.community.CommunityGeneralRefreshData
 import com.example.ugotprototype.data.community.CommunityGeneralUpdateViewData
 import com.example.ugotprototype.data.response.CommunityGeneralDataResponse
 import com.example.ugotprototype.data.response.CommunityGeneralPostResponse
@@ -26,4 +27,10 @@ interface CommunityService {
 
     @DELETE("com/{postId}")
     suspend fun deleteCommunity(@Path("postId") postId: Int)
+
+    @PATCH("com/{postId}/refresh")
+    suspend fun refreshCommunity(
+        @Path("postId") postId: Int,
+        @Body refreshData: CommunityGeneralRefreshData
+    )
 }
