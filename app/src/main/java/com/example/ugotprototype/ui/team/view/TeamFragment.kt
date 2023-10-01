@@ -11,22 +11,23 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.ugotprototype.BuildConfig
-import com.example.ugotprototype.FragmentLoadingLayout
 import com.example.ugotprototype.R
 import com.example.ugotprototype.SharedPreference
 import com.example.ugotprototype.databinding.FragmentTeamBinding
+import com.example.ugotprototype.ui.Loading.util.LoadingLayoutHelper
 import com.example.ugotprototype.ui.login.view.LoginActivity
 import com.example.ugotprototype.ui.team.adapter.TeamRecyclerViewAdapter
 import com.example.ugotprototype.ui.team.viewmodel.TeamViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+@Suppress("DEPRECATION")
 @AndroidEntryPoint
 class TeamFragment : Fragment() {
 
     private lateinit var binding: FragmentTeamBinding
     private val teamViewModel: TeamViewModel by viewModels()
     private lateinit var teamRecyclerViewAdapter: TeamRecyclerViewAdapter
-    private val loadingDialog = FragmentLoadingLayout()
+    private val loadingLayoutHelper: LoadingLayoutHelper by lazy { LoadingLayoutHelper(parentFragmentManager) }
     private lateinit var sharedPreference: SharedPreference
 
     companion object {
@@ -75,7 +76,14 @@ class TeamFragment : Fragment() {
             }
         }
 
-        viewLoadingLayout()
+        teamViewModel.isLoadingPage.observe(viewLifecycleOwner) {
+            if(it) {
+                loadingLayoutHelper.dismissLoadingDialog()
+            } else {
+                loadingLayoutHelper.showLoadingDialog()
+            }
+        }
+
         goToTeamSearchDetail()
         goToTeamPostWriteDetail()
     }
@@ -111,18 +119,6 @@ class TeamFragment : Fragment() {
             goToPostWriteResultLauncher.launch(
                 Intent(requireContext(), TeamPostWriteDetailActivity::class.java)
             )
-        }
-    }
-
-    private fun viewLoadingLayout() {
-        loadingDialog.isCancelable = false
-
-        teamViewModel.isLoadingPage.observe(viewLifecycleOwner) {
-            if (it) {
-                loadingDialog.dismiss()
-            } else {
-                loadingDialog.show(requireActivity().supportFragmentManager, "loadingDialog")
-            }
         }
     }
 }

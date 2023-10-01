@@ -5,11 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.PopupMenu
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.example.ugotprototype.FragmentLoadingLayout
+import com.example.ugotprototype.ui.Loading.util.FragmentLoadingLayout
 import com.example.ugotprototype.R
 import com.example.ugotprototype.data.group.GroupDetailData
 import com.example.ugotprototype.databinding.ActivityGroupDetailBinding

@@ -11,9 +11,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.ugotprototype.FragmentLoadingLayout
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.FragmentGroupBinding
+import com.example.ugotprototype.ui.Loading.util.LoadingLayoutHelper
 import com.example.ugotprototype.ui.group.adapter.GroupMiddleViewRecyclerViewAdapter
 import com.example.ugotprototype.ui.group.adapter.GroupTopViewRecyclerViewAdapter
 import com.example.ugotprototype.ui.group.viewmodel.GroupViewModel
@@ -25,7 +25,7 @@ class GroupFragment : Fragment() {
     private val groupViewModel: GroupViewModel by viewModels()
     private lateinit var groupTopViewAdapter: GroupTopViewRecyclerViewAdapter
     private lateinit var groupMiddleViewAdapter: GroupMiddleViewRecyclerViewAdapter
-    private val loadingDialog = FragmentLoadingLayout()
+    private val loadingLayoutHelper: LoadingLayoutHelper by lazy { LoadingLayoutHelper(parentFragmentManager) }
 
     companion object {
         const val GROUP_ID = "groupID"
@@ -66,7 +66,14 @@ class GroupFragment : Fragment() {
             onStart()
         }
 
-        viewLoadingLayout()
+        groupViewModel.isLoadingPage.observe(this) {
+            if(it) {
+                loadingLayoutHelper.dismissLoadingDialog()
+            } else {
+                loadingLayoutHelper.showLoadingDialog()
+            }
+        }
+
         goToNewGroup()
     }
 
@@ -84,18 +91,6 @@ class GroupFragment : Fragment() {
                     requireContext(), GroupNewGenerate::class.java
                 )
             )
-        }
-    }
-
-    private fun viewLoadingLayout() {
-        loadingDialog.isCancelable = false
-
-        groupViewModel.isLoadingPage.observe(viewLifecycleOwner) {
-            if (it) {
-                loadingDialog.dismiss()
-            } else {
-                loadingDialog.show(requireActivity().supportFragmentManager, "loadingDialog")
-            }
         }
     }
 

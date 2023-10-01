@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.ActivityGroupRequestApplicationBinding
+import com.example.ugotprototype.ui.Loading.util.LoadingLayoutHelper
 import com.example.ugotprototype.ui.group.adapter.GroupRequestApplicationAdapter
 import com.example.ugotprototype.ui.group.view.GroupFragment.Companion.GROUP_ID
 import com.example.ugotprototype.ui.group.viewmodel.GroupRequestApplicationViewModel
@@ -16,6 +17,8 @@ class GroupRequestApplicationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGroupRequestApplicationBinding
     private val viewModel: GroupRequestApplicationViewModel by viewModels()
     private lateinit var adapter: GroupRequestApplicationAdapter
+    private val loadingLayoutHelper: LoadingLayoutHelper by lazy { LoadingLayoutHelper(this.supportFragmentManager) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_group_request_application)
@@ -34,5 +37,13 @@ class GroupRequestApplicationActivity : AppCompatActivity() {
         }
 
         binding.ivTeamPrev.setOnClickListener { finish() }
+
+        viewModel.isLoadingPage.observe(this) {
+            if(it) {
+                loadingLayoutHelper.dismissLoadingDialog()
+            } else {
+                loadingLayoutHelper.showLoadingDialog()
+            }
+        }
     }
 }

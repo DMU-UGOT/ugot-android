@@ -1,8 +1,9 @@
-package com.example.ugotprototype
+package com.example.ugotprototype.ui.Loading.util
 
 import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
+import com.example.ugotprototype.R
 
 class FragmentLoadingLayout : DialogFragment() {
 

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.ugotprototype.R
 import com.example.ugotprototype.data.group.GroupGetApplicationList
 import com.example.ugotprototype.databinding.ItemGroupApplicationListBinding
@@ -28,6 +29,9 @@ class GroupRequestApplicationAdapter(
                 tvGitLink.text = item.gitHubLink
                 tvBlogLink.text = item.personalBlogLink
                 tvInforGrade.text = item.grade.toString() + item._class
+                Glide.with(binding.root.context)
+                    .load(item.avatarUrl)
+                    .into(binding.ivProfileImage)
             }
 
             binding.ivMenu.setOnClickListener {

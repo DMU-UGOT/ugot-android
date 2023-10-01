@@ -8,9 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
-import com.example.ugotprototype.FragmentLoadingLayout
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.ActivityStudySearchDetailBinding
+import com.example.ugotprototype.ui.Loading.util.LoadingLayoutHelper
 import com.example.ugotprototype.ui.study.adapter.StudySearchRecyclerViewAdapter
 import com.example.ugotprototype.ui.study.viewmodel.StudySearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,11 +21,10 @@ class StudySearchDetailActivity : AppCompatActivity() {
     private val studySearchViewModel: StudySearchViewModel by viewModels()
     private lateinit var binding: ActivityStudySearchDetailBinding
     private lateinit var studySearchRecyclerViewAdapter: StudySearchRecyclerViewAdapter
-    private val loadingDialog = FragmentLoadingLayout()
+    private val loadingLayoutHelper: LoadingLayoutHelper by lazy { LoadingLayoutHelper(this.supportFragmentManager) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewLoadingLayout()
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_study_search_detail)
 
@@ -35,6 +34,14 @@ class StudySearchDetailActivity : AppCompatActivity() {
         studySearchViewModel.studies.observe(this) {
             studySearchRecyclerViewAdapter.setData(it)
             binding.chipLayout.isVisible = false
+        }
+
+        studySearchViewModel.isLoadingPage.observe(this) {
+            if(it) {
+                loadingLayoutHelper.dismissLoadingDialog()
+            } else {
+                loadingLayoutHelper.showLoadingDialog()
+            }
         }
 
         backToMain()
@@ -62,17 +69,5 @@ class StudySearchDetailActivity : AppCompatActivity() {
         }
 
         binding.svTextInput.setOnQueryTextListener(queryTextListener)
-    }
-
-    private fun viewLoadingLayout() {
-        loadingDialog.isCancelable = false
-
-        studySearchViewModel.isLoadingPage.observe(this) {
-            if (it) {
-                loadingDialog.dismiss()
-            } else {
-                loadingDialog.show(this.supportFragmentManager, "loadingDialog")
-            }
-        }
     }
 }

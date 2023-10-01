@@ -9,5 +9,6 @@ data class GroupGetApplicationList(
     val _class: String,
     val gitHubLink: String,
     val personalBlogLink: String,
-    val skill: List<String>
+    val skill: List<String>,
+    var avatarUrl: String
 )

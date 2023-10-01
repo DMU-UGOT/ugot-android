@@ -10,9 +10,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.ugotprototype.FragmentLoadingLayout
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.FragmentStudyBinding
+import com.example.ugotprototype.ui.Loading.util.LoadingLayoutHelper
 import com.example.ugotprototype.ui.study.adapter.StudyRecyclerViewAdapter
 import com.example.ugotprototype.ui.study.viewmodel.StudyViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,7 +22,7 @@ class StudyFragment : Fragment() {
     private lateinit var binding: FragmentStudyBinding
     private val studyViewModel: StudyViewModel by viewModels()
     private lateinit var studyRecyclerViewAdapter: StudyRecyclerViewAdapter
-    private val loadingDialog = FragmentLoadingLayout()
+    private val loadingLayoutHelper: LoadingLayoutHelper by lazy { LoadingLayoutHelper(parentFragmentManager) }
 
     companion object {
         const val STUDY_ID = "studyId"
@@ -61,7 +61,13 @@ class StudyFragment : Fragment() {
             studyViewModel.getStudyList()
         }
 
-        viewLoadingLayout()
+        studyViewModel.isLoadingPage.observe(viewLifecycleOwner) {
+            if(it) {
+                loadingLayoutHelper.dismissLoadingDialog()
+            } else {
+                loadingLayoutHelper.showLoadingDialog()
+            }
+        }
         goToStudySearchDetail()
         goToStudyNewGroup()
     }
@@ -103,18 +109,6 @@ class StudyFragment : Fragment() {
                     requireContext(), StudyNewGroupActivity::class.java
                 )
             )
-        }
-    }
-
-    private fun viewLoadingLayout() {
-        loadingDialog.isCancelable = false
-
-        studyViewModel.isLoadingPage.observe(viewLifecycleOwner) {
-            if (it) {
-                loadingDialog.dismiss()
-            } else {
-                loadingDialog.show(requireActivity().supportFragmentManager, "loadingDialog")
-            }
         }
     }
 }

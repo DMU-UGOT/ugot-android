@@ -8,9 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
-import com.example.ugotprototype.FragmentLoadingLayout
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.ActivityTeamSearchDetailBinding
+import com.example.ugotprototype.ui.Loading.util.LoadingLayoutHelper
 import com.example.ugotprototype.ui.team.adapter.TeamSearchRecyclerViewAdapter
 import com.example.ugotprototype.ui.team.viewmodel.TeamSearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,12 +21,11 @@ class TeamSearchDetailActivity : AppCompatActivity() {
     private val teamSearchViewModel: TeamSearchViewModel by viewModels()
     private lateinit var binding: ActivityTeamSearchDetailBinding
     private lateinit var teamSearchRecyclerViewAdapter: TeamSearchRecyclerViewAdapter
-    private val loadingDialog = FragmentLoadingLayout()
+    private val loadingLayoutHelper: LoadingLayoutHelper by lazy { LoadingLayoutHelper(this.supportFragmentManager) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_team_search_detail)
-        viewLoadingLayout()
 
         teamSearchRecyclerViewAdapter = TeamSearchRecyclerViewAdapter(teamSearchViewModel)
         binding.rvTeam.adapter = teamSearchRecyclerViewAdapter
@@ -34,6 +33,14 @@ class TeamSearchDetailActivity : AppCompatActivity() {
         teamSearchViewModel.teams.observe(this) {
             teamSearchRecyclerViewAdapter.setData(it)
             binding.chipLayout.isVisible = false
+        }
+
+        teamSearchViewModel.isLoadingPage.observe(this) {
+            if(it) {
+                loadingLayoutHelper.dismissLoadingDialog()
+            } else {
+                loadingLayoutHelper.showLoadingDialog()
+            }
         }
 
         backToMain()
@@ -61,17 +68,5 @@ class TeamSearchDetailActivity : AppCompatActivity() {
         }
 
         binding.svTextInput.setOnQueryTextListener(queryTextListener)
-    }
-
-    private fun viewLoadingLayout() {
-        loadingDialog.isCancelable = false
-
-        teamSearchViewModel.isLoadingPage.observe(this) {
-            if (it) {
-                loadingDialog.dismiss()
-            } else {
-                loadingDialog.show(this.supportFragmentManager, "loadingDialog")
-            }
-        }
     }
 }

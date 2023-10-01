@@ -1,14 +1,12 @@
 package com.example.ugotprototype.ui.profile.view
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.example.ugotprototype.FragmentLoadingLayout
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.ActivityProfileMyPostStudyBinding
+import com.example.ugotprototype.ui.Loading.util.LoadingLayoutHelper
 import com.example.ugotprototype.ui.profile.adapter.ProfilePostStudyRecyclerViewAdapter
 import com.example.ugotprototype.ui.profile.viewmodel.ProfileMyStudyPostViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,13 +16,11 @@ class ProfileMyPostStudyActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileMyPostStudyBinding
     private val viewModel: ProfileMyStudyPostViewModel by viewModels()
     private lateinit var profilePostStudyRecyclerviewAdapter: ProfilePostStudyRecyclerViewAdapter
-    private val loadingDialog = FragmentLoadingLayout()
+    private val loadingLayoutHelper: LoadingLayoutHelper by lazy { LoadingLayoutHelper(this.supportFragmentManager) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_profile_my_post_study)
-
-        viewLoadingLayout()
 
         binding.ivGroupCmuBack.setOnClickListener {
             finish()
@@ -50,16 +46,12 @@ class ProfileMyPostStudyActivity : AppCompatActivity() {
                 onStart()
             }
         }
-    }
-
-    private fun viewLoadingLayout() {
-        loadingDialog.isCancelable = false
 
         viewModel.isLoadingPage.observe(this) {
-            if (it) {
-                loadingDialog.dismiss()
+            if(it) {
+                loadingLayoutHelper.dismissLoadingDialog()
             } else {
-                loadingDialog.show(this.supportFragmentManager, "loadingDialog")
+                loadingLayoutHelper.showLoadingDialog()
             }
         }
     }
