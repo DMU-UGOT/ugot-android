@@ -38,7 +38,7 @@ class CommunityGeneralRecyclerViewAdapter :
                 tvCommunityName.text = item.title
                 tvCommunityText.text = item.content
                 tvCommunityViewCount.text = formatViewCount(item.viewCount)
-                tvCommunityVoteCount.text = formatVoteCount(item.voteCount)
+                tvCommunityVoteCount.text = formatVoteCount(item.commentCount)
                 tvCommunityCreateAt.text = formatDate(item.created_at)
                 tvCommunityMemberNickname.text = item.nickname
             }
@@ -104,7 +104,7 @@ class CommunityGeneralRecyclerViewAdapter :
             putExtra(GENERAL_TITLE, item.title)
             putExtra(GENERAL_CONTENT, item.content)
             putExtra(GENERAL_VIEW_COUNT, item.viewCount)
-            putExtra(GENERAL_VOTE_COUNT, item.voteCount)
+            putExtra(GENERAL_VOTE_COUNT, item.commentCount)
             putExtra(GENERAL_CREATE_AT, item.created_at)
             putExtra(GENERAL_NICKNAME, item.nickname)
             putExtra(GENERAL_MEMBER_ID, item.memberId)
