@@ -101,8 +101,6 @@
             android:id="@+id/nsv_com_change_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="45dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fm_change_v2">
@@ -117,7 +115,6 @@
                     android:layout_height="wrap_content"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:layout_editor_absoluteX="48dp"
                     tools:listitem="@layout/item_community_change_list" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout

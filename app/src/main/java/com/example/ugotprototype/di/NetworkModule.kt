@@ -133,4 +133,10 @@ object NetworkModule {
     fun provideGroupService(retrofit: Retrofit): GroupService {
         return retrofit.create(GroupService::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideCommunityChangeService(retrofit: Retrofit): ChangeService {
+        return retrofit.create(ChangeService::class.java)
+    }
 }

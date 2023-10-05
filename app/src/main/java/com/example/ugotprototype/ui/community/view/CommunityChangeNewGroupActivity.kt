@@ -1,5 +1,6 @@
 package com.example.ugotprototype.ui.community.view
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
@@ -7,19 +8,55 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.R
+import com.example.ugotprototype.data.change.CommunityChangeNewPostData
+import com.example.ugotprototype.data.community.CommunityGeneralNewPostData
 import com.example.ugotprototype.databinding.ActivityCommunityChangeNewGroupBinding
 import com.example.ugotprototype.databinding.ActivityDialogMessageBinding
+import com.example.ugotprototype.ui.community.viewmodel.CommunityChangeNewGroupViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CommunityChangeNewGroupActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCommunityChangeNewGroupBinding
+    private val communityChangeNewGroupViewModel: CommunityChangeNewGroupViewModel by viewModels()
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_community_change_new_group)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_community_change_new_group)
+
+        communityChangeNewGroupViewModel.isCommunityChangePostRegisterBtnEnabled.observe(this) { enabled ->
+            binding.btChangeNewPostRegister.isEnabled = enabled
+        }
+
+        communityChangeNewGroupViewModel.communityCreateData.observe(this) {
+            communityChangeNewGroupViewModel.sendCommunityChangeData(it)
+        }
+
+        communityChangeNewGroupViewModel.spGrade.observe(this){
+            checkAllFields()
+        }
+
+        communityChangeNewGroupViewModel.spNowClass.observe(this) {
+            checkAllFields()
+        }
+
+        communityChangeNewGroupViewModel.spChangeClass.observe(this) {
+            checkAllFields()
+        }
+
+
+        communityChangeNewGroupViewModel.createFinish.observe(this) {
+            if (it) {
+                setResult(Activity.RESULT_OK, Intent())
+                finish()
+            }
+        }
 
         spinnerChangeNewChoice()
         spinnerChangeNowClassNewChoice()
@@ -53,25 +90,34 @@ class CommunityChangeNewGroupActivity : AppCompatActivity() {
 
     private fun backCommunityChangeNewToMainActivity() {
         binding.btChangeNewPostRegister.setOnClickListener {
-            val gradeClass = binding.spChangeNewGrade.selectedItem.toString()
-            val currentClass = binding.spChangeNewNowClass.selectedItem.toString()
-            val changeClass = binding.spChangeNewChangeClass.selectedItem.toString()
-
-            if (currentClass == "미선택" || changeClass == "미선택" || gradeClass == "미선택") {
-                Toast.makeText(applicationContext, "선택되지 않은 항목이 있습니다", Toast.LENGTH_SHORT).show()
-            } else if (currentClass == changeClass) {
-                Toast.makeText(applicationContext, "현재 반과 변경할 반이 동일합니다", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(applicationContext, "저장되었습니다", Toast.LENGTH_SHORT).show()
-                Intent().putExtra("resultText", "text")
-                setResult(Activity.RESULT_OK, Intent())
-                finish()
-            }
+            checkChangeOrganizationExistence()
+            setResult(Activity.RESULT_OK, Intent())
+            finish()
         }
 
         binding.btChangeNewBackToMain.setOnClickListener {
             showConfirmationDialog()
         }
+    }
+
+    private fun checkAllFields() {
+        if (binding.spChangeNewGrade.selectedItem == "미선택" &&
+            binding.spChangeNewChangeClass.selectedItem == "미선택" &&
+            binding.spChangeNewNowClass.selectedItem == "미선택") {
+            communityChangeNewGroupViewModel.isCommunityChangePostRegisterButtonState(false)
+        } else {
+            communityChangeNewGroupViewModel.isCommunityChangePostRegisterButtonState(true)
+        }
+    }
+
+    private fun checkChangeOrganizationExistence() {
+        communityChangeNewGroupViewModel.sendCommunityChangeData(
+            CommunityChangeNewPostData(
+                grade = binding.spChangeNewGrade.selectedItem.toString(),
+                currentClass = binding.spChangeNewNowClass.selectedItem.toString(),
+                changeClass = binding.spChangeNewChangeClass.selectedItem.toString()
+            )
+        )
     }
 
     private fun showConfirmationDialog() {

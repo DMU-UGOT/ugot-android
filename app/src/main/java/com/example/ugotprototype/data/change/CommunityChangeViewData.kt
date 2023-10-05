@@ -1,4 +1,4 @@
-package com.example.ugotprototype.data.community
+package com.example.ugotprototype.data.change
 
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
