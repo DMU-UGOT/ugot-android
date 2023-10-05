@@ -1,13 +1,11 @@
 package com.example.ugotprototype.ui.group.view
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -25,11 +23,16 @@ class GroupFragment : Fragment() {
     private val groupViewModel: GroupViewModel by viewModels()
     private lateinit var groupTopViewAdapter: GroupTopViewRecyclerViewAdapter
     private lateinit var groupMiddleViewAdapter: GroupMiddleViewRecyclerViewAdapter
-    private val loadingLayoutHelper: LoadingLayoutHelper by lazy { LoadingLayoutHelper(parentFragmentManager) }
+    private val loadingLayoutHelper: LoadingLayoutHelper by lazy {
+        LoadingLayoutHelper(
+            parentFragmentManager
+        )
+    }
 
     companion object {
         const val GROUP_ID = "groupID"
         const val TEAM_LEADER_ID = "teamLeaderID"
+        const val GROUP_NAME = "groupName"
     }
 
     override fun onCreateView(
@@ -67,7 +70,7 @@ class GroupFragment : Fragment() {
         }
 
         groupViewModel.isLoadingPage.observe(this) {
-            if(it) {
+            if (it) {
                 loadingLayoutHelper.dismissLoadingDialog()
             } else {
                 loadingLayoutHelper.showLoadingDialog()
@@ -78,19 +81,8 @@ class GroupFragment : Fragment() {
     }
 
     private fun goToNewGroup() {
-        val goToNewGroupResultLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                if (result.resultCode == Activity.RESULT_OK) {
-                    groupViewModel.getGroupList()
-                }
-            }
-
         binding.fabGroup.setOnClickListener {
-            goToNewGroupResultLauncher.launch(
-                Intent(
-                    requireContext(), GroupNewGenerate::class.java
-                )
-            )
+            startActivity(Intent(requireContext(), GroupNewGenerate::class.java))
         }
     }
 

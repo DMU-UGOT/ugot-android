@@ -1,87 +1,48 @@
 package com.example.ugotprototype.ui.group.view
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.lifecycleScope
 import com.example.ugotprototype.R
-import com.example.ugotprototype.data.api.ApiService
-import com.example.ugotprototype.data.group.GroupEngagementData
 import com.example.ugotprototype.databinding.ActivityGroupEngagementRateBinding
+import com.example.ugotprototype.ui.Loading.util.LoadingLayoutHelper
 import com.example.ugotprototype.ui.group.adapter.GroupEngagementRateRecyclerViewAdapter
-import com.example.ugotprototype.ui.group.viewmodel.GroupViewModel
-import com.example.ugotprototype.ui.team.view.TeamFragment
+import com.example.ugotprototype.ui.group.view.GroupFragment.Companion.GROUP_NAME
+import com.example.ugotprototype.ui.group.viewmodel.GroupEngagementRateViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class GroupEngagementRateActivity : AppCompatActivity() {
-    @Inject
-    lateinit var apiService: ApiService
-
     private lateinit var binding: ActivityGroupEngagementRateBinding
     private lateinit var groupEngagementRateRecyclerViewAdapter: GroupEngagementRateRecyclerViewAdapter
 
-    private var groupEngagementData = ArrayList<GroupEngagementData>()
+    private val viewModel: GroupEngagementRateViewModel by viewModels()
 
-    private val groupViewModel: GroupViewModel by viewModels()
+    private val loadingLayoutHelper: LoadingLayoutHelper by lazy { LoadingLayoutHelper(this.supportFragmentManager) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_group_engagement_rate)
 
-        fetchMembers()
+        viewModel.fetchMembers(intent.getStringExtra(GROUP_NAME) ?: "")
 
         groupEngagementRateRecyclerViewAdapter = GroupEngagementRateRecyclerViewAdapter()
         binding.rvRating.adapter = groupEngagementRateRecyclerViewAdapter
 
-        groupViewModel.engagementRateData.observe(this) {
-            groupEngagementRateRecyclerViewAdapter.setData(groupEngagementData)
-            Log.d("group", "$groupEngagementData")
+        viewModel.engagementRateData.observe(this) {
+            groupEngagementRateRecyclerViewAdapter.setData(it)
         }
 
         binding.ibEngagementPrev.setOnClickListener {
             finish()
         }
-    }
 
-    private fun fetchMembers() {
-        lifecycleScope.launch {
-            try {
-                val members = apiService.getOrganizationMembers(
-                    "githubapi-testad"
-                )
-                Log.d("members", "$members")
-                for (member in members) {
-                    val repositories = apiService.getOrganizationRepositories(
-                        "githubapi-testad"
-                    )
-                    Log.d("repositories", "$repositories")
-                    var totalContributions = 0
-                    for (repo in repositories) {
-                        Log.d("test", repo.name)
-                        try {
-                            val contributors = apiService.getRepositoryContributors(
-                                "githubapi-testad", repo.name
-                            )
-
-                            val userContributions =
-                                contributors?.find { it.login == member.login }?.contributions ?: 0
-                            totalContributions += userContributions
-                        } catch (e: Exception) {
-                        }
-                    }
-                    groupEngagementData.add(
-                        GroupEngagementData(
-                            member.login, member.avatarUrl, totalContributions
-                        )
-                    )
-                }
-                groupViewModel.setEngagementRate(groupEngagementData)
-            } catch (e: Exception) {
+        viewModel.isLoadingPage.observe(this) {
+            if (it) {
+                loadingLayoutHelper.dismissLoadingDialog()
+            } else {
+                loadingLayoutHelper.showLoadingDialog()
             }
         }
     }

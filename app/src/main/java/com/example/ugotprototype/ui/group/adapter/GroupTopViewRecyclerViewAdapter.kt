@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.example.ugotprototype.data.group.GroupGetFavoritesList
 import com.example.ugotprototype.databinding.ItemGroupTopListBinding
 import com.example.ugotprototype.ui.group.view.GroupDetailActivity
+import com.example.ugotprototype.ui.group.view.GroupFragment
 import com.example.ugotprototype.ui.group.view.GroupFragment.Companion.GROUP_ID
 
 class GroupTopViewRecyclerViewAdapter() :
@@ -62,6 +63,7 @@ class GroupTopViewRecyclerViewAdapter() :
     fun goToPostDetail(item: GroupGetFavoritesList, context: Context) {
         Intent(context, GroupDetailActivity::class.java).apply {
             putExtra(GROUP_ID, item.groupId)
+            putExtra(GroupFragment.GROUP_NAME, item.gitHubUrl)
             context.startActivity(this)
         }
     }

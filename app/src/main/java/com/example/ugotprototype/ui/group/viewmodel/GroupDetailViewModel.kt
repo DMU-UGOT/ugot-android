@@ -1,6 +1,5 @@
 package com.example.ugotprototype.ui.group.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -55,7 +54,6 @@ class GroupDetailViewModel @Inject constructor(
 
     private val _isUpdateGroup = MutableLiveData<Boolean>()
     val isUpdateGroup: LiveData<Boolean> = _isUpdateGroup
-
 
     fun isBottomSheetClickCheck(enabled: Boolean) {
         _bottomSheetClickCheck.value = enabled

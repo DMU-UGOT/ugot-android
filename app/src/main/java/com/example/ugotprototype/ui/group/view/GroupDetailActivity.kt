@@ -8,11 +8,12 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.example.ugotprototype.ui.Loading.util.FragmentLoadingLayout
 import com.example.ugotprototype.R
 import com.example.ugotprototype.data.group.GroupDetailData
 import com.example.ugotprototype.databinding.ActivityGroupDetailBinding
+import com.example.ugotprototype.ui.Loading.util.LoadingLayoutHelper
 import com.example.ugotprototype.ui.group.view.GroupFragment.Companion.GROUP_ID
+import com.example.ugotprototype.ui.group.view.GroupFragment.Companion.GROUP_NAME
 import com.example.ugotprototype.ui.group.view.GroupFragment.Companion.TEAM_LEADER_ID
 import com.example.ugotprototype.ui.group.viewmodel.GroupDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,15 +23,22 @@ class GroupDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityGroupDetailBinding
     private val viewModel: GroupDetailViewModel by viewModels()
-    private val loadingDialog = FragmentLoadingLayout()
+    private val loadingLayoutHelper: LoadingLayoutHelper by lazy { LoadingLayoutHelper(this.supportFragmentManager) }
     private var groupId: Int = 0
     private var groupLeaderId: String = ""
+    private var groupName: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_group_detail)
 
-        viewLoadingLayout()
+        viewModel.isLoadingPage.observe(this) {
+            if (it) {
+                loadingLayoutHelper.dismissLoadingDialog()
+            } else {
+                loadingLayoutHelper.showLoadingDialog()
+            }
+        }
 
         viewModel.groupDetailData.observe(this) {
             viewSetting(it)
@@ -67,11 +75,13 @@ class GroupDetailActivity : AppCompatActivity() {
         goToDetailCommunityPage()
         goToTeamInformationPage()
         onClickHambugerButton()
+        goToEngagementPage()
     }
 
     private fun viewSetting(data: GroupDetailData) {
         groupId = data.groupId
         groupLeaderId = data.nickname
+        groupName = intent.getStringExtra(GROUP_NAME)!!.split("/")[0]
 
         with(binding) {
             tvGroupDetailTeamTitle.text = data.groupName
@@ -99,6 +109,15 @@ class GroupDetailActivity : AppCompatActivity() {
         }
     }
 
+    private fun goToEngagementPage() {
+        binding.mbGroupDetailProgress.setOnClickListener {
+            Intent(this, GroupEngagementRateActivity::class.java).apply {
+                putExtra(GROUP_NAME, groupName)
+                startActivity(this)
+            }
+        }
+    }
+
     private fun bottomSheetDialogCreate() {
         val bottomSheetHelper = BottomSheetHelper(this@GroupDetailActivity, this, viewModel)
         bottomSheetHelper.createBottomSheet()
@@ -117,18 +136,6 @@ class GroupDetailActivity : AppCompatActivity() {
             Intent(this, GroupCommunityActivity::class.java).apply {
                 putExtra(GROUP_ID, groupId)
                 startActivity(this)
-            }
-        }
-    }
-
-    private fun viewLoadingLayout() {
-        loadingDialog.isCancelable = false
-
-        viewModel.isLoadingPage.observe(this) {
-            if (it) {
-                loadingDialog.dismiss()
-            } else {
-                loadingDialog.show(this.supportFragmentManager, "loadingDialog")
             }
         }
     }

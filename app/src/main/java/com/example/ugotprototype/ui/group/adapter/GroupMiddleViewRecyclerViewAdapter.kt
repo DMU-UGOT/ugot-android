@@ -12,6 +12,7 @@ import com.example.ugotprototype.data.group.GroupMiddleViewData
 import com.example.ugotprototype.databinding.ItemGroupMiddleListBinding
 import com.example.ugotprototype.ui.group.view.GroupDetailActivity
 import com.example.ugotprototype.ui.group.view.GroupFragment.Companion.GROUP_ID
+import com.example.ugotprototype.ui.group.view.GroupFragment.Companion.GROUP_NAME
 import com.example.ugotprototype.ui.group.viewmodel.GroupViewModel
 
 class GroupMiddleViewRecyclerViewAdapter(private val viewModel: GroupViewModel) :
@@ -71,6 +72,7 @@ class GroupMiddleViewRecyclerViewAdapter(private val viewModel: GroupViewModel) 
     fun goToPostDetail(item: GroupMiddleViewData, context: Context) {
         Intent(context, GroupDetailActivity::class.java).apply {
             putExtra(GROUP_ID, item.groupId)
+            putExtra(GROUP_NAME, item.githubUrl)
             context.startActivity(this)
         }
     }

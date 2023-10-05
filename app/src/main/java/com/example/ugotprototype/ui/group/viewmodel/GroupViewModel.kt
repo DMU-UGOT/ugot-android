@@ -25,9 +25,6 @@ class GroupViewModel @Inject constructor(
     private val _itemCount = MutableLiveData<Int>()
     val itemCount: LiveData<Int> = _itemCount
 
-    private val _engagementRate = MutableLiveData<ArrayList<GroupEngagementData>>()
-    val engagementRateData: LiveData<ArrayList<GroupEngagementData>> = _engagementRate
-
     private val _groupMaxPersonnel = MutableLiveData<Int>()
     var groupMaxPersonnel: LiveData<Int> = _groupMaxPersonnel
 
@@ -42,10 +39,6 @@ class GroupViewModel @Inject constructor(
 
     private val _getFavoritesList = MutableLiveData<List<GroupGetFavoritesList>>()
     val getFavoritesList: LiveData<List<GroupGetFavoritesList>> = _getFavoritesList
-
-    fun setEngagementRate(data: ArrayList<GroupEngagementData>) {
-        _engagementRate.value = data
-    }
 
     fun getGroupList() {
         _isLoadingPage.value = false

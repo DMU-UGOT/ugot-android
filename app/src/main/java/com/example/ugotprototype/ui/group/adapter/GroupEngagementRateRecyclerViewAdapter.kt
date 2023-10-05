@@ -24,8 +24,8 @@ class GroupEngagementRateRecyclerViewAdapter() :
         @SuppressLint("SetTextI18n")
         fun bind(position: Int) {
             binding.tvUserIndex.text = (position+1).toString()
-            binding.tvUserName.text = groupEngagementRateItemList[position].name
-            binding.tvCommitCount.text = groupEngagementRateItemList[position].commit.toString()
+            binding.tvUserName.text = groupEngagementRateItemList[position].login
+            binding.tvCommitCount.text = groupEngagementRateItemList[position].contributions.toString()
             Glide.with(binding.root.context).load(groupEngagementRateItemList[position].avatarUrl)
                 .into(binding.ivUserImg)
 
