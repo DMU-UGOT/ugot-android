@@ -3,6 +3,7 @@
     <item
         android:id="@+id/menu_item1"
         android:title="그룹 탈퇴" />
+
     <item
         android:id="@+id/menu_item2"
         android:title="그룹 삭제" />
@@ -13,5 +14,9 @@
 
     <item
         android:id="@+id/menu_item4"
-        android:title="그룹 강제퇴장"/>
+        android:title="그룹 강제퇴장" />
+
+    <item
+        android:id="@+id/menu_item5"
+        android:title="팀장 권한 넘기기" />
 </menu>

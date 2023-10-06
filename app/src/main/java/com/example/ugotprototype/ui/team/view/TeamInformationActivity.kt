@@ -1,7 +1,6 @@
 package com.example.ugotprototype.ui.team.view
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -27,7 +26,7 @@ class TeamInformationActivity : AppCompatActivity() {
         binding.rvTeamInformation.adapter = rvAdapter
 
         teamInformationViewModel.isLoadingPage.observe(this) {
-            if(it) {
+            if (it) {
                 loadingLayoutHelper.dismissLoadingDialog()
             } else {
                 loadingLayoutHelper.showLoadingDialog()
@@ -35,8 +34,6 @@ class TeamInformationActivity : AppCompatActivity() {
         }
 
         teamInformationViewModel.getTeamInformationList(intent.getIntExtra(TEAM_ID, 0))
-
-        Log.d("test", intent.getIntExtra(TEAM_ID, 0).toString())
 
         binding.ivTeamPrev.setOnClickListener {
             finish()

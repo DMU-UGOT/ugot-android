@@ -157,4 +157,14 @@ class GroupDetailViewModel @Inject constructor(
             }
         }
     }
+
+    fun getAccountNickname(callback: (String) -> Unit) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                profileService.getUserInfo(sharedPreference.getMemberId().toString())
+            }.onSuccess {
+                callback(it.nickname)
+            }
+        }
+    }
 }

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_profile_image"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_team_infor_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:text="닉네임"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/iv_profile_image"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_team_leader"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/ic_team_leader"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_team_infor_name"
+            app:layout_constraintStart_toEndOf="@+id/tv_team_infor_name"
+            app:layout_constraintTop_toTopOf="@+id/tv_team_infor_name" />
+
+        <ImageView
+            android:id="@+id/iv_menu"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="15dp"
+            android:src="@drawable/ic_hamburger"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_team_infor_name" />
+
+        <TextView
+            android:id="@+id/tv_infor_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="관심분야"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="@+id/tv_team_infor_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_team_infor_name" />
+
+        <TextView
+            android:id="@+id/tv_infor_team_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="UGOT PROJECT"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/tv_infor_field"
+            app:layout_constraintTop_toBottomOf="@+id/tv_infor_field" />
+
+        <TextView
+            android:id="@+id/tv_git"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Git : "
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/tv_infor_team_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_infor_team_name" />
+
+        <TextView
+            android:id="@+id/tv_git_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autoLink="web"
+            android:linksClickable="true"
+            android:text="https://github.com/arab1209"
+            android:textColorLink="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_git"
+            app:layout_constraintStart_toEndOf="@+id/tv_git" />
+
+        <TextView
+            android:id="@+id/tv_blog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Blog : "
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/tv_git"
+            app:layout_constraintTop_toBottomOf="@+id/tv_git" />
+
+        <TextView
+            android:id="@+id/tvBlogLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autoLink="web"
+            android:linksClickable="true"
+            android:textColorLink="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_blog"
+            app:layout_constraintStart_toEndOf="@+id/tv_blog"
+            tools:text="https://dev-baik.tistory.com/" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/color_F0F1F3"
+            app:layout_constraintTop_toBottomOf="@+id/tv_blog" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

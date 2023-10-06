@@ -63,11 +63,19 @@ class GroupDetailActivity : AppCompatActivity() {
         viewModel.isQuitGroup.observe(this) {
             if (it) {
                 finish()
+            } else {
+                Toast.makeText(this, "그룹의 팀장은 탈퇴할 수 없습니다.", Toast.LENGTH_SHORT).show()
             }
         }
 
         binding.fabGroupNoticeWrite.setOnClickListener {
-            bottomSheetDialogCreate()
+            viewModel.getAccountNickname {
+                if (it == groupLeaderId) {
+                    bottomSheetDialogCreate()
+                } else {
+                    Toast.makeText(this, "그룹의 팀장만 작성이 가능합니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
         backToMain()
@@ -189,6 +197,16 @@ class GroupDetailActivity : AppCompatActivity() {
                         R.id.menu_item4 -> {
                             Intent(
                                 this@GroupDetailActivity, GroupForcedExitActivity::class.java
+                            ).apply {
+                                putExtra(GROUP_ID, groupId)
+                                startActivity(this)
+                            }
+                            true
+                        }
+
+                        R.id.menu_item5 -> {
+                            Intent(
+                                this@GroupDetailActivity, GroupHandOverActivity::class.java
                             ).apply {
                                 putExtra(GROUP_ID, groupId)
                                 startActivity(this)

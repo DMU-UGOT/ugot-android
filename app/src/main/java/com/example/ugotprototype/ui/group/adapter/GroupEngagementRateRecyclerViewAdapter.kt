@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ugotprototype.data.group.GroupCalendarData
 import com.example.ugotprototype.data.group.GroupEngagementData
+import com.example.ugotprototype.data.group.GroupPostWriteData
 import com.example.ugotprototype.databinding.ItemGroupCalendarNoticeListBinding
 import com.example.ugotprototype.databinding.ItemGroupEngagementRateListBinding
 import java.time.LocalDate
@@ -22,14 +23,16 @@ class GroupEngagementRateRecyclerViewAdapter() :
     inner class MyViewHolder(val binding: ItemGroupEngagementRateListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun bind(position: Int) {
-            binding.tvUserIndex.text = (position+1).toString()
-            binding.tvUserName.text = groupEngagementRateItemList[position].login
-            binding.tvCommitCount.text = groupEngagementRateItemList[position].contributions.toString()
-            Glide.with(binding.root.context).load(groupEngagementRateItemList[position].avatarUrl)
-                .into(binding.ivUserImg)
+        fun bind(item: GroupEngagementData) {
 
-            if(bindingAdapterPosition % 2 == 1) {
+            with(binding) {
+                tvUserIndex.text = (bindingAdapterPosition + 1).toString()
+                tvUserName.text = item.login
+                tvCommitCount.text = item.contributions.toString()
+                Glide.with(binding.root.context).load(item.avatarUrl).into(binding.ivUserImg)
+            }
+
+            if (bindingAdapterPosition % 2 == 1) {
                 binding.objectLayout.setBackgroundColor(Color.parseColor("#10636363"))
             }
         }
@@ -43,7 +46,7 @@ class GroupEngagementRateRecyclerViewAdapter() :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(position)
+        holder.bind(groupEngagementRateItemList[position])
     }
 
     override fun getItemCount() = groupEngagementRateItemList.size
@@ -54,7 +57,6 @@ class GroupEngagementRateRecyclerViewAdapter() :
 
     fun setData(data: ArrayList<GroupEngagementData>) {
         groupEngagementRateItemList = data
-        Log.d("data", "$data")
         notifyDataSetChanged()
     }
 }

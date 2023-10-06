@@ -86,19 +86,19 @@ interface GroupService {
 
     @POST("groups/{groupId}/{applicationId}/accept")
     suspend fun receiveApplication(
-        @Path("groupId") groupId: Int,
-        @Path("applicationId") application: Int
+        @Path("groupId") groupId: Int, @Path("applicationId") application: Int
     )
 
     @DELETE("groups/{groupId}/{applicationId}/turnDown")
     suspend fun rejectApplication(
-        @Path("groupId") groupId: Int,
-        @Path("applicationId") application: Int
+        @Path("groupId") groupId: Int, @Path("applicationId") application: Int
     )
 
     @DELETE("groups/{groupId}/{memberId}/expulsion")
     suspend fun groupForcedExit(
-        @Path("groupId") groupId: Int,
-        @Path("memberId") memberId: Int
+        @Path("groupId") groupId: Int, @Path("memberId") memberId: Int
     )
+
+    @PATCH("groups/{groupId}/{memberId}/handOver")
+    suspend fun handOverLeader(@Path("groupId") groupId: Int, @Path("memberId") memberId: Int)
 }

@@ -28,7 +28,7 @@ class GroupEngagementRateViewModel @Inject constructor(private val apiService: A
 
                 val repositories = apiService.getOrganizationRepositories(groupName)
 
-                for (repository in repositories!!) {
+                repositories?.forEach { repository ->
                     val response = apiService.getRepositoryContributors(groupName, repository.name)
 
                     if (response.isSuccessful) {
@@ -41,9 +41,11 @@ class GroupEngagementRateViewModel @Inject constructor(private val apiService: A
                             if (existingMember != null) {
                                 existingMember.contributions += contributor.contributions
                             } else {
+                                val avatarUrl = apiService.getUser(contributor.login)?.avatar_url
+
                                 groupEngagementData.add(
                                     GroupEngagementData(
-                                        contributor.login, "", contributor.contributions
+                                        contributor.login, avatarUrl!!, contributor.contributions
                                     )
                                 )
                             }
@@ -53,7 +55,8 @@ class GroupEngagementRateViewModel @Inject constructor(private val apiService: A
                     }
                 }
 
-                _engagementRate.value = groupEngagementData
+                _engagementRate.value =
+                    ArrayList(groupEngagementData.sortedByDescending { it.contributions })
             }.onSuccess {
                 _isLoadingPage.value = true
             }.onFailure {
