@@ -41,6 +41,10 @@ class GroupHandOverRecyclerViewAdapter(
             binding.ivMenu.setOnClickListener {
                 popUpMenu(it, item.memberId)
             }
+
+            if(bindingAdapterPosition == 0) {
+                binding.ivMenu.visibility = View.INVISIBLE
+            }
         }
     }
 
