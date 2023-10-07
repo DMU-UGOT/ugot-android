@@ -107,7 +107,7 @@
                 app:layout_constraintBottom_toTopOf="@id/tv_community_change_date_input"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="가능" />
+                tools:text="교환 가능" />
 
             <TextView
                 android:id="@+id/tv_community_change_date_input"

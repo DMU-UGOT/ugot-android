@@ -271,8 +271,8 @@
                     android:textColor="@color/black"
                     android:textSize="15dp"
                     android:visibility="invisible"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="@id/community_change_detail_v4"
+                    app:layout_constraintEnd_toEndOf="parent"
                     tools:text="11" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

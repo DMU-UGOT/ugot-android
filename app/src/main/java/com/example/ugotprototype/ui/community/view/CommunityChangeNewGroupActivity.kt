@@ -7,12 +7,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.R
 import com.example.ugotprototype.data.change.CommunityChangeNewPostData
-import com.example.ugotprototype.data.community.CommunityGeneralNewPostData
 import com.example.ugotprototype.databinding.ActivityCommunityChangeNewGroupBinding
 import com.example.ugotprototype.databinding.ActivityDialogMessageBinding
 import com.example.ugotprototype.ui.community.viewmodel.CommunityChangeNewGroupViewModel

@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.example.ugotprototype.ui.community.viewmodel.CommunityChangeUpdateViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -171,6 +178,41 @@
                     android:background="@color/color_F0F1F3"
                     app:layout_constraintStart_toEndOf="@+id/tv_change_update_text2"
                     app:layout_constraintTop_toBottomOf="@id/tv_change_update_text3" />
+
+                <TextView
+                    android:id="@+id/tv_change_update_text4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@android:color/transparent"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="15dp"
+                    android:text="변경 상태를 선택해주세요"
+                    android:textSize="15dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_change_update_text3" />
+
+                <Spinner
+                    android:id="@+id/sp_change_update_change_status"
+                    android:layout_width="115dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="25dp"
+                    android:paddingStart="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:textSize="13dp"
+                    app:layout_constraintStart_toEndOf="@id/tv_change_update_text4"
+                    app:layout_constraintTop_toBottomOf="@id/tv_change_update_text3" />
+
+                <View
+                    android:id="@+id/change_update_v4"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/color_F0F1F3"
+                    app:layout_constraintStart_toEndOf="@+id/tv_change_update_text3"
+                    app:layout_constraintTop_toBottomOf="@id/tv_change_update_text4" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

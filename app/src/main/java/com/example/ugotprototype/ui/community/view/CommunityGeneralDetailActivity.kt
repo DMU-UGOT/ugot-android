@@ -16,11 +16,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ugotprototype.R
 import com.example.ugotprototype.data.community.CommunityGeneralCommentNewPostData
 import com.example.ugotprototype.data.community.CommunityGeneralRefreshData
-import com.example.ugotprototype.data.community.CommunityGeneralUpdateViewData
 import com.example.ugotprototype.databinding.ActivityDialogDeleteMessageBinding
 import com.example.ugotprototype.databinding.FragmentCommunityGeneralDetailBinding
 import com.example.ugotprototype.ui.community.adapter.CommunityGeneralChatRecyclerViewAdapter
-import com.example.ugotprototype.ui.community.view.CommunityGeneralFragment.Companion.GENERAL_CREATE_AT
 import com.example.ugotprototype.ui.community.view.CommunityGeneralFragment.Companion.GENERAL_ID
 import com.example.ugotprototype.ui.community.viewmodel.CommunityGeneralChatViewModel
 import com.example.ugotprototype.ui.community.viewmodel.CommunityGeneralDetailViewModel

@@ -3,6 +3,7 @@ package com.example.ugotprototype.data.api
 import com.example.ugotprototype.data.change.CommunityChangeNewPostData
 import com.example.ugotprototype.data.change.CommunityChangePostViewData
 import com.example.ugotprototype.data.change.CommunityChangeRefreshData
+import com.example.ugotprototype.data.change.CommunityChangeUpdateViewData
 import com.example.ugotprototype.data.response.CommunityChangeDataResponse
 import retrofit2.http.*
 
@@ -15,6 +16,12 @@ interface ChangeService {
 
     @GET("classChanges/{classChangeId}")
     suspend fun getChangeDetail(@Path("classChangeId") classChangeId: Int): CommunityChangePostViewData
+
+    @PATCH("classChanges/{classChangeId}")
+    suspend fun updateChangeCommunity(
+        @Path("classChangeId") classChangeId: Int,
+        @Body updatedData: CommunityChangeUpdateViewData
+    )
 
     @DELETE("classChanges/{classChangeId}")
     suspend fun deleteChangeDetail(@Path("classChangeId") classChangeId: Int)

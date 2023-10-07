@@ -6,17 +6,18 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.R
 import com.example.ugotprototype.data.change.CommunityChangeRefreshData
-import com.example.ugotprototype.data.community.CommunityGeneralRefreshData
 import com.example.ugotprototype.databinding.ActivityCommunityChangeDetailBinding
 import com.example.ugotprototype.databinding.ActivityCommunityChangeSendMessageBinding
 import com.example.ugotprototype.databinding.ActivityDialogDeleteMessageBinding
+import com.example.ugotprototype.ui.community.view.CommunityChangeFragment.Companion.CHANGE_CLASS_CHANGE_ID
 import com.example.ugotprototype.ui.community.viewmodel.CommunityChangeDetailViewModel
-import com.example.ugotprototype.ui.community.viewmodel.CommunityChangeViewModel
+import com.example.ugotprototype.ui.community.viewmodel.CommunityChangeUpdateViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -25,16 +26,11 @@ import java.time.format.DateTimeFormatter
 class CommunityChangeDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCommunityChangeDetailBinding
     private val communityChangeDetailViewModel: CommunityChangeDetailViewModel by viewModels()
-    private val communityChangeViewModel: CommunityChangeViewModel by viewModels()
+    private val communityChangeUpdateViewModel: CommunityChangeUpdateViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_community_change_detail)
-
-
-        binding.tvChangeDelete.setOnClickListener {
-            showDeleteCheckDialog()
-        }
 
         dataChangeSet()
 
@@ -48,12 +44,21 @@ class CommunityChangeDetailActivity : AppCompatActivity() {
             binding.ivCmuChangeResetTime.visibility = View.GONE
         }
 
+        binding.tvChangeDelete.setOnClickListener {
+            showDeleteCheckDialog()
+        }
+
+        communityChangeUpdateViewModel.dataUpdate.observe(this) { isDataUpdate ->
+            if (isDataUpdate) {
+                setResult(Activity.RESULT_OK, Intent())
+                finish()
+            }
+        }
+
         resetTime(intent.getIntExtra(CommunityChangeFragment.CHANGE_CLASS_CHANGE_ID, 0))
         backCommunityChangeToMainActivity()
 
-
-
-
+        goToChangeUpdateResult()
         clickSendMessage()
 
 
@@ -79,6 +84,24 @@ class CommunityChangeDetailActivity : AppCompatActivity() {
         }
     }
 
+    private fun goToChangeUpdateResult() {
+        val goToChangeUpdateResultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    communityChangeDetailViewModel.getCommunityChangeDetailList(intent.getIntExtra(CHANGE_CLASS_CHANGE_ID, 0))
+                }
+            }
+
+        binding.tvChangeNewUpdate.setOnClickListener {
+            goToChangeUpdateResultLauncher.launch(
+                Intent(
+                    applicationContext,
+                    CommunityChangeUpdateGroupActivity::class.java
+                ).putExtra(CHANGE_CLASS_CHANGE_ID, intent.getIntExtra(CHANGE_CLASS_CHANGE_ID, 0))
+            )
+        }
+    }
+
     @SuppressLint("SetTextI18n")
     private fun dataChangeSet() {
         with(binding) {
@@ -95,8 +118,6 @@ class CommunityChangeDetailActivity : AppCompatActivity() {
             tvCommunityChangeMemberId.text = intent.getIntExtra(CommunityChangeFragment.CHANGE_MEMBER_ID, 0).toString()
         }
     }
-
-
 
     private fun clickSendMessage() {
         binding.btChangeNewMessage.setOnClickListener {
@@ -125,7 +146,6 @@ class CommunityChangeDetailActivity : AppCompatActivity() {
         }
         alertDialog.show()
     }
-
 
     // 삭제
     private fun showDeleteCheckDialog() {

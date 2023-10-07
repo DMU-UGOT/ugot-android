@@ -11,13 +11,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.ugotprototype.R
-import com.example.ugotprototype.data.change.CommunityChangeViewData
 import com.example.ugotprototype.databinding.FragmentCommunityChangeBinding
 import com.example.ugotprototype.ui.community.adapter.CommunityChangeRecyclerViewAdapter
 import com.example.ugotprototype.ui.community.viewmodel.CommunityChangeDetailViewModel
 import com.example.ugotprototype.ui.community.viewmodel.CommunityChangeViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class CommunityChangeFragment : Fragment() {
@@ -90,7 +88,7 @@ class CommunityChangeFragment : Fragment() {
                 Intent(
                     requireContext(),
                     CommunityChangeDetailActivity::class.java
-                ).putExtra(CommunityChangeFragment.CHANGE_CLASS_CHANGE_ID, classChangeId)
+                ).putExtra(CHANGE_CLASS_CHANGE_ID, classChangeId)
             )
         }
     }

@@ -5,7 +5,6 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ugotprototype.data.change.CommunityChangeViewData
 import com.example.ugotprototype.data.response.CommunityChangePostResponse
 import com.example.ugotprototype.databinding.ItemCommunityChangeListBinding
 import com.example.ugotprototype.ui.community.view.CommunityChangeDetailActivity
