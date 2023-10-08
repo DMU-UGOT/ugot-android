@@ -99,7 +99,6 @@
 
     <!--Change Update Group Activity-->
     <string-array name="change_update_grade">
-        <item>미선택</item>
         <item>1학년</item>
         <item>2학년</item>
         <item>3학년</item>
@@ -107,7 +106,6 @@
     </string-array>
 
     <string-array name="change_update_now_class">
-        <item>미선택</item>
         <item>YA</item>
         <item>YB</item>
         <item>YC</item>
@@ -117,7 +115,6 @@
     </string-array>
 
     <string-array name="change_update_now_change_class">
-        <item>미선택</item>
         <item>YA</item>
         <item>YB</item>
         <item>YC</item>

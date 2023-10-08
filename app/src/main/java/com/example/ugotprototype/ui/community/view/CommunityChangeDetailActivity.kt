@@ -60,20 +60,6 @@ class CommunityChangeDetailActivity : AppCompatActivity() {
 
         goToChangeUpdateResult()
         clickSendMessage()
-
-
-        // 아이템 정보 받기
-//        var comChangeExchange = intent.getStringExtra("comChangeExchange")
-
-        // 거래 상태 표시
-//        binding.tvCommunityChangeDetailExchange.text = comChangeExchange
-
-        // 수정 버튼 클릭 이벤트 처리
-//        binding.btChangeNewUpdate.setOnClickListener {
-//            // 거래 상태를 "완료"와 "가능" 사이에서 토글합니다.
-//            comChangeExchange = if (comChangeExchange == "완료") "가능" else "완료"
-//            binding.tvCommunityChangeDetailExchange.text = comChangeExchange
-//        }
     }
 
     private fun backCommunityChangeToMainActivity() {

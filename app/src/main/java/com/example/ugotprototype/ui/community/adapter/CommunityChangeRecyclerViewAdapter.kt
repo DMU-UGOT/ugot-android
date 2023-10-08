@@ -2,6 +2,7 @@ package com.example.ugotprototype.ui.community.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -41,12 +42,11 @@ class CommunityChangeRecyclerViewAdapter :
             }
 
 //             ComChangeExchange 값에 따라 텍스트 색상 설정
-//            when(binding.tvCommunityChangeExchangeInput) {
-//                "교환 가능" -> binding.tvCommunityChangeExchangeInput.setTextColor(Color.parseColor("#14A492")) // 녹색
-//                "교환 대기" -> binding.tvCommunityChangeExchangeInput.setTextColor(Color.parseColor("#F1BD1A")) // 노란색
-//                "교환 완료" -> binding.tvCommunityChangeExchangeInput.setTextColor(Color.parseColor("#BE2E22")) // 빨간색
-//                else -> binding.tvCommunityChangeExchangeInput.setTextColor(Color.BLACK) // 기본 검은색
-//            }
+            when(item.status) {
+                "교환 가능" -> binding.tvCommunityChangeExchangeInput.setTextColor(Color.parseColor("#14A492")) // 녹색
+                "교환 대기" -> binding.tvCommunityChangeExchangeInput.setTextColor(Color.parseColor("#F1BD1A")) // 노란색
+                "교환 완료" -> binding.tvCommunityChangeExchangeInput.setTextColor(Color.parseColor("#BE2E22")) // 빨간색
+            }
         }
 
         private fun formatDate(dateString: String): String {
