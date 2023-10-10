@@ -1,6 +1,5 @@
 package com.example.ugotprototype.ui.community.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,12 +18,16 @@ class CommunityChangeDetailViewModel @Inject constructor(
     private val sharedPreference: SharedPreference
 ) : ViewModel() {
     private val _communityChangeDetailData = MutableLiveData<CommunityChangePostViewData>()
-    val communityChangeDetailData: LiveData<CommunityChangePostViewData> = _communityChangeDetailData
+    val communityChangeDetailData: LiveData<CommunityChangePostViewData> =
+        _communityChangeDetailData
 
     private val _dataRefresh = MutableLiveData<Boolean>()
     val dataRefresh: LiveData<Boolean> = _dataRefresh
 
-    fun getCommunityChangeDetailList(classChangeId:Int){
+    private val _isDeleteChangeGroup = MutableLiveData<Boolean>()
+    val isDeleteChangeGroup: LiveData<Boolean> = _isDeleteChangeGroup
+
+    fun getCommunityChangeDetailList(classChangeId: Int) {
         viewModelScope.launch {
             kotlin.runCatching {
                 val data = changeService.getChangeDetail(classChangeId)
@@ -38,10 +41,9 @@ class CommunityChangeDetailViewModel @Inject constructor(
             kotlin.runCatching {
                 changeService.deleteChangeDetail(classChangeId)
             }.onSuccess {
-                Log.d("delete", "삭제완료")
+                _isDeleteChangeGroup.value = true
             }.onFailure {
-                Log.d("삭제 실패", it.toString())
-                Log.d("deleteX", it.toString())
+                _isDeleteChangeGroup.value = false
             }
         }
     }
@@ -50,15 +52,15 @@ class CommunityChangeDetailViewModel @Inject constructor(
         return sharedPreference.getMemberId()
     }
 
-    fun refreshData(classChangeId: Int, communityChangeRefreshData: CommunityChangeRefreshData){
+    fun refreshData(classChangeId: Int, communityChangeRefreshData: CommunityChangeRefreshData) {
         viewModelScope.launch {
             kotlin.runCatching {
                 var data = changeService.refreshChange(classChangeId, communityChangeRefreshData)
             }.onSuccess { result ->
-                _dataRefresh.value = true}
-                .onFailure { exception ->
-                    _dataRefresh.value = false
-                }
+                _dataRefresh.value = true
+            }.onFailure { exception ->
+                _dataRefresh.value = false
+            }
         }
     }
 }
