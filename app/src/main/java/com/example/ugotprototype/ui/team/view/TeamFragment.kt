@@ -1,12 +1,10 @@
 package com.example.ugotprototype.ui.team.view
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -27,13 +25,19 @@ class TeamFragment : Fragment() {
     private lateinit var binding: FragmentTeamBinding
     private val teamViewModel: TeamViewModel by viewModels()
     private lateinit var teamRecyclerViewAdapter: TeamRecyclerViewAdapter
-    private val loadingLayoutHelper: LoadingLayoutHelper by lazy { LoadingLayoutHelper(parentFragmentManager) }
+    private val loadingLayoutHelper: LoadingLayoutHelper by lazy {
+        LoadingLayoutHelper(
+            parentFragmentManager
+        )
+    }
     private lateinit var sharedPreference: SharedPreference
 
     companion object {
         const val TEAM_ID = "teamId"
         const val TOKEN_DATA = BuildConfig.GITHUB_KEY
         const val TEAM_STATUS = "teamStatus"
+        const val TEAM_PERSON_CNT = "teamPersonCnt"
+        const val TEAM_GITHUB_LINK = "teamGitHubLink"
     }
 
     override fun onCreateView(
@@ -67,7 +71,6 @@ class TeamFragment : Fragment() {
 
         teamViewModel.currentPage.observe(viewLifecycleOwner) {
             binding.teamPageFirstText.text = it.toString()
-            teamViewModel.getTeamList()
         }
 
         teamViewModel.isTokenExpired.observe(viewLifecycleOwner) {
@@ -77,7 +80,7 @@ class TeamFragment : Fragment() {
         }
 
         teamViewModel.isLoadingPage.observe(viewLifecycleOwner) {
-            if(it) {
+            if (it) {
                 loadingLayoutHelper.dismissLoadingDialog()
             } else {
                 loadingLayoutHelper.showLoadingDialog()
@@ -89,16 +92,8 @@ class TeamFragment : Fragment() {
     }
 
     private fun goToTeamSearchDetail() {
-
-        val goToSearchResultLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                if (result.resultCode == Activity.RESULT_OK) {
-                    teamViewModel.getTeamList()
-                }
-            }
-
         binding.btGoDetailSearch.setOnClickListener {
-            goToSearchResultLauncher.launch(
+            startActivity(
                 Intent(
                     requireContext(), TeamSearchDetailActivity::class.java
                 )
@@ -107,18 +102,15 @@ class TeamFragment : Fragment() {
     }
 
     private fun goToTeamPostWriteDetail() {
-
-        val goToPostWriteResultLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                if (result.resultCode == Activity.RESULT_OK) {
-                    teamViewModel.getTeamList()
-                }
-            }
-
         binding.fabTeam.setOnClickListener {
-            goToPostWriteResultLauncher.launch(
+            startActivity(
                 Intent(requireContext(), TeamPostWriteDetailActivity::class.java)
             )
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        teamViewModel.getTeamList()
     }
 }

@@ -25,7 +25,7 @@ class ProfileMyStudyPostPatchViewModel @Inject constructor(
 ) : ViewModel() {
 
     companion object {
-        const val BASE_URL_PATTERN = "open\\.kakao\\.com/[A-Za-z0-9]+"
+        const val BASE_URL_PATTERN = "(https?://)?open\\.kakao\\.com/[A-Za-z0-9]+"
     }
 
     private val _isStudyPostRegisterBtnEnabled = MutableLiveData<Boolean>()
@@ -42,9 +42,6 @@ class ProfileMyStudyPostPatchViewModel @Inject constructor(
 
     private val _selectSpinner = MutableLiveData<Int>()
     val selectSpinner: LiveData<Int> = _selectSpinner
-
-    private val _isTeamExists = MutableLiveData<Boolean>()
-    val isTeamExists: LiveData<Boolean> = _isTeamExists
 
     private val _createFinish = MutableLiveData<Boolean>()
     val createFinish: LiveData<Boolean> = _createFinish
@@ -75,16 +72,6 @@ class ProfileMyStudyPostPatchViewModel @Inject constructor(
         override fun onNothingSelected(parent: AdapterView<*>?) {}
     }
 
-    val onSeekBarChangeListener = object : SeekBar.OnSeekBarChangeListener {
-        override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-            _seekBar.value = progress
-        }
-
-        override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-
-        override fun onStopTrackingTouch(seekBar: SeekBar?) {}
-    }
-
     fun isKakaoOpenChatBaseURL(input: String, callback: (String) -> Unit) {
         if (input.matches(BASE_URL_PATTERN.toRegex())) {
             callback("success")
@@ -98,14 +85,6 @@ class ProfileMyStudyPostPatchViewModel @Inject constructor(
             kotlin.runCatching {
                 _studyItemList.value = profileService.getStudy(teamId)
             }
-        }
-    }
-
-    fun isStudyExists(gitHubLink: String) {
-        viewModelScope.launch {
-            kotlin.runCatching {
-                apiService.getOrganization(gitHubLink)
-            }.onSuccess { _isTeamExists.value = true }.onFailure { _isTeamExists.value = false }
         }
     }
 

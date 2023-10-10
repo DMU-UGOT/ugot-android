@@ -22,6 +22,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageView
+                android:id="@+id/study_hamburger"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_group_hambuger"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -272,11 +283,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="동양미래대학교 IT 플랫폼"
                         android:textColor="@color/black"
                         android:textSize="14dp"
                         app:layout_constraintStart_toStartOf="@+id/tv_post_title"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_subject_title" />
+                        app:layout_constraintTop_toBottomOf="@+id/tv_subject_title"
+                        tools:text="동양미래대학교 IT 플랫폼" />
 
                     <View
                         android:id="@+id/line_subject"
@@ -303,11 +314,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="안드로이드 애플리케이션"
                         android:textColor="@color/black"
                         android:textSize="14dp"
                         app:layout_constraintStart_toStartOf="@+id/tv_post_title"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_field_title" />
+                        app:layout_constraintTop_toBottomOf="@+id/tv_field_title"
+                        tools:text="안드로이드 애플리케이션" />
 
                     <View
                         android:id="@+id/line_field"

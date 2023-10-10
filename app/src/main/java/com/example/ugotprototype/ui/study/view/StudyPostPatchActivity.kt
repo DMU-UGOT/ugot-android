@@ -1,4 +1,4 @@
-package com.example.ugotprototype.ui.profile.view
+package com.example.ugotprototype.ui.study.view
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -20,7 +20,7 @@ import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_PERSON
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ProfileStudyPostPatchActivity : AppCompatActivity() {
+class StudyPostPatchActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileStudyPostPatchBinding
     private val viewModel: ProfileMyStudyPostPatchViewModel by viewModels()
     private lateinit var adapter: ArrayAdapter<CharSequence>
@@ -29,7 +29,6 @@ class ProfileStudyPostPatchActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_study_new_group)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_profile_study_post_patch)
         binding.lifecycleOwner = this

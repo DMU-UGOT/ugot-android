@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -61,6 +63,24 @@ class TeamPostWriteDetailActivity : AppCompatActivity() {
             binding.groupSpinner.adapter = adapter
         }
 
+        teamPostWriteViewModel.gitHubUrl.observe(this) {
+            binding.etInputGithubLink.setText(it)
+        }
+
+        binding.groupSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                teamPostWriteViewModel.getGroupDetailData(position)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+        }
         spinnerSetting()
         backToMainActivity()
     }

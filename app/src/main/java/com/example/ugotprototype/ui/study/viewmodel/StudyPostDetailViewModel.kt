@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.ugotprototype.SharedPreference
 import com.example.ugotprototype.data.api.GroupService
+import com.example.ugotprototype.data.api.ProfileService
 import com.example.ugotprototype.data.api.StudyService
 import com.example.ugotprototype.data.study.StudyGetPost
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,13 +16,18 @@ import javax.inject.Inject
 @HiltViewModel
 class StudyPostDetailViewModel @Inject constructor(
     private val studyService: StudyService,
-    private val groupService: GroupService
+    private val groupService: GroupService,
+    private val profileService: ProfileService,
+    private val sharedPreference: SharedPreference
 ) : ViewModel() {
     private val _studyDetailData = MutableLiveData<StudyGetPost>()
     val studyDetailData: LiveData<StudyGetPost> = _studyDetailData
 
     private val _isDuplicateGroupPerson = MutableLiveData<Boolean>()
     val isDuplicateGroupPerson: LiveData<Boolean> = _isDuplicateGroupPerson
+
+    private val _isPostDelete = MutableLiveData<Boolean>()
+    val isPostDelete: LiveData<Boolean> = _isPostDelete
 
     fun sendApplication(groupId: Int) {
         viewModelScope.launch {
@@ -40,6 +47,30 @@ class StudyPostDetailViewModel @Inject constructor(
                 studyService.getStudy(studyId)
             }.onSuccess {
                 _studyDetailData.value = it
+            }
+        }
+    }
+
+    fun getMyNickName(callback: (String) -> Unit) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                profileService.getUserInfo(sharedPreference.getMemberId().toString())
+            }.onSuccess {
+                callback(it.nickname)
+            }.onFailure {
+                callback("")
+            }
+        }
+    }
+
+    fun deleteMyPost(postId: Int) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                profileService.deleteStudyPost(postId)
+            }.onSuccess {
+                _isPostDelete.value = true
+            }.onFailure {
+                _isPostDelete.value = false
             }
         }
     }

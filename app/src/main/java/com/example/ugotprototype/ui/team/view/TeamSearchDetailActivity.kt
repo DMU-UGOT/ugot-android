@@ -23,6 +23,10 @@ class TeamSearchDetailActivity : AppCompatActivity() {
     private lateinit var teamSearchRecyclerViewAdapter: TeamSearchRecyclerViewAdapter
     private val loadingLayoutHelper: LoadingLayoutHelper by lazy { LoadingLayoutHelper(this.supportFragmentManager) }
 
+    companion object {
+        private var searchQuery: String = ""
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_team_search_detail)
@@ -36,7 +40,7 @@ class TeamSearchDetailActivity : AppCompatActivity() {
         }
 
         teamSearchViewModel.isLoadingPage.observe(this) {
-            if(it) {
+            if (it) {
                 loadingLayoutHelper.dismissLoadingDialog()
             } else {
                 loadingLayoutHelper.showLoadingDialog()
@@ -59,6 +63,7 @@ class TeamSearchDetailActivity : AppCompatActivity() {
         val queryTextListener = object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 teamSearchViewModel.searchTeams(query.toString())
+                searchQuery = query!!
                 return true
             }
 
@@ -68,5 +73,18 @@ class TeamSearchDetailActivity : AppCompatActivity() {
         }
 
         binding.svTextInput.setOnQueryTextListener(queryTextListener)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (searchQuery != "") {
+            teamSearchViewModel.searchTeams(searchQuery)
+            binding.svTextInput.setQuery(searchQuery, false)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        searchQuery = ""
     }
 }

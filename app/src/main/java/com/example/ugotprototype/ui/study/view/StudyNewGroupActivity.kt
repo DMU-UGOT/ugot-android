@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -64,6 +66,24 @@ class StudyNewGroupActivity : AppCompatActivity() {
             }
         }
 
+        studyViewModel.gitHubUrl.observe(this) {
+            binding.etStNewGitLink.setText(it)
+        }
+
+        binding.groupSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                studyViewModel.getGroupDetailData(position)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+        }
 
         spinnerMeetChoice()
         backStudyNewToMainActivity()

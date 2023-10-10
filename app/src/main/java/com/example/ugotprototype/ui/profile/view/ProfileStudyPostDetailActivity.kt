@@ -15,6 +15,8 @@ import com.example.ugotprototype.ui.group.view.GroupFragment.Companion.GROUP_ID
 import com.example.ugotprototype.ui.profile.viewmodel.ProfileMyStudyPostDetailViewModel
 import com.example.ugotprototype.ui.study.view.StudyInformationActivity
 import com.example.ugotprototype.ui.team.view.TeamFragment
+import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_GITHUB_LINK
+import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_PERSON_CNT
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -24,6 +26,9 @@ class ProfileStudyPostDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileStudyPostDetailBinding
     private lateinit var teamStatusCnt: String
     private val viewModel: ProfileMyStudyPostDetailViewModel by viewModels()
+    private var totalPersonCount: Int = 0
+    private var gitHubLink: String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_profile_study_post_detail)
@@ -75,6 +80,8 @@ class ProfileStudyPostDetailActivity : AppCompatActivity() {
             goToSearchResultLauncher.launch(
                 Intent(this, ProfileStudyPostPatchActivity::class.java).apply {
                     putExtra(TeamFragment.TEAM_ID, intent.getIntExtra(TeamFragment.TEAM_ID, 0))
+                    putExtra(TEAM_PERSON_CNT, totalPersonCount)
+                    putExtra(TEAM_GITHUB_LINK, gitHubLink)
                 }
             )
         }
@@ -82,6 +89,9 @@ class ProfileStudyPostDetailActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun viewSetting(team: StudyGetPost) {
+        totalPersonCount = team.allPersonnel
+        gitHubLink = team.gitHubLink
+
         with(binding) {
             teamStatusCnt = team.nowPersonnel.toString()
             tvPostTitle.text = team.title

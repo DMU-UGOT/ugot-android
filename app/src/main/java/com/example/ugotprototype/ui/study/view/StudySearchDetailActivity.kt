@@ -23,6 +23,10 @@ class StudySearchDetailActivity : AppCompatActivity() {
     private lateinit var studySearchRecyclerViewAdapter: StudySearchRecyclerViewAdapter
     private val loadingLayoutHelper: LoadingLayoutHelper by lazy { LoadingLayoutHelper(this.supportFragmentManager) }
 
+    companion object {
+        private var searchQuery: String = ""
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -37,7 +41,7 @@ class StudySearchDetailActivity : AppCompatActivity() {
         }
 
         studySearchViewModel.isLoadingPage.observe(this) {
-            if(it) {
+            if (it) {
                 loadingLayoutHelper.dismissLoadingDialog()
             } else {
                 loadingLayoutHelper.showLoadingDialog()
@@ -60,6 +64,7 @@ class StudySearchDetailActivity : AppCompatActivity() {
         val queryTextListener = object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 studySearchViewModel.searchStudies(query.toString())
+                searchQuery = query!!
                 return true
             }
 
@@ -69,5 +74,18 @@ class StudySearchDetailActivity : AppCompatActivity() {
         }
 
         binding.svTextInput.setOnQueryTextListener(queryTextListener)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (searchQuery != "") {
+            studySearchViewModel.searchStudies(searchQuery)
+            binding.svTextInput.setQuery(searchQuery, false)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        searchQuery = ""
     }
 }

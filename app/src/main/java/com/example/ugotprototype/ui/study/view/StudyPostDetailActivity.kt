@@ -3,7 +3,8 @@ package com.example.ugotprototype.ui.study.view
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.view.View
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,7 @@ import com.example.ugotprototype.ui.group.view.GroupFragment.Companion.GROUP_ID
 import com.example.ugotprototype.ui.study.view.StudyFragment.Companion.STUDY_ID
 import com.example.ugotprototype.ui.study.view.StudyFragment.Companion.STUDY_STATUS
 import com.example.ugotprototype.ui.study.viewmodel.StudyPostDetailViewModel
+import com.example.ugotprototype.ui.team.view.TeamFragment
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -23,11 +25,12 @@ import java.time.format.DateTimeFormatter
 class StudyPostDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStudyPostDetailBinding
     private val viewModel: StudyPostDetailViewModel by viewModels()
+    private var teamId: Int = 0
+    private var gitHubLink: String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_study_post_detail)
-
-        viewModel.viewSetting(intent.getIntExtra(STUDY_ID, 0))
 
         viewModel.studyDetailData.observe(this) {
             initData(it)
@@ -49,12 +52,20 @@ class StudyPostDetailActivity : AppCompatActivity() {
             finish()
         }
 
+        viewModel.isPostDelete.observe(this) {
+            setResult(0)
+            finish()
+        }
+
+        onClickHambugerButton()
         goToTeamInformation()
     }
 
     @SuppressLint("SetTextI18n")
     private fun initData(data: StudyGetPost) {
-        Log.d("test", data.toString())
+        teamId = data.studyId
+        gitHubLink = data.gitHubLink
+
         with(binding) {
             tvTeamNickName.text = data.nickname
             tvTime.text = LocalDateTime.parse(data.createdAt)?.format(
@@ -65,10 +76,22 @@ class StudyPostDetailActivity : AppCompatActivity() {
             tvTotalPersonCntFirst.text = data.nowPersonnel.toString()
             tvTotalPersonCntEnd.text = data.allPersonnel.toString()
             tvGithubLink.text = data.gitHubLink
-            tvKakaoLink.text = "https://" + data.kakaoOpenLink
+            tvKakaoLink.text = data.kakaoOpenLink
             tvPersonCntCheck.text = intent.getStringExtra(STUDY_STATUS)
             tvGroupName.text = data.groupName
+            tvSubject.text = data.subject
+            tvField.text = data.field
         }
+
+        viewModel.getMyNickName {
+            if (it == data.nickname) {
+                binding.studyHamburger.visibility = View.VISIBLE
+            } else {
+                binding.studyHamburger.visibility = View.INVISIBLE
+            }
+        }
+
+
     }
 
     private fun goToTeamInformation() {
@@ -85,5 +108,40 @@ class StudyPostDetailActivity : AppCompatActivity() {
                 startActivity(this)
             }
         }
+    }
+
+    private fun onClickHambugerButton() {
+
+        binding.studyHamburger.setOnClickListener { view ->
+            val popupMenu = PopupMenu(this, view)
+
+            popupMenu.menuInflater.inflate(R.menu.team_patch_delete_menu, popupMenu.menu)
+
+            popupMenu.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.item1 -> {
+                        Intent(this, StudyPostPatchActivity::class.java).apply {
+                            putExtra(TeamFragment.TEAM_ID, teamId)
+                            putExtra(TeamFragment.TEAM_GITHUB_LINK, gitHubLink)
+                            startActivity(this)
+                        }
+                        true
+                    }
+
+                    R.id.item2 -> {
+                        viewModel.deleteMyPost(teamId)
+                        true
+                    }
+
+                    else -> false
+                }
+            }
+            popupMenu.show()
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.viewSetting(intent.getIntExtra(STUDY_ID, 0))
     }
 }

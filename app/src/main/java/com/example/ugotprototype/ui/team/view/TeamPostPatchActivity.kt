@@ -1,4 +1,4 @@
-package com.example.ugotprototype.ui.profile.view
+package com.example.ugotprototype.ui.team.view
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -20,7 +20,7 @@ import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_PERSON
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ProfileTeamPostPatchActivity : AppCompatActivity() {
+class TeamPostPatchActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileTeamPostPatchBinding
     private val viewModel: ProfileMyTeamPostPatch by viewModels()
     private var teamId = 0
@@ -51,7 +51,6 @@ class ProfileTeamPostPatchActivity : AppCompatActivity() {
 
         viewModel.createFinish.observe(this) {
             if (it) {
-                setResult(Activity.RESULT_OK, Intent())
                 finish()
             }
         }

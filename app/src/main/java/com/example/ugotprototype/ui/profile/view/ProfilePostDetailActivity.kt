@@ -13,6 +13,7 @@ import com.example.ugotprototype.data.response.Team
 import com.example.ugotprototype.databinding.ActivityProfilePostDetailBinding
 import com.example.ugotprototype.ui.group.view.GroupFragment.Companion.GROUP_ID
 import com.example.ugotprototype.ui.profile.viewmodel.ProfilePostActivityViewModel
+import com.example.ugotprototype.ui.team.view.TeamFragment
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_ID
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_STATUS
 import com.example.ugotprototype.ui.team.view.TeamInformationActivity
@@ -26,6 +27,9 @@ class ProfilePostDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfilePostDetailBinding
     private lateinit var teamStatusCnt: String
     private val viewModel: ProfilePostActivityViewModel by viewModels()
+    private var totalPersonCount: Int = 0
+    private var gitHubLink: String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_profile_post_detail)
@@ -79,12 +83,17 @@ class ProfilePostDetailActivity : AppCompatActivity() {
                 ProfileTeamPostPatchActivity::class.java
             ).apply {
                 putExtra(TEAM_ID, intent.getIntExtra(TEAM_ID, 0))
+                putExtra(TeamFragment.TEAM_PERSON_CNT, totalPersonCount)
+                putExtra(TeamFragment.TEAM_GITHUB_LINK, gitHubLink)
             })
         }
     }
 
     @SuppressLint("SetTextI18n")
     private fun viewSetting(team: Team) {
+        totalPersonCount = team.allPersonnel
+        gitHubLink = team.gitHubLink
+
         with(binding) {
             teamStatusCnt = team.nowPersonnel.toString()
             tvPostTitle.text = team.title

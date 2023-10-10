@@ -3,6 +3,8 @@ package com.example.ugotprototype.ui.team.view
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +13,7 @@ import com.example.ugotprototype.R
 import com.example.ugotprototype.data.response.Team
 import com.example.ugotprototype.databinding.ActivityTeamPostDetailBinding
 import com.example.ugotprototype.ui.group.view.GroupFragment.Companion.GROUP_ID
+import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_GITHUB_LINK
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_ID
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_STATUS
 import com.example.ugotprototype.ui.team.viewmodel.TeamPostDetailViewModel
@@ -25,11 +28,11 @@ class TeamPostDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTeamPostDetailBinding
     private lateinit var teamStatusCnt: String
     private val viewModel: TeamPostDetailViewModel by viewModels()
+    private var teamId: Int = 0
+    private var githubLink: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_team_post_detail)
-
-        viewModel.viewSetting(intent.getIntExtra(TEAM_ID, 0))
 
         viewModel.teamDetailData.observe(this) {
             initData(it)
@@ -51,7 +54,12 @@ class TeamPostDetailActivity : AppCompatActivity() {
             finish()
         }
 
+        viewModel.isPostDelete.observe(this) {
+            finish()
+        }
+
         goToTeamInformation()
+        onClickHambugerButton()
     }
 
     private fun goToTeamInformation() {
@@ -72,6 +80,9 @@ class TeamPostDetailActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun initData(data: Team) {
+        teamId = data.teamId
+        githubLink = data.gitHubLink
+
         with(binding) {
             tvTeamNickName.text = data.nickname
             teamStatusCnt = data.nowPersonnel.toString()
@@ -83,7 +94,7 @@ class TeamPostDetailActivity : AppCompatActivity() {
             tvPersonCntCheck.text = intent.getStringExtra(TEAM_STATUS)
             tvNowClassText.text = data._class
             tvGithubLink.text = "https://github.com/" + data.gitHubLink
-            tvKakaoLink.text = "https://" + data.kakaoOpenLink
+            tvKakaoLink.text = data.kakaoOpenLink
             tvTime.text = LocalDateTime.parse(data.createdAt)?.format(
                 DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm")
             ) ?: ""
@@ -91,5 +102,48 @@ class TeamPostDetailActivity : AppCompatActivity() {
             tvTarget.text = data.goal
             tvGroupName.text = data.groupName
         }
+
+        viewModel.getMyNickName {
+            if (it == data.nickname) {
+                binding.teamHamburger.visibility = View.VISIBLE
+            } else {
+                binding.teamHamburger.visibility = View.INVISIBLE
+            }
+        }
+    }
+
+    private fun onClickHambugerButton() {
+
+        binding.teamHamburger.setOnClickListener { view ->
+            val popupMenu = PopupMenu(this, view)
+
+            popupMenu.menuInflater.inflate(R.menu.team_patch_delete_menu, popupMenu.menu)
+
+            popupMenu.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.item1 -> {
+                        Intent(this, TeamPostPatchActivity::class.java).apply {
+                            putExtra(TEAM_ID, teamId)
+                            putExtra(TEAM_GITHUB_LINK, githubLink)
+                            startActivity(this)
+                        }
+                        true
+                    }
+
+                    R.id.item2 -> {
+                        viewModel.deleteMyPost(teamId)
+                        true
+                    }
+
+                    else -> false
+                }
+            }
+            popupMenu.show()
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.viewSetting(intent.getIntExtra(TEAM_ID, 0))
     }
 }

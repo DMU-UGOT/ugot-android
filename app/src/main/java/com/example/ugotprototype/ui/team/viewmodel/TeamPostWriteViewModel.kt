@@ -5,7 +5,6 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
-import android.widget.SeekBar
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,6 +12,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.ugotprototype.data.api.ApiService
 import com.example.ugotprototype.data.api.GroupService
 import com.example.ugotprototype.data.api.TeamBuildingService
+import com.example.ugotprototype.data.group.GroupPostWriteData
 import com.example.ugotprototype.data.team.TeamPostData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -26,7 +26,7 @@ class TeamPostWriteViewModel @Inject constructor(
 ) : ViewModel() {
 
     companion object {
-        const val BASE_URL_PATTERN = "open\\.kakao\\.com/[A-Za-z0-9]+"
+        const val BASE_URL_PATTERN = "(https?://)?open\\.kakao\\.com/[A-Za-z0-9]+"
     }
 
     private val _isTeamPostRegisterBtnEnabled = MutableLiveData<Boolean>()
@@ -37,9 +37,6 @@ class TeamPostWriteViewModel @Inject constructor(
 
     private val _etText = MutableLiveData<String>()
     val etText: LiveData<String> = _etText
-
-    private val _seekBar = MutableLiveData<Int>()
-    val seekBar: LiveData<Int> = _seekBar
 
     private val _selectSpinner = MutableLiveData<Int>()
     val selectSpinner: LiveData<Int> = _selectSpinner
@@ -55,6 +52,12 @@ class TeamPostWriteViewModel @Inject constructor(
 
     private val _postData = MutableLiveData<Map<Int, String>>()
     val postData: LiveData<Map<Int, String>> = _postData
+
+    private val _isGroupData = MutableLiveData<List<GroupPostWriteData>>()
+    val isGroupData: LiveData<List<GroupPostWriteData>> = _isGroupData
+
+    private val _gitHubUrl = MutableLiveData<String>()
+    val gitHubUrl: LiveData<String> = _gitHubUrl
 
 
     fun isTeamPostRegisterButtonState(enabled: Boolean) {
@@ -103,16 +106,6 @@ class TeamPostWriteViewModel @Inject constructor(
         override fun onNothingSelected(parent: AdapterView<*>?) {}
     }
 
-    val onSeekBarChangeListener = object : SeekBar.OnSeekBarChangeListener {
-        override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-            _seekBar.value = progress
-        }
-
-        override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-
-        override fun onStopTrackingTouch(seekBar: SeekBar?) {}
-    }
-
     fun isKakaoOpenChatBaseURL(input: String, callback: (String) -> Unit) {
         if (input.matches(BASE_URL_PATTERN.toRegex())) {
             callback("success")
@@ -135,6 +128,22 @@ class TeamPostWriteViewModel @Inject constructor(
 
                 _postData.value = data
                 _postTitles.value = list
+            }
+        }
+    }
+
+    fun getGroupDetailData(position: Int) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                val foundKey =
+                    _postData.value!!.entries.find { it.value == _postTitles.value!![position] }?.key
+                _isGroupData.value = groupService.getTeamPostWriteGroupData()
+
+                _isGroupData.value!!.forEach {
+                    if (it.groupId == foundKey) {
+                        _gitHubUrl.value = it.githubUrl
+                    }
+                }
             }
         }
     }

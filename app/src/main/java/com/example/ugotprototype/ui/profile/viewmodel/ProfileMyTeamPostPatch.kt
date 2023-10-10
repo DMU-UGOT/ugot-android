@@ -26,7 +26,7 @@ class ProfileMyTeamPostPatch @Inject constructor(
 ) : ViewModel() {
 
     companion object {
-        const val BASE_URL_PATTERN = "open\\.kakao\\.com/[A-Za-z0-9]+"
+        const val BASE_URL_PATTERN = "(https?://)?open\\.kakao\\.com/[A-Za-z0-9]+"
     }
 
     private val _isTeamPostRegisterBtnEnabled = MutableLiveData<Boolean>()

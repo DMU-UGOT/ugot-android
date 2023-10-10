@@ -13,6 +13,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.ugotprototype.data.api.ApiService
 import com.example.ugotprototype.data.api.GroupService
 import com.example.ugotprototype.data.api.StudyService
+import com.example.ugotprototype.data.group.GroupPostWriteData
 import com.example.ugotprototype.data.study.StudySetPost
 import com.example.ugotprototype.ui.team.viewmodel.TeamPostWriteViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -51,6 +52,12 @@ class StudyPostWriteViewModel @Inject constructor(
 
     private val _postData = MutableLiveData<Map<Int, String>>()
     val postData: LiveData<Map<Int, String>> = _postData
+
+    private val _isGroupData = MutableLiveData<List<GroupPostWriteData>>()
+    val isGroupData: LiveData<List<GroupPostWriteData>> = _isGroupData
+
+    private val _gitHubUrl = MutableLiveData<String>()
+    val gitHubUrl: LiveData<String> = _gitHubUrl
 
     val textWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -130,6 +137,22 @@ class StudyPostWriteViewModel @Inject constructor(
 
                 _postData.value = data
                 _postTitles.value = list
+            }
+        }
+    }
+
+    fun getGroupDetailData(position: Int) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                val foundKey =
+                    _postData.value!!.entries.find { it.value == _postTitles.value!![position] }?.key
+                _isGroupData.value = groupService.getTeamPostWriteGroupData()
+
+                _isGroupData.value!!.forEach {
+                    if (it.groupId == foundKey) {
+                        _gitHubUrl.value = it.githubUrl
+                    }
+                }
             }
         }
     }
