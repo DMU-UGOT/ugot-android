@@ -139,6 +139,8 @@ class CommunityChangeDetailActivity : AppCompatActivity() {
         communityChangeDetailViewModel.deleteChangeDetailText(
             intent.getIntExtra(CHANGE_CLASS_CHANGE_ID, 0)
         )
+        setResult(Activity.RESULT_OK, Intent())
+        finish()
     }
 
     private fun refreshGeneralOrganizationExistence(classChangeId: Int) {

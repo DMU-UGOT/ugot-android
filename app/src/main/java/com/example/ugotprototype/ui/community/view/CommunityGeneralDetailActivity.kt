@@ -127,6 +127,8 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
         dialogBinding.btDialogDeleteYes.setOnClickListener {
             alertDialog.dismiss()
             deleteCommunity()
+            setResult(Activity.RESULT_OK, Intent())
+            finish()
         }
 
         dialogBinding.btDialogDeleteNo.setOnClickListener {
