@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.PopupMenu
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -49,6 +50,7 @@ class CommunityChangeDetailActivity : AppCompatActivity() {
             }
         }
 
+        goToUpdateChangeResult()
         onClickChangeHamburgerButton()
         backCommunityChangeToMainActivity()
         clickSendMessage()
@@ -111,6 +113,27 @@ class CommunityChangeDetailActivity : AppCompatActivity() {
             alertDialog.dismiss()
         }
         alertDialog.show()
+    }
+
+    private fun goToUpdateChangeResult() {
+        val goToUpdateChangeResultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    communityChangeDetailViewModel.getCommunityChangeDetailList(intent.getIntExtra(
+                        CHANGE_CLASS_CHANGE_ID, 0))
+                }
+            }
+
+        binding.tvCmuChangeUpdate.setOnClickListener {
+            goToUpdateChangeResultLauncher.launch(
+                Intent(
+                    applicationContext,
+                    CommunityChangeUpdateGroupActivity::class.java
+                ).putExtra(
+                    CHANGE_CLASS_CHANGE_ID, intent.getIntExtra(
+                        CHANGE_CLASS_CHANGE_ID, 0))
+            )
+        }
     }
 
     // 삭제

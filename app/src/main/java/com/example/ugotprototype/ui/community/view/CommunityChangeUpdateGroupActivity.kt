@@ -14,6 +14,7 @@ import com.example.ugotprototype.data.api.ChangeService
 import com.example.ugotprototype.data.change.CommunityChangeUpdateViewData
 import com.example.ugotprototype.databinding.ActivityCommunityChangeUpdateGroupBinding
 import com.example.ugotprototype.databinding.ActivityDialogMessageBinding
+import com.example.ugotprototype.ui.community.view.CommunityChangeFragment.Companion.CHANGE_CLASS_CHANGE_ID
 import com.example.ugotprototype.ui.community.viewmodel.CommunityChangeUpdateViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -53,7 +54,7 @@ class CommunityChangeUpdateGroupActivity : AppCompatActivity() {
             goToUpdateToChangeDetailResult()
         }
 
-        communityChangeUpdateViewModel.getChangeCommunityUpdateList(intent.getIntExtra(CommunityChangeFragment.CHANGE_CLASS_CHANGE_ID, 0))
+        communityChangeUpdateViewModel.getChangeCommunityUpdateList(intent.getIntExtra(CHANGE_CLASS_CHANGE_ID, 0))
 
         communityChangeUpdateViewModel.communityChangeUpdateData.observe(this){
             binding.spChangeUpdateGrade.selectedItem.toString()
@@ -138,7 +139,7 @@ class CommunityChangeUpdateGroupActivity : AppCompatActivity() {
             status = binding.spChangeUpdateChangeStatus.selectedItem.toString()
         )
         communityChangeUpdateViewModel.modifyCommunityChangeUpdateData(communityChangeUpdateViewData,
-            intent.getIntExtra(CommunityChangeFragment.CHANGE_CLASS_CHANGE_ID,0))
+            intent.getIntExtra(CHANGE_CLASS_CHANGE_ID,0))
     }
 
     private fun goToUpdateToChangeDetailResult() {
@@ -156,7 +157,7 @@ class CommunityChangeUpdateGroupActivity : AppCompatActivity() {
                 status = binding.spChangeUpdateChangeStatus.selectedItem.toString()
             )
             communityChangeUpdateViewModel.modifyCommunityChangeUpdateData(updatedData, intent.getIntExtra(
-                CommunityChangeFragment.CHANGE_CLASS_CHANGE_ID, 0))
+                CHANGE_CLASS_CHANGE_ID, 0))
             goToUpdateToChangeDetailResultLauncher.launch(
                 Intent(
                     applicationContext,

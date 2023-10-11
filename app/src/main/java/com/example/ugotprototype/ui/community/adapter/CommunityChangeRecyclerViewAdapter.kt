@@ -41,7 +41,6 @@ class CommunityChangeRecyclerViewAdapter :
                 tvCommunityChangeExchangeInput.text = item.status
             }
 
-//             ComChangeExchange 값에 따라 텍스트 색상 설정
             when(item.status) {
                 "교환 가능" -> binding.tvCommunityChangeExchangeInput.setTextColor(Color.parseColor("#14A492")) // 녹색
                 "교환 대기" -> binding.tvCommunityChangeExchangeInput.setTextColor(Color.parseColor("#F1BD1A")) // 노란색

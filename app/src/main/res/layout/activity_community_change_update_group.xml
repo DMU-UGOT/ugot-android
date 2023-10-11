@@ -124,7 +124,7 @@
 
                 <Spinner
                     android:id="@+id/sp_change_update_now_class"
-                    android:layout_width="90dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="25dp"
@@ -159,7 +159,7 @@
 
                 <Spinner
                     android:id="@+id/sp_change_update_change_class"
-                    android:layout_width="90dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="25dp"

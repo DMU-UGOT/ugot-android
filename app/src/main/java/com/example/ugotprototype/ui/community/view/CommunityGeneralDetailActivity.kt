@@ -8,6 +8,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.PopupMenu
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -56,10 +57,6 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
             binding.tvCommunityGeneralText.text = it.content
         }
 
-        binding.tvCmuGeneralDelete.setOnClickListener {
-            showDeleteCheckDialog()
-        }
-
         communityGeneralUpdateViewModel.dataUpdate.observe(this) { isDataUpdate ->
             if (isDataUpdate) {
                 setResult(Activity.RESULT_OK, Intent())
@@ -69,23 +66,25 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
 
         //댓글 추가
         communityGeneralChatViewModel.communityGeneralChatCreateItemList.observe(this) {
-            communityGeneralChatViewModel.newCommunityCommentData(intent.getIntExtra(GENERAL_ID,0), it)
+            communityGeneralChatViewModel.newCommunityCommentData(intent.getIntExtra(GENERAL_ID, 0), it)
         }
 
-        communityGeneralChatViewModel.getCommunityDetailList(intent.getIntExtra(GENERAL_ID,0))
+        communityGeneralChatViewModel.getCommunityDetailList(intent.getIntExtra(GENERAL_ID, 0))
 
-        goToUpdateResult()
         dataGeneralSet()
 
-        if(communityGeneralDetailViewModel.getLoggedInUserId().toString() == binding.tvCommunityGeneralMemberId.text.toString()){
-            binding.tvCmuGeneralDelete.visibility = View.VISIBLE
-            binding.ivCmuGeneralResetTime.visibility = View.VISIBLE
+        if (communityGeneralDetailViewModel.getLoggedInUserId()
+                .toString() == binding.tvCommunityGeneralMemberId.text.toString()
+        ) {
+            binding.ivGeneralMenu.visibility = View.VISIBLE
+            binding.tvCmuGeneUpdate.visibility = View.VISIBLE
         } else {
-            binding.tvCmuGeneralDelete.visibility = View.GONE
-            binding.ivCmuGeneralResetTime.visibility = View.GONE
+            binding.ivGeneralMenu.visibility = View.GONE
+            binding.tvCmuGeneUpdate.visibility = View.GONE
         }
 
-        resetTime(intent.getIntExtra(GENERAL_ID, 0))
+        goToUpdateResult()
+        onClickGeneralHamburgerButton()
         chatInputBtn()
         changeMyGeneralChatCount()
         goBackCommunityGeneralUpdate()
@@ -134,7 +133,7 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
             tvCommunityInquireInput.text =
                 intent.getIntExtra(CommunityGeneralFragment.GENERAL_VIEW_COUNT, 0).toString()
             tvCommunityGeneralMemberId.text =
-                intent.getIntExtra(CommunityGeneralFragment.GENERAL_MEMBER_ID,0).toString()
+                intent.getIntExtra(CommunityGeneralFragment.GENERAL_MEMBER_ID, 0).toString()
         }
     }
 
@@ -158,7 +157,7 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
     }
 
     private fun deleteCommunity() {
-        communityGeneralDetailViewModel.deleteDetailText(intent.getIntExtra(GENERAL_ID,0))
+        communityGeneralDetailViewModel.deleteDetailText(intent.getIntExtra(GENERAL_ID, 0))
     }
 
     private fun changeMyGeneralChatCount() {
@@ -181,8 +180,9 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
         imm.hideSoftInputFromWindow(binding.generalChatInput.windowToken, 0)
     }
 
-    private fun checkGeneralOrganizationExistence(postId : Int) {
-        communityGeneralChatViewModel.newCommunityCommentData(postId,
+    private fun checkGeneralOrganizationExistence(postId: Int) {
+        communityGeneralChatViewModel.newCommunityCommentData(
+            postId,
             CommunityGeneralCommentNewPostData(
                 content = binding.generalChatInput.text.toString(),
                 status = binding.tvStatus.text.toString(),
@@ -190,18 +190,52 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
         )
     }
 
-    private fun refreshGeneralOrganizationExistence(postId : Int) {
+    private fun refreshGeneralOrganizationExistence(postId: Int) {
         val communityGeneralRefreshData = CommunityGeneralRefreshData(
             created_at = binding.tvCommunityGeneralTime.text.toString()
         )
         communityGeneralDetailViewModel.refreshData(postId, communityGeneralRefreshData)
     }
 
-    private fun resetTime(postId : Int) {
-        binding.ivCmuGeneralResetTime.setOnClickListener {
-            refreshGeneralOrganizationExistence(postId)
-            setResult(Activity.RESULT_OK, Intent())
-            finish()
+    private fun resetTime(postId: Int) {
+        refreshGeneralOrganizationExistence(postId)
+        setResult(Activity.RESULT_OK, Intent())
+        finish()
+    }
+
+    private fun onClickGeneralHamburgerButton() {
+        binding.ivGeneralMenu.setOnClickListener { view ->
+            val popupMenu = PopupMenu(this, view)
+            popupMenu.menuInflater.inflate(R.menu.general_hamburger_menu, popupMenu.menu)
+
+            popupMenu.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.menu_general_item1 -> {
+                        // 수정
+                        Intent(
+                            this@CommunityGeneralDetailActivity,
+                            CommunityGeneralUpdateGroupActivity::class.java
+                        ).apply {
+                            putExtra(GENERAL_ID, 0)
+                            startActivity(this)
+                        }
+                        true
+                    }
+                    // 갱신
+                    R.id.menu_general_item2 -> {
+                        resetTime(intent.getIntExtra(GENERAL_ID, 0))
+                        true
+                    }
+                    // 삭제
+                    R.id.menu_general_item3 -> {
+                        showDeleteCheckDialog()
+                        true
+                    }
+
+                    else -> false
+                }
+            }
+            popupMenu.show()
         }
     }
 }
