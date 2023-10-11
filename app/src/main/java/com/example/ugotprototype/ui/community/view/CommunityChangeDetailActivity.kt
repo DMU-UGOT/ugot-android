@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.R
 import com.example.ugotprototype.data.change.CommunityChangeRefreshData
+import com.example.ugotprototype.data.change.CommunityChangeUpdateViewData
 import com.example.ugotprototype.databinding.ActivityCommunityChangeDetailBinding
 import com.example.ugotprototype.databinding.ActivityCommunityChangeSendMessageBinding
 import com.example.ugotprototype.databinding.ActivityDialogDeleteMessageBinding
@@ -50,7 +51,6 @@ class CommunityChangeDetailActivity : AppCompatActivity() {
             }
         }
 
-        goToUpdateChangeResult()
         onClickChangeHamburgerButton()
         backCommunityChangeToMainActivity()
         clickSendMessage()
@@ -115,27 +115,6 @@ class CommunityChangeDetailActivity : AppCompatActivity() {
         alertDialog.show()
     }
 
-    private fun goToUpdateChangeResult() {
-        val goToUpdateChangeResultLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                if (result.resultCode == Activity.RESULT_OK) {
-                    communityChangeDetailViewModel.getCommunityChangeDetailList(intent.getIntExtra(
-                        CHANGE_CLASS_CHANGE_ID, 0))
-                }
-            }
-
-        binding.tvCmuChangeUpdate.setOnClickListener {
-            goToUpdateChangeResultLauncher.launch(
-                Intent(
-                    applicationContext,
-                    CommunityChangeUpdateGroupActivity::class.java
-                ).putExtra(
-                    CHANGE_CLASS_CHANGE_ID, intent.getIntExtra(
-                        CHANGE_CLASS_CHANGE_ID, 0))
-            )
-        }
-    }
-
     // 삭제
     private fun showDeleteCheckDialog() {
         val dialogBinding = ActivityDialogDeleteMessageBinding.inflate(layoutInflater)
@@ -158,10 +137,7 @@ class CommunityChangeDetailActivity : AppCompatActivity() {
 
     private fun deleteCommunity() {
         communityChangeDetailViewModel.deleteChangeDetailText(
-            intent.getIntExtra(
-                CommunityChangeFragment.CHANGE_CLASS_CHANGE_ID,
-                0
-            )
+            intent.getIntExtra(CHANGE_CLASS_CHANGE_ID, 0)
         )
     }
 
@@ -191,7 +167,7 @@ class CommunityChangeDetailActivity : AppCompatActivity() {
                             this@CommunityChangeDetailActivity,
                             CommunityChangeUpdateGroupActivity::class.java
                         ).apply {
-                            putExtra(CHANGE_CLASS_CHANGE_ID, 0)
+                            putExtra(CHANGE_CLASS_CHANGE_ID, intent.getIntExtra(CHANGE_CLASS_CHANGE_ID, 0))
                             startActivity(this)
                         }
                         true

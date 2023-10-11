@@ -37,7 +37,7 @@ class CommunityChangeViewModel @Inject constructor(
     fun getChangeList(){
         viewModelScope.launch {
             kotlin.runCatching {
-                val pageResponse = changeService.getChange(_currentPage.value!!, 5)
+                val pageResponse = changeService.getChange(_currentPage.value!!, 10)
                 val communityChangeResponse = pageResponse.data
 
                 _communityChangeItemList.value = communityChangeResponse

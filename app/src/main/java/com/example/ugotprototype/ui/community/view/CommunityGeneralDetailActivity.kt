@@ -77,13 +77,10 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
                 .toString() == binding.tvCommunityGeneralMemberId.text.toString()
         ) {
             binding.ivGeneralMenu.visibility = View.VISIBLE
-            binding.tvCmuGeneUpdate.visibility = View.VISIBLE
         } else {
             binding.ivGeneralMenu.visibility = View.GONE
-            binding.tvCmuGeneUpdate.visibility = View.GONE
         }
 
-        goToUpdateResult()
         onClickGeneralHamburgerButton()
         chatInputBtn()
         changeMyGeneralChatCount()
@@ -93,24 +90,6 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
     private fun goBackCommunityGeneralUpdate() {
         binding.ivCommunityGeneralBack.setOnClickListener {
             finish()
-        }
-    }
-
-    private fun goToUpdateResult() {
-        val goToUpdateResultLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                if (result.resultCode == Activity.RESULT_OK) {
-                    communityGeneralDetailViewModel.getCommunityDetailList(intent.getIntExtra(GENERAL_ID, 0))
-                }
-            }
-
-        binding.tvCmuGeneUpdate.setOnClickListener {
-            goToUpdateResultLauncher.launch(
-                Intent(
-                    applicationContext,
-                    CommunityGeneralUpdateGroupActivity::class.java
-                ).putExtra(GENERAL_ID, intent.getIntExtra(GENERAL_ID, 0))
-            )
         }
     }
 
@@ -216,7 +195,7 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
                             this@CommunityGeneralDetailActivity,
                             CommunityGeneralUpdateGroupActivity::class.java
                         ).apply {
-                            putExtra(GENERAL_ID, 0)
+                            putExtra(GENERAL_ID, intent.getIntExtra(GENERAL_ID, 0))
                             startActivity(this)
                         }
                         true

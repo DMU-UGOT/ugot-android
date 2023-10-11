@@ -47,7 +47,7 @@ class CommunityGeneralViewModel @Inject constructor(
     fun getCommunityList(){
         viewModelScope.launch {
             kotlin.runCatching {
-                val pageResponse = communityService.getCommunityGeneral(_currentPage.value!!, 5)
+                val pageResponse = communityService.getCommunityGeneral(_currentPage.value!!, 10)
                 val communityGeneralResponse = pageResponse.data
 
                 _communityGeneralItemList.value = communityGeneralResponse
