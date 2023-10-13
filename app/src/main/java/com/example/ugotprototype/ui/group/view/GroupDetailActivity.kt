@@ -1,10 +1,12 @@
 package com.example.ugotprototype.ui.group.view
 
 import BottomSheetHelper
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -28,9 +30,18 @@ class GroupDetailActivity : AppCompatActivity() {
     private var groupLeaderId: String = ""
     private var groupName: String = ""
 
+    private val goToSearchResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            viewModel.getGroupDetailData(intent.getIntExtra(GROUP_ID, 0))
+        }
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_group_detail)
+
+        viewModel.getGroupDetailData(intent.getIntExtra(GROUP_ID, 0))
 
         viewModel.isLoadingPage.observe(this) {
             if (it) {
@@ -108,21 +119,30 @@ class GroupDetailActivity : AppCompatActivity() {
     }
 
     private fun goToDetailPage() {
+
         binding.mbGroupDetailCalendar.setOnClickListener {
-            Intent(this, GroupDetailCalendarActivity::class.java).apply {
-                putExtra(GROUP_ID, groupId)
-                putExtra(TEAM_LEADER_ID, groupLeaderId)
-                startActivity(this)
-            }
+            goToSearchResultLauncher.launch(
+                Intent(
+                    this,
+                    GroupDetailCalendarActivity::class.java
+                ).apply {
+                    putExtra(GROUP_ID, groupId)
+                    putExtra(TEAM_LEADER_ID, groupLeaderId)
+                }
+            )
         }
     }
 
     private fun goToEngagementPage() {
         binding.mbGroupDetailProgress.setOnClickListener {
-            Intent(this, GroupEngagementRateActivity::class.java).apply {
-                putExtra(GROUP_NAME, groupName)
-                startActivity(this)
-            }
+            goToSearchResultLauncher.launch(
+                Intent(
+                    this,
+                    GroupEngagementRateActivity::class.java
+                ).apply {
+                    putExtra(GROUP_NAME, groupName)
+                }
+            )
         }
     }
 
@@ -141,19 +161,27 @@ class GroupDetailActivity : AppCompatActivity() {
 
     private fun goToDetailCommunityPage() {
         binding.mbGroupDetailCommunication.setOnClickListener {
-            Intent(this, GroupCommunityActivity::class.java).apply {
-                putExtra(GROUP_ID, groupId)
-                startActivity(this)
-            }
+            goToSearchResultLauncher.launch(
+                Intent(
+                    this,
+                    GroupCommunityActivity::class.java
+                ).apply {
+                    putExtra(GROUP_ID, groupId)
+                }
+            )
         }
     }
 
     private fun goToTeamInformationPage() {
         binding.mbGroupDetailTeamInformation.setOnClickListener {
-            Intent(this, GroupTeamInformationActivity::class.java).apply {
-                putExtra(GROUP_ID, groupId)
-                startActivity(this)
-            }
+            goToSearchResultLauncher.launch(
+                Intent(
+                    this,
+                    GroupTeamInformationActivity::class.java
+                ).apply {
+                    putExtra(GROUP_ID, groupId)
+                }
+            )
         }
     }
 
@@ -184,33 +212,38 @@ class GroupDetailActivity : AppCompatActivity() {
                         }
 
                         R.id.menu_item3 -> {
-                            Intent(
-                                this@GroupDetailActivity,
-                                GroupRequestApplicationActivity::class.java
-                            ).apply {
-                                putExtra(GROUP_ID, groupId)
-                                startActivity(this)
-                            }
+                            goToSearchResultLauncher.launch(
+                                Intent(
+                                    this,
+                                    GroupRequestApplicationActivity::class.java
+                                ).apply {
+                                    putExtra(GROUP_ID, groupId)
+                                }
+                            )
                             true
                         }
 
                         R.id.menu_item4 -> {
-                            Intent(
-                                this@GroupDetailActivity, GroupForcedExitActivity::class.java
-                            ).apply {
-                                putExtra(GROUP_ID, groupId)
-                                startActivity(this)
-                            }
+                            goToSearchResultLauncher.launch(
+                                Intent(
+                                    this,
+                                    GroupForcedExitActivity::class.java
+                                ).apply {
+                                    putExtra(GROUP_ID, groupId)
+                                }
+                            )
                             true
                         }
 
                         R.id.menu_item5 -> {
-                            Intent(
-                                this@GroupDetailActivity, GroupHandOverActivity::class.java
-                            ).apply {
-                                putExtra(GROUP_ID, groupId)
-                                startActivity(this)
-                            }
+                            goToSearchResultLauncher.launch(
+                                Intent(
+                                    this,
+                                    GroupHandOverActivity::class.java
+                                ).apply {
+                                    putExtra(GROUP_ID, groupId)
+                                }
+                            )
                             true
                         }
 
@@ -220,10 +253,5 @@ class GroupDetailActivity : AppCompatActivity() {
                 popupMenu.show()
             }
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.getGroupDetailData(intent.getIntExtra(GROUP_ID, 0))
     }
 }

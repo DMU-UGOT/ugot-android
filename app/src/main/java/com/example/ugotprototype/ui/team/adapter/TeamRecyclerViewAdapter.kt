@@ -1,10 +1,14 @@
 package com.example.ugotprototype.ui.team.adapter
 
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.activity.ComponentActivity
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ugotprototype.data.response.TeamPostResponse
@@ -13,6 +17,7 @@ import com.example.ugotprototype.ui.group.view.GroupFragment.Companion.GROUP_ID
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_ID
 import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_STATUS
 import com.example.ugotprototype.ui.team.view.TeamPostDetailActivity
+import com.example.ugotprototype.ui.team.view.TeamSearchDetailActivity
 import com.example.ugotprototype.ui.team.viewmodel.TeamViewModel
 
 class TeamRecyclerViewAdapter(private val viewModel: TeamViewModel) :

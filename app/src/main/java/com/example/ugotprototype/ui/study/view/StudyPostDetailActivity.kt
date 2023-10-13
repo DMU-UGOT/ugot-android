@@ -1,11 +1,13 @@
 package com.example.ugotprototype.ui.study.view
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -17,6 +19,8 @@ import com.example.ugotprototype.ui.study.view.StudyFragment.Companion.STUDY_ID
 import com.example.ugotprototype.ui.study.view.StudyFragment.Companion.STUDY_STATUS
 import com.example.ugotprototype.ui.study.viewmodel.StudyPostDetailViewModel
 import com.example.ugotprototype.ui.team.view.TeamFragment
+import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_GITHUB_LINK
+import com.example.ugotprototype.ui.team.view.TeamFragment.Companion.TEAM_ID
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -28,9 +32,17 @@ class StudyPostDetailActivity : AppCompatActivity() {
     private var teamId: Int = 0
     private var gitHubLink: String = ""
 
+    private val goToSearchResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            viewModel.viewSetting(intent.getIntExtra(STUDY_ID, 0))
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_study_post_detail)
+
+        viewModel.viewSetting(intent.getIntExtra(STUDY_ID, 0))
 
         viewModel.studyDetailData.observe(this) {
             initData(it)
@@ -120,11 +132,15 @@ class StudyPostDetailActivity : AppCompatActivity() {
             popupMenu.setOnMenuItemClickListener { item ->
                 when (item.itemId) {
                     R.id.item1 -> {
-                        Intent(this, StudyPostPatchActivity::class.java).apply {
-                            putExtra(TeamFragment.TEAM_ID, teamId)
-                            putExtra(TeamFragment.TEAM_GITHUB_LINK, gitHubLink)
-                            startActivity(this)
-                        }
+                        goToSearchResultLauncher.launch(
+                            Intent(
+                                this,
+                                StudyPostPatchActivity::class.java
+                            ).apply {
+                                putExtra(TEAM_ID, teamId)
+                                putExtra(TEAM_GITHUB_LINK, gitHubLink)
+                            }
+                        )
                         true
                     }
 
@@ -138,10 +154,5 @@ class StudyPostDetailActivity : AppCompatActivity() {
             }
             popupMenu.show()
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.viewSetting(intent.getIntExtra(STUDY_ID, 0))
     }
 }

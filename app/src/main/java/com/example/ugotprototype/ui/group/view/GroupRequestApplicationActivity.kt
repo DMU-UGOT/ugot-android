@@ -1,5 +1,6 @@
 package com.example.ugotprototype.ui.group.view
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -36,7 +37,10 @@ class GroupRequestApplicationActivity : AppCompatActivity() {
             viewModel.getGroupApplicationList(intent.getIntExtra(GROUP_ID, 0))
         }
 
-        binding.ivTeamPrev.setOnClickListener { finish() }
+        binding.ivTeamPrev.setOnClickListener {
+            setResult(Activity.RESULT_OK)
+            finish()
+        }
 
         viewModel.isLoadingPage.observe(this) {
             if(it) {

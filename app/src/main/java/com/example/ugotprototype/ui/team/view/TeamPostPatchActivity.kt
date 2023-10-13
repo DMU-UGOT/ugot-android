@@ -51,6 +51,7 @@ class TeamPostPatchActivity : AppCompatActivity() {
 
         viewModel.createFinish.observe(this) {
             if (it) {
+                setResult(Activity.RESULT_OK)
                 finish()
             }
         }

@@ -1,5 +1,6 @@
 package com.example.ugotprototype.ui.group.view
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -44,6 +45,9 @@ class GroupForcedExitActivity : AppCompatActivity() {
             }
         }
 
-        binding.ivTeamPrev.setOnClickListener { finish() }
+        binding.ivTeamPrev.setOnClickListener {
+            setResult(Activity.RESULT_OK)
+            finish()
+        }
     }
 }
