@@ -6,7 +6,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.R
@@ -25,19 +24,20 @@ class CommunityChangeUpdateGroupActivity : AppCompatActivity() {
     lateinit var changeService: ChangeService
 
     private lateinit var binding: ActivityCommunityChangeUpdateGroupBinding
-    private val communityChangeUpdateViewModel : CommunityChangeUpdateViewModel by viewModels()
+    private val communityChangeUpdateViewModel: CommunityChangeUpdateViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_community_change_update_group)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_community_change_update_group)
+        binding =
+            DataBindingUtil.setContentView(this, R.layout.activity_community_change_update_group)
         binding.vm = communityChangeUpdateViewModel
 
         communityChangeUpdateViewModel.isCommunityChangePostRegisterBtnEnabled.observe(this) { enabled ->
             binding.btChangeUpdatePostRegister.isEnabled = enabled
         }
 
-        communityChangeUpdateViewModel.spUpdateGrade.observe(this){
+        communityChangeUpdateViewModel.spUpdateGrade.observe(this) {
             checkAllFields()
         }
 
@@ -47,27 +47,6 @@ class CommunityChangeUpdateGroupActivity : AppCompatActivity() {
 
         communityChangeUpdateViewModel.spUpdateChangeClass.observe(this) {
             checkAllFields()
-        }
-
-        communityChangeUpdateViewModel.isCommunityGeneralExists.observe(this) {
-            checkChangeUpdateOrganizationExistence()
-            goToUpdateToChangeDetailResult()
-        }
-
-        communityChangeUpdateViewModel.getChangeCommunityUpdateList(intent.getIntExtra(CHANGE_CLASS_CHANGE_ID, 0))
-
-        communityChangeUpdateViewModel.communityChangeUpdateData.observe(this){
-            binding.spChangeUpdateGrade.selectedItem.toString()
-            binding.spChangeUpdateNowClass.selectedItem.toString()
-            binding.spChangeUpdateChangeClass.selectedItem.toString()
-            binding.spChangeUpdateChangeStatus.selectedItem.toString()
-        }
-
-        communityChangeUpdateViewModel.dataUpdate.observe(this) { isDataUpdate ->
-            if (isDataUpdate) {
-                setResult(Activity.RESULT_OK, Intent())
-                finish()
-            }
         }
 
         spinnerChangeClassGroupUpdateChoice()
@@ -80,8 +59,10 @@ class CommunityChangeUpdateGroupActivity : AppCompatActivity() {
     private fun backNewToChangeDetailActivity() {
         binding.btChangeUpdatePostRegister.setOnClickListener {
             checkChangeUpdateOrganizationExistence()
-            setResult(Activity.RESULT_OK)
-            finish()
+            communityChangeUpdateViewModel.dataUpdate.observe(this) {
+                setResult(Activity.RESULT_OK, Intent())
+                finish()
+            }
         }
 
         binding.btChangeUpdateBackToMain.setOnClickListener {
@@ -124,7 +105,8 @@ class CommunityChangeUpdateGroupActivity : AppCompatActivity() {
     private fun checkAllFields() {
         if (binding.spChangeUpdateGrade.selectedItem == "미선택" &&
             binding.spChangeUpdateChangeClass.selectedItem == "미선택" &&
-            binding.spChangeUpdateNowClass.selectedItem == "미선택") {
+            binding.spChangeUpdateNowClass.selectedItem == "미선택"
+        ) {
             communityChangeUpdateViewModel.isCommunityChangePostRegisterButtonState(false)
         } else {
             communityChangeUpdateViewModel.isCommunityChangePostRegisterButtonState(true)
@@ -138,33 +120,11 @@ class CommunityChangeUpdateGroupActivity : AppCompatActivity() {
             changeClass = binding.spChangeUpdateChangeClass.selectedItem.toString(),
             status = binding.spChangeUpdateChangeStatus.selectedItem.toString()
         )
-        communityChangeUpdateViewModel.modifyCommunityChangeUpdateData(communityChangeUpdateViewData,
-            intent.getIntExtra(CHANGE_CLASS_CHANGE_ID,0))
-    }
 
-    private fun goToUpdateToChangeDetailResult() {
-        val goToUpdateToChangeDetailResultLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                if (result.resultCode == Activity.RESULT_OK) {
-                }
-            }
-
-        binding.btChangeUpdatePostRegister.setOnClickListener {
-            val updatedData = CommunityChangeUpdateViewData(
-                grade = binding.spChangeUpdateGrade.selectedItem.toString(),
-                currentClass = binding.spChangeUpdateNowClass.selectedItem.toString(),
-                changeClass = binding.spChangeUpdateChangeClass.selectedItem.toString(),
-                status = binding.spChangeUpdateChangeStatus.selectedItem.toString()
-            )
-            communityChangeUpdateViewModel.modifyCommunityChangeUpdateData(updatedData, intent.getIntExtra(
-                CHANGE_CLASS_CHANGE_ID, 0))
-            goToUpdateToChangeDetailResultLauncher.launch(
-                Intent(
-                    applicationContext,
-                    CommunityChangeDetailActivity::class.java
-                )
-            )
-        }
+        communityChangeUpdateViewModel.modifyCommunityChangeUpdateData(
+            communityChangeUpdateViewData,
+            intent.getIntExtra(CHANGE_CLASS_CHANGE_ID, 0)
+        )
     }
 
     private fun showConfirmationDialog() {

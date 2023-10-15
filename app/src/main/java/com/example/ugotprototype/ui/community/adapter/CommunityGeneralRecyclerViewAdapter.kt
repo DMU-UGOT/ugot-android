@@ -8,14 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ugotprototype.data.response.CommunityGeneralPostResponse
 import com.example.ugotprototype.databinding.ItemCommunityGeneralListBinding
 import com.example.ugotprototype.ui.community.view.CommunityGeneralDetailActivity
-import com.example.ugotprototype.ui.community.view.CommunityGeneralFragment.Companion.GENERAL_CONTENT
-import com.example.ugotprototype.ui.community.view.CommunityGeneralFragment.Companion.GENERAL_CREATE_AT
 import com.example.ugotprototype.ui.community.view.CommunityGeneralFragment.Companion.GENERAL_ID
-import com.example.ugotprototype.ui.community.view.CommunityGeneralFragment.Companion.GENERAL_MEMBER_ID
-import com.example.ugotprototype.ui.community.view.CommunityGeneralFragment.Companion.GENERAL_NICKNAME
-import com.example.ugotprototype.ui.community.view.CommunityGeneralFragment.Companion.GENERAL_TITLE
-import com.example.ugotprototype.ui.community.view.CommunityGeneralFragment.Companion.GENERAL_VIEW_COUNT
-import com.example.ugotprototype.ui.community.view.CommunityGeneralFragment.Companion.GENERAL_VOTE_COUNT
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -24,13 +17,12 @@ class CommunityGeneralRecyclerViewAdapter :
 
     var communityGeneralItemList: List<CommunityGeneralPostResponse> = emptyList()
 
-    // 생성된 뷰 홀더에 값 지정
     inner class CommunityGeneralViewHolder(val binding: ItemCommunityGeneralListBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: CommunityGeneralPostResponse) {
             binding.root.setOnClickListener {
-                goToCommunityGeneralDetailPostDetail(item, binding.root.context)
+                goToCommunityGeneralDetailPostDetail(item.id, binding.root.context)
             }
 
             with(binding) {
@@ -95,19 +87,12 @@ class CommunityGeneralRecyclerViewAdapter :
 
     fun setData(data: List<CommunityGeneralPostResponse>) {
         communityGeneralItemList = data
-        notifyDataSetChanged()  // 데이터 갱신
+        notifyDataSetChanged()
     }
 
-    fun goToCommunityGeneralDetailPostDetail(item: CommunityGeneralPostResponse, context: Context) {
+    fun goToCommunityGeneralDetailPostDetail(postId : Int, context: Context) {
         Intent(context, CommunityGeneralDetailActivity::class.java).apply {
-            putExtra(GENERAL_ID, item.id)
-            putExtra(GENERAL_TITLE, item.title)
-            putExtra(GENERAL_CONTENT, item.content)
-            putExtra(GENERAL_VIEW_COUNT, item.viewCount)
-            putExtra(GENERAL_VOTE_COUNT, item.commentCount)
-            putExtra(GENERAL_CREATE_AT, item.created_at)
-            putExtra(GENERAL_NICKNAME, item.nickname)
-            putExtra(GENERAL_MEMBER_ID, item.memberId)
+            putExtra(GENERAL_ID, postId)
 
             context.startActivity(this)
         }

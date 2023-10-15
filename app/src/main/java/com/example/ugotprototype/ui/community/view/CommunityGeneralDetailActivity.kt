@@ -1,6 +1,5 @@
 package com.example.ugotprototype.ui.community.view
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
@@ -13,9 +12,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ugotprototype.R
 import com.example.ugotprototype.data.community.CommunityGeneralCommentNewPostData
+import com.example.ugotprototype.data.community.CommunityGeneralPostViewData
 import com.example.ugotprototype.data.community.CommunityGeneralRefreshData
 import com.example.ugotprototype.databinding.ActivityDialogDeleteMessageBinding
 import com.example.ugotprototype.databinding.FragmentCommunityGeneralDetailBinding
@@ -25,8 +24,8 @@ import com.example.ugotprototype.ui.community.viewmodel.CommunityGeneralChatView
 import com.example.ugotprototype.ui.community.viewmodel.CommunityGeneralDetailViewModel
 import com.example.ugotprototype.ui.community.viewmodel.CommunityGeneralUpdateViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+import java.text.SimpleDateFormat
+import java.util.*
 
 @AndroidEntryPoint
 class CommunityGeneralDetailActivity : AppCompatActivity() {
@@ -35,33 +34,24 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
     private val communityGeneralDetailViewModel: CommunityGeneralDetailViewModel by viewModels()
     private val communityGeneralUpdateViewModel: CommunityGeneralUpdateViewModel by viewModels()
     private lateinit var communityGeneralChatRecyclerViewAdapter: CommunityGeneralChatRecyclerViewAdapter
+    private var postId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.fragment_community_general_detail)
         binding.vm = communityGeneralChatViewModel
 
-        communityGeneralChatRecyclerViewAdapter = CommunityGeneralChatRecyclerViewAdapter()
-        binding.rvCommunityGeneralChat.adapter = communityGeneralChatRecyclerViewAdapter
+        communityGeneralDetailViewModel.communityDetailData.observe(this) {
+            viewSetting(it)
+        }
 
-        // RecyclerView의 레이아웃 매니저를 LinearLayoutManager로 설정
-        val layoutManager = LinearLayoutManager(this)
-        binding.rvCommunityGeneralChat.layoutManager = layoutManager
+        // 댓글 관련
+        communityGeneralChatRecyclerViewAdapter =
+            CommunityGeneralChatRecyclerViewAdapter(communityGeneralChatViewModel, intent.getIntExtra(GENERAL_ID, 0))
+        binding.rvCommunityGeneralChat.adapter = communityGeneralChatRecyclerViewAdapter
 
         communityGeneralChatViewModel.communityGeneralChatItemList.observe(this) {
             communityGeneralChatRecyclerViewAdapter.setData(it)
-        }
-
-        communityGeneralDetailViewModel.communityDetailData.observe(this) {
-            binding.tvCommunityGeneralName.text = it.title
-            binding.tvCommunityGeneralText.text = it.content
-        }
-
-        communityGeneralUpdateViewModel.dataUpdate.observe(this) { isDataUpdate ->
-            if (isDataUpdate) {
-                setResult(Activity.RESULT_OK, Intent())
-                finish()
-            }
         }
 
         //댓글 추가
@@ -69,16 +59,8 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
             communityGeneralChatViewModel.newCommunityCommentData(intent.getIntExtra(GENERAL_ID, 0), it)
         }
 
-        communityGeneralChatViewModel.getCommunityDetailList(intent.getIntExtra(GENERAL_ID, 0))
-
-        dataGeneralSet()
-
-        if (communityGeneralDetailViewModel.getLoggedInUserId()
-                .toString() == binding.tvCommunityGeneralMemberId.text.toString()
-        ) {
-            binding.ivGeneralMenu.visibility = View.VISIBLE
-        } else {
-            binding.ivGeneralMenu.visibility = View.GONE
+        communityGeneralChatViewModel.isDeleteComment.observe(this){
+            setResult(Activity.RESULT_OK, Intent())
         }
 
         onClickGeneralHamburgerButton()
@@ -87,32 +69,57 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
         goBackCommunityGeneralUpdate()
     }
 
-    private fun goBackCommunityGeneralUpdate() {
-        binding.ivCommunityGeneralBack.setOnClickListener {
-            finish()
+    private fun viewSetting(data: CommunityGeneralPostViewData) {
+        postId = data.id
+
+        with(binding) {
+            tvCommunityGeneralName.text = data.title
+            tvCommunityGeneralNickname.text = data.nickname
+            tvCommunityGeneralTime.text = formatDate(data.created_at)
+            tvCommunityGeneralText.text = data.content
+            tvCommunityInquireInput.text = formatViewCount(data.viewCount)
+            tvCommunityGeneralCnt.text = formatVoteCount(data.voteCount)
+            tvCommunityGeneralMemberId.text = data.memberId.toString()
+        }
+
+        if (communityGeneralDetailViewModel.getLoggedInUserId()
+                .toString() == data.memberId.toString()
+        ) {
+            binding.ivGeneralMenu.visibility = View.VISIBLE
+        } else {
+            binding.ivGeneralMenu.visibility = View.GONE
         }
     }
 
-    @SuppressLint("SetTextI18n")
-    private fun dataGeneralSet() {
-        with(binding) {
-            tvCommunityGeneralName.text =
-                intent.getStringExtra(CommunityGeneralFragment.GENERAL_TITLE)
-            tvCommunityGeneralNickname.text =
-                intent.getStringExtra(CommunityGeneralFragment.GENERAL_NICKNAME)
-            tvCommunityGeneralText.text =
-                intent.getStringExtra(CommunityGeneralFragment.GENERAL_CONTENT)
-            tvCommunityGeneralTime.text =
-                LocalDateTime.parse(intent.getStringExtra((CommunityGeneralFragment.GENERAL_CREATE_AT)))
-                    ?.format(
-                        DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm")
-                    ) ?: ""
-            tvCommunityGeneralCnt.text =
-                intent.getIntExtra(CommunityGeneralFragment.GENERAL_VOTE_COUNT, 0).toString()
-            tvCommunityInquireInput.text =
-                intent.getIntExtra(CommunityGeneralFragment.GENERAL_VIEW_COUNT, 0).toString()
-            tvCommunityGeneralMemberId.text =
-                intent.getIntExtra(CommunityGeneralFragment.GENERAL_MEMBER_ID, 0).toString()
+    private fun formatDate(dateString: String): String {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS", Locale.getDefault())
+        val currentDate = Calendar.getInstance()
+        val date = inputFormat.parse(dateString)
+        val cal = Calendar.getInstance().apply { time = date }
+        val dateFormat: SimpleDateFormat
+
+        if (currentDate.get(Calendar.YEAR) == cal.get(Calendar.YEAR) &&
+            currentDate.get(Calendar.DAY_OF_YEAR) == cal.get(Calendar.DAY_OF_YEAR)
+        ) {
+            dateFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+        } else {
+            dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        }
+
+        return dateFormat.format(date)
+    }
+
+    private fun formatViewCount(viewCount: Int?): String {
+        return viewCount?.toString() ?: "0"
+    }
+
+    private fun formatVoteCount(voteCount: Int?): String {
+        return voteCount?.toString() ?: "0"
+    }
+
+    private fun goBackCommunityGeneralUpdate() {
+        binding.ivCommunityGeneralBack.setOnClickListener {
+            finish()
         }
     }
 
@@ -127,8 +134,6 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
         dialogBinding.btDialogDeleteYes.setOnClickListener {
             alertDialog.dismiss()
             deleteCommunity()
-            setResult(Activity.RESULT_OK, Intent())
-            finish()
         }
 
         dialogBinding.btDialogDeleteNo.setOnClickListener {
@@ -165,8 +170,7 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
         communityGeneralChatViewModel.newCommunityCommentData(
             postId,
             CommunityGeneralCommentNewPostData(
-                content = binding.generalChatInput.text.toString(),
-                status = binding.tvStatus.text.toString(),
+                content = binding.generalChatInput.text.toString()
             )
         )
     }
@@ -180,9 +184,20 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
 
     private fun resetTime(postId: Int) {
         refreshGeneralOrganizationExistence(postId)
-        setResult(Activity.RESULT_OK, Intent())
-        finish()
+
+        communityGeneralDetailViewModel.dataRefresh.observe(this){
+            setResult(Activity.RESULT_OK, Intent())
+            finish()
+        }
     }
+
+    private val goToUpdateToGeneralDetailResultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                communityGeneralUpdateViewModel.getCommunityUpdateList(intent.getIntExtra(GENERAL_ID, 0)
+                )
+            }
+        }
 
     private fun onClickGeneralHamburgerButton() {
         binding.ivGeneralMenu.setOnClickListener { view ->
@@ -192,31 +207,39 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
             popupMenu.setOnMenuItemClickListener { item ->
                 when (item.itemId) {
                     R.id.menu_general_item1 -> {
-                        // 수정
-                        Intent(
-                            this@CommunityGeneralDetailActivity,
-                            CommunityGeneralUpdateGroupActivity::class.java
-                        ).apply {
-                            putExtra(GENERAL_ID, intent.getIntExtra(GENERAL_ID, 0))
-                            startActivity(this)
-                        }
+                        goToUpdateToGeneralDetailResultLauncher.launch(
+                            Intent(
+                                applicationContext,
+                                CommunityGeneralUpdateGroupActivity::class.java
+                            ).putExtra(GENERAL_ID, intent.getIntExtra(GENERAL_ID, 0))
+                        )
                         true
                     }
-                    // 갱신
+
                     R.id.menu_general_item2 -> {
                         resetTime(intent.getIntExtra(GENERAL_ID, 0))
                         true
                     }
-                    // 삭제
+
                     R.id.menu_general_item3 -> {
                         showDeleteCheckDialog()
                         true
                     }
-
                     else -> false
                 }
             }
             popupMenu.show()
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        communityGeneralDetailViewModel.getCommunityDetailList(
+            intent.getIntExtra(GENERAL_ID, 0)
+        )
+
+        communityGeneralChatViewModel.getCommunityDetailList(
+            intent.getIntExtra(GENERAL_ID, 0)
+        )
     }
 }

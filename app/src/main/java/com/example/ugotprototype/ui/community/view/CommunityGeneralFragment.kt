@@ -1,5 +1,6 @@
 package com.example.ugotprototype.ui.community.view
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -13,7 +14,6 @@ import androidx.fragment.app.viewModels
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.FragmentCommunityGeneralBinding
 import com.example.ugotprototype.ui.community.adapter.CommunityGeneralRecyclerViewAdapter
-import com.example.ugotprototype.ui.community.viewmodel.CommunityGeneralDetailViewModel
 import com.example.ugotprototype.ui.community.viewmodel.CommunityGeneralViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,24 +21,14 @@ import dagger.hilt.android.AndroidEntryPoint
 class CommunityGeneralFragment : Fragment() {
     private lateinit var binding: FragmentCommunityGeneralBinding
     private val communityGeneralViewModel: CommunityGeneralViewModel by viewModels()
-    private val communityGeneralDetailViewModel: CommunityGeneralDetailViewModel by viewModels()
     private lateinit var communityGeneralRecyclerViewAdapter: CommunityGeneralRecyclerViewAdapter
 
     companion object {
         const val GENERAL_ID = "generalId"
-        const val GENERAL_TITLE = "generalTitle"
-        const val GENERAL_CONTENT = "generalContent"
-        const val GENERAL_VOTE_COUNT = "generalVoteCount"
-        const val GENERAL_VIEW_COUNT = "generalViewCount"
-        const val GENERAL_CREATE_AT = "generalCreateAt"
-        const val GENERAL_NICKNAME = "generalNickName"
-        const val GENERAL_MEMBER_ID = "generalMemberId"
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         binding =
@@ -48,6 +38,7 @@ class CommunityGeneralFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -59,7 +50,6 @@ class CommunityGeneralFragment : Fragment() {
         }
 
         communityGeneralViewModel.communityGeneralItemList.observe(viewLifecycleOwner) { updatedData ->
-            // 데이터가 업데이트되면 이곳에서 UI를 업데이트할 수 있습니다.
             communityGeneralRecyclerViewAdapter.setData(updatedData)
         }
 
@@ -73,25 +63,6 @@ class CommunityGeneralFragment : Fragment() {
         }
 
         goToCommunityGeneralNewGroup()
-        goToCommunityGeneralDetail(binding.rvCommunity.id)
-    }
-
-    private fun goToCommunityGeneralDetail(postId : Int) {
-        val goToCommunityGeneralDetailResultLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                if (result.resultCode == Activity.RESULT_OK) {
-                    communityGeneralDetailViewModel.getCommunityDetailList(postId)
-                }
-            }
-
-        binding.rvCommunity.setOnClickListener {
-            goToCommunityGeneralDetailResultLauncher.launch(
-                Intent(
-                    requireContext(),
-                    CommunityGeneralDetailActivity::class.java
-                ).putExtra(GENERAL_ID, postId)
-            )
-        }
     }
 
     private fun goToCommunityGeneralNewGroup() {

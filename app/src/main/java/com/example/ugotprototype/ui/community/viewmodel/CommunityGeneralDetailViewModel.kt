@@ -24,11 +24,21 @@ class CommunityGeneralDetailViewModel @Inject constructor(
     private val _dataRefresh = MutableLiveData<Boolean>()
     val dataRefresh: LiveData<Boolean> = _dataRefresh
 
-    fun getCommunityDetailList(postId:Int){
+    private val _isDeleteGeneralGroup = MutableLiveData<Boolean>()
+    val isDeleteGeneralGroup: LiveData<Boolean> = _isDeleteGeneralGroup
+
+    fun getLoggedInUserId(): Int {
+        return sharedPreference.getMemberId()
+    }
+
+    fun getCommunityDetailList(postId: Int) {
         viewModelScope.launch {
             kotlin.runCatching {
-                val data = communityService.getCommunityDetailGeneral(postId)
-                _communityDetailData.value = data
+                communityService.getCommunityDetailGeneral(postId)
+            }.onSuccess {
+                _communityDetailData.value = it
+            }.onFailure {
+                Log.d("fail","fail")
             }
         }
     }
@@ -38,17 +48,11 @@ class CommunityGeneralDetailViewModel @Inject constructor(
             kotlin.runCatching {
                 communityService.deleteCommunity(postId)
             }.onSuccess {
-                Log.d("delete", "삭제완료")
+                _isDeleteGeneralGroup.value = true
             }.onFailure {
-                Log.d("삭제 실패", it.toString())
-                Log.d("deleteX", it.toString())
+                _isDeleteGeneralGroup.value = false
             }
         }
-    }
-
-    // 현재 로그인된 사용자의 ID를 가져오는 함수
-    fun getLoggedInUserId(): Int {
-        return sharedPreference.getMemberId()
     }
 
     fun refreshData(postId: Int, communityGeneralRefreshData: CommunityGeneralRefreshData){

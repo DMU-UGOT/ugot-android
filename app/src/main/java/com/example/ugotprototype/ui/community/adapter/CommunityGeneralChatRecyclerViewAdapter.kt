@@ -1,26 +1,41 @@
 package com.example.ugotprototype.ui.community.adapter
 
+import android.app.AlertDialog
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ugotprototype.data.community.CommunityGeneralChatViewData
 import com.example.ugotprototype.databinding.ItemCommunityGeneralChatListBinding
+import com.example.ugotprototype.ui.community.viewmodel.CommunityGeneralChatViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class CommunityGeneralChatRecyclerViewAdapter : RecyclerView.Adapter<CommunityGeneralChatRecyclerViewAdapter.CommunityGeneralChatViewHolder>() {
+class CommunityGeneralChatRecyclerViewAdapter(private val communityGeneralChatViewModel: CommunityGeneralChatViewModel, private val generalId: Int) :
+    RecyclerView.Adapter<CommunityGeneralChatRecyclerViewAdapter.CommunityGeneralChatViewHolder>() {
 
     var communityGeneralChatItemList = arrayListOf<CommunityGeneralChatViewData>()
 
-    // 생성된 뷰 홀더에 값 지정
     inner class CommunityGeneralChatViewHolder(val binding: ItemCommunityGeneralChatListBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item : CommunityGeneralChatViewData) {
-            binding.tvCommunityGeneralItemNickName.text = item.nickname
-            binding.tvCommunityGeneralItemText.text = item.content
-            binding.tvCommunityGeneralItemTime.text = formatDate(item.createdAt)
+            binding.tvCommunityGeneralChatDelete.setOnClickListener {
+                showDeleteConfirmationDialog(item)
+            }
+
+            with(binding){
+                tvCommunityGeneralItemNickName.text = item.nickname
+                tvCommunityGeneralItemText.text = item.content
+                tvCommunityGeneralItemTime.text = formatDate(item.createdAt)
+            }
+
+            if (communityGeneralChatViewModel.getLoggedInUserId().toString() == item.memberId.toString()) {
+                binding.tvCommunityGeneralChatDelete.visibility = View.VISIBLE
+            } else {
+                binding.tvCommunityGeneralChatDelete.visibility = View.GONE
+            }
         }
 
         private fun formatDate(dateString: String): String {
@@ -39,6 +54,19 @@ class CommunityGeneralChatRecyclerViewAdapter : RecyclerView.Adapter<CommunityGe
             }
 
             return dateFormat.format(date)
+        }
+
+        private fun showDeleteConfirmationDialog(item: CommunityGeneralChatViewData) {
+            val builder = AlertDialog.Builder(binding.root.context)
+            builder.setTitle("삭제 확인")
+            builder.setMessage("정말로 이 댓글을 삭제하시겠습니까?")
+            builder.setPositiveButton("예") { dialog, which ->
+                communityGeneralChatViewModel.deleteChatDetailText(generalId , item.commentId)
+            }
+            builder.setNegativeButton("아니오") { dialog, which ->
+                dialog.dismiss()
+            }
+            builder.create().show()
         }
     }
 

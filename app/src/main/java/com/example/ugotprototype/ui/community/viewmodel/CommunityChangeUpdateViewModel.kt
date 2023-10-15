@@ -12,15 +12,15 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CommunityChangeUpdateViewModel  @Inject constructor(
+class CommunityChangeUpdateViewModel @Inject constructor(
     private val changeService: ChangeService
 ) : ViewModel() {
     private val _isCommunityChangePostRegisterBtnEnabled = MutableLiveData<Boolean>()
     var isCommunityChangePostRegisterBtnEnabled: LiveData<Boolean> =
         _isCommunityChangePostRegisterBtnEnabled
 
-    private val _communityChangeUpdateData = MutableLiveData<CommunityChangePostViewData>()
-    val communityChangeUpdateData: LiveData<CommunityChangePostViewData> = _communityChangeUpdateData
+    private val _communityChangeData = MutableLiveData<CommunityChangePostViewData>()
+    val communityChangeData: LiveData<CommunityChangePostViewData> = _communityChangeData
 
     private val _spUpdateGrade = MutableLiveData<String>()
     val spUpdateGrade: LiveData<String> = _spUpdateGrade
@@ -34,18 +34,15 @@ class CommunityChangeUpdateViewModel  @Inject constructor(
     private val _dataUpdate = MutableLiveData<Boolean>()
     val dataUpdate: LiveData<Boolean> = _dataUpdate
 
-    private val _isCommunityGeneralExists = MutableLiveData<Boolean>()
-    val isCommunityGeneralExists: LiveData<Boolean> = _isCommunityGeneralExists
-
     fun isCommunityChangePostRegisterButtonState(enabled: Boolean) {
         _isCommunityChangePostRegisterBtnEnabled.value = enabled
     }
 
-    fun getChangeCommunityUpdateList(classChangeId : Int){
+    fun sendUpdatedData(classChangeId: Int) {
         viewModelScope.launch {
             kotlin.runCatching {
-                var data = changeService.getChangeDetail(classChangeId)
-                _communityChangeUpdateData.value = data
+                val data = changeService.getChangeDetail(classChangeId)
+                _communityChangeData.value = data
             }
         }
     }
@@ -53,12 +50,12 @@ class CommunityChangeUpdateViewModel  @Inject constructor(
     fun modifyCommunityChangeUpdateData(communityChangeUpdateViewData: CommunityChangeUpdateViewData, classChangeId: Int) {
         viewModelScope.launch {
             kotlin.runCatching {
-                var data = changeService.updateChangeCommunity(classChangeId, communityChangeUpdateViewData)
+                changeService.updateChangeCommunity(classChangeId, communityChangeUpdateViewData)
             }.onSuccess { result ->
-                _dataUpdate.value = true}
-                .onFailure { exception ->
-                    _dataUpdate.value = false
-                }
+                _dataUpdate.value = true
+            }.onFailure { exception ->
+                _dataUpdate.value = false
+            }
         }
     }
 }

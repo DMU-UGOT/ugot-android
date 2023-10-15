@@ -5,7 +5,6 @@ import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.R
@@ -36,6 +35,13 @@ class CommunityGeneralUpdateGroupActivity : AppCompatActivity() {
             binding.btGeneralNewPostRegister2.isEnabled = enabled
         }
 
+        communityGeneralUpdateViewModel.getCommunityUpdateList(intent.getIntExtra(GENERAL_ID, 0))
+
+        communityGeneralUpdateViewModel.communityUpdateData.observe(this){
+            binding.etGeneralNewTitleName2.setText(it.title)
+            binding.etGeneralTextDetail2.setText(it.content)
+        }
+
         communityGeneralUpdateViewModel.etTitle.observe(this) {
             checkAllFields()
         }
@@ -44,34 +50,16 @@ class CommunityGeneralUpdateGroupActivity : AppCompatActivity() {
             checkAllFields()
         }
 
-        communityGeneralUpdateViewModel.isCommunityGeneralExists.observe(this) {
-            checkGeneralOrganizationExistence()
-            goToUpdateToDetailResult()
-        }
-
-        communityGeneralUpdateViewModel.getCommunityUpdateList(intent.getIntExtra(GENERAL_ID, 0))
-
-        // Detail에서 데이터 받기
-        communityGeneralUpdateViewModel.communityUpdateData.observe(this){
-            binding.etGeneralNewTitleName2.setText(it.title)
-            binding.etGeneralTextDetail2.setText(it.title)
-        }
-
-        communityGeneralUpdateViewModel.dataUpdate.observe(this) { isDataUpdate ->
-            if (isDataUpdate) {
-                setResult(Activity.RESULT_OK, Intent())
-                finish()
-            }
-        }
-
         backNewToDetailActivity()
     }
 
     private fun backNewToDetailActivity() {
         binding.btGeneralNewPostRegister2.setOnClickListener {
             checkGeneralOrganizationExistence()
-            setResult(Activity.RESULT_OK)
-            finish()
+            communityGeneralUpdateViewModel.dataUpdate.observe(this) {
+                setResult(Activity.RESULT_OK, Intent())
+                finish()
+            }
         }
 
         binding.btGeneralNewBackToMain2.setOnClickListener {
@@ -85,28 +73,6 @@ class CommunityGeneralUpdateGroupActivity : AppCompatActivity() {
             content = binding.etGeneralTextDetail2.text.toString()
         )
         communityGeneralUpdateViewModel.modifyCommunityGeneralUpdateData(communityGeneralUpdateViewData, intent.getIntExtra(GENERAL_ID,0))
-    }
-
-    private fun goToUpdateToDetailResult() {
-        val goToUpdateToDetailResultLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                if (result.resultCode == Activity.RESULT_OK) {
-                }
-            }
-
-        binding.btGeneralNewPostRegister2.setOnClickListener {
-            val updatedData = CommunityGeneralUpdateViewData(
-                title = binding.etGeneralNewTitleName2.text.toString(),
-                content = binding.etGeneralTextDetail2.text.toString()
-            )
-            communityGeneralUpdateViewModel.modifyCommunityGeneralUpdateData(updatedData, intent.getIntExtra(GENERAL_ID, 0))
-            goToUpdateToDetailResultLauncher.launch(
-                Intent(
-                    applicationContext,
-                    CommunityGeneralDetailActivity::class.java
-                )
-            )
-        }
     }
 
     private fun checkAllFields() {

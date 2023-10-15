@@ -1,5 +1,6 @@
 package com.example.ugotprototype.ui.community.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -27,11 +28,14 @@ class CommunityChangeDetailViewModel @Inject constructor(
     private val _isDeleteChangeGroup = MutableLiveData<Boolean>()
     val isDeleteChangeGroup: LiveData<Boolean> = _isDeleteChangeGroup
 
-    fun getCommunityChangeDetailList(classChangeId: Int) {
+    fun getChangeDetailData(classChangeId: Int) {
         viewModelScope.launch {
             kotlin.runCatching {
-                val data = changeService.getChangeDetail(classChangeId)
-                _communityChangeDetailData.value = data
+                changeService.getChangeDetail(classChangeId)
+            }.onSuccess {
+                _communityChangeDetailData.value = it
+            }.onFailure {
+                Log.d("fail","fail")
             }
         }
     }

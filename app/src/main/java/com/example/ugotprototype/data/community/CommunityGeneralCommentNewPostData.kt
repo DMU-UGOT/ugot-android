@@ -1,6 +1,5 @@
 package com.example.ugotprototype.data.community
 
 data class CommunityGeneralCommentNewPostData(
-    val content : String,
-    val status : String
+    val content : String
 )

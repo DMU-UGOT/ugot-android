@@ -5,18 +5,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.ugotprototype.SharedPreference
 import com.example.ugotprototype.data.api.CommentService
 import com.example.ugotprototype.data.community.CommunityGeneralChatViewData
 import com.example.ugotprototype.data.community.CommunityGeneralCommentNewPostData
-import com.example.ugotprototype.data.community.CommunityGeneralNewPostData
-import com.example.ugotprototype.di.api.CommunityService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class CommunityGeneralChatViewModel @Inject constructor(
-    private val commentService: CommentService
+    private val commentService: CommentService,
+    private val sharedPreference: SharedPreference
 ): ViewModel() {
     private val _communityGeneralChatItemList = MutableLiveData<ArrayList<CommunityGeneralChatViewData>>() // 뷰 모델에서 데이터 처리를 하는 변수
     val communityGeneralChatItemList: LiveData<ArrayList<CommunityGeneralChatViewData>> = _communityGeneralChatItemList
@@ -26,6 +26,13 @@ class CommunityGeneralChatViewModel @Inject constructor(
 
     private val _itemCount = MutableLiveData<Int>()
     val itemCount: LiveData<Int> = _itemCount
+
+    private val _isDeleteComment = MutableLiveData<Boolean>()
+    val isDeleteComment: LiveData<Boolean> = _isDeleteComment
+
+    fun getLoggedInUserId(): Int {
+        return sharedPreference.getMemberId()
+    }
 
     fun setCommunityGeneralChatData(communityGeneralChatViewData: ArrayList<CommunityGeneralChatViewData>) {
         _communityGeneralChatItemList.value = communityGeneralChatViewData
@@ -41,13 +48,27 @@ class CommunityGeneralChatViewModel @Inject constructor(
         }
     }
 
+    fun deleteChatDetailText(postId: Int, commentId: Int) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                commentService.deleteCommunityComment(postId, commentId)
+            }.onSuccess {
+                getCommunityDetailList(postId)
+            }.onFailure {
+                Log.d("ChatDeleteError", it.toString())
+            }
+        }
+    }
+
     fun newCommunityCommentData(postId: Int, communityGeneralCommentNewPostData: CommunityGeneralCommentNewPostData) {
         viewModelScope.launch {
             kotlin.runCatching {
                 commentService.createCommunityComment(postId, communityGeneralCommentNewPostData)
-            }.onSuccess { Log.d("commentSuccess", it.toString())
-            getCommunityDetailList(postId)}
-                .onFailure { Log.d("commentFail", it.toString())}
+            }.onSuccess {
+                getCommunityDetailList(postId)
+            }.onFailure {
+                    Log.d("ChatGetListError2", it.toString())
+            }
         }
     }
 }

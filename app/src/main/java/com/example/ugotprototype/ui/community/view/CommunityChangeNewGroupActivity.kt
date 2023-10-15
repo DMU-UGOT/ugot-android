@@ -48,7 +48,6 @@ class CommunityChangeNewGroupActivity : AppCompatActivity() {
             checkAllFields()
         }
 
-
         communityChangeNewGroupViewModel.createFinish.observe(this) {
             if (it) {
                 setResult(Activity.RESULT_OK, Intent())
@@ -131,14 +130,11 @@ class CommunityChangeNewGroupActivity : AppCompatActivity() {
         val alertDialog = builder.create()
 
         dialogBinding.btDialogYes.setOnClickListener {
-            // 예 버튼 클릭 시 동작
             setResult(Activity.RESULT_OK, Intent())
             finish()
-            alertDialog.dismiss()
         }
 
         dialogBinding.btDialogNo.setOnClickListener {
-            // 아니오 버튼 클릭 시 동작
             alertDialog.dismiss()
         }
         alertDialog.show()

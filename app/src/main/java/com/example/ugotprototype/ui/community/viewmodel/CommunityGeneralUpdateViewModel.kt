@@ -33,9 +33,6 @@ class CommunityGeneralUpdateViewModel @Inject constructor(
     private val _dataUpdate = MutableLiveData<Boolean>()
     val dataUpdate: LiveData<Boolean> = _dataUpdate
 
-    private val _isCommunityGeneralExists = MutableLiveData<Boolean>()
-    val isCommunityGeneralExists: LiveData<Boolean> = _isCommunityGeneralExists
-
     fun isCommunityGeneralPostRegisterButtonState(enabled: Boolean) {
         _isCommunityGeneralPostRegisterBtnEnabled.value = enabled
     }
@@ -54,10 +51,10 @@ class CommunityGeneralUpdateViewModel @Inject constructor(
             kotlin.runCatching {
                 var data = communityService.updateCommunity(postID, communityGeneralUpdateViewData)
             }.onSuccess { result ->
-                _dataUpdate.value = true}
-                .onFailure { exception ->
+                _dataUpdate.value = true
+            }.onFailure { exception ->
                     _dataUpdate.value = false
-                }
+            }
         }
     }
 

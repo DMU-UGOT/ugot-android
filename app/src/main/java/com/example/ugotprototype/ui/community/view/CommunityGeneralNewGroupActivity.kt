@@ -16,8 +16,7 @@ import com.example.ugotprototype.ui.community.viewmodel.CommunityGeneralNewGroup
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class
-CommunityGeneralNewGroupActivity : AppCompatActivity() {
+class CommunityGeneralNewGroupActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCommunityGeneralNewGroupBinding
     private val communityGeneralNewGroupViewModel: CommunityGeneralNewGroupViewModel by viewModels()
 

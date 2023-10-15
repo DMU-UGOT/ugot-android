@@ -9,14 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ugotprototype.data.response.CommunityChangePostResponse
 import com.example.ugotprototype.databinding.ItemCommunityChangeListBinding
 import com.example.ugotprototype.ui.community.view.CommunityChangeDetailActivity
-import com.example.ugotprototype.ui.community.view.CommunityChangeFragment.Companion.CHANGE_CHANGE_CLASS
 import com.example.ugotprototype.ui.community.view.CommunityChangeFragment.Companion.CHANGE_CLASS_CHANGE_ID
-import com.example.ugotprototype.ui.community.view.CommunityChangeFragment.Companion.CHANGE_CREATE_AT
-import com.example.ugotprototype.ui.community.view.CommunityChangeFragment.Companion.CHANGE_CURRENT_CLASS
-import com.example.ugotprototype.ui.community.view.CommunityChangeFragment.Companion.CHANGE_GRADE
-import com.example.ugotprototype.ui.community.view.CommunityChangeFragment.Companion.CHANGE_MEMBER_ID
-import com.example.ugotprototype.ui.community.view.CommunityChangeFragment.Companion.CHANGE_NICK_NAME
-import com.example.ugotprototype.ui.community.view.CommunityChangeFragment.Companion.CHANGE_STATUS
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -30,7 +23,7 @@ class CommunityChangeRecyclerViewAdapter :
 
         fun bind(item: CommunityChangePostResponse) {
             binding.root.setOnClickListener {
-                goToCommunityChangePostDetail(item, binding.root.context)
+                goToCommunityChangePostDetail(item.classChangeId, binding.root.context)
             }
 
             with(binding) {
@@ -92,19 +85,12 @@ class CommunityChangeRecyclerViewAdapter :
 
     fun setData(data: List<CommunityChangePostResponse>) {
         communityChangeItemList = data
-        notifyDataSetChanged()  // 데이터 갱신
+        notifyDataSetChanged()
     }
 
-    fun goToCommunityChangePostDetail(item: CommunityChangePostResponse, context: Context) {
+    fun goToCommunityChangePostDetail(classChangeId: Int, context: Context) {
         Intent(context, CommunityChangeDetailActivity::class.java).apply {
-            putExtra(CHANGE_CLASS_CHANGE_ID, item.classChangeId)
-            putExtra(CHANGE_GRADE, item.grade)
-            putExtra(CHANGE_CREATE_AT, item.createdAt)
-            putExtra(CHANGE_NICK_NAME, item.nickname)
-            putExtra(CHANGE_CURRENT_CLASS, item.currentClass)
-            putExtra(CHANGE_CHANGE_CLASS, item.changeClass)
-            putExtra(CHANGE_STATUS, item.status)
-            putExtra(CHANGE_MEMBER_ID, item.memberId)
+            putExtra(CHANGE_CLASS_CHANGE_ID, classChangeId)
 
             context.startActivity(this)
         }

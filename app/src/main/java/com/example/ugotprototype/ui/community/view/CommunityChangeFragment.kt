@@ -1,5 +1,6 @@
 package com.example.ugotprototype.ui.community.view
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -13,7 +14,6 @@ import androidx.fragment.app.viewModels
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.FragmentCommunityChangeBinding
 import com.example.ugotprototype.ui.community.adapter.CommunityChangeRecyclerViewAdapter
-import com.example.ugotprototype.ui.community.viewmodel.CommunityChangeDetailViewModel
 import com.example.ugotprototype.ui.community.viewmodel.CommunityChangeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,32 +21,22 @@ import dagger.hilt.android.AndroidEntryPoint
 class CommunityChangeFragment : Fragment() {
     private lateinit var binding: FragmentCommunityChangeBinding
     private val communityChangeViewModel: CommunityChangeViewModel by viewModels()
-    private val communityChangeDetailViewModel: CommunityChangeDetailViewModel by viewModels()
     private lateinit var communityChangeRecyclerViewAdapter: CommunityChangeRecyclerViewAdapter
 
     companion object {
         const val CHANGE_CLASS_CHANGE_ID = "changeClassChangeId"
-        const val CHANGE_GRADE = "changeGrade"
-        const val CHANGE_CREATE_AT = "changeCreateAt"
-        const val CHANGE_NICK_NAME = "changeNickname"
-        const val CHANGE_CURRENT_CLASS = "changeCurrentClass"
-        const val CHANGE_CHANGE_CLASS = "changeChangeClass"
-        const val CHANGE_STATUS = "changeStatus"
-        const val CHANGE_MEMBER_ID = "changeMemberId"
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_community_change, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_community_change, container, false)
 
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -57,7 +47,6 @@ class CommunityChangeFragment : Fragment() {
             communityChangeRecyclerViewAdapter.setData(it)
         }
 
-        //업데이트 구문
         communityChangeViewModel.communityChangeItemList.observe(viewLifecycleOwner) {updatedData ->
             communityChangeRecyclerViewAdapter.setData(updatedData)
         }
@@ -72,25 +61,6 @@ class CommunityChangeFragment : Fragment() {
         }
 
         goToCommunityChangeNewGroup()
-        goToCommunityChangeDetail(binding.rvCommunityChange.id)
-    }
-
-    private fun goToCommunityChangeDetail(classChangeId : Int) {
-        val goToCommunityChangeDetailResultLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                if (result.resultCode == Activity.RESULT_OK) {
-                    communityChangeDetailViewModel.getCommunityChangeDetailList(classChangeId)
-                }
-            }
-
-        binding.rvCommunityChange.setOnClickListener {
-            goToCommunityChangeDetailResultLauncher.launch(
-                Intent(
-                    requireContext(),
-                    CommunityChangeDetailActivity::class.java
-                ).putExtra(CHANGE_CLASS_CHANGE_ID, classChangeId)
-            )
-        }
     }
 
     private fun goToCommunityChangeNewGroup() {
