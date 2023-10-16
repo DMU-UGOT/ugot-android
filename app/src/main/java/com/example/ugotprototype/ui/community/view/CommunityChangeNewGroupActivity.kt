@@ -91,7 +91,25 @@ class CommunityChangeNewGroupActivity : AppCompatActivity() {
                 binding.spChangeNewChangeClass.selectedItem.toString() == "미선택" ||
                     binding.spChangeNewGrade.selectedItem.toString() == "미선택"){
                 showErrorMessage()
-            } else{
+            }
+            if ((binding.spChangeNewNowClass.selectedItem == "YA" ||
+                        binding.spChangeNewNowClass.selectedItem == "YB" ||
+                        binding.spChangeNewNowClass.selectedItem == "YC" ||
+                        binding.spChangeNewNowClass.selectedItem == "YD") &&
+                binding.spChangeNewChangeClass.selectedItem == "YJ" ||
+                binding.spChangeNewChangeClass.selectedItem == "YK"){
+                showErrorMessage2()
+            }
+            if ((binding.spChangeNewGrade.selectedItem == "1학년" ||
+                        binding.spChangeNewGrade.selectedItem == "2학년" ||
+                        binding.spChangeNewGrade.selectedItem == "3학년") &&
+                (binding.spChangeNewNowClass.selectedItem == "YJ" ||
+                        binding.spChangeNewNowClass.selectedItem == "YK") &&
+                (binding.spChangeNewChangeClass.selectedItem == "YJ" ||
+                binding.spChangeNewChangeClass.selectedItem == "YK")){
+                showErrorMessage3()
+            }
+            else{
                 setResult(Activity.RESULT_OK, Intent())
                 finish()
             }
@@ -107,7 +125,8 @@ class CommunityChangeNewGroupActivity : AppCompatActivity() {
             binding.spChangeNewChangeClass.selectedItem == "미선택" &&
             binding.spChangeNewNowClass.selectedItem == "미선택") {
             communityChangeNewGroupViewModel.isCommunityChangePostRegisterButtonState(false)
-        } else {
+        }
+        else {
             communityChangeNewGroupViewModel.isCommunityChangePostRegisterButtonState(true)
         }
     }
@@ -127,6 +146,30 @@ class CommunityChangeNewGroupActivity : AppCompatActivity() {
 
         builder.setTitle("선택하지 않은 목록이 있습니다")
         builder.setMessage("미선택이 없도록 선택해주시기 바랍니다")
+
+        builder.setPositiveButton("확인") { dialog, which ->
+            dialog.dismiss()
+        }
+        builder.create().show()
+    }
+
+    private fun showErrorMessage2() {
+        val builder = AlertDialog.Builder(binding.root.context)
+
+        builder.setTitle("선택할 수 없는 항목입니다")
+        builder.setMessage("올바른 반을 입력해주세요")
+
+        builder.setPositiveButton("확인") { dialog, which ->
+            dialog.dismiss()
+        }
+        builder.create().show()
+    }
+
+    private fun showErrorMessage3() {
+        val builder = AlertDialog.Builder(binding.root.context)
+
+        builder.setTitle("올바르지 않은 항목이 포함되어 있습니다")
+        builder.setMessage("YJ, YK반은 4학년만 가능합니다")
 
         builder.setPositiveButton("확인") { dialog, which ->
             dialog.dismiss()
