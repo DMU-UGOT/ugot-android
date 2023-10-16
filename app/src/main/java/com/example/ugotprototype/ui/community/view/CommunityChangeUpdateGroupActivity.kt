@@ -12,7 +12,9 @@ import com.example.ugotprototype.R
 import com.example.ugotprototype.data.api.ChangeService
 import com.example.ugotprototype.data.change.CommunityChangeUpdateViewData
 import com.example.ugotprototype.databinding.ActivityCommunityChangeUpdateGroupBinding
+import com.example.ugotprototype.databinding.ActivityDialogDeleteMessageBinding
 import com.example.ugotprototype.databinding.ActivityDialogMessageBinding
+import com.example.ugotprototype.databinding.DialogSameClassErrorBinding
 import com.example.ugotprototype.ui.community.view.CommunityChangeFragment.Companion.CHANGE_CLASS_CHANGE_ID
 import com.example.ugotprototype.ui.community.viewmodel.CommunityChangeUpdateViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -59,6 +61,7 @@ class CommunityChangeUpdateGroupActivity : AppCompatActivity() {
     private fun backNewToChangeDetailActivity() {
         binding.btChangeUpdatePostRegister.setOnClickListener {
             checkChangeUpdateOrganizationExistence()
+
             communityChangeUpdateViewModel.dataUpdate.observe(this) {
                 setResult(Activity.RESULT_OK, Intent())
                 finish()
@@ -121,10 +124,32 @@ class CommunityChangeUpdateGroupActivity : AppCompatActivity() {
             status = binding.spChangeUpdateChangeStatus.selectedItem.toString()
         )
 
-        communityChangeUpdateViewModel.modifyCommunityChangeUpdateData(
-            communityChangeUpdateViewData,
-            intent.getIntExtra(CHANGE_CLASS_CHANGE_ID, 0)
-        )
+        if(binding.spChangeUpdateNowClass.selectedItem.toString() == binding.spChangeUpdateChangeClass.selectedItem.toString()){
+            showConfirmationErrorDialog()
+        } else {
+            communityChangeUpdateViewModel.modifyCommunityChangeUpdateData(
+                communityChangeUpdateViewData,
+                intent.getIntExtra(CHANGE_CLASS_CHANGE_ID, 0)
+            )
+        }
+    }
+
+    private fun showConfirmationErrorDialog() {
+        if (isFinishing) {
+            return
+        }
+
+        val dialogBinding = DialogSameClassErrorBinding.inflate(layoutInflater)
+        val dialogView = dialogBinding.root
+        val builder = AlertDialog.Builder(this)
+
+        builder.setView(dialogView)
+        val alertDialog = builder.create()
+
+        dialogBinding.btDialogSameClassErrorReturn.setOnClickListener {
+            alertDialog.dismiss()
+        }
+        alertDialog.show()
     }
 
     private fun showConfirmationDialog() {
