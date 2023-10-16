@@ -46,16 +46,13 @@ class CommunityChangeViewModel @Inject constructor(
         }
     }
 
-    fun sendMessage(content: String) {
-        viewModelScope.launch {
-            kotlin.runCatching {
-                messageService.sendMessage(
-                    CommunityMessageData(
-                        content = content,
-                        receiverName = "미래김"
-                    )
-                )
-            }
-        }
-    }
+//    fun sendMessage(content: String) {
+//        viewModelScope.launch {
+//            kotlin.runCatching {
+//                messageService.sendMessage(
+//
+//                )
+//            }
+//        }
+//    }
 }

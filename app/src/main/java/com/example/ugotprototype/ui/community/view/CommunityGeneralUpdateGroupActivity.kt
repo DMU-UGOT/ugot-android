@@ -10,7 +10,6 @@ import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.R
 import com.example.ugotprototype.data.community.CommunityGeneralUpdateViewData
 import com.example.ugotprototype.databinding.ActivityCommunityGeneralUpdateGroupBinding
-import com.example.ugotprototype.databinding.ActivityDialogMessageBinding
 import com.example.ugotprototype.di.api.CommunityService
 import com.example.ugotprototype.ui.community.view.CommunityGeneralFragment.Companion.GENERAL_ID
 import com.example.ugotprototype.ui.community.viewmodel.CommunityGeneralUpdateViewModel
@@ -63,7 +62,7 @@ class CommunityGeneralUpdateGroupActivity : AppCompatActivity() {
         }
 
         binding.btGeneralNewBackToMain2.setOnClickListener {
-            showConfirmationDialog()
+            showOutCheckDialog()
         }
     }
 
@@ -83,26 +82,20 @@ class CommunityGeneralUpdateGroupActivity : AppCompatActivity() {
         }
     }
 
-    private fun showConfirmationDialog() {
-        if (isFinishing) {
-            return
-        }
-
-        val dialogBinding = ActivityDialogMessageBinding.inflate(layoutInflater)
-        val dialogView = dialogBinding.root
+    private fun showOutCheckDialog() {
         val builder = AlertDialog.Builder(this)
 
-        builder.setView(dialogView)
-        val alertDialog = builder.create()
+        builder.setTitle("나가시겠습니까?")
+        builder.setMessage("변경사항이 저장되지 않을 수 있습니다")
 
-        dialogBinding.btDialogYes.setOnClickListener {
-            alertDialog.dismiss()
+        builder.setPositiveButton("예") { dialog, which ->
+            dialog.dismiss()
             onBackPressed()
         }
 
-        dialogBinding.btDialogNo.setOnClickListener {
-            alertDialog.dismiss()
+        builder.setNegativeButton("아니오") { dialog, which ->
+            dialog.dismiss()
         }
-        alertDialog.show()
+        builder.create().show()
     }
 }

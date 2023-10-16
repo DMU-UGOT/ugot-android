@@ -123,27 +123,13 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun showDeleteCheckDialog() {
-        val dialogBinding = ActivityDialogDeleteMessageBinding.inflate(layoutInflater)
-        val dialogView = dialogBinding.root
-        val builder = AlertDialog.Builder(this)
-
-        builder.setView(dialogView)
-        val alertDialog = builder.create()
-
-        dialogBinding.btDialogDeleteYes.setOnClickListener {
-            alertDialog.dismiss()
-            deleteCommunity()
-        }
-
-        dialogBinding.btDialogDeleteNo.setOnClickListener {
-            alertDialog.dismiss()
-        }
-        alertDialog.show()
-    }
-
     private fun deleteCommunity() {
         communityGeneralDetailViewModel.deleteDetailText(intent.getIntExtra(GENERAL_ID, 0))
+
+        communityGeneralDetailViewModel.isDeleteGeneralGroup.observe(this) {
+            setResult(Activity.RESULT_OK, Intent())
+            finish()
+        }
     }
 
     private fun changeMyGeneralChatCount() {
@@ -230,6 +216,21 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
             }
             popupMenu.show()
         }
+    }
+
+    private fun showDeleteCheckDialog() {
+        val builder = AlertDialog.Builder(this)
+
+        builder.setTitle("삭제하시겠습니까?")
+        builder.setMessage("정말로 이 게시글을 삭제하시겠습니까?")
+
+        builder.setPositiveButton("예") { dialog, which ->
+            deleteCommunity()
+        }
+        builder.setNegativeButton("아니오") { dialog, which ->
+            dialog.dismiss()
+        }
+        builder.create().show()
     }
 
     override fun onStart() {

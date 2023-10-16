@@ -12,9 +12,6 @@ import com.example.ugotprototype.R
 import com.example.ugotprototype.data.api.ChangeService
 import com.example.ugotprototype.data.change.CommunityChangeUpdateViewData
 import com.example.ugotprototype.databinding.ActivityCommunityChangeUpdateGroupBinding
-import com.example.ugotprototype.databinding.ActivityDialogDeleteMessageBinding
-import com.example.ugotprototype.databinding.ActivityDialogMessageBinding
-import com.example.ugotprototype.databinding.DialogSameClassErrorBinding
 import com.example.ugotprototype.ui.community.view.CommunityChangeFragment.Companion.CHANGE_CLASS_CHANGE_ID
 import com.example.ugotprototype.ui.community.viewmodel.CommunityChangeUpdateViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -69,7 +66,7 @@ class CommunityChangeUpdateGroupActivity : AppCompatActivity() {
         }
 
         binding.btChangeUpdateBackToMain.setOnClickListener {
-            showConfirmationDialog()
+            showOutCheckDialog()
         }
     }
 
@@ -135,43 +132,31 @@ class CommunityChangeUpdateGroupActivity : AppCompatActivity() {
     }
 
     private fun showConfirmationErrorDialog() {
-        if (isFinishing) {
-            return
-        }
-
-        val dialogBinding = DialogSameClassErrorBinding.inflate(layoutInflater)
-        val dialogView = dialogBinding.root
         val builder = AlertDialog.Builder(this)
 
-        builder.setView(dialogView)
-        val alertDialog = builder.create()
+        builder.setTitle("현재 반과 변경 반이 동일합니다")
+        builder.setMessage("\n반을 다르게 설정 하셔야 합니다")
 
-        dialogBinding.btDialogSameClassErrorReturn.setOnClickListener {
-            alertDialog.dismiss()
+        builder.setNegativeButton("확인") { dialog, which ->
+            dialog.dismiss()
         }
-        alertDialog.show()
+        builder.create().show()
     }
 
-    private fun showConfirmationDialog() {
-        if (isFinishing) {
-            return
-        }
-
-        val dialogBinding = ActivityDialogMessageBinding.inflate(layoutInflater)
-        val dialogView = dialogBinding.root
+    private fun showOutCheckDialog() {
         val builder = AlertDialog.Builder(this)
 
-        builder.setView(dialogView)
-        val alertDialog = builder.create()
+        builder.setTitle("나가시겠습니까?")
+        builder.setMessage("변경사항이 저장되지 않을 수 있습니다")
 
-        dialogBinding.btDialogYes.setOnClickListener {
-            alertDialog.dismiss()
+        builder.setPositiveButton("예") { dialog, which ->
+            dialog.dismiss()
             onBackPressed()
         }
 
-        dialogBinding.btDialogNo.setOnClickListener {
-            alertDialog.dismiss()
+        builder.setNegativeButton("아니오") { dialog, which ->
+            dialog.dismiss()
         }
-        alertDialog.show()
+        builder.create().show()
     }
 }

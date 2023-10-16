@@ -11,7 +11,6 @@ import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.R
 import com.example.ugotprototype.data.community.CommunityGeneralNewPostData
 import com.example.ugotprototype.databinding.ActivityCommunityGeneralNewGroupBinding
-import com.example.ugotprototype.databinding.ActivityDialogMessageBinding
 import com.example.ugotprototype.ui.community.viewmodel.CommunityGeneralNewGroupViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -83,26 +82,19 @@ class CommunityGeneralNewGroupActivity : AppCompatActivity() {
     }
 
     private fun showConfirmationDialog() {
-        if (isFinishing) {
-            return
-        }
-
-        val dialogBinding = ActivityDialogMessageBinding.inflate(layoutInflater)
-        val dialogView = dialogBinding.root
         val builder = AlertDialog.Builder(this)
 
-        builder.setView(dialogView)
-        val alertDialog = builder.create()
+        builder.setTitle("나가시겠습니까?")
+        builder.setMessage("변경사항이 저장되지 않을 수 있습니다")
 
-        dialogBinding.btDialogYes.setOnClickListener {
+        builder.setPositiveButton("예") { dialog, which ->
             setResult(Activity.RESULT_OK, Intent())
             finish()
-            alertDialog.dismiss()
         }
 
-        dialogBinding.btDialogNo.setOnClickListener {
-            alertDialog.dismiss()
+        builder.setNegativeButton("아니오") { dialog, which ->
+            dialog.dismiss()
         }
-        alertDialog.show()
+        builder.create().show()
     }
 }

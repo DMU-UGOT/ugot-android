@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -15,7 +16,6 @@ import com.example.ugotprototype.data.change.CommunityChangePostViewData
 import com.example.ugotprototype.data.change.CommunityChangeRefreshData
 import com.example.ugotprototype.databinding.ActivityCommunityChangeDetailBinding
 import com.example.ugotprototype.databinding.ActivityCommunityChangeSendMessageBinding
-import com.example.ugotprototype.databinding.ActivityDialogDeleteMessageBinding
 import com.example.ugotprototype.ui.community.view.CommunityChangeFragment.Companion.CHANGE_CLASS_CHANGE_ID
 import com.example.ugotprototype.ui.community.viewmodel.CommunityChangeDetailViewModel
 import com.example.ugotprototype.ui.community.viewmodel.CommunityChangeUpdateViewModel
@@ -59,8 +59,10 @@ class CommunityChangeDetailActivity : AppCompatActivity() {
         if (communityChangeDetailViewModel.getLoggedInUserId()
                 .toString() == data.memberId.toString()
         ) {
+            binding.btChangeNewMessage.visibility = View.GONE
             binding.ivChangeMenu.visibility = View.VISIBLE
         } else {
+            binding.btChangeNewMessage.visibility = View.VISIBLE
             binding.ivChangeMenu.visibility = View.GONE
         }
     }
@@ -88,47 +90,6 @@ class CommunityChangeDetailActivity : AppCompatActivity() {
         }
 
         return dateFormat.format(date)
-    }
-
-
-    private fun sendMessageDialog() {
-        if (isFinishing) {
-            return
-        }
-        val dialogBinding = ActivityCommunityChangeSendMessageBinding.inflate(layoutInflater)
-        val dialogView = dialogBinding.root
-        val builder = AlertDialog.Builder(this)
-
-        builder.setView(dialogView)
-        val alertDialog = builder.create()
-
-        dialogBinding.btChangeSendMessage.setOnClickListener {
-            alertDialog.dismiss()
-        }
-
-        dialogBinding.btChangeSendReturn.setOnClickListener {
-            alertDialog.dismiss()
-        }
-        alertDialog.show()
-    }
-
-    private fun showDeleteCheckDialog() {
-        val dialogBinding = ActivityDialogDeleteMessageBinding.inflate(layoutInflater)
-        val dialogView = dialogBinding.root
-        val builder = AlertDialog.Builder(this)
-
-        builder.setView(dialogView)
-        val alertDialog = builder.create()
-
-        dialogBinding.btDialogDeleteYes.setOnClickListener {
-            alertDialog.dismiss()
-            deleteCommunity()
-        }
-
-        dialogBinding.btDialogDeleteNo.setOnClickListener {
-            alertDialog.dismiss()
-        }
-        alertDialog.show()
     }
 
     private fun deleteCommunity() {
@@ -177,7 +138,6 @@ class CommunityChangeDetailActivity : AppCompatActivity() {
             popupMenu.setOnMenuItemClickListener { item ->
                 when (item.itemId) {
                     R.id.menu_change_item1 -> {
-                        // 수정
                         goToUpdateToDetailResultLauncher.launch(
                             Intent(
                                 applicationContext,
@@ -189,12 +149,12 @@ class CommunityChangeDetailActivity : AppCompatActivity() {
                         )
                         true
                     }
-                    // 갱신
+
                     R.id.menu_change_item2 -> {
                         resetTime(intent.getIntExtra(CHANGE_CLASS_CHANGE_ID, 0))
                         true
                     }
-                    // 삭제
+
                     R.id.menu_change_item3 -> {
                         showDeleteCheckDialog()
                         true
@@ -211,6 +171,46 @@ class CommunityChangeDetailActivity : AppCompatActivity() {
         binding.btChangeNewMessage.setOnClickListener {
             sendMessageDialog()
         }
+    }
+
+    private fun sendMessageDialog() {
+        if (isFinishing) {
+            return
+        }
+        val dialogBinding = ActivityCommunityChangeSendMessageBinding.inflate(layoutInflater)
+        val dialogView = dialogBinding.root
+        val builder = AlertDialog.Builder(this)
+
+        builder.setView(dialogView)
+        val alertDialog = builder.create()
+
+        dialogBinding.btChangeSendMessage.setOnClickListener {
+            communityChangeDetailViewModel.getMessageList(intent.getIntExtra(CommunityGeneralFragment.GENERAL_ID, 0))
+            alertDialog.dismiss()
+            Toast.makeText(this,"메시지를 전송하였습니다", Toast.LENGTH_SHORT).show()
+        }
+
+        dialogBinding.btChangeSendReturn.setOnClickListener {
+            alertDialog.dismiss()
+            Toast.makeText(this,"메시지를 전송을 취소했습니다", Toast.LENGTH_SHORT).show()
+        }
+        alertDialog.show()
+    }
+
+    private fun showDeleteCheckDialog() {
+        val builder = AlertDialog.Builder(this)
+
+        builder.setTitle("삭제하시겠습니까?")
+        builder.setMessage("정말로 이 게시글을 삭제하시겠습니까?")
+
+        builder.setPositiveButton("예") { dialog, which ->
+            deleteCommunity()
+        }
+
+        builder.setNegativeButton("아니오") { dialog, which ->
+            dialog.dismiss()
+        }
+        builder.create().show()
     }
 
     override fun onStart() {
