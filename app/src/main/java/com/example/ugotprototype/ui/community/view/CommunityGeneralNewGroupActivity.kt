@@ -85,7 +85,7 @@ class CommunityGeneralNewGroupActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(this)
 
         builder.setTitle("나가시겠습니까?")
-        builder.setMessage("변경사항이 저장되지 않을 수 있습니다")
+        builder.setMessage("\n변경사항이 저장되지 않을 수 있습니다")
 
         builder.setPositiveButton("예") { dialog, which ->
             finish()

@@ -24,6 +24,9 @@ class CommunityGeneralViewModel @Inject constructor(
     private val _currentPage = MutableLiveData<Int>()
     val currentPage: LiveData<Int> = _currentPage
 
+    private val _isLoadingPage = MutableLiveData<Boolean>()
+    val isLoadingPage: LiveData<Boolean> = _isLoadingPage
+
     val onCmuPrevButtonClickListener = View.OnClickListener {
         if (_currentPage.value!! > 1) {
             _currentPage.value = _currentPage.value!! - 1
@@ -45,6 +48,8 @@ class CommunityGeneralViewModel @Inject constructor(
     }
 
     fun getCommunityList(){
+        _isLoadingPage.value = false
+
         viewModelScope.launch {
             kotlin.runCatching {
                 val pageResponse = communityService.getCommunityGeneral(_currentPage.value!!, 10)
@@ -53,6 +58,7 @@ class CommunityGeneralViewModel @Inject constructor(
                 _communityGeneralItemList.value = communityGeneralResponse
                 _totalPage.value = pageResponse.pageInfo.totalPages
             }
+            _isLoadingPage.value = true
         }
     }
 }

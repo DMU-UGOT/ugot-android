@@ -140,10 +140,15 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
 
     private fun chatInputBtn() {
         binding.btGeneralDetailChatInput.setOnClickListener {
-            checkGeneralOrganizationExistence(intent.getIntExtra(GENERAL_ID, 0))
-            binding.generalChatInput.text.clear()
-            setResult(Activity.RESULT_OK, Intent())
-            hideKeyboard()
+            if(binding.generalChatInput.text.toString().isBlank()){
+                showErrorMessage()
+            }
+            else {
+                checkGeneralOrganizationExistence(intent.getIntExtra(GENERAL_ID, 0))
+                binding.generalChatInput.text.clear()
+                setResult(Activity.RESULT_OK, Intent())
+                hideKeyboard()
+            }
         }
     }
 
@@ -228,6 +233,18 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
             deleteCommunity()
         }
         builder.setNegativeButton("아니오") { dialog, which ->
+            dialog.dismiss()
+        }
+        builder.create().show()
+    }
+
+    private fun showErrorMessage() {
+        val builder = AlertDialog.Builder(this)
+
+        builder.setTitle("빈칸은 입력이 안됩니다")
+        builder.setMessage("댓글 텍스트를 입력해주세요")
+
+        builder.setNegativeButton("확인") { dialog, which ->
             dialog.dismiss()
         }
         builder.create().show()

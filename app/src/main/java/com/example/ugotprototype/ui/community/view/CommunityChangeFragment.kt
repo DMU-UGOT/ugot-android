@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.FragmentCommunityChangeBinding
+import com.example.ugotprototype.ui.Loading.util.LoadingLayoutHelper
 import com.example.ugotprototype.ui.community.adapter.CommunityChangeRecyclerViewAdapter
 import com.example.ugotprototype.ui.community.viewmodel.CommunityChangeViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,6 +23,11 @@ class CommunityChangeFragment : Fragment() {
     private lateinit var binding: FragmentCommunityChangeBinding
     private val communityChangeViewModel: CommunityChangeViewModel by viewModels()
     private lateinit var communityChangeRecyclerViewAdapter: CommunityChangeRecyclerViewAdapter
+    private val loadingLayoutHelper: LoadingLayoutHelper by lazy {
+        LoadingLayoutHelper(
+            parentFragmentManager
+        )
+    }
 
     companion object {
         const val CHANGE_CLASS_CHANGE_ID = "changeClassChangeId"
@@ -57,7 +63,14 @@ class CommunityChangeFragment : Fragment() {
 
         communityChangeViewModel.currentPage.observe(viewLifecycleOwner) {
             binding.communityPageFirstText.text = it.toString()
-            communityChangeViewModel.getChangeList()
+        }
+
+        communityChangeViewModel.isLoadingPage.observe(viewLifecycleOwner) {
+            if (it) {
+                loadingLayoutHelper.dismissLoadingDialog()
+            } else {
+                loadingLayoutHelper.showLoadingDialog()
+            }
         }
 
         goToCommunityChangeNewGroup()

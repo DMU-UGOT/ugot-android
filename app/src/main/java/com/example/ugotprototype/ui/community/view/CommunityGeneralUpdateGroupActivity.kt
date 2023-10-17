@@ -54,10 +54,18 @@ class CommunityGeneralUpdateGroupActivity : AppCompatActivity() {
 
     private fun backNewToDetailActivity() {
         binding.btGeneralNewPostRegister2.setOnClickListener {
-            checkGeneralOrganizationExistence()
-            communityGeneralUpdateViewModel.dataUpdate.observe(this) {
-                setResult(Activity.RESULT_OK, Intent())
-                finish()
+            if(binding.etGeneralNewTitleName2.text.toString().isBlank()){
+                showErrorMessage()
+            }
+            if(binding.etGeneralTextDetail2.text.toString().isBlank()){
+                showErrorMessage2()
+            }
+            else {
+                checkGeneralOrganizationExistence()
+                communityGeneralUpdateViewModel.dataUpdate.observe(this) {
+                    setResult(Activity.RESULT_OK, Intent())
+                    finish()
+                }
             }
         }
 
@@ -86,7 +94,7 @@ class CommunityGeneralUpdateGroupActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(this)
 
         builder.setTitle("나가시겠습니까?")
-        builder.setMessage("변경사항이 저장되지 않을 수 있습니다")
+        builder.setMessage("\n변경사항이 저장되지 않을 수 있습니다")
 
         builder.setPositiveButton("예") { dialog, which ->
             dialog.dismiss()
@@ -94,6 +102,30 @@ class CommunityGeneralUpdateGroupActivity : AppCompatActivity() {
         }
 
         builder.setNegativeButton("아니오") { dialog, which ->
+            dialog.dismiss()
+        }
+        builder.create().show()
+    }
+
+    private fun showErrorMessage() {
+        val builder = AlertDialog.Builder(binding.root.context)
+
+        builder.setTitle("제목이 비었습니다")
+        builder.setMessage("\n제목을 작성해주시기 바랍니다")
+
+        builder.setPositiveButton("확인") { dialog, which ->
+            dialog.dismiss()
+        }
+        builder.create().show()
+    }
+
+    private fun showErrorMessage2() {
+        val builder = AlertDialog.Builder(binding.root.context)
+
+        builder.setTitle("내용이 비었습니다")
+        builder.setMessage("\n내용을 작성해주시기 바랍니다")
+
+        builder.setPositiveButton("확인") { dialog, which ->
             dialog.dismiss()
         }
         builder.create().show()

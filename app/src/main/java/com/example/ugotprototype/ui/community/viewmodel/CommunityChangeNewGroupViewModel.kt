@@ -41,8 +41,8 @@ class CommunityChangeNewGroupViewModel @Inject constructor(
         viewModelScope.launch {
             kotlin.runCatching {
                 changeService.createChange(communityChangeNewPostData)
-            }.onSuccess { Log.d("successChangeNew", it.toString()) }
-                .onFailure { Log.d("successChangeNew", it.toString()) }
+            }.onSuccess { _createFinish.value = true }
+                .onFailure { _createFinish.value = false }
         }
     }
 }

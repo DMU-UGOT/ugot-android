@@ -121,7 +121,12 @@ class CommunityChangeUpdateGroupActivity : AppCompatActivity() {
             status = binding.spChangeUpdateChangeStatus.selectedItem.toString()
         )
 
-        if(binding.spChangeUpdateNowClass.selectedItem.toString() == binding.spChangeUpdateChangeClass.selectedItem.toString()){
+        if((binding.spChangeUpdateNowClass.selectedItem.toString() == binding.spChangeUpdateChangeClass.selectedItem.toString())
+            ||
+            (binding.spChangeUpdateGrade.selectedItem.toString() != "4학년" &&
+                    (binding.spChangeUpdateNowClass.selectedItem.toString() == "YJ" || binding.spChangeUpdateNowClass.selectedItem.toString() == "YK") ||
+                    (binding.spChangeUpdateChangeClass.selectedItem.toString() == "YJ" || binding.spChangeUpdateChangeClass.selectedItem.toString() == "YK")))
+        {
             showConfirmationErrorDialog()
         } else {
             communityChangeUpdateViewModel.modifyCommunityChangeUpdateData(
@@ -134,8 +139,8 @@ class CommunityChangeUpdateGroupActivity : AppCompatActivity() {
     private fun showConfirmationErrorDialog() {
         val builder = AlertDialog.Builder(this)
 
-        builder.setTitle("현재 반과 변경 반이 동일합니다")
-        builder.setMessage("\n반을 다르게 설정 하셔야 합니다")
+        builder.setTitle("현재 반과 변경 반이 올바르지 않습니다")
+        builder.setMessage("\n반을 다시 선택해주시기 바랍니다")
 
         builder.setNegativeButton("확인") { dialog, which ->
             dialog.dismiss()
@@ -147,7 +152,7 @@ class CommunityChangeUpdateGroupActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(this)
 
         builder.setTitle("나가시겠습니까?")
-        builder.setMessage("변경사항이 저장되지 않을 수 있습니다")
+        builder.setMessage("\n변경사항이 저장되지 않을 수 있습니다")
 
         builder.setPositiveButton("예") { dialog, which ->
             dialog.dismiss()

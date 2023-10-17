@@ -86,32 +86,29 @@ class CommunityChangeNewGroupActivity : AppCompatActivity() {
 
     private fun backCommunityChangeNewToMainActivity() {
         binding.btChangeNewPostRegister.setOnClickListener {
-            checkChangeOrganizationExistence()
-            if(binding.spChangeNewNowClass.selectedItem.toString() == "미선택" ||
+            if ((binding.spChangeNewGrade.selectedItem.toString() == "미선택" ||
                 binding.spChangeNewChangeClass.selectedItem.toString() == "미선택" ||
-                    binding.spChangeNewGrade.selectedItem.toString() == "미선택"){
+                binding.spChangeNewNowClass.selectedItem.toString() == "미선택")
+                ||
+                ((binding.spChangeNewGrade.selectedItem.toString() == "1학년" ||
+                        binding.spChangeNewGrade.selectedItem.toString() == "2학년" ||
+                        binding.spChangeNewGrade.selectedItem.toString() == "3학년") &&
+                        (binding.spChangeNewNowClass.selectedItem.toString() ==  "YJ" ||
+                                binding.spChangeNewNowClass.selectedItem.toString() == "YK") ||
+                        (binding.spChangeNewChangeClass.selectedItem.toString() == "YJ" ||
+                                binding.spChangeNewChangeClass.selectedItem.toString() == "YK"))
+                ||
+                ((binding.spChangeNewGrade.selectedItem.toString() == "4학년") &&
+                        (binding.spChangeNewNowClass.toString() != "YJ" ||
+                        binding.spChangeNewChangeClass.toString() != "YK"))
+                ||
+                (binding.spChangeNewNowClass.selectedItem.toString() ==
+                        binding.spChangeNewChangeClass.selectedItem.toString())
+            ){
                 showErrorMessage()
             }
-            if ((binding.spChangeNewNowClass.selectedItem == "YA" ||
-                        binding.spChangeNewNowClass.selectedItem == "YB" ||
-                        binding.spChangeNewNowClass.selectedItem == "YC" ||
-                        binding.spChangeNewNowClass.selectedItem == "YD") &&
-                binding.spChangeNewChangeClass.selectedItem == "YJ" ||
-                binding.spChangeNewChangeClass.selectedItem == "YK"){
-                showErrorMessage2()
-            }
-            if ((binding.spChangeNewGrade.selectedItem == "1학년" ||
-                        binding.spChangeNewGrade.selectedItem == "2학년" ||
-                        binding.spChangeNewGrade.selectedItem == "3학년") &&
-                (binding.spChangeNewNowClass.selectedItem == "YJ" ||
-                        binding.spChangeNewNowClass.selectedItem == "YK") &&
-                (binding.spChangeNewChangeClass.selectedItem == "YJ" ||
-                binding.spChangeNewChangeClass.selectedItem == "YK")){
-                showErrorMessage3()
-            }
             else{
-                setResult(Activity.RESULT_OK, Intent())
-                finish()
+                checkChangeOrganizationExistence()
             }
         }
 
@@ -121,8 +118,8 @@ class CommunityChangeNewGroupActivity : AppCompatActivity() {
     }
 
     private fun checkAllFields() {
-        if (binding.spChangeNewGrade.selectedItem == "미선택" &&
-            binding.spChangeNewChangeClass.selectedItem == "미선택" &&
+        if (binding.spChangeNewGrade.selectedItem == "미선택" ||
+            binding.spChangeNewChangeClass.selectedItem == "미선택" ||
             binding.spChangeNewNowClass.selectedItem == "미선택") {
             communityChangeNewGroupViewModel.isCommunityChangePostRegisterButtonState(false)
         }
@@ -144,32 +141,8 @@ class CommunityChangeNewGroupActivity : AppCompatActivity() {
     private fun showErrorMessage() {
         val builder = AlertDialog.Builder(binding.root.context)
 
-        builder.setTitle("선택하지 않은 목록이 있습니다")
-        builder.setMessage("미선택이 없도록 선택해주시기 바랍니다")
-
-        builder.setPositiveButton("확인") { dialog, which ->
-            dialog.dismiss()
-        }
-        builder.create().show()
-    }
-
-    private fun showErrorMessage2() {
-        val builder = AlertDialog.Builder(binding.root.context)
-
-        builder.setTitle("선택할 수 없는 항목입니다")
-        builder.setMessage("올바른 반을 입력해주세요")
-
-        builder.setPositiveButton("확인") { dialog, which ->
-            dialog.dismiss()
-        }
-        builder.create().show()
-    }
-
-    private fun showErrorMessage3() {
-        val builder = AlertDialog.Builder(binding.root.context)
-
-        builder.setTitle("올바르지 않은 항목이 포함되어 있습니다")
-        builder.setMessage("YJ, YK반은 4학년만 가능합니다")
+        builder.setTitle("올바르지 않은 항목이 있습니다")
+        builder.setMessage("\n제대로 된 항목을 선택해주시기 바랍니다")
 
         builder.setPositiveButton("확인") { dialog, which ->
             dialog.dismiss()
@@ -181,7 +154,7 @@ class CommunityChangeNewGroupActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(this)
 
         builder.setTitle("나가시겠습니까?")
-        builder.setMessage("변경사항이 저장되지 않을 수 있습니다")
+        builder.setMessage("\n변경사항이 저장되지 않을 수 있습니다")
 
         builder.setPositiveButton("예") { dialog, which ->
             setResult(Activity.RESULT_OK, Intent())

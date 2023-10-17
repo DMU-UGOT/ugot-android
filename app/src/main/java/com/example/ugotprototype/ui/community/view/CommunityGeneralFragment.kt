@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.FragmentCommunityGeneralBinding
+import com.example.ugotprototype.ui.Loading.util.LoadingLayoutHelper
 import com.example.ugotprototype.ui.community.adapter.CommunityGeneralRecyclerViewAdapter
 import com.example.ugotprototype.ui.community.viewmodel.CommunityGeneralViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,6 +23,11 @@ class CommunityGeneralFragment : Fragment() {
     private lateinit var binding: FragmentCommunityGeneralBinding
     private val communityGeneralViewModel: CommunityGeneralViewModel by viewModels()
     private lateinit var communityGeneralRecyclerViewAdapter: CommunityGeneralRecyclerViewAdapter
+    private val loadingLayoutHelper: LoadingLayoutHelper by lazy {
+        LoadingLayoutHelper(
+            parentFragmentManager
+        )
+    }
 
     companion object {
         const val GENERAL_ID = "generalId"
@@ -59,7 +65,14 @@ class CommunityGeneralFragment : Fragment() {
 
         communityGeneralViewModel.currentPage.observe(viewLifecycleOwner) {
             binding.communityGeneralPageFirstText.text = it.toString()
-            communityGeneralViewModel.getCommunityList()
+        }
+
+        communityGeneralViewModel.isLoadingPage.observe(viewLifecycleOwner) {
+            if (it) {
+                loadingLayoutHelper.dismissLoadingDialog()
+            } else {
+                loadingLayoutHelper.showLoadingDialog()
+            }
         }
 
         goToCommunityGeneralNewGroup()

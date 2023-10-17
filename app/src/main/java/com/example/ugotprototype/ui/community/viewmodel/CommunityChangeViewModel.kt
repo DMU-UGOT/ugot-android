@@ -1,5 +1,6 @@
 package com.example.ugotprototype.ui.community.viewmodel
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,6 +27,21 @@ class CommunityChangeViewModel @Inject constructor(
     private val _totalPage = MutableLiveData<Int>()
     var totalPage: LiveData<Int> = _totalPage
 
+    private val _isLoadingPage = MutableLiveData<Boolean>()
+    val isLoadingPage: LiveData<Boolean> = _isLoadingPage
+
+    val onCmuPrevButtonClickListener = View.OnClickListener {
+        if (_currentPage.value!! > 1) {
+            _currentPage.value = _currentPage.value!! - 1
+        }
+    }
+
+    val onCmuNextButtonClickListener = View.OnClickListener {
+        if (_currentPage.value!! < _totalPage.value!!) {
+            _currentPage.value = _currentPage.value!! + 1
+        }
+    }
+
     fun setCurrentPage(data: Int) {
         _currentPage.value = data
     }
@@ -36,6 +52,8 @@ class CommunityChangeViewModel @Inject constructor(
 
     fun getChangeList(){
         viewModelScope.launch {
+            _isLoadingPage.value = false
+
             kotlin.runCatching {
                 val pageResponse = changeService.getChange(_currentPage.value!!, 10)
                 val communityChangeResponse = pageResponse.data
@@ -43,6 +61,7 @@ class CommunityChangeViewModel @Inject constructor(
                 _communityChangeItemList.value = communityChangeResponse
                 _totalPage.value = pageResponse.pageInfo.totalPages
             }
+            _isLoadingPage.value = true
         }
     }
 
