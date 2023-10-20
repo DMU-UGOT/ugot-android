@@ -78,12 +78,14 @@ class StudyViewModel @Inject constructor(
     val onPrevButtonClickListener = View.OnClickListener {
         if (_currentPage.value!! > 1) {
             _currentPage.value = _currentPage.value!! - 1
+            getStudyList()
         }
     }
 
     val onNextButtonClickListener = View.OnClickListener {
         if (_currentPage.value!! < _totalPage.value!!) {
             _currentPage.value = _currentPage.value!! + 1
+            getStudyList()
         }
     }
 
@@ -91,10 +93,6 @@ class StudyViewModel @Inject constructor(
         viewModelScope.launch {
             kotlin.runCatching {
                 studyService.setBookmark(teamId)
-            }.onSuccess {
-                Log.d("스터디", "성공")
-            }.onFailure {
-                Log.d("스터디", it.toString())
             }
         }
     }

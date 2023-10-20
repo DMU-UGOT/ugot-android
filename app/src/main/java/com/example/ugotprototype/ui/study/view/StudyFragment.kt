@@ -60,7 +60,6 @@ class StudyFragment : Fragment() {
 
         studyViewModel.currentPage.observe(viewLifecycleOwner) {
             binding.studyPageFirstText.text = it.toString()
-            studyViewModel.getStudyList()
         }
 
         studyViewModel.isLoadingPage.observe(viewLifecycleOwner) {
