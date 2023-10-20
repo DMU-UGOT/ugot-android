@@ -2,6 +2,7 @@ package com.example.ugotprototype.ui.team.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,6 +39,7 @@ class TeamFragment : Fragment() {
         const val TEAM_STATUS = "teamStatus"
         const val TEAM_PERSON_CNT = "teamPersonCnt"
         const val TEAM_GITHUB_LINK = "teamGitHubLink"
+        var SKILL_LIST = listOf("", "")
     }
 
     override fun onCreateView(
@@ -87,6 +89,11 @@ class TeamFragment : Fragment() {
             }
         }
 
+        teamViewModel.skillList.observe(viewLifecycleOwner) {
+            SKILL_LIST = it
+            Log.d("skill1", SKILL_LIST.toString())
+        }
+
         goToTeamSearchDetail()
         goToTeamPostWriteDetail()
     }
@@ -111,6 +118,7 @@ class TeamFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+        teamViewModel.getUserInfo()
         teamViewModel.getTeamList()
     }
 }

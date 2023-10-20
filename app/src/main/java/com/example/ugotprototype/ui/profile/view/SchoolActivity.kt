@@ -1,5 +1,6 @@
 package com.example.ugotprototype.ui.profile.view
 
+import android.app.Activity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Spinner
@@ -49,6 +50,7 @@ class SchoolActivity : AppCompatActivity() {
 
         schoolActivityViewModel.isMemberDataPatch.observe(this) {
             if (it) {
+                setResult(Activity.RESULT_OK)
                 finish()
             }
         }

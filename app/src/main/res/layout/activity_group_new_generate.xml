@@ -71,9 +71,9 @@
                 android:hint="제목"
                 android:imeOptions="actionNext"
                 android:inputType="text"
+                android:maxLength="20"
                 android:textColorHint="@color/color_80636363"
                 android:textSize="15dp"
-                android:maxLength="20"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -109,7 +109,7 @@
                 android:background="@color/color_F0F1F3"
                 app:layout_constraintTop_toBottomOf="@+id/et_group_text_detail" />
 
-<!--총 인원-->
+            <!--총 인원-->
             <TextView
                 android:id="@+id/tv_group_max_member"
                 android:layout_width="wrap_content"
@@ -184,7 +184,7 @@
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/bg_team_post_detail_et"
-                android:hint="GitHub Url을 입력하세요"
+                android:hint="깃헙 조직 이름을 입력하세요."
                 android:padding="15dp"
                 android:textColorHint="@color/color_80636363"
                 android:textSize="15dp"

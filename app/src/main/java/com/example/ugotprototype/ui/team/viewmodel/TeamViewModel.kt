@@ -1,12 +1,13 @@
 package com.example.ugotprototype.ui.team.viewmodel
 
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.ugotprototype.SharedPreference
 import com.example.ugotprototype.data.api.ApiService
+import com.example.ugotprototype.data.api.ProfileService
 import com.example.ugotprototype.data.api.TeamBuildingService
 import com.example.ugotprototype.data.response.TeamPostResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TeamViewModel @Inject constructor(
-    private val apiService: ApiService, private val teamBuildingService: TeamBuildingService
+    private val apiService: ApiService, private val teamBuildingService: TeamBuildingService,
+    private val profileService: ProfileService, private val sharedPreference: SharedPreference
 ) : ViewModel() {
     private val _teamItemList = MutableLiveData<List<TeamPostResponse>>()
     val teamItemList: LiveData<List<TeamPostResponse>> = _teamItemList
@@ -32,15 +34,20 @@ class TeamViewModel @Inject constructor(
     private val _isLoadingPage = MutableLiveData<Boolean>()
     val isLoadingPage: LiveData<Boolean> = _isLoadingPage
 
+    private val _skillList = MutableLiveData<List<String>>()
+    val skillList: LiveData<List<String>> = _skillList
+
     val onPrevButtonClickListener = View.OnClickListener {
         if (_currentPage.value!! > 1) {
             _currentPage.value = _currentPage.value!! - 1
+            getTeamList()
         }
     }
 
     val onNextButtonClickListener = View.OnClickListener {
         if (_currentPage.value!! < _totalPage.value!!) {
             _currentPage.value = _currentPage.value!! + 1
+            getTeamList()
         }
     }
 
@@ -87,6 +94,16 @@ class TeamViewModel @Inject constructor(
         viewModelScope.launch {
             kotlin.runCatching {
                 teamBuildingService.setBookmark(teamId)
+            }
+        }
+    }
+
+    fun getUserInfo() {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                profileService.getUserInfo(sharedPreference.getMemberId().toString())
+            }.onSuccess {
+                _skillList.value = it.skill
             }
         }
     }

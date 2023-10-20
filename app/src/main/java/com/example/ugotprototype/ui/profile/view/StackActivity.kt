@@ -26,8 +26,13 @@ class StackActivity : AppCompatActivity() {
 
         viewModel.getSkillList()
 
-        viewModel.skillList.observe(this) {
-            updateSkillLayouts(it)
+        viewModel.memberData.observe(this) {
+            updateSkillLayouts(it.skill)
+        }
+
+        viewModel.patchOk.observe(this) {
+            setResult(Activity.RESULT_OK)
+            finish()
         }
 
         stackBackToMainActivity()
@@ -36,13 +41,15 @@ class StackActivity : AppCompatActivity() {
     private fun stackBackToMainActivity() {
 
         binding.btStackPostRegister.setOnClickListener {
-            Intent().putExtra("resultText", "text")
-            setResult(Activity.RESULT_OK, Intent())
-            finish()
+            viewModel.updateSkillList(
+                listOf(
+                    binding.etStack1.text.toString(),
+                    binding.etStack2.text.toString()
+                )
+            )
         }
 
         binding.btStackBackToMain.setOnClickListener {
-            Intent().putExtra("resultText", "text")
             setResult(Activity.RESULT_OK, Intent())
             finish()
         }

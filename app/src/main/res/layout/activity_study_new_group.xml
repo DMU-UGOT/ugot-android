@@ -274,7 +274,7 @@
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginTop="15dp"
                     android:background="@drawable/bg_team_post_detail_et"
-                    android:hint="깃헙 닉네임을 입력하세요"
+                    android:hint="깃헙 조직 이름을 입력하세요."
                     android:padding="15dp"
                     android:textColorHint="@color/color_80636363"
                     android:textSize="15sp"

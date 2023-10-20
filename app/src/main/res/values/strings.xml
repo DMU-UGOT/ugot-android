@@ -21,8 +21,8 @@
         <item>선택안함</item>
         <item>Web</item>
         <item>Mobile</item>
+        <item>Ai</item>
         <item>Game</item>
-        <item>Software</item>
     </string-array>
 
     <string-array name="team_post_class_item">

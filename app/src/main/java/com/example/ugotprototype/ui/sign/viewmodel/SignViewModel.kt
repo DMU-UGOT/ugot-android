@@ -5,11 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.ugotprototype.SharedPreference
 import com.example.ugotprototype.data.api.ApiService
 import com.example.ugotprototype.data.api.SignService
 import com.example.ugotprototype.data.sign.SignAccountData
 import com.example.ugotprototype.data.sign.SignData
-import com.example.ugotprototype.SharedPreference
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -157,7 +157,7 @@ class SignViewModel @Inject constructor(
     }
 
     fun isBlogValid(): Boolean {
-        return blogLink.value?.contains(".com") ?: true
+        return blogLink.value?.trim()?.contains(".com") ?: true
     }
 
     fun isRealNameValid(): Boolean {
