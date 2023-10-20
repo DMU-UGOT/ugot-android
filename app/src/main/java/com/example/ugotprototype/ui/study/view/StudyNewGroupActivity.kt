@@ -115,7 +115,7 @@ class StudyNewGroupActivity : AppCompatActivity() {
     }
 
     private fun checkAllFields() {
-        if (binding.etStNewTitleName.length() != 0 && binding.etTitleDetail.length() != 0 && binding.tvStNewGithubTitle.length() != 0 && binding.etSubject.length() != 0 && binding.etField.length() != 0) {
+        if (binding.groupSpinner.selectedItem as? String != null && binding.etStNewTitleName.length() != 0 && binding.etTitleDetail.length() != 0 && binding.tvStNewGithubTitle.length() != 0 && binding.etSubject.length() != 0 && binding.etField.length() != 0) {
             studyViewModel.isStudyPostRegisterButtonState(true)
         } else {
             studyViewModel.isStudyPostRegisterButtonState(false)

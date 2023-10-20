@@ -118,7 +118,8 @@ class TeamPostWriteDetailActivity : AppCompatActivity() {
     }
 
     private fun checkAllFields() {
-        if (binding.etLanguage.length() != 0 && binding.etTarget.length() != 0 && binding.classSpinner.selectedItemPosition != 0 && binding.fieldSpinner.selectedItemPosition != 0 && binding.etTitleName.length() != 0 && binding.etTitleDetail.length() != 0 && binding.etInputGithubLink.length() != 0 && binding.etInputKakaoOpenLink.length() != 0) {
+        if (binding.etLanguage.length() != 0 && binding.etTarget.length() != 0 && binding.classSpinner.selectedItemPosition != 0 && binding.fieldSpinner.selectedItemPosition != 0 && binding.etTitleName.length() != 0 && binding.etTitleDetail.length() != 0 && binding.etInputGithubLink.length() != 0 && binding.etInputKakaoOpenLink.length() != 0
+            && binding.groupSpinner.selectedItem as? String != null) {
             teamPostWriteViewModel.isTeamPostRegisterButtonState(true)
         } else {
             teamPostWriteViewModel.isTeamPostRegisterButtonState(false)
