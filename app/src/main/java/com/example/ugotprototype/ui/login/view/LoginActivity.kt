@@ -10,17 +10,17 @@ import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.BuildConfig
 import com.example.ugotprototype.MainActivity
 import com.example.ugotprototype.R
+import com.example.ugotprototype.SharedPreference
 import com.example.ugotprototype.data.oauth.RequestLoginNaver
 import com.example.ugotprototype.databinding.ActivityLoginBinding
 import com.example.ugotprototype.ui.login.viewmodel.LoginViewModel
-import com.example.ugotprototype.SharedPreference
 import com.example.ugotprototype.ui.sign.view.SignActivity
 import com.example.ugotprototype.ui.sign.view.SignNoEmailActivity
-import com.example.ugotprototype.ui.sign.viewmodel.SignViewModel.Companion.LOGIN_TYPE
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
+import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
 import com.navercorp.nid.NaverIdLoginSDK
 import com.navercorp.nid.oauth.NidOAuthLogin
@@ -39,12 +39,13 @@ class LoginActivity : AppCompatActivity() {
     companion object {
         const val LOGIN_EMAIL = "loginEmail"
         const val LOGIN_REAL_NAME = "loginRealName"
+        var USER_LOGIN_TYPE = ""
     }
 
     // 카카오계정으로 로그인 공통 callback 구성
     // 카카오톡으로 로그인 할 수 없어 카카오계정으로 로그인할 경우 사용됨
     private val kakaOAuthCallback: (OAuthToken?, Throwable?) -> Unit = { token, _ ->
-        token?.let { getKakaoTalkUserInfo() }
+        token?.let { getKakaoTalkUserInfo(token.accessToken) }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,7 +55,7 @@ class LoginActivity : AppCompatActivity() {
         sharedPreference = SharedPreference(this)
 
         // TODO 필수 : kakao developers -> 플랫폼 -> 키 해시 등록
-        // Log.e("태그", Utility.getKeyHash(applicationContext))
+        Log.e("태그", Utility.getKeyHash(applicationContext))
 
         viewModel.userAccessToken.observe(this) {
             if (it != "") {
@@ -68,14 +69,20 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
+        viewModel.kakaoUserAccessToken.observe(this) {
+            if (it != "") {
+                sharedPreference.saveToken(it!!)
+                sharedPreference.saveAutoLogin(true)
+                startActivity(Intent(this, MainActivity::class.java))
+            }
+        }
+
         binding.layoutNaverLogin.setOnClickListener {
             loginNaver()
         }
 
         binding.imgKakaoLogin.setOnClickListener {
-            //kakaoLogin()
-            //startActivity(Intent(this, MainActivity::class.java))
-            Toast.makeText(this, "준비 중 입니다.", Toast.LENGTH_SHORT).show()
+            kakaoLogin()
         }
     }
 
@@ -96,6 +103,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun handleKakaoTalkLoginResult() {
         kakaoClient.loginWithKakaoTalk(this) { token, error ->
+            Log.d("token", token?.accessToken.toString())
             // 사용자가 카카오톡 설치 후 디바이스 권한 요청 화면에서 로그인을 취소한 경우,
             // 의도적인 로그인 취소로 보고 카카오계정으로 로그인 시도 없이 로그인 취소로 처리 (예: 뒤로 가기)
             if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
@@ -103,27 +111,34 @@ class LoginActivity : AppCompatActivity() {
             }
             // 카카오톡에 연결된 카카오계정이 없는 경우, 카카오계정으로 로그인 시도
             error?.let { kakaoClient.loginWithKakaoAccount(this, callback = kakaOAuthCallback) }
-            token?.let { getKakaoTalkUserInfo() }
+            token?.let { getKakaoTalkUserInfo(token.accessToken) }
         }
     }
 
-    private fun getKakaoTalkUserInfo() {
-        kakaoClient.me { user, _ ->
-            user.let {
-                if (it?.kakaoAccount?.isEmailValid == true) {
-                    Intent(this, SignActivity::class.java).apply {
-                        putExtra(LOGIN_EMAIL, it.kakaoAccount?.email)
-                        putExtra(LOGIN_REAL_NAME, it.properties?.get("nickname"))
-                        putExtra(LOGIN_TYPE, "카카오")
-                        startActivity(this)
+    private fun getKakaoTalkUserInfo(accessToken: String) {
+        viewModel.loginKakao(accessToken) {
+            if (it) {
+                kakaoClient.me { user, _ ->
+                    user.let { userData ->
+                        if (userData?.kakaoAccount?.isEmailValid == true) {
+                            Intent(this, SignActivity::class.java).apply {
+                                putExtra(LOGIN_EMAIL, userData!!.kakaoAccount?.email)
+                                putExtra(LOGIN_REAL_NAME, userData.properties?.get("nickname"))
+                                USER_LOGIN_TYPE = "카카오"
+                                startActivity(this)
+                            }
+                        } else {
+                            // 이메일 데이터 필요
+                            USER_LOGIN_TYPE = "카카오"
+                            startActivity(Intent(this, SignNoEmailActivity::class.java))
+
+                        }
                     }
-                } else {
-                    // 이메일 데이터 필요
-                    startActivity(Intent(this, SignNoEmailActivity::class.java))
                 }
             }
         }
     }
+
 
     private fun setUpNaverLogin() {
         NaverIdLoginSDK.initialize(
@@ -140,7 +155,7 @@ class LoginActivity : AppCompatActivity() {
         val oauthLoginCallback = object : OAuthLoginCallback {
             override fun onSuccess() {
                 // 네이버 로그인 인증이 성공했을 때 수행할 코드 추가
-                Log.e("태그", NaverIdLoginSDK.getAccessToken().toString())
+                //Log.e("태그", NaverIdLoginSDK.getAccessToken().toString())
                 viewModel.loginNaver(RequestLoginNaver(NaverIdLoginSDK.getAccessToken().toString()))
             }
 
@@ -162,7 +177,7 @@ class LoginActivity : AppCompatActivity() {
                 Intent(this@LoginActivity, SignActivity::class.java).apply {
                     putExtra(LOGIN_EMAIL, result.profile?.email)
                     putExtra(LOGIN_REAL_NAME, result.profile?.name)
-                    putExtra(LOGIN_TYPE, "네이버")
+                    USER_LOGIN_TYPE = "네이버"
                     startActivity(this)
                 }
             }

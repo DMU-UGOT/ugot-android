@@ -102,7 +102,8 @@ object NetworkModule {
             } else if (originalRequest.url.toString()
                     .startsWith(BuildConfig.BASE_URL) && (!(originalRequest.url.toString()
                     .contains("auth/naver")) && !((originalRequest.url.toString()
-                    .contains("members")) && (originalRequest.method == ("POST"))))
+                    .contains("members")) && (originalRequest.method == ("POST"))) &&
+                        (!(originalRequest.url.toString().contains("auth/kakao"))))
             ) {
                 modifiedRequest = originalRequest.newBuilder()
                     .header("Authorization", "Bearer ${sharedPreference.getToken()}").build()

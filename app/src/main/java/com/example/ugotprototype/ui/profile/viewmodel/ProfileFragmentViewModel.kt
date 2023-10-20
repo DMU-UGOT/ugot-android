@@ -26,10 +26,10 @@ class ProfileFragmentViewModel @Inject constructor(
             kotlin.runCatching {
                 profileService.deleteUser(sharedPreference.getMemberId().toString())
             }.onSuccess {
-                isDeleteAccount.value = true
-                sharedPreference.saveAutoLogin(false)
                 sharedPreference.saveMemberId(0)
                 sharedPreference.saveToken("")
+                isDeleteAccount.value = true
+                sharedPreference.saveAutoLogin(false)
             }.onFailure {
                 isDeleteAccount.value = false
             }

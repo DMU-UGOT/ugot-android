@@ -2,10 +2,8 @@ package com.example.ugotprototype.ui.profile.viewmodel
 
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
-import android.widget.SeekBar
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -25,7 +23,7 @@ class ProfileMyStudyPostPatchViewModel @Inject constructor(
 ) : ViewModel() {
 
     companion object {
-        const val BASE_URL_PATTERN = "(https?://)?open\\.kakao\\.com/[A-Za-z0-9]+"
+        val BASE_URL_PATTERN = """(https://)?open\.kakao\.com/o/[a-zA-Z]+""".toRegex()
     }
 
     private val _isStudyPostRegisterBtnEnabled = MutableLiveData<Boolean>()
@@ -73,7 +71,7 @@ class ProfileMyStudyPostPatchViewModel @Inject constructor(
     }
 
     fun isKakaoOpenChatBaseURL(input: String, callback: (String) -> Unit) {
-        if (input.matches(BASE_URL_PATTERN.toRegex())) {
+        if (input.matches(BASE_URL_PATTERN)) {
             callback("success")
         } else {
             callback("falied")

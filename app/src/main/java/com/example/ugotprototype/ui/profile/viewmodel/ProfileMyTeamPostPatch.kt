@@ -26,7 +26,7 @@ class ProfileMyTeamPostPatch @Inject constructor(
 ) : ViewModel() {
 
     companion object {
-        const val BASE_URL_PATTERN = "(https?://)?open\\.kakao\\.com/[A-Za-z0-9]+"
+        val BASE_URL_PATTERN = """(https://)?open\.kakao\.com/o/[a-zA-Z]+""".toRegex()
     }
 
     private val _isTeamPostRegisterBtnEnabled = MutableLiveData<Boolean>()
@@ -86,7 +86,7 @@ class ProfileMyTeamPostPatch @Inject constructor(
     }
 
     fun isKakaoOpenChatBaseURL(input: String, callback: (String) -> Unit) {
-        if (input.matches(BASE_URL_PATTERN.toRegex())) {
+        if (input.matches(BASE_URL_PATTERN)) {
             callback("success")
         } else {
             callback("falied")

@@ -17,7 +17,9 @@ import com.example.ugotprototype.SharedPreference
 import com.example.ugotprototype.data.profile.ProfileMemberData
 import com.example.ugotprototype.databinding.FragmentProfileBinding
 import com.example.ugotprototype.ui.login.view.LoginActivity
+import com.example.ugotprototype.ui.login.view.LoginActivity.Companion.USER_LOGIN_TYPE
 import com.example.ugotprototype.ui.profile.viewmodel.ProfileFragmentViewModel
+import com.kakao.sdk.user.UserApiClient
 import com.navercorp.nid.NaverIdLoginSDK
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -163,10 +165,15 @@ class ProfileFragment : Fragment() {
     }
 
     private fun logout() {
-        NaverIdLoginSDK.logout()
+        if (USER_LOGIN_TYPE == "네이버") {
+            NaverIdLoginSDK.logout()
+        } else if (USER_LOGIN_TYPE == "카카오") {
+            UserApiClient.instance.logout {}
+        }
+
+        sharedPreference.saveMemberId(0)
         sharedPreference.saveToken("")
         sharedPreference.saveAutoLogin(false)
-        sharedPreference.saveMemberId(0)
         startActivity(Intent(requireContext(), LoginActivity::class.java))
     }
 }

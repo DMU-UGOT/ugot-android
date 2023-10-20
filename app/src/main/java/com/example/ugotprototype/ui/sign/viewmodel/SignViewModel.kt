@@ -1,6 +1,5 @@
 package com.example.ugotprototype.ui.sign.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -200,6 +199,7 @@ class SignViewModel @Inject constructor(
                     )
                 )
             }.onSuccess {
+                sharedPreference.saveMemberId(it.data.memberId)
                 sharedPreference.saveToken(it.data.accessToken)
                 sharedPreference.saveAutoLogin(true)
                 _onSignInCompleted.value = true
@@ -213,10 +213,8 @@ class SignViewModel @Inject constructor(
                 signService.checkNicknameDuplicate(_nickName.value.toString())
 
             }.onSuccess {
-                Log.d("test성공", it.toString())
                 callback(true)
             }.onFailure {
-                Log.d("test실패", it.toString())
                 callback(false)
             }
         }

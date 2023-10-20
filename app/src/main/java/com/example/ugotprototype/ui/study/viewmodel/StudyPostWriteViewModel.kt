@@ -108,15 +108,14 @@ class StudyPostWriteViewModel @Inject constructor(
         viewModelScope.launch {
             kotlin.runCatching {
                 studyService.setStudies(studyPostData)
-            }.onSuccess { _createFinish.value = true }
-                .onFailure {
+            }.onSuccess { _createFinish.value = true }.onFailure {
                     Log.d("test", it.toString())
                 }
         }
     }
 
     fun isKakaoOpenChatBaseURL(input: String, callback: (String) -> Unit) {
-        if (input.matches(TeamPostWriteViewModel.BASE_URL_PATTERN.toRegex())) {
+        if (input.matches(TeamPostWriteViewModel.BASE_URL_PATTERN)) {
             callback("success")
         } else {
             callback("falied")
