@@ -3,13 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="profileMessageDetailItem"
-            type="com.example.ugotprototype.data.profile.ProfileMessageDetailData" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -25,6 +18,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <ImageView
+                android:id="@+id/iv_message_chat_delete"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_profile_study_delete"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/tv_message_detail_name"
                 android:layout_width="wrap_content"
@@ -33,7 +36,6 @@
                 android:ellipsize="end"
                 android:ems="15"
                 android:maxLines="1"
-                android:text="@{profileMessageDetailItem.messageDetailName}"
                 android:textColor="#14a492"
                 android:textSize="13dp"
                 android:textStyle="bold"
@@ -52,7 +54,6 @@
                 android:paddingTop="10dp"
                 android:paddingEnd="15dp"
                 android:textColor="@color/black"
-                android:text="@{profileMessageDetailItem.messageDetailText}"
                 android:paddingBottom="10dp"
                 android:textSize="13dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -66,7 +67,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/black"
-                android:text="@{profileMessageDetailItem.messageDetailTime}"
                 android:textSize="13dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

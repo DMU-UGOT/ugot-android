@@ -14,6 +14,7 @@ import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.R
 import com.example.ugotprototype.data.change.CommunityChangePostViewData
 import com.example.ugotprototype.data.change.CommunityChangeRefreshData
+import com.example.ugotprototype.data.profile.ProfileMessageCommentNewPostData
 import com.example.ugotprototype.databinding.ActivityCommunityChangeDetailBinding
 import com.example.ugotprototype.databinding.ActivityCommunityChangeSendMessageBinding
 import com.example.ugotprototype.ui.community.view.CommunityChangeFragment.Companion.CHANGE_CLASS_CHANGE_ID
@@ -185,7 +186,11 @@ class CommunityChangeDetailActivity : AppCompatActivity() {
         val alertDialog = builder.create()
 
         dialogBinding.btChangeSendMessage.setOnClickListener {
-            communityChangeDetailViewModel.getMessageList(intent.getIntExtra(CommunityGeneralFragment.GENERAL_ID, 0))
+            communityChangeDetailViewModel.sendMessage(
+                intent.getIntExtra(CommunityGeneralFragment.GENERAL_ID, 0), ProfileMessageCommentNewPostData(
+                    content = dialogBinding.etChangeSendText.text.toString()
+                )
+            )
             alertDialog.dismiss()
             Toast.makeText(this,"메시지를 전송하였습니다", Toast.LENGTH_SHORT).show()
         }

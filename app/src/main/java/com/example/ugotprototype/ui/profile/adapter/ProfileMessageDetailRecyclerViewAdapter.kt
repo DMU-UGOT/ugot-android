@@ -3,67 +3,78 @@ package com.example.ugotprototype.ui.profile.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ugotprototype.data.profile.ProfileMessageDetailData
+import com.example.ugotprototype.data.profile.ProfileMessageData
 import com.example.ugotprototype.databinding.ItemProfileMessageDetailBinding
-import com.example.ugotprototype.databinding.ItemProfileMessageDetailRightBinding
+import com.example.ugotprototype.ui.profile.viewmodel.ProfileMessageDetailViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
-class ProfileMessageDetailRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ProfileMessageDetailRecyclerViewAdapter(private val profileMessageDetailViewModel: ProfileMessageDetailViewModel) :
+    RecyclerView.Adapter<ProfileMessageDetailRecyclerViewAdapter.ProfileMessageDetailViewHolder>() {
 
-    private val VIEW_TYPE_LEFT = 1
-    private val VIEW_TYPE_RIGHT = 2
-    private val profileMessageDetailItemList = arrayListOf<ProfileMessageDetailData>()
+    var profileMessageDetailItemList : List<ProfileMessageData> = emptyList()
 
-    // ViewHolder 클래스 추가
-    class ProfileMessageDetailViewHolder(val binding: ItemProfileMessageDetailBinding) :
+    inner class ProfileMessageDetailViewHolder(val binding: ItemProfileMessageDetailBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(currentProfileMessageDetailData: ProfileMessageDetailData) {
-            binding.profileMessageDetailItem = currentProfileMessageDetailData
+        fun bind(item: ProfileMessageData) {
+            binding.ivMessageChatDelete.setOnClickListener {
+                profileMessageDetailViewModel.deleteMessageChatList(item.id)
+            }
+
+            with(binding) {
+                tvMessageDetailName.text = item.senderName
+                tvMessageDetailText.text = item.content
+                tvItemGroupCmuDay.text = formatDate(item.created_at)
+            }
+        }
+
+        private fun formatDate(dateString: String): String {
+            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS", Locale.getDefault())
+            val currentDate = Calendar.getInstance()
+            val date = inputFormat.parse(dateString)
+            val cal = Calendar.getInstance().apply { time = date }
+            val dateFormat: SimpleDateFormat
+
+            if (currentDate.get(Calendar.YEAR) == cal.get(Calendar.YEAR) &&
+                currentDate.get(Calendar.DAY_OF_YEAR) == cal.get(Calendar.DAY_OF_YEAR)
+            ) {
+                dateFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+            } else {
+                dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            }
+
+            return dateFormat.format(date)
         }
     }
 
-    class ProfileMessageDetailRightViewHolder(val binding: ItemProfileMessageDetailRightBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(currentProfileMessageDetailData: ProfileMessageDetailData) {
-            binding.profileMessageDetailItem = currentProfileMessageDetailData
-        }
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int): ProfileMessageDetailRecyclerViewAdapter.ProfileMessageDetailViewHolder {
+        val binding =
+            ItemProfileMessageDetailBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ProfileMessageDetailViewHolder(binding)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return if (viewType == VIEW_TYPE_LEFT) {
-            val binding =
-                ItemProfileMessageDetailBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            ProfileMessageDetailViewHolder(binding)
-        } else {
-            val binding =
-                ItemProfileMessageDetailRightBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            ProfileMessageDetailRightViewHolder(binding)
-        }
+    override fun onBindViewHolder(holder: ProfileMessageDetailViewHolder, position: Int) {
+        holder.bind(profileMessageDetailItemList[position])
     }
 
     override fun getItemCount() = profileMessageDetailItemList.size
-
-    override fun getItemViewType(position: Int): Int {
-        // 상대방 대화와 내 대화를 구분하여 ViewType을 반환합니다.
-        return if (profileMessageDetailItemList[position].MessageDetailSender) VIEW_TYPE_RIGHT else VIEW_TYPE_LEFT
-    }
-
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val currentItem = profileMessageDetailItemList[position]
-        when (holder) {
-            is ProfileMessageDetailViewHolder -> holder.bind(currentItem)
-            is ProfileMessageDetailRightViewHolder -> holder.bind(currentItem)
-        }
-    }
 
     override fun getItemId(position: Int): Long {
         return position.toLong()
     }
 
-    fun setData(data: ArrayList<ProfileMessageDetailData>) {
-        profileMessageDetailItemList.clear()
-        profileMessageDetailItemList.addAll(data)
+    fun setData(data: List<ProfileMessageData>) {
+        profileMessageDetailItemList = data
+        notifyDataSetChanged()
+    }
+
+    fun updateAllItemsVisibility(visible: Int) {
+        profileMessageDetailItemList.forEach { item ->
+            item.isDelete = visible
+        }
         notifyDataSetChanged()
     }
 }

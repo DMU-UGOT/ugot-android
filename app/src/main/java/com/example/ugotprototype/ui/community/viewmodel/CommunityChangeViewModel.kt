@@ -6,8 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ugotprototype.data.api.ChangeService
-import com.example.ugotprototype.data.api.MessageService
-import com.example.ugotprototype.data.change.CommunityMessageData
 import com.example.ugotprototype.data.response.CommunityChangePostResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -15,8 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CommunityChangeViewModel @Inject constructor(
-    private val changeService: ChangeService,
-    private val messageService: MessageService
+    private val changeService: ChangeService
 ) : ViewModel() {
     private val _communityChangeItemList = MutableLiveData<List<CommunityChangePostResponse>>() // 뷰 모델에서 데이터 처리를 하는 변수
     val communityChangeItemList: LiveData<List<CommunityChangePostResponse>> = _communityChangeItemList
@@ -30,13 +27,13 @@ class CommunityChangeViewModel @Inject constructor(
     private val _isLoadingPage = MutableLiveData<Boolean>()
     val isLoadingPage: LiveData<Boolean> = _isLoadingPage
 
-    val onCmuPrevButtonClickListener = View.OnClickListener {
+    val onCmuChangePrevButtonClickListener = View.OnClickListener {
         if (_currentPage.value!! > 1) {
             _currentPage.value = _currentPage.value!! - 1
         }
     }
 
-    val onCmuNextButtonClickListener = View.OnClickListener {
+    val onCmuChangeNextButtonClickListener = View.OnClickListener {
         if (_currentPage.value!! < _totalPage.value!!) {
             _currentPage.value = _currentPage.value!! + 1
         }
@@ -64,14 +61,4 @@ class CommunityChangeViewModel @Inject constructor(
             _isLoadingPage.value = true
         }
     }
-
-//    fun sendMessage(content: String) {
-//        viewModelScope.launch {
-//            kotlin.runCatching {
-//                messageService.sendMessage(
-//
-//                )
-//            }
-//        }
-//    }
 }

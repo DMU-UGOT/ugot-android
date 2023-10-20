@@ -5,55 +5,70 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ugotprototype.data.profile.ProfileMessageData
+import com.example.ugotprototype.data.response.ProfileMessagePostResponse
 import com.example.ugotprototype.databinding.ItemProfileMessageBinding
+import com.example.ugotprototype.ui.profile.view.MessageActivity.Companion.ROOM_ID
 import com.example.ugotprototype.ui.profile.view.ProfileMessageDetailActivity
+import com.example.ugotprototype.ui.profile.viewmodel.ProfileMessageViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
-class ProfileMessageRecyclerViewAdapter :
+class ProfileMessageRecyclerViewAdapter(private val profileMessageViewModel: ProfileMessageViewModel) :
     RecyclerView.Adapter<ProfileMessageRecyclerViewAdapter.ProfileMessageViewHolder>() {
-    var profileMessageItemList = arrayListOf<ProfileMessageData>()
-    private val dataList: MutableList<ProfileMessageData> = mutableListOf()
 
-    // 아이템 클릭 이벤트 리스너 인터페이스 정의
-    interface OnItemClickListener {
-        fun onItemClick(messageData: ProfileMessageData)
+    var profileMessageItemList : List<ProfileMessagePostResponse> = emptyList()
+
+    inner class ProfileMessageViewHolder(val binding: ItemProfileMessageBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(item: ProfileMessagePostResponse) {
+            binding.ivMessageDelete.setOnClickListener {
+                profileMessageViewModel.deleteMessageList(item.room)
+            }
+
+            binding.root.setOnClickListener {
+                goToMessageDetail(item, binding.root.context)
+            }
+
+            with(binding) {
+                tvMessageName.text = item.senderName
+                tvMessageText.text = item.content
+                tvMessageDay.text = formatDate(item.created_at)
+                ivMessageDelete.visibility = item.isDelete
+            }
+        }
+
+        private fun formatDate(dateString: String): String {
+            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS", Locale.getDefault())
+            val currentDate = Calendar.getInstance()
+            val date = inputFormat.parse(dateString)
+            val cal = Calendar.getInstance().apply { time = date }
+            val dateFormat: SimpleDateFormat
+
+            if (currentDate.get(Calendar.YEAR) == cal.get(Calendar.YEAR) &&
+                currentDate.get(Calendar.DAY_OF_YEAR) == cal.get(Calendar.DAY_OF_YEAR)
+            ) {
+                dateFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+            } else {
+                dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            }
+
+            return dateFormat.format(date)
+        }
     }
 
-    // 아이템 클릭 이벤트 리스너 변수 선언
-    private var itemClickListener: OnItemClickListener? = null
-
-
-    // 아이템 클릭 이벤트 리스너 설정 메서드
-    fun setOnItemClickListener(listener: OnItemClickListener) {
-        this.itemClickListener = listener
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int): ProfileMessageViewHolder {
+        val binding =
+            ItemProfileMessageBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ProfileMessageViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ProfileMessageViewHolder, position: Int) {
         holder.bind(profileMessageItemList[position])
     }
 
-    // 생성된 뷰 홀더에 값 지정
-    inner class ProfileMessageViewHolder(val binding: ItemProfileMessageBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(currentProfileMessageViewData: ProfileMessageData) {
-            binding.profileMessageItem = currentProfileMessageViewData
-
-            // 아이템 뷰를 클릭하면 아이템 클릭 이벤트 리스너 호출
-            binding.root.setOnClickListener {
-                itemClickListener?.onItemClick(currentProfileMessageViewData)
-            }
-        }
-    }
-
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): ProfileMessageViewHolder {
-        val binding =
-            ItemProfileMessageBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ProfileMessageViewHolder(binding)
-    }
 
     override fun getItemCount() = profileMessageItemList.size
 
@@ -61,43 +76,23 @@ class ProfileMessageRecyclerViewAdapter :
         return position.toLong()
     }
 
-    fun setData(data: ArrayList<ProfileMessageData>) {
+    fun setData(data: List<ProfileMessagePostResponse>) {
         profileMessageItemList = data
-        notifyDataSetChanged()  // 데이터 갱신
-    }
-
-    fun clearItems() {
-        profileMessageItemList.clear()
         notifyDataSetChanged()
     }
 
-    fun goToMessageDetail(item: ProfileMessageData, context: Context) {
+    fun updateAllItemsVisibility(visible: Int) {
+        profileMessageItemList.forEach { item ->
+            item.isDelete = visible
+        }
+        notifyDataSetChanged()
+    }
+
+    fun goToMessageDetail(item: ProfileMessagePostResponse, context: Context) {
         Intent(context, ProfileMessageDetailActivity::class.java).apply {
-            putExtra("MessageName", item.MessageName)
-            putExtra("MessageText", item.MessageText)
-            putExtra("MessageTime", item.MessageTime)
+            putExtra(ROOM_ID, item.room)
 
             context.startActivity(this)
         }
-    }
-
-    fun setDataList(dataList: List<ProfileMessageData>) {
-        // 중복된 이름 처리를 위해 데이터 목록을 정리하는 메서드
-        this.dataList.clear()
-        this.dataList.addAll(removeDuplicateNames(dataList))
-        notifyDataSetChanged()
-    }
-
-    private fun removeDuplicateNames(dataList: List<ProfileMessageData>): List<ProfileMessageData> {
-        val filteredList: MutableList<ProfileMessageData> = mutableListOf()
-        val nameSet: MutableSet<String> = mutableSetOf()
-
-        for (item in dataList) {
-            if (!nameSet.contains(item.MessageName)) {
-                filteredList.add(item)
-                nameSet.add(item.MessageName)
-            }
-        }
-        return filteredList
     }
 }

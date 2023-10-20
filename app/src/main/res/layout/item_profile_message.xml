@@ -25,6 +25,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <ImageView
+                android:id="@+id/iv_message_delete"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_profile_study_delete"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/tv_message_name"
                 android:layout_width="wrap_content"
@@ -33,7 +43,6 @@
                 android:ellipsize="end"
                 android:ems="15"
                 android:maxLines="1"
-                android:text="@{profileMessageItem.messageName}"
                 android:textColor="#14a492"
                 android:textSize="13dp"
                 android:textStyle="bold"
@@ -53,7 +62,6 @@
                 android:paddingTop="10dp"
                 android:paddingEnd="15dp"
                 android:paddingBottom="10dp"
-                android:text="@{profileMessageItem.messageText}"
                 android:textColor="@color/black"
                 android:textSize="13dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -66,7 +74,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="@{profileMessageItem.messageTime}"
                 android:textColor="@color/black"
                 android:textSize="13dp"
                 app:layout_constraintEnd_toEndOf="parent"

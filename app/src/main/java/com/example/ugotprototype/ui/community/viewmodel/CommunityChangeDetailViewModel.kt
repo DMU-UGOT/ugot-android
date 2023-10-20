@@ -11,6 +11,7 @@ import com.example.ugotprototype.data.api.MessageService
 import com.example.ugotprototype.data.change.CommunityChangePostViewData
 import com.example.ugotprototype.data.change.CommunityChangeRefreshData
 import com.example.ugotprototype.data.change.CommunityMessageData
+import com.example.ugotprototype.data.profile.ProfileMessageCommentNewPostData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -25,7 +26,7 @@ class CommunityChangeDetailViewModel @Inject constructor(
     val communityChangeDetailData: LiveData<CommunityChangePostViewData> =
         _communityChangeDetailData
 
-    private val _sendMessageData = MutableLiveData<ArrayList<CommunityMessageData>>() // 뷰 모델에서 데이터 처리를 하는 변수
+    private val _sendMessageData = MutableLiveData<ArrayList<CommunityMessageData>>()
     val sendMessageData: LiveData<ArrayList<CommunityMessageData>> = _sendMessageData
 
     private val _dataRefresh = MutableLiveData<Boolean>()
@@ -34,19 +35,10 @@ class CommunityChangeDetailViewModel @Inject constructor(
     private val _isDeleteChangeGroup = MutableLiveData<Boolean>()
     val isDeleteChangeGroup: LiveData<Boolean> = _isDeleteChangeGroup
 
-    private val _itemCount = MutableLiveData<Int>()
-    val itemCount: LiveData<Int> = _itemCount
-
-    fun setMessageData(messageData: ArrayList<CommunityMessageData>) {
-        _sendMessageData.value = messageData
-        _itemCount.value = messageData.size
-    }
-
-    fun getMessageList(postId:Int){
+    fun sendMessage(userId : Int, messageData: ProfileMessageCommentNewPostData) {
         viewModelScope.launch {
             kotlin.runCatching {
-                val data = messageService.allMessage(postId)
-                setMessageData(data)
+                messageService.sendMessage(userId, messageData)
             }
         }
     }

@@ -1,7 +1,6 @@
-package com.example.ugotprototype.data.profile
+package com.example.ugotprototype.data.response
 
-// 쪽지함
-class ProfileMessageData (
+data class ProfileMessagePostResponse(
     val id: Int,
     val room: Int,
     val content: String,

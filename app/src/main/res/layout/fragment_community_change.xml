@@ -176,6 +176,7 @@
                         android:layout_marginEnd="16dp"
                         android:backgroundTint="@color/color_FFFFFF"
                         android:src="@drawable/ic_team_prev_page"
+                        android:onClick="@{vm.onCmuChangePrevButtonClickListener}"
                         app:layout_constraintEnd_toStartOf="@+id/community_page_first_text"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -184,6 +185,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
+                        android:onClick="@{vm.onCmuChangeNextButtonClickListener}"
                         android:backgroundTint="@color/color_FFFFFF"
                         android:src="@drawable/ic_team_next_page"
                         app:layout_constraintStart_toEndOf="@+id/community_page_second_text"
