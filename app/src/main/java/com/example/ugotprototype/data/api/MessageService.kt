@@ -1,18 +1,19 @@
 package com.example.ugotprototype.data.api
 
-import com.example.ugotprototype.data.profile.ProfileMessageChatViewData
+import com.example.ugotprototype.data.change.CommunityMessageData
 import com.example.ugotprototype.data.profile.ProfileMessageCommentNewPostData
-import com.example.ugotprototype.data.response.ProfileMessagePostResponse
+import com.example.ugotprototype.data.response.ProfileMessageDataResponse
+import com.example.ugotprototype.data.response.ProfileMessageDetailDataResponse
 import retrofit2.http.*
 
 interface MessageService {
     @GET("messages")
-    suspend fun getAllMessage() : List<ProfileMessagePostResponse>
+    suspend fun getAllMessage() : ProfileMessageDataResponse
 
-    @POST("messages/send/{userId}")
+    @POST("messages/send/{communityId}")
     suspend fun sendMessage(
-        @Path("userId") userId : Int,
-        @Body messageData: ProfileMessageCommentNewPostData
+        @Path("communityId") communityId : Int,
+        @Body messageData: CommunityMessageData
     )
 
     @POST("messages/send/room/{roomId}")
@@ -24,7 +25,7 @@ interface MessageService {
     @GET("messages/{roomId}")
     suspend fun getMessage(
         @Path("roomId") roomId: Int
-    ) : ArrayList<ProfileMessageChatViewData>
+    ) : ProfileMessageDetailDataResponse
 
     @DELETE("messages/delete/{messageId}")
     suspend fun messageDelete(
@@ -32,7 +33,7 @@ interface MessageService {
     )
 
     @DELETE("messages/delete/room/{roomId}")
-    suspend fun messageRoom(
+    suspend fun messageRoomDelete(
         @Path("roomId") roomId: Int
     )
 }

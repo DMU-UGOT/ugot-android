@@ -19,6 +19,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <ImageView
+                android:id="@+id/iv_message_detail_delete"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_profile_study_delete"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
             <TextView
                 android:id="@+id/tv_message_detail_right_name"
                 android:layout_width="wrap_content"
@@ -27,12 +37,12 @@
                 android:ellipsize="end"
                 android:ems="15"
                 android:maxLines="1"
-                android:textColor="#ffd400"
+                android:textColor="#14a492"
                 android:textSize="13dp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="내 아이디가 출력됩니다" />
+                tools:text="IDIDIDIDID" />
 
             <TextView
                 android:id="@+id/tv_message_detail_right_text"
@@ -50,7 +60,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_message_detail_right_name"
-                tools:text="오른쪽 채팅 메시지입니다" />
+                tools:text="채팅 메시지입니다" />
 
             <TextView
                 android:id="@+id/tv_item_group_right_cmu_day"

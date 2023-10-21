@@ -11,6 +11,7 @@ import com.example.ugotprototype.data.api.MessageService
 import com.example.ugotprototype.data.change.CommunityChangePostViewData
 import com.example.ugotprototype.data.change.CommunityChangeRefreshData
 import com.example.ugotprototype.data.change.CommunityMessageData
+import com.example.ugotprototype.data.community.CommunityGeneralChatViewData
 import com.example.ugotprototype.data.profile.ProfileMessageCommentNewPostData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -35,10 +36,14 @@ class CommunityChangeDetailViewModel @Inject constructor(
     private val _isDeleteChangeGroup = MutableLiveData<Boolean>()
     val isDeleteChangeGroup: LiveData<Boolean> = _isDeleteChangeGroup
 
-    fun sendMessage(userId : Int, messageData: ProfileMessageCommentNewPostData) {
+    fun sendMessage(communityId : Int, messageData: CommunityMessageData) {
         viewModelScope.launch {
             kotlin.runCatching {
-                messageService.sendMessage(userId, messageData)
+                messageService.sendMessage(communityId, messageData)
+            }.onSuccess {
+                Log.d("success","success")
+            }.onFailure {
+                Log.d("fail","fail")
             }
         }
     }

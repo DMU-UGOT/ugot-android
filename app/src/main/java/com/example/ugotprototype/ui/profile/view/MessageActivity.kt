@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.ActivityProfileMessageBinding
 import com.example.ugotprototype.ui.profile.adapter.ProfileMessageRecyclerViewAdapter
@@ -24,7 +23,6 @@ class MessageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_profile_message)
-        binding.vm = profileMessageViewModel
 
         binding.btMessageBackToMain.setOnClickListener {
             finish()
@@ -33,15 +31,12 @@ class MessageActivity : AppCompatActivity() {
         profileMessageRecyclerViewAdapter = ProfileMessageRecyclerViewAdapter(profileMessageViewModel)
         binding.rvProfileMessage.adapter = profileMessageRecyclerViewAdapter
 
-        val layoutManager = LinearLayoutManager(this)
-        binding.rvProfileMessage.layoutManager = layoutManager
-
         profileMessageViewModel.getMessageData.observe(this) {
             profileMessageRecyclerViewAdapter.setData(it)
         }
 
-        binding.btProfileDelete.setOnClickListener {
-            profileMessageViewModel.toggleDeleteVisibility()
+        profileMessageViewModel.getMessageData.observe(this) { updatedData ->
+            profileMessageRecyclerViewAdapter.setData(updatedData)
         }
 
         profileMessageViewModel.isDeleteVisible.observe(this) {

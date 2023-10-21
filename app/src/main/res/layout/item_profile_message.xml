@@ -3,13 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="profileMessageItem"
-            type="com.example.ugotprototype.data.profile.ProfileMessageData" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -33,7 +26,7 @@
                 android:src="@drawable/ic_profile_study_delete"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="parent"/>
 
             <TextView
                 android:id="@+id/tv_message_name"
@@ -58,10 +51,10 @@
                 android:background="@color/white"
                 android:gravity="start"
                 android:maxLines="1"
-                android:paddingStart="15dp"
+                android:paddingStart="10dp"
                 android:paddingTop="10dp"
-                android:paddingEnd="15dp"
                 android:paddingBottom="10dp"
+                android:layout_marginEnd="30dp"
                 android:textColor="@color/black"
                 android:textSize="13dp"
                 app:layout_constraintEnd_toEndOf="parent"

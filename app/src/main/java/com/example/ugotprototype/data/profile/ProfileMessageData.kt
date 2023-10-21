@@ -1,6 +1,6 @@
 package com.example.ugotprototype.data.profile
 
-// 쪽지함
+// 대화 내용
 class ProfileMessageData (
     val id: Int,
     val room: Int,

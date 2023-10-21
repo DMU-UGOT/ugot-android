@@ -26,7 +26,6 @@ class ProfileMessageDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_profile_message_detail)
-        binding.vm = profileMessageDetailViewModel
 
         binding.btMessageDetailBackToMain.setOnClickListener {
             setResult(Activity.RESULT_OK, Intent())
@@ -35,6 +34,14 @@ class ProfileMessageDetailActivity : AppCompatActivity() {
 
         profileMessageDetailRecyclerViewAdapter = ProfileMessageDetailRecyclerViewAdapter(profileMessageDetailViewModel)
         binding.rvProfileMessageDetail.adapter = profileMessageDetailRecyclerViewAdapter
+
+        profileMessageDetailViewModel.getMessageChatData.observe(this) {
+            profileMessageDetailRecyclerViewAdapter.setData(it)
+        }
+
+        profileMessageDetailViewModel.getMessageChatData.observe(this) { updatedData ->
+            profileMessageDetailRecyclerViewAdapter.setData(updatedData)
+        }
 
         profileMessageDetailViewModel.isDeleteVisible.observe(this) {
             profileMessageDetailRecyclerViewAdapter.updateAllItemsVisibility(it)

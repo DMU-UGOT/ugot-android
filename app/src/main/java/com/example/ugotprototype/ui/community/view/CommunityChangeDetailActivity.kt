@@ -14,10 +14,12 @@ import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.R
 import com.example.ugotprototype.data.change.CommunityChangePostViewData
 import com.example.ugotprototype.data.change.CommunityChangeRefreshData
+import com.example.ugotprototype.data.change.CommunityMessageData
 import com.example.ugotprototype.data.profile.ProfileMessageCommentNewPostData
 import com.example.ugotprototype.databinding.ActivityCommunityChangeDetailBinding
 import com.example.ugotprototype.databinding.ActivityCommunityChangeSendMessageBinding
 import com.example.ugotprototype.ui.community.view.CommunityChangeFragment.Companion.CHANGE_CLASS_CHANGE_ID
+import com.example.ugotprototype.ui.community.view.CommunityChangeFragment.Companion.MEMBER_ID
 import com.example.ugotprototype.ui.community.viewmodel.CommunityChangeDetailViewModel
 import com.example.ugotprototype.ui.community.viewmodel.CommunityChangeUpdateViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -187,10 +189,10 @@ class CommunityChangeDetailActivity : AppCompatActivity() {
 
         dialogBinding.btChangeSendMessage.setOnClickListener {
             communityChangeDetailViewModel.sendMessage(
-                intent.getIntExtra(CommunityGeneralFragment.GENERAL_ID, 0), ProfileMessageCommentNewPostData(
-                    content = dialogBinding.etChangeSendText.text.toString()
+                intent.getIntExtra(CHANGE_CLASS_CHANGE_ID, 0), CommunityMessageData(
+                    content = dialogBinding.etChangeSendText.text.toString())
                 )
-            )
+            setResult(Activity.RESULT_OK, Intent())
             alertDialog.dismiss()
             Toast.makeText(this,"메시지를 전송하였습니다", Toast.LENGTH_SHORT).show()
         }

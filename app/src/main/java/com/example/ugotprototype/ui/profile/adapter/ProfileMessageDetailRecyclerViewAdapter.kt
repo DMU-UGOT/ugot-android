@@ -3,8 +3,8 @@ package com.example.ugotprototype.ui.profile.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ugotprototype.data.profile.ProfileMessageData
-import com.example.ugotprototype.databinding.ItemProfileMessageDetailBinding
+import com.example.ugotprototype.data.response.ProfileMessageDetailPostResponse
+import com.example.ugotprototype.databinding.ItemProfileMessageDetailRightBinding
 import com.example.ugotprototype.ui.profile.viewmodel.ProfileMessageDetailViewModel
 import java.text.SimpleDateFormat
 import java.util.*
@@ -12,20 +12,21 @@ import java.util.*
 class ProfileMessageDetailRecyclerViewAdapter(private val profileMessageDetailViewModel: ProfileMessageDetailViewModel) :
     RecyclerView.Adapter<ProfileMessageDetailRecyclerViewAdapter.ProfileMessageDetailViewHolder>() {
 
-    var profileMessageDetailItemList : List<ProfileMessageData> = emptyList()
+    var profileMessageDetailItemList : List<ProfileMessageDetailPostResponse> = emptyList()
 
-    inner class ProfileMessageDetailViewHolder(val binding: ItemProfileMessageDetailBinding) :
+    inner class ProfileMessageDetailViewHolder(val binding: ItemProfileMessageDetailRightBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: ProfileMessageData) {
-            binding.ivMessageChatDelete.setOnClickListener {
+        fun bind(item: ProfileMessageDetailPostResponse) {
+            binding.ivMessageDetailDelete.setOnClickListener {
                 profileMessageDetailViewModel.deleteMessageChatList(item.id)
             }
 
             with(binding) {
-                tvMessageDetailName.text = item.senderName
-                tvMessageDetailText.text = item.content
-                tvItemGroupCmuDay.text = formatDate(item.created_at)
+                tvMessageDetailRightName.text = item.senderName
+                tvMessageDetailRightText.text = item.content
+                tvItemGroupRightCmuDay.text = formatDate(item.created_at)
+                ivMessageDetailDelete.visibility = item.isDelete
             }
         }
 
@@ -52,7 +53,7 @@ class ProfileMessageDetailRecyclerViewAdapter(private val profileMessageDetailVi
         parent: ViewGroup,
         viewType: Int): ProfileMessageDetailRecyclerViewAdapter.ProfileMessageDetailViewHolder {
         val binding =
-            ItemProfileMessageDetailBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemProfileMessageDetailRightBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ProfileMessageDetailViewHolder(binding)
     }
 
@@ -66,7 +67,7 @@ class ProfileMessageDetailRecyclerViewAdapter(private val profileMessageDetailVi
         return position.toLong()
     }
 
-    fun setData(data: List<ProfileMessageData>) {
+    fun setData(data: List<ProfileMessageDetailPostResponse>) {
         profileMessageDetailItemList = data
         notifyDataSetChanged()
     }

@@ -27,11 +27,11 @@ class ProfileMessageViewModel @Inject constructor(
     private val _isDeleteVisible = MutableLiveData<Int>()
     val isDeleteVisible: LiveData<Int> = _isDeleteVisible
 
-    fun getMessageList(){
+    fun getMessageList() {
         viewModelScope.launch {
             kotlin.runCatching {
-                val data = messageService.getAllMessage()
-                _getMessageData.value = data
+                val list = messageService.getAllMessage()
+                _getMessageData.value = list.data
             }
         }
     }
@@ -50,7 +50,7 @@ class ProfileMessageViewModel @Inject constructor(
         _isDelete.value = false
         viewModelScope.launch {
             kotlin.runCatching {
-                messageService.messageRoom(roomId)
+                messageService.messageRoomDelete(roomId)
             }.onSuccess {
                 _isDelete.value = true
             }.onFailure {

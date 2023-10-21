@@ -69,7 +69,6 @@ class ProfileMessageRecyclerViewAdapter(private val profileMessageViewModel: Pro
         holder.bind(profileMessageItemList[position])
     }
 
-
     override fun getItemCount() = profileMessageItemList.size
 
     override fun getItemId(position: Int): Long {

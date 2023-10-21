@@ -6,11 +6,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.ugotprototype.SharedPreference
 import com.example.ugotprototype.data.api.MessageService
-import com.example.ugotprototype.data.profile.ProfileMessageChatViewData
 import com.example.ugotprototype.data.profile.ProfileMessageCommentNewPostData
-import com.example.ugotprototype.data.profile.ProfileMessageData
+import com.example.ugotprototype.data.response.ProfileMessageDetailPostResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,8 +17,8 @@ import javax.inject.Inject
 class ProfileMessageDetailViewModel @Inject constructor(
     private val messageService: MessageService
 ) : ViewModel() {
-    private val _getMessageChatData = MutableLiveData<ArrayList<ProfileMessageChatViewData>>()
-    val getMessageChatData: LiveData<ArrayList<ProfileMessageChatViewData>> = _getMessageChatData
+    private val _getMessageChatData = MutableLiveData<List<ProfileMessageDetailPostResponse>>()
+    val getMessageChatData: LiveData<List<ProfileMessageDetailPostResponse>> = _getMessageChatData
 
     private val _itemCount = MutableLiveData<Int>()
     val itemCount: LiveData<Int> = _itemCount
@@ -34,8 +32,8 @@ class ProfileMessageDetailViewModel @Inject constructor(
     fun getMessageChatList(roomId : Int){
         viewModelScope.launch {
             kotlin.runCatching {
-                val data = messageService.getMessage(roomId)
-                _getMessageChatData.value = data
+                val list = messageService.getMessage(roomId)
+                _getMessageChatData.value = list.data
             }
         }
     }
