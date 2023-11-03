@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -16,6 +18,12 @@ import com.example.ugotprototype.databinding.ActivityLoginBinding
 import com.example.ugotprototype.ui.login.viewmodel.LoginViewModel
 import com.example.ugotprototype.ui.sign.view.SignActivity
 import com.example.ugotprototype.ui.sign.view.SignNoEmailActivity
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.model.ClientError
@@ -35,6 +43,10 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var sharedPreference: SharedPreference
     private val viewModel: LoginViewModel by viewModels()
     private val kakaoClient: UserApiClient by lazy { UserApiClient.instance }
+    private lateinit var mGoogleSignInClient: GoogleSignInClient
+    private lateinit var signInLauncher: ActivityResultLauncher<Intent>
+    private var email: String = ""
+    private var displayName: String = ""
 
     companion object {
         const val LOGIN_EMAIL = "loginEmail"
@@ -78,6 +90,20 @@ class LoginActivity : AppCompatActivity() {
             Log.d("test", "로그인 실패")
         }
 
+        viewModel.buserAccessToken.observe(this) {
+            if (it != null) {
+                sharedPreference.saveToken(it.toString())
+                sharedPreference.saveAutoLogin(true)
+                startActivity(Intent(this, MainActivity::class.java))
+            } else {
+                registerGoogleAccount(email, displayName)
+            }
+        }
+
+        viewModel.auserAccessToken.observe(this) {
+            viewModel.loginGoogle(it.toString())
+        }
+
         binding.layoutNaverLogin.setOnClickListener {
             loginNaver()
         }
@@ -85,6 +111,8 @@ class LoginActivity : AppCompatActivity() {
         binding.imgKakaoLogin.setOnClickListener {
             kakaoLogin()
         }
+
+        setUpGoogleLogin()
     }
 
     private fun setUpKaKaoLogin() {
@@ -124,7 +152,7 @@ class LoginActivity : AppCompatActivity() {
                     user.let { userData ->
                         if (userData?.kakaoAccount?.isEmailValid == true) {
                             Intent(this, SignActivity::class.java).apply {
-                                putExtra(LOGIN_EMAIL, userData!!.kakaoAccount?.email)
+                                putExtra(LOGIN_EMAIL, userData.kakaoAccount?.email)
                                 putExtra(LOGIN_REAL_NAME, userData.properties?.get("nickname"))
                                 USER_LOGIN_TYPE = "카카오"
                                 startActivity(this)
@@ -157,7 +185,7 @@ class LoginActivity : AppCompatActivity() {
         val oauthLoginCallback = object : OAuthLoginCallback {
             override fun onSuccess() {
                 // 네이버 로그인 인증이 성공했을 때 수행할 코드 추가
-                //Log.e("태그", NaverIdLoginSDK.getAccessToken().toString())
+                Log.e("태그", NaverIdLoginSDK.getAccessToken().toString())
                 viewModel.loginNaver(RequestLoginNaver(NaverIdLoginSDK.getAccessToken().toString()))
             }
 
@@ -190,5 +218,46 @@ class LoginActivity : AppCompatActivity() {
         }
 
         NidOAuthLogin().callProfileApi(nidProfileCallback)
+    }
+
+    private fun setUpGoogleLogin() {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestServerAuthCode(BuildConfig.GOOGLE_CLIENT_ID)
+            .requestIdToken(BuildConfig.GOOGLE_CLIENT_ID)
+            .requestEmail().build()
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+
+        signInLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                val task: Task<GoogleSignInAccount> =
+                    GoogleSignIn.getSignedInAccountFromIntent(it.data)
+                googleHandleResult(task)
+            }
+
+        binding.layoutGoogleLogin.setOnClickListener {
+            var signIntent: Intent = mGoogleSignInClient.signInIntent
+            signInLauncher.launch(signIntent)
+        }
+    }
+
+    private fun googleHandleResult(task: Task<GoogleSignInAccount>) {
+        try {
+            val account = task.getResult(ApiException::class.java)
+
+            viewModel.getAccessToken(account.serverAuthCode.toString())
+            email = account.email.toString()
+            displayName = account.displayName.toString()
+        } catch (e: ApiException) {
+            Log.e("test", "signInResult:failed Code = " + e.statusCode)
+        }
+    }
+
+    private fun registerGoogleAccount(email: String, name: String) {
+        Intent(this@LoginActivity, SignActivity::class.java).apply {
+            putExtra(LOGIN_EMAIL, email)
+            putExtra(LOGIN_REAL_NAME, name)
+            startActivity(this)
+        }
     }
 }

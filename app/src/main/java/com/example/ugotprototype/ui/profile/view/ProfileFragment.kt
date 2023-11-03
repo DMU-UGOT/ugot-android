@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -19,6 +20,8 @@ import com.example.ugotprototype.databinding.FragmentProfileBinding
 import com.example.ugotprototype.ui.login.view.LoginActivity
 import com.example.ugotprototype.ui.login.view.LoginActivity.Companion.USER_LOGIN_TYPE
 import com.example.ugotprototype.ui.profile.viewmodel.ProfileFragmentViewModel
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.kakao.sdk.user.UserApiClient
 import com.navercorp.nid.NaverIdLoginSDK
 import dagger.hilt.android.AndroidEntryPoint
@@ -169,6 +172,15 @@ class ProfileFragment : Fragment() {
             NaverIdLoginSDK.logout()
         } else if (USER_LOGIN_TYPE == "카카오") {
             UserApiClient.instance.logout {}
+        } else if (USER_LOGIN_TYPE == "구글") {
+            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build()
+
+            val mGoogleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
+            mGoogleSignInClient.signOut().addOnCompleteListener {
+                Toast.makeText(context, "로그아웃 되셨습니다!", Toast.LENGTH_SHORT).show()
+            }
         }
 
         sharedPreference.saveMemberId(0)
