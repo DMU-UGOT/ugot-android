@@ -6,4 +6,8 @@
     <item
         android:id="@+id/item2"
         android:title="게시글 삭제" />
+
+    <item
+        android:id="@+id/item3"
+        android:title="게시글 끌어올리기"/>
 </menu>

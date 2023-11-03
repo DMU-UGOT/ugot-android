@@ -75,6 +75,7 @@ class LoginActivity : AppCompatActivity() {
                 sharedPreference.saveAutoLogin(true)
                 startActivity(Intent(this, MainActivity::class.java))
             }
+            Log.d("test", "로그인 실패")
         }
 
         binding.layoutNaverLogin.setOnClickListener {
@@ -116,6 +117,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun getKakaoTalkUserInfo(accessToken: String) {
+        Log.d("test", accessToken)
         viewModel.loginKakao(accessToken) {
             if (it) {
                 kakaoClient.me { user, _ ->

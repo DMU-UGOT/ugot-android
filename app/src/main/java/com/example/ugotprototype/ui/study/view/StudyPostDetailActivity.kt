@@ -65,8 +65,13 @@ class StudyPostDetailActivity : AppCompatActivity() {
         }
 
         viewModel.isPostDelete.observe(this) {
-            setResult(0)
             finish()
+        }
+
+        viewModel.isPostRefresh.observe(this) {
+            if(it) {
+                finish()
+            }
         }
 
         onClickHambugerButton()
@@ -146,6 +151,11 @@ class StudyPostDetailActivity : AppCompatActivity() {
 
                     R.id.item2 -> {
                         viewModel.deleteMyPost(teamId)
+                        true
+                    }
+
+                    R.id.item3 -> {
+                        viewModel.refreshMyPost(teamId)
                         true
                     }
 

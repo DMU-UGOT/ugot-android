@@ -29,6 +29,9 @@ class StudyPostDetailViewModel @Inject constructor(
     private val _isPostDelete = MutableLiveData<Boolean>()
     val isPostDelete: LiveData<Boolean> = _isPostDelete
 
+    private val _isPostRefresh = MutableLiveData<Boolean>()
+    val isPostRefresh: LiveData<Boolean> = _isPostRefresh
+
     fun sendApplication(groupId: Int) {
         viewModelScope.launch {
             kotlin.runCatching {
@@ -71,6 +74,18 @@ class StudyPostDetailViewModel @Inject constructor(
                 _isPostDelete.value = true
             }.onFailure {
                 _isPostDelete.value = false
+            }
+        }
+    }
+
+    fun refreshMyPost(postId: Int) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                studyService.refreshStudy(postId)
+            }.onSuccess {
+                _isPostRefresh.value = true
+            }.onFailure {
+                _isPostRefresh.value = true
             }
         }
     }

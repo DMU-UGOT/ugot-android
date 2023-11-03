@@ -1,5 +1,6 @@
 package com.example.ugotprototype.ui.group.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -127,6 +128,7 @@ class GroupDetailViewModel @Inject constructor(
             }.onSuccess {
                 _isQuitGroup.value = true
             }.onFailure {
+                Log.d("test", it.toString())
                 _isQuitGroup.value = false
             }
         }

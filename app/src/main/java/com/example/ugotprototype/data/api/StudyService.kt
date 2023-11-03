@@ -10,12 +10,13 @@ import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface StudyService {
-    @GET("studies")
+    @GET("studies/createdAt")
     suspend fun getTeams(@Query("page") page: Int, @Query("size") size: Int): StudyDataResponse
 
     @POST("studies")
@@ -32,4 +33,7 @@ interface StudyService {
 
     @GET("studies/{studyId}")
     suspend fun getStudy(@Path("studyId") studyId: Int): StudyGetPost
+
+    @PATCH("studies/{studyId}/refresh")
+    suspend fun refreshStudy(@Path("studyId") studyId: Int)
 }

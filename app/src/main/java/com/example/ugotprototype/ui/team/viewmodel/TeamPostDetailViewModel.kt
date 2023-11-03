@@ -30,6 +30,9 @@ class TeamPostDetailViewModel @Inject constructor(
     private val _isPostDelete = MutableLiveData<Boolean>()
     val isPostDelete: LiveData<Boolean> = _isPostDelete
 
+    private val _isPostRefresh = MutableLiveData<Boolean>()
+    val isPostRefresh: LiveData<Boolean> = _isPostRefresh
+
     fun sendApplication(groupId: Int) {
         viewModelScope.launch {
             kotlin.runCatching {
@@ -72,6 +75,18 @@ class TeamPostDetailViewModel @Inject constructor(
                 _isPostDelete.value = true
             }.onFailure {
                 _isPostDelete.value = false
+            }
+        }
+    }
+
+    fun refreshMyPost(postId: Int) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                teamBuildingService.refreshPost(postId)
+            }.onSuccess {
+                _isPostRefresh.value = true
+            }.onFailure {
+                _isPostRefresh.value = false
             }
         }
     }

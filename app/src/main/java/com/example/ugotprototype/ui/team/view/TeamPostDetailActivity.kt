@@ -69,6 +69,12 @@ class TeamPostDetailActivity : AppCompatActivity() {
             finish()
         }
 
+        viewModel.isPostRefresh.observe(this) {
+            if(it) {
+                finish()
+            }
+        }
+
         goToTeamInformation()
         onClickHambugerButton()
     }
@@ -150,6 +156,10 @@ class TeamPostDetailActivity : AppCompatActivity() {
                         true
                     }
 
+                    R.id.item3 -> {
+                        viewModel.refreshMyPost(teamId)
+                        true
+                    }
                     else -> false
                 }
             }

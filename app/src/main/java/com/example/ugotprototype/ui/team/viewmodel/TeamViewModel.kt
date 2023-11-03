@@ -1,5 +1,6 @@
 package com.example.ugotprototype.ui.team.viewmodel
 
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -85,6 +86,10 @@ class TeamViewModel @Inject constructor(
             }.onSuccess {
                 _isLoadingPage.value = true
             }.onFailure {
+                Log.d("test", it.toString())
+                sharedPreference.saveAutoLogin(false)
+                sharedPreference.saveMemberId(0)
+                sharedPreference.saveToken("")
                 _isTokenExpired.value = true
             }
         }

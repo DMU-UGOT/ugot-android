@@ -8,6 +8,7 @@ import com.example.ugotprototype.data.team.TeamPostData
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -19,7 +20,7 @@ interface TeamBuildingService {
     @GET("teams/{teamId}")
     suspend fun getTeam(@Path("teamId") teamId: Int): Team
 
-    @GET("teams")
+    @GET("teams/createdAt")
     suspend fun getTeams(@Query("page") page: Int, @Query("size") size: Int): TeamDataResponse
 
     @GET("teams/post/search")
@@ -33,4 +34,7 @@ interface TeamBuildingService {
 
     @GET("teams/bookmark")
     suspend fun getBookmark(): List<TeamBookmarkData>
+
+    @PATCH("teams/{postId}/refresh")
+    suspend fun refreshPost(@Path("postId") postId: Int)
 }
