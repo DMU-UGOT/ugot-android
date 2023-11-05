@@ -35,6 +35,10 @@ class ProfileFragment : Fragment() {
             }
         }
 
+    companion object {
+        const val NICKNAME = "nickname"
+    }
+
     // 초기화
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -97,7 +101,9 @@ class ProfileFragment : Fragment() {
     // 쪽지 관리 페이지 이동
     private fun goToMessage() {
         binding.layoutProfileMessage.setOnClickListener {
-            startActivity(Intent(requireActivity(), MessageActivity::class.java))
+            val intent = Intent(requireActivity(), MessageActivity::class.java)
+            intent.putExtra(NICKNAME, binding.tvFgName.text.toString())
+            startActivity(intent)
         }
     }
 

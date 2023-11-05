@@ -34,6 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
+                android:layout_marginStart="7dp"
                 android:ellipsize="end"
                 android:ems="15"
                 android:maxLines="1"
@@ -41,6 +42,23 @@
                 android:textSize="13dp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="IDIDIDIDID" />
+
+            <TextView
+                android:id="@+id/tv_message_detail_right_name_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:ems="15"
+                android:maxLines="1"
+                android:textColor="#febd1a"
+                android:textSize="13dp"
+                android:textStyle="bold"
+                android:gravity="end"
+                android:layout_marginEnd="15dp"
+                app:layout_constraintEnd_toStartOf="@id/tv_item_group_right_cmu_day"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="IDIDIDIDID" />
 
@@ -68,7 +86,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/black"
-                android:textSize="13dp"
+                android:textSize="12dp"
+                android:layout_marginEnd="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="2023.07.01 12:48" />

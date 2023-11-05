@@ -27,6 +27,9 @@ class ProfileMessageViewModel @Inject constructor(
     private val _isDeleteVisible = MutableLiveData<Int>()
     val isDeleteVisible: LiveData<Int> = _isDeleteVisible
 
+    private val _nickname = MutableLiveData<String>()
+    val nickname: LiveData<String> = _nickname
+
     fun getMessageList() {
         viewModelScope.launch {
             kotlin.runCatching {

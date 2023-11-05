@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.R
 import com.example.ugotprototype.databinding.ActivityProfileMessageBinding
 import com.example.ugotprototype.ui.profile.adapter.ProfileMessageRecyclerViewAdapter
+import com.example.ugotprototype.ui.profile.view.ProfileFragment.Companion.NICKNAME
 import com.example.ugotprototype.ui.profile.viewmodel.ProfileMessageViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,6 +29,8 @@ class MessageActivity : AppCompatActivity() {
             finish()
         }
 
+        binding.tvMessageMyName.text = intent.getStringExtra(NICKNAME)
+
         profileMessageRecyclerViewAdapter = ProfileMessageRecyclerViewAdapter(profileMessageViewModel)
         binding.rvProfileMessage.adapter = profileMessageRecyclerViewAdapter
 
@@ -43,6 +46,10 @@ class MessageActivity : AppCompatActivity() {
             profileMessageRecyclerViewAdapter.updateAllItemsVisibility(it)
         }
 
+        binding.tvProfileDelete.setOnClickListener {
+            profileMessageViewModel.toggleDeleteVisibility()
+        }
+
         profileMessageViewModel.isDelete.observe(this) {
             if (it) {
                 onStart()
@@ -51,6 +58,8 @@ class MessageActivity : AppCompatActivity() {
 
         changeMyGeneralChatCount()
     }
+
+
 
     private fun changeMyGeneralChatCount() {
         profileMessageViewModel.itemCount.observe(this) { count ->
