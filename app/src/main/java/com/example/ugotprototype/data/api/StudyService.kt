@@ -5,10 +5,12 @@ import com.example.ugotprototype.data.study.StudyData
 import com.example.ugotprototype.data.study.StudyDataResponse
 import com.example.ugotprototype.data.study.StudyGetPost
 import com.example.ugotprototype.data.study.StudySearchData
+import com.example.ugotprototype.data.study.StudySearchHistory
 import com.example.ugotprototype.data.study.StudySetPost
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.PATCH
 import retrofit2.http.POST
@@ -36,4 +38,13 @@ interface StudyService {
 
     @PATCH("studies/{studyId}/refresh")
     suspend fun refreshStudy(@Path("studyId") studyId: Int)
+
+    @GET("studies/searchHistory")
+    suspend fun getStudySearchHistory(): List<StudySearchHistory>
+
+    @DELETE("studies/searchHistory/{query}")
+    suspend fun deleteStudySearchHistory(@Path("query") query: String)
+
+    @DELETE("studies/searchHistory")
+    suspend fun allDeleteStudySearchHistory()
 }

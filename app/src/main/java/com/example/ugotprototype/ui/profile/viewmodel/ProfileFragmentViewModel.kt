@@ -1,5 +1,6 @@
 package com.example.ugotprototype.ui.profile.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -31,6 +32,8 @@ class ProfileFragmentViewModel @Inject constructor(
                 isDeleteAccount.value = true
                 sharedPreference.saveAutoLogin(false)
             }.onFailure {
+                Log.d("test", it.toString())
+                Log.d("test", sharedPreference.getMemberId().toString())
                 isDeleteAccount.value = false
             }
         }

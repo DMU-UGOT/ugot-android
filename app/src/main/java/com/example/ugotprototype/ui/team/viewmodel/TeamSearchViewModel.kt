@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.ugotprototype.data.api.ApiService
 import com.example.ugotprototype.data.api.TeamBuildingService
 import com.example.ugotprototype.data.response.Team
+import com.example.ugotprototype.data.team.TeamSearchHistory
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -22,6 +23,15 @@ class TeamSearchViewModel @Inject constructor(
 
     private val _isLoadingPage = MutableLiveData<Boolean>()
     val isLoadingPage: LiveData<Boolean> = _isLoadingPage
+
+    private val _postSearchHistory = MutableLiveData<List<TeamSearchHistory>>()
+    val postSearchHistory: LiveData<List<TeamSearchHistory>> = _postSearchHistory
+
+    private val _isDelete = MutableLiveData<Boolean>()
+    val isDelete: LiveData<Boolean> = _isDelete
+
+    private val _isAllDelete = MutableLiveData<Boolean>()
+    val isAllDelete: LiveData<Boolean> = _isAllDelete
 
     fun searchTeams(query: String) {
         _isLoadingPage.value = false
@@ -64,6 +74,40 @@ class TeamSearchViewModel @Inject constructor(
         viewModelScope.launch {
             kotlin.runCatching {
                 teamBuildingService.setBookmark(teamId)
+            }
+        }
+    }
+
+    fun getTeamPostSearchHistory() {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                teamBuildingService.searchHistory()
+            }.onSuccess {
+                _postSearchHistory.value = it
+            }
+        }
+    }
+
+    fun deleteTeamPostSearchHistory(query: String) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                teamBuildingService.deleteSearchHistory(query)
+            }.onSuccess {
+                _isDelete.value = true
+            }.onFailure {
+                _isDelete.value = false
+            }
+        }
+    }
+
+    fun allDeleteTeamPostSearchHistory() {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                teamBuildingService.allDeleteSearchHistory()
+            }.onSuccess {
+                _isAllDelete.value = true
+            }.onFailure {
+                _isAllDelete.value = false
             }
         }
     }

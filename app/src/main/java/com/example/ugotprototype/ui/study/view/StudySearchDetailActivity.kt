@@ -9,10 +9,12 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.R
+import com.example.ugotprototype.data.study.StudySearchHistory
 import com.example.ugotprototype.databinding.ActivityStudySearchDetailBinding
 import com.example.ugotprototype.ui.Loading.util.LoadingLayoutHelper
 import com.example.ugotprototype.ui.study.adapter.StudySearchRecyclerViewAdapter
 import com.example.ugotprototype.ui.study.viewmodel.StudySearchViewModel
+import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,6 +37,8 @@ class StudySearchDetailActivity : AppCompatActivity() {
         studySearchRecyclerViewAdapter = StudySearchRecyclerViewAdapter(studySearchViewModel)
         binding.rvStudy.adapter = studySearchRecyclerViewAdapter
 
+        studySearchViewModel.getTeamPostSearchHistory()
+
         studySearchViewModel.studies.observe(this) {
             studySearchRecyclerViewAdapter.setData(it)
             binding.chipLayout.isVisible = false
@@ -45,6 +49,27 @@ class StudySearchDetailActivity : AppCompatActivity() {
                 loadingLayoutHelper.dismissLoadingDialog()
             } else {
                 loadingLayoutHelper.showLoadingDialog()
+            }
+        }
+
+        studySearchViewModel.postSearchHistory.observe(this) {
+            searchChipSetUp(it)
+        }
+
+        studySearchViewModel.isDelete.observe(this) {
+            if(it) {
+                binding.chipGroup.removeAllViews()
+                studySearchViewModel.getTeamPostSearchHistory()
+            }
+        }
+
+        binding.btnDelete.setOnClickListener {
+            studySearchViewModel.allDeleteStudyPostSearchHistory()
+        }
+
+        studySearchViewModel.isAllDelete.observe(this) {
+            if(it) {
+                binding.chipGroup.removeAllViews()
             }
         }
 
@@ -74,6 +99,19 @@ class StudySearchDetailActivity : AppCompatActivity() {
         }
 
         binding.svTextInput.setOnQueryTextListener(queryTextListener)
+    }
+
+    private fun searchChipSetUp(data: List<StudySearchHistory>) {
+        data.forEach { chipData ->
+            val chip = Chip(this).apply {
+                text = chipData.keyword
+                isCloseIconVisible = true
+                setOnCloseIconClickListener() {
+                    studySearchViewModel.deleteStudyPostSearchHistory(text.toString())
+                }
+            }
+            binding.chipGroup.addView(chip)
+        }
     }
 
     override fun onStart() {

@@ -89,6 +89,7 @@
                 tools:text="검색 기록" />
 
             <Button
+                android:id="@+id/btn_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
@@ -101,7 +102,7 @@
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/chip_group"
                 android:layout_width="0dp"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
                 app:chipSpacing="8dp"
@@ -110,73 +111,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_search_history"
                 app:singleLine="false">
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxWidth="100dp"
-                    android:text="Android Programmin"
-                    android:textSize="12dp"
-                    app:chipBackgroundColor="@color/color_F0F1F3"
-                    tools:text="Android Programming" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxWidth="150dp"
-                    android:text="Web Programming"
-                    android:textSize="12dp"
-                    app:chipBackgroundColor="@color/color_F0F1F3"
-                    tools:text="Web Programming" />
-
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxWidth="150dp"
-                    android:text="mobile"
-                    android:textSize="12dp"
-                    app:chipBackgroundColor="@color/color_F0F1F3"
-                    tools:text="mobile" />
-
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxWidth="150dp"
-                    android:text="게임개발실습"
-                    android:textSize="12dp"
-                    app:chipBackgroundColor="@color/color_F0F1F3"
-                    tools:text="게임개발실습" />
-
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxWidth="150dp"
-                    android:text="게임 프로그래밍"
-                    android:textSize="12dp"
-                    app:chipBackgroundColor="@color/color_F0F1F3"
-                    tools:text="게임 프로그래밍" />
-
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxWidth="150dp"
-                    android:text="서버관련 프로그래밍"
-                    android:textSize="12dp"
-                    app:chipBackgroundColor="@color/color_F0F1F3"
-                    tools:text="서버관련 프로그래밍" />
             </com.google.android.material.chip.ChipGroup>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/line_top">
 
