@@ -1,6 +1,7 @@
 package com.example.ugotprototype.ui.profile.adapter
 
 import android.view.LayoutInflater
+import android.view.View.*
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ugotprototype.data.response.ProfileMessageDetailPostResponse
@@ -24,9 +25,20 @@ class ProfileMessageDetailRecyclerViewAdapter(private val profileMessageDetailVi
 
             with(binding) {
                 tvMessageDetailRightName.text = item.senderName
+                tvMessageDetailRightNameTwo.text = item.senderName
                 tvMessageDetailRightText.text = item.content
                 tvItemGroupRightCmuDay.text = formatDate(item.created_at)
                 ivMessageDetailDelete.visibility = item.isDelete
+            }
+
+            profileMessageDetailViewModel.getUserNickname {
+                if (it == item.senderName) {
+                    binding.tvMessageDetailRightNameTwo.visibility = VISIBLE
+                    binding.tvMessageDetailRightName.visibility = INVISIBLE
+                } else{
+                    binding.tvMessageDetailRightName.visibility = VISIBLE
+                    binding.tvMessageDetailRightNameTwo.visibility = INVISIBLE
+                }
             }
         }
 
