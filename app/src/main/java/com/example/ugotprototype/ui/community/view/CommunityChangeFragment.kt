@@ -31,7 +31,6 @@ class CommunityChangeFragment : Fragment() {
 
     companion object {
         const val CHANGE_CLASS_CHANGE_ID = "changeClassChangeId"
-        const val MEMBER_ID = "memberId"
     }
 
     override fun onCreateView(

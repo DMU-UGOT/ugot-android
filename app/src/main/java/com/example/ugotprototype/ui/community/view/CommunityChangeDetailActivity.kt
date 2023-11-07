@@ -15,11 +15,9 @@ import com.example.ugotprototype.R
 import com.example.ugotprototype.data.change.CommunityChangePostViewData
 import com.example.ugotprototype.data.change.CommunityChangeRefreshData
 import com.example.ugotprototype.data.change.CommunityMessageData
-import com.example.ugotprototype.data.profile.ProfileMessageCommentNewPostData
 import com.example.ugotprototype.databinding.ActivityCommunityChangeDetailBinding
 import com.example.ugotprototype.databinding.ActivityCommunityChangeSendMessageBinding
 import com.example.ugotprototype.ui.community.view.CommunityChangeFragment.Companion.CHANGE_CLASS_CHANGE_ID
-import com.example.ugotprototype.ui.community.view.CommunityChangeFragment.Companion.MEMBER_ID
 import com.example.ugotprototype.ui.community.viewmodel.CommunityChangeDetailViewModel
 import com.example.ugotprototype.ui.community.viewmodel.CommunityChangeUpdateViewModel
 import dagger.hilt.android.AndroidEntryPoint

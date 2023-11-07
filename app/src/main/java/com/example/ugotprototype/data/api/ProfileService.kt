@@ -1,6 +1,10 @@
 package com.example.ugotprototype.data.api
 
+import com.example.ugotprototype.data.community.CommunityGeneralPostViewData
+import com.example.ugotprototype.data.community.CommunityGeneralRefreshData
+import com.example.ugotprototype.data.community.CommunityGeneralUpdateViewData
 import com.example.ugotprototype.data.profile.ProfileMemberData
+import com.example.ugotprototype.data.response.CommunityGeneralPostResponse
 import com.example.ugotprototype.data.response.Team
 import com.example.ugotprototype.data.response.TeamPostResponse
 import com.example.ugotprototype.data.study.StudyGetPost
@@ -51,4 +55,25 @@ interface ProfileService {
 
     @DELETE("teams/{postId}")
     suspend fun deleteTeamPost(@Path("postId") postId: Int)
+
+    @GET("com/myCommunities")
+    suspend fun getGeneralCommunity(): List<CommunityGeneralPostResponse>
+
+    @GET("com/{postId}")
+    suspend fun getProfileGeneralDetail(@Path("postId") postId: Int): CommunityGeneralPostViewData
+
+    @PATCH("com/{postId}")
+    suspend fun updateProfileGeneralDetail(
+        @Path("postId") postId: Int,
+        @Body updatedData: CommunityGeneralUpdateViewData
+    )
+
+    @PATCH("com/{postId}/refresh")
+    suspend fun refreshProfileGeneralDetail(
+        @Path("postId") postId: Int,
+        @Body refreshData: CommunityGeneralRefreshData
+    )
+
+    @DELETE("com/{postId}")
+    suspend fun deleteGeneralCommunity(@Path("postId") postId: Int)
 }

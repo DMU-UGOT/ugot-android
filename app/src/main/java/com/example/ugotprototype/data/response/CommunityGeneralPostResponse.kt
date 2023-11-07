@@ -8,5 +8,6 @@ data class CommunityGeneralPostResponse (
     val commentCount : Int?,
     val nickname : String,
     val created_at : String,
-    val memberId : Int
+    val memberId : Int,
+    var isDelete : Int
 )
