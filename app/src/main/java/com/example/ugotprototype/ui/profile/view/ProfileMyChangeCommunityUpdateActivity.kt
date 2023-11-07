@@ -1,4 +1,4 @@
-package com.example.ugotprototype.ui.community.view
+package com.example.ugotprototype.ui.profile.view
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -11,39 +11,39 @@ import androidx.databinding.DataBindingUtil
 import com.example.ugotprototype.R
 import com.example.ugotprototype.data.api.ChangeService
 import com.example.ugotprototype.data.change.CommunityChangeUpdateViewData
-import com.example.ugotprototype.databinding.ActivityCommunityChangeUpdateGroupBinding
-import com.example.ugotprototype.ui.community.view.CommunityChangeFragment.Companion.CHANGE_CLASS_CHANGE_ID
-import com.example.ugotprototype.ui.community.viewmodel.CommunityChangeUpdateViewModel
+import com.example.ugotprototype.databinding.ActivityProfileChangeUpdateBinding
+import com.example.ugotprototype.ui.community.view.CommunityChangeFragment
+import com.example.ugotprototype.ui.profile.viewmodel.ProfileMyChangeCommunityUpdateViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class CommunityChangeUpdateGroupActivity : AppCompatActivity() {
+class ProfileMyChangeCommunityUpdateActivity : AppCompatActivity() {
     @Inject
     lateinit var changeService: ChangeService
 
-    private lateinit var binding: ActivityCommunityChangeUpdateGroupBinding
-    private val communityChangeUpdateViewModel: CommunityChangeUpdateViewModel by viewModels()
+    private lateinit var binding: ActivityProfileChangeUpdateBinding
+    private val profileMyChangeCommunityUpdateViewModel: ProfileMyChangeCommunityUpdateViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_community_change_update_group)
+        setContentView(R.layout.activity_profile_change_update)
         binding =
-            DataBindingUtil.setContentView(this, R.layout.activity_community_change_update_group)
+            DataBindingUtil.setContentView(this, R.layout.activity_profile_change_update)
 
-        communityChangeUpdateViewModel.isCommunityChangePostRegisterBtnEnabled.observe(this) { enabled ->
+        profileMyChangeCommunityUpdateViewModel.isProfileChangePostRegisterBtnEnabled.observe(this) { enabled ->
             binding.btChangeUpdatePostRegister.isEnabled = enabled
         }
 
-        communityChangeUpdateViewModel.spUpdateGrade.observe(this) {
+        profileMyChangeCommunityUpdateViewModel.spUpdateGrade.observe(this) {
             checkAllFields()
         }
 
-        communityChangeUpdateViewModel.spUpdateNowClass.observe(this) {
+        profileMyChangeCommunityUpdateViewModel.spUpdateNowClass.observe(this) {
             checkAllFields()
         }
 
-        communityChangeUpdateViewModel.spUpdateChangeClass.observe(this) {
+        profileMyChangeCommunityUpdateViewModel.spUpdateChangeClass.observe(this) {
             checkAllFields()
         }
 
@@ -58,7 +58,7 @@ class CommunityChangeUpdateGroupActivity : AppCompatActivity() {
         binding.btChangeUpdatePostRegister.setOnClickListener {
             checkChangeUpdateOrganizationExistence()
 
-            communityChangeUpdateViewModel.dataUpdate.observe(this) {
+            profileMyChangeCommunityUpdateViewModel.dataUpdate.observe(this) {
                 setResult(Activity.RESULT_OK, Intent())
                 finish()
             }
@@ -106,9 +106,9 @@ class CommunityChangeUpdateGroupActivity : AppCompatActivity() {
             binding.spChangeUpdateChangeClass.selectedItem == "미선택" &&
             binding.spChangeUpdateNowClass.selectedItem == "미선택"
         ) {
-            communityChangeUpdateViewModel.isCommunityChangePostRegisterButtonState(false)
+            profileMyChangeCommunityUpdateViewModel.isProfileChangePostRegisterButtonState(false)
         } else {
-            communityChangeUpdateViewModel.isCommunityChangePostRegisterButtonState(true)
+            profileMyChangeCommunityUpdateViewModel.isProfileChangePostRegisterButtonState(true)
         }
     }
 
@@ -128,9 +128,9 @@ class CommunityChangeUpdateGroupActivity : AppCompatActivity() {
         {
             showConfirmationErrorDialog()
         } else {
-            communityChangeUpdateViewModel.modifyCommunityChangeUpdateData(
+            profileMyChangeCommunityUpdateViewModel.modifyCommunityChangeUpdateData(
                 communityChangeUpdateViewData,
-                intent.getIntExtra(CHANGE_CLASS_CHANGE_ID, 0)
+                intent.getIntExtra(CommunityChangeFragment.CHANGE_CLASS_CHANGE_ID, 0)
             )
         }
     }

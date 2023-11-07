@@ -27,7 +27,6 @@ class ProfileMyGeneralPostViewModel @Inject constructor(
     private val _isDeleteVisible = MutableLiveData<Int>()
     val isDeleteVisible: LiveData<Int> = _isDeleteVisible
 
-
     fun getMyPost() {
         _isLoadingPage.value = false
         viewModelScope.launch {

@@ -8,13 +8,13 @@
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/profile_my_general"
+            android:id="@+id/profile_my_change"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/iv_profile_general_cmu_back"
+                android:id="@+id/iv_profile_change_cmu_back"
                 android:layout_width="wrap_content"
                 android:layout_height="42dp"
                 android:padding="5dp"
@@ -23,10 +23,10 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_profile_general_cmu_title"
+                android:id="@+id/tv_profile_change_cmu_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="일반 게시글"
+                android:text="반 변경 게시글"
                 android:textColor="#0D0D0D"
                 android:textSize="16dp"
                 android:textStyle="bold"
@@ -35,31 +35,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tv_profile_general_delete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:text="삭제"
-                android:textColor="#0D0D0D"
-                android:textSize="16dp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="#E0E0E0"
-                app:layout_constraintTop_toBottomOf="@+id/iv_profile_general_cmu_back" />
+                app:layout_constraintTop_toBottomOf="@+id/iv_profile_change_cmu_back" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_my_general">
+            app:layout_constraintTop_toBottomOf="@+id/profile_my_change">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/rv_layout"
@@ -67,12 +54,12 @@
                 android:layout_height="wrap_content">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_general"
+                    android:id="@+id/rv_change"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    tools:listitem="@layout/item_profile_general_list" />
+                    tools:listitem="@layout/item_community_change_list" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

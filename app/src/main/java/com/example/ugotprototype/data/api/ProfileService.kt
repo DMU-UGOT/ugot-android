@@ -1,20 +1,17 @@
 package com.example.ugotprototype.data.api
 
+import com.example.ugotprototype.data.change.CommunityChangePostViewData
+import com.example.ugotprototype.data.change.CommunityChangeRefreshData
+import com.example.ugotprototype.data.change.CommunityChangeUpdateViewData
 import com.example.ugotprototype.data.community.CommunityGeneralPostViewData
 import com.example.ugotprototype.data.community.CommunityGeneralRefreshData
 import com.example.ugotprototype.data.community.CommunityGeneralUpdateViewData
 import com.example.ugotprototype.data.profile.ProfileMemberData
-import com.example.ugotprototype.data.response.CommunityGeneralPostResponse
-import com.example.ugotprototype.data.response.Team
-import com.example.ugotprototype.data.response.TeamPostResponse
+import com.example.ugotprototype.data.response.*
 import com.example.ugotprototype.data.study.StudyGetPost
 import com.example.ugotprototype.data.study.StudySetPost
 import com.example.ugotprototype.data.team.TeamPostData
-import retrofit2.http.Body
-import retrofit2.http.DELETE
-import retrofit2.http.GET
-import retrofit2.http.PATCH
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface ProfileService {
     @GET("members/{userId}")
@@ -76,4 +73,25 @@ interface ProfileService {
 
     @DELETE("com/{postId}")
     suspend fun deleteGeneralCommunity(@Path("postId") postId: Int)
+
+    @GET("classChanges/myClassChanges")
+    suspend fun getChangeCommunity(): List<CommunityChangePostResponse>
+
+    @GET("classChanges/{classChangeId}")
+    suspend fun getChangeDetail(@Path("classChangeId") classChangeId: Int): CommunityChangePostViewData
+
+    @PATCH("classChanges/{classChangeId}/refresh")
+    suspend fun refreshChange(
+        @Path("classChangeId") classChangeId: Int,
+        @Body refreshData: CommunityChangeRefreshData
+    )
+
+    @PATCH("classChanges/{classChangeId}")
+    suspend fun updateChangeCommunity(
+        @Path("classChangeId") classChangeId: Int,
+        @Body updatedData: CommunityChangeUpdateViewData
+    )
+
+    @DELETE("classChanges/{classChangeId}")
+    suspend fun deleteChangeDetail(@Path("classChangeId") classChangeId: Int)
 }

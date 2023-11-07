@@ -16,6 +16,7 @@ class ProfileMyPostActivity : AppCompatActivity() {
         binding.layoutMypost.setOnClickListener { startActivity(Intent(this, ProfileMyPostTeamActivity::class.java)) }
         binding.layoutMypostStudy.setOnClickListener { startActivity(Intent(this, ProfileMyPostStudyActivity::class.java))}
         binding.layoutMypostCommunity.setOnClickListener { startActivity(Intent(this, ProfileMyGeneralCommunityActivity::class.java))}
+        binding.layoutMypostChangeCommunity.setOnClickListener { startActivity(Intent(this, ProfileMyChangeCommunityActivity::class.java))}
         binding.ivGroupCmuBack.setOnClickListener { finish() }
     }
 }
