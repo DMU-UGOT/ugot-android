@@ -86,28 +86,20 @@ class CommunityChangeNewGroupActivity : AppCompatActivity() {
 
     private fun backCommunityChangeNewToMainActivity() {
         binding.btChangeNewPostRegister.setOnClickListener {
-            if ((binding.spChangeNewGrade.selectedItem.toString() == "미선택" ||
-                binding.spChangeNewChangeClass.selectedItem.toString() == "미선택" ||
-                binding.spChangeNewNowClass.selectedItem.toString() == "미선택")
-                ||
-                ((binding.spChangeNewGrade.selectedItem.toString() == "1학년" ||
-                        binding.spChangeNewGrade.selectedItem.toString() == "2학년" ||
-                        binding.spChangeNewGrade.selectedItem.toString() == "3학년") &&
-                        (binding.spChangeNewNowClass.selectedItem.toString() ==  "YJ" ||
-                                binding.spChangeNewNowClass.selectedItem.toString() == "YK") ||
-                        (binding.spChangeNewChangeClass.selectedItem.toString() == "YJ" ||
-                                binding.spChangeNewChangeClass.selectedItem.toString() == "YK"))
-                ||
-                ((binding.spChangeNewGrade.selectedItem.toString() == "4학년") &&
-                        (binding.spChangeNewNowClass.toString() != "YJ" ||
-                        binding.spChangeNewChangeClass.toString() != "YK"))
-                ||
-                (binding.spChangeNewNowClass.selectedItem.toString() ==
-                        binding.spChangeNewChangeClass.selectedItem.toString())
-            ){
+            val selectedGrade = binding.spChangeNewGrade.selectedItem.toString()
+            val nowClass = binding.spChangeNewNowClass.selectedItem.toString()
+            val changeClass = binding.spChangeNewChangeClass.selectedItem.toString()
+
+            val isFourthGrade = selectedGrade == "4학년"
+            val isInvalidGradeChange = nowClass !in listOf("YJ", "YK") || changeClass !in listOf("YJ", "YK")
+            val isInvalidOtherGradeChange = nowClass !in listOf("YA", "YB", "YC", "YD") || changeClass !in listOf("YA", "YB", "YC", "YD")
+
+            if ((selectedGrade == "미선택" || nowClass == "미선택" || changeClass == "미선택") ||
+                (nowClass == changeClass)) {
                 showErrorMessage()
-            }
-            else{
+            } else if ((isFourthGrade && isInvalidGradeChange) || (!isFourthGrade && isInvalidOtherGradeChange)) {
+                showErrorMessage()
+            } else {
                 checkChangeOrganizationExistence()
             }
         }

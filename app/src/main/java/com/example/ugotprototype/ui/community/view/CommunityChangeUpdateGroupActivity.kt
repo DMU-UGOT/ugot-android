@@ -113,19 +113,21 @@ class CommunityChangeUpdateGroupActivity : AppCompatActivity() {
     }
 
     private fun checkChangeUpdateOrganizationExistence() {
+        val selectedGrade = binding.spChangeUpdateGrade.selectedItem.toString()
+        val nowClass = binding.spChangeUpdateNowClass.selectedItem.toString()
+        val changeClass = binding.spChangeUpdateChangeClass.selectedItem.toString()
         val communityChangeUpdateViewData = CommunityChangeUpdateViewData(
-            grade = binding.spChangeUpdateGrade.selectedItem.toString(),
-            currentClass = binding.spChangeUpdateNowClass.selectedItem.toString(),
-            changeClass = binding.spChangeUpdateChangeClass.selectedItem.toString(),
+            grade = selectedGrade,
+            currentClass = nowClass,
+            changeClass = changeClass,
             status = binding.spChangeUpdateChangeStatus.selectedItem.toString()
         )
 
-        if((binding.spChangeUpdateNowClass.selectedItem.toString() == binding.spChangeUpdateChangeClass.selectedItem.toString())
-            ||
-            (binding.spChangeUpdateGrade.selectedItem.toString() != "4학년" &&
-                    (binding.spChangeUpdateNowClass.selectedItem.toString() == "YJ" || binding.spChangeUpdateNowClass.selectedItem.toString() == "YK") ||
-                    (binding.spChangeUpdateChangeClass.selectedItem.toString() == "YJ" || binding.spChangeUpdateChangeClass.selectedItem.toString() == "YK")))
-        {
+        val isInvalidGradeChange = (selectedGrade == "4학년" && (nowClass !in listOf("YJ", "YK") || changeClass !in listOf("YJ", "YK")))
+                || (selectedGrade != "4학년" && (nowClass !in listOf("YA", "YB", "YC", "YD") || changeClass !in listOf("YA", "YB", "YC", "YD")))
+                || nowClass == changeClass
+
+        if (isInvalidGradeChange) {
             showConfirmationErrorDialog()
         } else {
             communityChangeUpdateViewModel.modifyCommunityChangeUpdateData(
