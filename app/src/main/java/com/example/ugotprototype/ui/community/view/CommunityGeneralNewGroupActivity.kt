@@ -88,6 +88,7 @@ class CommunityGeneralNewGroupActivity : AppCompatActivity() {
         builder.setMessage("\n변경사항이 저장되지 않을 수 있습니다")
 
         builder.setPositiveButton("예") { dialog, which ->
+            setResult(Activity.RESULT_OK, Intent())
             finish()
         }
 

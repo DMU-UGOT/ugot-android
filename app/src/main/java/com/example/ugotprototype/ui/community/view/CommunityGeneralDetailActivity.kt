@@ -16,7 +16,6 @@ import com.example.ugotprototype.R
 import com.example.ugotprototype.data.community.CommunityGeneralCommentNewPostData
 import com.example.ugotprototype.data.community.CommunityGeneralPostViewData
 import com.example.ugotprototype.data.community.CommunityGeneralRefreshData
-import com.example.ugotprototype.databinding.ActivityDialogDeleteMessageBinding
 import com.example.ugotprototype.databinding.FragmentCommunityGeneralDetailBinding
 import com.example.ugotprototype.ui.community.adapter.CommunityGeneralChatRecyclerViewAdapter
 import com.example.ugotprototype.ui.community.view.CommunityGeneralFragment.Companion.GENERAL_ID
@@ -252,6 +251,8 @@ class CommunityGeneralDetailActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+        setResult(Activity.RESULT_OK, Intent())
+
         communityGeneralDetailViewModel.getCommunityDetailList(
             intent.getIntExtra(GENERAL_ID, 0)
         )
