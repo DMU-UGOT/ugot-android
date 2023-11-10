@@ -48,9 +48,7 @@ class StudySearchViewModel @Inject constructor(
                 val studyId = bookmark.map { it.studyId }
 
                 val response = studyService.searchStudies(currentPage, query)
-                Log.d("response", response.toString())
                 val studies = response.body()?.content ?: emptyList()
-                Log.d("response", studies.toString())
 
                 for (study in studies) {
                     study.bookmark = study.studyId in studyId

@@ -42,34 +42,29 @@ class TeamSearchViewModel @Inject constructor(
             kotlin.runCatching {
                 val allMatchingTeams = mutableListOf<Team>()
                 var currentPage = 0
+
                 val response = teamBuildingService.searchTeams(currentPage, query)
-                Log.d("test1", response.toString())
                 val teams = response.body()?.content ?: emptyList()
-                Log.d("test2", teams.toString())
 
                 val bookmark = teamBuildingService.getBookmark()
-                Log.d("test3", bookmark.toString())
                 val teamId = bookmark.map { it.teamId }
 
                 for (team in teams) {
                     team.bookmark = team.teamId in teamId
-                    Log.d("test4", team.gitHubLink)
                     if (team.title.contains(query)) {
                         val avatarUrl = apiService.getOrganization(
                             team.gitHubLink
                         )?.avatarUrl
-                        Log.d("test4", avatarUrl.toString())
                         team.avatarUrl = avatarUrl ?: ""
                         allMatchingTeams.add(team)
                     }
                 }
-                Log.d("test1", allMatchingTeams.toString())
+
                 _teams.value = allMatchingTeams
             }.onSuccess {
                 _isSearch.value = true
                 _isLoadingPage.value = true
             }.onFailure {
-                Log.d("test4e", it.toString())
                 _isSearch.value = false
                 _isLoadingPage.value = true
             }

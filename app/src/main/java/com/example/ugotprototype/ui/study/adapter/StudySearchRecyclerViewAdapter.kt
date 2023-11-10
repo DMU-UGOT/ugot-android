@@ -25,7 +25,6 @@ class StudySearchRecyclerViewAdapter(private val viewModel: StudySearchViewModel
         fun bind(item: StudyGetPost) {
             binding.root.setOnClickListener {
                 goToTeamPostDetail(item, binding.root.context)
-                viewModel.sendBookmark(item.studyId)
             }
 
             binding.ivStBookmark.setOnClickListener {
