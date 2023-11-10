@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.View.VISIBLE
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -71,6 +72,12 @@ class TeamSearchDetailActivity : AppCompatActivity() {
         teamSearchViewModel.isAllDelete.observe(this) {
             if(it) {
                 binding.chipGroup.removeAllViews()
+            }
+        }
+
+        teamSearchViewModel.isSearch.observe(this) {
+            if(it) {
+                binding.nsvSearchHistory.visibility = VISIBLE
             }
         }
 

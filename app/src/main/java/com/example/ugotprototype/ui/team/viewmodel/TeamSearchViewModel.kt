@@ -33,43 +33,49 @@ class TeamSearchViewModel @Inject constructor(
     private val _isAllDelete = MutableLiveData<Boolean>()
     val isAllDelete: LiveData<Boolean> = _isAllDelete
 
+    private val _isSearch = MutableLiveData<Boolean>()
+    val isSearch: LiveData<Boolean> = _isSearch
+
     fun searchTeams(query: String) {
         _isLoadingPage.value = false
         viewModelScope.launch {
             kotlin.runCatching {
                 val allMatchingTeams = mutableListOf<Team>()
                 var currentPage = 0
+                val response = teamBuildingService.searchTeams(currentPage, query)
+                Log.d("test1", response.toString())
+                val teams = response.body()?.content ?: emptyList()
+                Log.d("test2", teams.toString())
 
-                while (true) {
-                    val response = teamBuildingService.searchTeams(currentPage, query)
-                    val teams = response.body()?.content ?: emptyList()
+                val bookmark = teamBuildingService.getBookmark()
+                Log.d("test3", bookmark.toString())
+                val teamId = bookmark.map { it.teamId }
 
-                    val bookmark = teamBuildingService.getBookmark()
-                    val teamId = bookmark.map { it.teamId }
-
-                    for (team in teams) {
-                        team.bookmark = team.teamId in teamId
-                        if (team.title.contains(query)) {
-                            val avatarUrl = apiService.getOrganization(
-                                team.gitHubLink
-                            )?.avatarUrl
-                            team.avatarUrl = avatarUrl ?: ""
-                            allMatchingTeams.add(team)
-                        }
+                for (team in teams) {
+                    team.bookmark = team.teamId in teamId
+                    Log.d("test4", team.gitHubLink)
+                    if (team.title.contains(query)) {
+                        val avatarUrl = apiService.getOrganization(
+                            team.gitHubLink
+                        )?.avatarUrl
+                        Log.d("test4", avatarUrl.toString())
+                        team.avatarUrl = avatarUrl ?: ""
+                        allMatchingTeams.add(team)
                     }
-                    if (currentPage >= (response.body()?.totalPages!! - 1)) {
-                        break
-                    }
-                    currentPage++
                 }
+                Log.d("test1", allMatchingTeams.toString())
                 _teams.value = allMatchingTeams
             }.onSuccess {
+                _isSearch.value = true
                 _isLoadingPage.value = true
             }.onFailure {
+                Log.d("test4e", it.toString())
+                _isSearch.value = false
                 _isLoadingPage.value = true
             }
         }
     }
+
     fun sendBookmark(teamId: Int) {
         viewModelScope.launch {
             kotlin.runCatching {

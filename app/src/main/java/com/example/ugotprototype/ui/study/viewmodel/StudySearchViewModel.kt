@@ -1,5 +1,6 @@
 package com.example.ugotprototype.ui.study.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -33,6 +34,9 @@ class StudySearchViewModel @Inject constructor(
     private val _isAllDelete = MutableLiveData<Boolean>()
     val isAllDelete: LiveData<Boolean> = _isAllDelete
 
+    private val _isSearch = MutableLiveData<Boolean>()
+    val isSearch: LiveData<Boolean> = _isSearch
+
     fun searchStudies(query: String) {
         _isLoadingPage.value = false
         viewModelScope.launch {
@@ -43,29 +47,28 @@ class StudySearchViewModel @Inject constructor(
                 val bookmark = studyService.getBookmark()
                 val studyId = bookmark.map { it.studyId }
 
-                while (true) {
-                    val response = studyService.searchStudies(currentPage, query)
-                    val studies = response.body()?.content ?: emptyList()
+                val response = studyService.searchStudies(currentPage, query)
+                Log.d("response", response.toString())
+                val studies = response.body()?.content ?: emptyList()
+                Log.d("response", studies.toString())
 
-                    for (study in studies) {
-                        study.bookmark = study.studyId in studyId
-                        if (study.title.contains(query)) {
-                            val avatarUrl = apiService.getOrganization(
-                                study.gitHubLink
-                            )?.avatarUrl
-                            study.avatarUrl = avatarUrl ?: ""
-                            allMatchingTeams.add(study)
-                        }
+                for (study in studies) {
+                    study.bookmark = study.studyId in studyId
+                    if (study.title.contains(query)) {
+                        val avatarUrl = apiService.getOrganization(
+                            study.gitHubLink
+                        )?.avatarUrl
+                        study.avatarUrl = avatarUrl ?: ""
+                        allMatchingTeams.add(study)
                     }
-                    if (currentPage >= (response.body()?.totalPages!! - 1)) {
-                        break
-                    }
-                    currentPage++
                 }
+
                 _studies.value = allMatchingTeams
             }.onSuccess {
+                _isSearch.value = true
                 _isLoadingPage.value = true
             }.onFailure {
+                _isSearch.value = false
                 _isLoadingPage.value = true
             }
         }
