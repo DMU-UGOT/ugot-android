@@ -1,11 +1,11 @@
 package com.example.ugotprototype.di.api
 
-import com.example.ugotprototype.data.community.CommunityGeneralNewPostData
-import com.example.ugotprototype.data.community.CommunityGeneralPostViewData
-import com.example.ugotprototype.data.community.CommunityGeneralRefreshData
-import com.example.ugotprototype.data.community.CommunityGeneralUpdateViewData
+import com.example.ugotprototype.data.community.*
 import com.example.ugotprototype.data.response.CommunityGeneralDataResponse
 import com.example.ugotprototype.data.response.CommunityGeneralPostResponse
+import com.example.ugotprototype.data.response.CommunitySearchResponse
+import com.example.ugotprototype.data.response.TeamSearchResponse
+import com.example.ugotprototype.data.team.TeamSearchHistory
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -19,6 +19,12 @@ interface CommunityService {
     @GET("com/{postId}")
     suspend fun getCommunityDetailGeneral(@Path("postId") postId: Int): CommunityGeneralPostViewData
 
+    @GET("com/post/search")
+    suspend fun searchCommunity(@Query("page") page: Int, @Query("keyword") keyword: String): Response<CommunitySearchResponse>
+
+    @GET("com/searchHistory")
+    suspend fun searchHistory(): List<CommunitySearchHistory>
+
     @PATCH("com/{postId}")
     suspend fun updateCommunity(
         @Path("postId") postId: Int,
@@ -27,6 +33,12 @@ interface CommunityService {
 
     @DELETE("com/{postId}")
     suspend fun deleteCommunity(@Path("postId") postId: Int)
+
+    @DELETE("com/searchHistory/{query}")
+    suspend fun deleteSearchHistory(@Path("query") query: String)
+
+    @DELETE("com/searchHistory")
+    suspend fun allDeleteSearchHistory()
 
     @PATCH("com/{postId}/refresh")
     suspend fun refreshCommunity(

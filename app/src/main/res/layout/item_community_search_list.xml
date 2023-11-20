@@ -10,7 +10,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
+            android:layout_marginHorizontal="18dp"
             android:layout_marginTop="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -25,8 +25,19 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
+            <ImageView
+                android:id="@+id/iv_delete"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_margin="8dp"
+                android:visibility="gone"
+                android:src="@drawable/ic_profile_study_delete"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
-                android:id="@+id/tv_community_name"
+                android:id="@+id/tv_community_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -54,19 +65,20 @@
                 tools:text="123" />
 
             <TextView
-                android:id="@+id/tv_community_member_nickname"
+                android:id="@+id/tv_community_nickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textSize="15dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/iv_delete"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="NICKNAME" />
 
             <TextView
-                android:id="@+id/tv_community_text"
+                android:id="@+id/tv_community_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -77,8 +89,8 @@
                 android:textColor="@color/color_80636363"
                 android:textSize="13dp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/tv_community_name"
-                app:layout_constraintTop_toBottomOf="@id/tv_community_name"
+                app:layout_constraintStart_toStartOf="@+id/tv_community_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_community_title"
                 tools:text="Content : 오후 5시 수업 끝나고 같이 PC방 가서 5인랭 할사람 있나? 저는 서폿만 하니까 원딜 구해서 듀오도 가요" />
 
             <TextView
@@ -90,8 +102,8 @@
                 android:text="댓글 수 :"
                 android:textSize="13dp"
                 app:layout_constraintBottom_toTopOf="@id/community_v1"
-                app:layout_constraintStart_toStartOf="@id/tv_community_name"
-                app:layout_constraintTop_toBottomOf="@id/tv_community_text" />
+                app:layout_constraintStart_toStartOf="@id/tv_community_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_community_content" />
 
             <TextView
                 android:id="@+id/tv_community_vote_count"
@@ -103,7 +115,7 @@
                 android:textSize="13dp"
                 app:layout_constraintBottom_toTopOf="@id/community_v1"
                 app:layout_constraintStart_toEndOf="@id/tv_community_chat"
-                app:layout_constraintTop_toBottomOf="@id/tv_community_text"
+                app:layout_constraintTop_toBottomOf="@id/tv_community_content"
                 tools:text="1" />
 
             <TextView
@@ -117,7 +129,7 @@
                 android:textSize="13dp"
                 app:layout_constraintBottom_toTopOf="@id/community_v1"
                 app:layout_constraintStart_toStartOf="@id/tv_community_vote_count"
-                app:layout_constraintTop_toBottomOf="@id/tv_community_text" />
+                app:layout_constraintTop_toBottomOf="@id/tv_community_content" />
 
             <TextView
                 android:id="@+id/tv_community_view_count"
@@ -129,7 +141,7 @@
                 android:textSize="13dp"
                 app:layout_constraintBottom_toTopOf="@id/community_v1"
                 app:layout_constraintStart_toEndOf="@id/tv_community_inquire"
-                app:layout_constraintTop_toBottomOf="@id/tv_community_text"
+                app:layout_constraintTop_toBottomOf="@id/tv_community_content"
                 tools:text="1" />
 
             <TextView
@@ -143,19 +155,19 @@
                 android:textSize="13dp"
                 app:layout_constraintBottom_toTopOf="@id/community_v1"
                 app:layout_constraintEnd_toStartOf="@id/tv_community_create_at"
-                app:layout_constraintTop_toBottomOf="@id/tv_community_text" />
+                app:layout_constraintTop_toBottomOf="@id/tv_community_content" />
 
             <TextView
                 android:id="@+id/tv_community_create_at"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
                 android:textSize="13dp"
                 app:layout_constraintBottom_toTopOf="@id/community_v1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_community_text"
+                app:layout_constraintTop_toBottomOf="@id/tv_community_content"
                 tools:text="5/28" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

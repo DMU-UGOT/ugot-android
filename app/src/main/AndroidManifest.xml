@@ -18,6 +18,9 @@
         tools:replace="android:name"
         tools:targetApi="31">
         <activity
+            android:name=".ui.community.view.CommunitySearchDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.profile.view.ProfileMyChangeCommunityUpdateActivity"
             android:exported="false" />
         <activity

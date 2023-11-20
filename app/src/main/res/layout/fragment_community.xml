@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -22,7 +21,7 @@
                 android:layout_marginHorizontal="20dp"
                 android:backgroundTint="@color/color_F0F1F3"
                 android:gravity="start|center_vertical"
-                android:text="찾고 싶은 게시글을 검색해주세요"
+                android:text="찾고 싶은 일반 게시글을 검색해주세요"
                 android:textColor="@color/color_80636363"
                 app:cornerRadius="20dp"
                 app:icon="@drawable/ic_team_search"
